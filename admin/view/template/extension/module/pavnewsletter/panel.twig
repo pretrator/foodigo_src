@@ -1,0 +1,85 @@
+{{ header }}
+{{ column_left }}
+
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+		        {% for breadcrumb in breadcrumbs %}
+		        	<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		        {% endfor %}
+	      	</ul>
+		</div>
+	</div><!-- end div .page-header -->
+
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="row">
+			<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_quickicons }}</h3>
+						</div>
+						<div class="panel-body">
+						
+		 
+							<div class="tool-icons clearfix" style="width:100%">
+								
+								<ul>
+									<li><a href="{{ menus['contact'].link }}"><span class="icon-blogs icon"></span><span>{{ menu_create_newsletter }}</span></a></li>
+									<li><a href="{{ menus['draft_contact'].link }}"><span class="icon-addcategory icon"></span><span>{{ menu_manage_draft_newsletters }}</span></a></li>
+									<li><a href="{{ menus['subscribes'].link }}"><span class="icon-category icon"></span><span>{{ menu_manage_subscribes }}</span></a></li>
+									<li><a href="{{ menus['modules'].link }}"><span class="icon-comment icon"></span><span>{{ menu_manage_modules }}</span></a></li>
+								</ul>
+							</div>
+		
+						</div>
+					</div><!-- end div .panel-body -->
+			</div><!-- end div .panel -->
+	 
+			<div class="col-md-6">	
+				<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title"><i class="fa fa-pencil"></i> Information </h3>
+						</div>
+						<div class="panel-body" >
+						
+		 
+							<div class="tool-icons clearfix" style="width:100%">
+								
+								<h3>Thanks you for using Pav NewsLetter Powered By PavoThemes.Com </h3>
+
+								<p class="">Newsletter Subscribe Module Will allow to you place a Newsletter subscriber module around your website. Your customers will be able to subscribe to your newsletter without the need of creating an account with this module.and You can easily prompt your products for sale and long-term relationship with the customer and online store with this extension.</p>
+
+							
+								<div class="text-center">
+									<h4>If you have any support please keep contact now</h4>
+									<a class="btn btn-warning" href="">Support</a> <a class="btn btn-primary" href="http://www.pavothemes.com/guides/3/pavnewsletter">Guide</a> <a href="http://www.pavothemes.com/opencart-modules/198-pav-newsletter-module.html" class="btn btn-info"> Detail </a>
+								</div>	
+							 
+							</div>
+		
+						</div>
+					</div><!-- end div .panel-body -->
+
+						
+
+			</div>
+		</div>	
+
+	</div><!-- end div #page-content -->
+
+</div><!-- end div #content -->
+{{ footer }}

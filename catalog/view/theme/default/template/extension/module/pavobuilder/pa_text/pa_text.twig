@@ -1,0 +1,5 @@
+<div class="pavo-widget-text pa-element pa_text pa_text_element {{settings.layout}} {{ settings.extra_class }}">
+	{% autoescape %}
+		<div style="{% if settings.font_size %}font-size: {{settings.font_size}};{% endif %}{% if settings.font_weight %}font-weight: {{settings.font_weight}};{% endif %}{% if settings.font_color %}color: {{settings.font_color}};{% endif %}">{{ settings.content | raw }}</div>
+	{% endautoescape %}
+</div>

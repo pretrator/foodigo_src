@@ -1,0 +1,33 @@
+<div class="pavo-widget-call-to-action {{settings.layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }} {{ settings.style }}">
+	<div class="inner">
+		<div class="content-text">
+			{% if settings.caption %}
+				<div class="content-caption">{{ settings.caption }}</div>
+			{% endif %}
+			{% if settings.title %}
+				<h3 class="content-title">{{ settings.title }}</h3>
+			{% endif %}
+			{% if settings.subtitle %}
+				<div class="content-subtitle">{{ settings.subtitle }}</div>
+			{% endif %}
+			{% if settings.content and settings.content != '<p><br></p>' %}
+				<div class="content-description">{{ settings.content }}</div>
+			{% endif %}
+		</div>
+		{% if settings.button_text or settings.icon %}
+		<div class="content-button">
+			<a href="{{settings.link}}">
+				{% if settings.icon %}
+					{% if settings.icon_position == "left" %}
+						<i class="fa {{settings.icon}}"></i> {% if settings.button_text %}{{settings.button_text}}{% endif %}
+					{% else %}
+						{% if settings.button_text %}{{settings.button_text}}{% endif %} <i class="fa {{settings.icon}}"></i>
+					{% endif %}
+				{% else %}
+			 	{% if settings.button_text %}{{settings.button_text}}{% endif %}
+			 	{% endif %} 
+			</a>
+		</div>
+		{% endif %}
+	</div>
+</div>

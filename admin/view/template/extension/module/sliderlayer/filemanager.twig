@@ -1,0 +1,248 @@
+<div class="modal-dialog modal-lg filemanager">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title">{{ heading_title }}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-5"><a href="{{ parent }}" data-toggle="tooltip" title="{{ button_parent }}" id="button-parent" class="btn btn-default"><i class="fa fa-level-up"></i></a> <a href="{{ refresh }}" data-toggle="tooltip" title="{{ button_refresh }}" id="button-refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+          <button type="button" data-toggle="tooltip" title="{{ button_upload }}" id="button-upload" class="btn btn-primary"><i class="fa fa-upload"></i></button>
+          <button type="button" data-toggle="tooltip" title="{{ button_folder }}" id="button-folder" class="btn btn-default"><i class="fa fa-folder"></i></button>
+          <button type="button" data-toggle="tooltip" title="{{ button_delete }}" id="button-delete" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+        </div>
+        <div class="col-sm-7">
+          <div class="input-group">
+            <input type="text" name="search" value="{{ filter_name }}" placeholder="{{ entry_search }}" class="form-control">
+            <span class="input-group-btn">
+            <button type="button" data-toggle="tooltip" title="{{ button_search }}" id="button-search" class="btn btn-primary"><i class="fa fa-search"></i></button>
+            </span></div>
+        </div>
+      </div>
+      <hr />
+
+      {% for image in images %}
+      <div class="row">
+        {% for image in image %}
+        <div class="col-sm-3 text-center">
+          {% if image.type == 'directory' %}
+          <div class="text-center"><a href="{{ image.href }}" class="directory" style="vertical-align: middle;"><i class="fa fa-folder fa-5x"></i></a></div>
+          <label>
+            <input type="checkbox" name="path[]" value="{{ image.path }}" />
+            {{ image.name }}</label>
+          {% endif %}
+
+          {% if image.type == 'image' %}
+          <a href="{{ image.href }}" class="thumbnail"><img src="{{ image.thumb }}" alt="{{ image.name }}" title="{{ image.name }}" /></a>
+          <label>
+            <input type="checkbox" name="path[]" value="{{ image.path }}" />
+            {{ image.name }}</label>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      <br />
+      {% endfor %}
+    </div>
+    <div class="modal-footer">{{ pagination }}</div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('a.thumbnail').on('click', function(e) { 
+	e.preventDefault();
+	{% if thumb %}
+		$('#{{ thumb }}').attr('src', $(this).attr('href'));
+	{% endif %}
+	{% if target != '' %}
+		$('#{{ target }}').attr('value', $(this).parent().find('input').attr('value'));
+	{% else %}
+		$('#{{ thumb }}').replaceWith('<img src="' + $(this).attr('href') + '" alt="" id="{{ thumb }}" />');
+		$('#{{ thumb }} img').replaceWith('<img src="' + $(this).attr('href') + '" alt="" id="{{ thumb }}" />');
+
+		var href = $(this).attr('href');
+		var result = href.split("image/");
+		$('#layer_content').val(result[1]);
+
+		var $pavoEditor = $(document).pavoSliderEditor(); 
+
+		$pavoEditor.state = false;
+		
+		var thumbid = "#{{ thumb }}"; // alert( thumbid );
+		var slayerid = thumbid.replace("img-","");
+
+		$(slayerid + ".draggable-item.tp-caption.layer-content.ui-draggable.ui-draggable-handle.layer-active").data( "data-form", $( '#slider-form' ).serializeArray() );
+		$(slayerid + ".draggable-item.tp-caption.layer-content.ui-draggable.ui-draggable-handle.layer-active").css( 'width', '' );
+		$(slayerid + ".draggable-item.tp-caption.layer-content.ui-draggable.ui-draggable-handle.layer-active").css( 'height', '' );
+	{% endif %}
+
+	$('#modal-image').modal('hide');
+});
+
+$('a.directory').on('click', function(e) {
+	e.preventDefault();
+	
+	$('#modal-image').load($(this).attr('href'));
+});
+
+$('.pagination a').on('click', function(e) {
+	e.preventDefault();
+	
+	$('#modal-image').load($(this).attr('href'));
+});
+
+$('#button-parent').on('click', function(e) {
+	e.preventDefault();
+	
+	$('#modal-image').load($(this).attr('href'));
+});
+
+$('#button-refresh').on('click', function(e) {
+	e.preventDefault();
+	
+	$('#modal-image').load($(this).attr('href'));
+});
+
+$('#button-search').on('click', function() {
+	var url = 'index.php?route=extension/module/pavsliderlayer/filemanager&user_token={{ user_token }}&directory={{ directory }}';
+		
+	var filter_name = $('input[name=\'search\']').val();
+	
+	if (filter_name) {
+		url += '&filter_name=' + encodeURIComponent(filter_name);
+	}
+							
+	{% if thumb %}
+	url += '&thumb=' + '{{ thumb }}';
+	{% endif %}
+	
+	{% if target %}
+	url += '&target=' + '{{ target }}';
+	{% endif %}
+			
+	$('#modal-image').load(url);
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#button-upload').on('click', function() {
+	$('#form-upload').remove();
+	
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+
+	$('#form-upload input[name=\'file\']').trigger('click');
+	
+	$('#form-upload input[name=\'file\']').on('change', function() {
+		$.ajax({
+			url: 'index.php?route=extension/module/pavsliderlayer/upload&user_token={{ user_token }}&directory={{ directory }}',
+			type: 'post',		
+			dataType: 'json',
+			data: new FormData($(this).parent()[0]),
+			cache: false,
+			contentType: false,
+			processData: false,		
+			beforeSend: function() {
+				$('#button-upload i').replaceWith('<i class="fa fa-circle-o-notch fa-spin"></i>');
+				$('#button-upload').prop('disabled', true);
+			},
+			complete: function() {
+				$('#button-upload i').replaceWith('<i class="fa fa-upload"></i>');
+				$('#button-upload').prop('disabled', false);
+			},
+			success: function(json) {
+				if (json['error']) {
+					alert(json['error']);
+				}
+				
+				if (json['success']) {
+					alert(json['success']);
+					
+					$('#button-refresh').trigger('click');
+				}
+			},			
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	});
+});
+
+$('#button-folder').popover({
+	html: true,
+	placement: 'bottom',
+	trigger: 'click',
+	title: '{{ entry_folder }}',
+	content: function() {
+		html  = '<div class="input-group">';
+		html += '  <input type="text" name="folder" value="" placeholder="{{ entry_folder }}" class="form-control">';
+		html += '  <span class="input-group-btn"><button type="button" title="{{ button_folder }}" id="button-create" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></span>';
+		html += '</div>';
+		
+		return html;	
+	}
+});
+
+$('#button-folder').on('shown.bs.popover', function() {
+	$('#button-create').on('click', function() {
+		$.ajax({
+			url: 'index.php?route=extension/module/pavsliderlayer/folder&user_token={{ user_token }}&directory={{ directory }}',
+			type: 'post',		
+			dataType: 'json',
+			data: 'folder=' + encodeURIComponent($('input[name=\'folder\']').val()),
+			beforeSend: function() {
+				$('#button-create i').replaceWith('<i class="fa fa-circle-o-notch fa-spin"></i>');
+				$('#button-create').prop('disabled', true);
+			},
+			complete: function() {
+				$('#button-create i').replaceWith('<i class="fa fa-plus-circle"></i>');
+				$('#button-create').prop('disabled', false);
+			},
+			success: function(json) {
+				if (json['error']) {
+					alert(json['error']);
+				}
+				
+				if (json['success']) {
+					alert(json['success']);
+										
+					$('#button-refresh').trigger('click');
+				}
+			},			
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	});	
+});
+
+$('#modal-image #button-delete').on('click', function(e) {
+	if (confirm('{{ text_confirm }}')) {
+		$.ajax({
+			url: 'index.php?route=extension/module/pavsliderlayer/delete&user_token={{ user_token }}',
+			type: 'post',		
+			dataType: 'json',
+			data: $('input[name^=\'path\']:checked'),
+			beforeSend: function() {
+				$('#button-delete i').replaceWith('<i class="fa fa-circle-o-notch fa-spin"></i>');
+				$('#button-delete').prop('disabled', true);
+			},	
+			complete: function() {
+				$('#button-delete i').replaceWith('<i class="fa fa-trash-o"></i>');
+				$('#button-delete').prop('disabled', false);
+			},		
+			success: function(json) {
+				if (json['error']) {
+					alert(json['error']);
+				}
+				
+				if (json['success']) {
+					alert(json['success']);
+					
+					$('#button-refresh').trigger('click');
+				}
+			},			
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	}
+});
+//--></script>

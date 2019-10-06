@@ -1,0 +1,33 @@
+{% set uniqid = now|date('YmdHis') %}
+<div class="pavoblog-media media-gallery">
+	<div class="swiper-viewport">
+	  	<div id="gallery{{ uniqid }}" class="swiper-container">
+	    	<div class="swiper-wrapper">
+	    		{% for gallery in post.gallery %}
+	      			<div class="swiper-slide">
+	      				<img src="{{ gallery.image }}" />
+	      			</div>
+	      		{% endfor %}
+	  		</div>
+			<div class="swiper-pagination carousel{{ uniqid }}"></div>
+	  		<div class="swiper-pager">
+		    	<div class="swiper-button-next"></div>
+		    	<div class="swiper-button-prev"></div>
+		  	</div>
+	  	</div>
+	</div>
+</div>
+<script type="text/javascript"><!--
+$('#gallery{{ uniqid }}').swiper({
+	mode: 'horizontal',
+	slidesPerView: {{ gallery_items_per_view }},
+	pagination: '.carousel{{ uniqid }}',
+	paginationClickable: true,
+	nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+	autoplay: 2500,
+	loop: true,
+	autoHeight: false,
+	height: 500
+});
+--></script>

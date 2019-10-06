@@ -1,0 +1,113 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  	<div class="page-header">
+	    <div class="container-fluid">
+		<div class="pull-right">
+			<button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-comments').submit() : false;"><i class="fa fa-trash-o"></i></button>
+		</div>
+		<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+			{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+  	</div>
+  	<div class="container-fluid">
+		{% if errors.error_warning %}
+		    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ errors.error_warning }}
+	      		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    </div>
+	    {% endif %}
+	    {% if success %}
+		    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+		      	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    </div>
+	    {% endif %}
+	    <div class="row">
+			<div class="col-xs-12">
+		    	<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="fa fa-list"></i> {{ comments_heading_title }}</h3>
+					</div>
+					<div class="panel-body">
+						<form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-comments">
+						  	<div class="table-responsive">
+							    <table class="table table-bordered table-hover">
+							      	<thead>
+								        <tr>
+											<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+											<td class="text-left">
+												{% if sort == 'email' %}
+													<a href="{{ sort_email }}" class="{{ order|lower }}">{{ entry_email_text }}</a>
+												{% else %}
+													<a href="{{ sort_email }}">{{ entry_email_text }}</a>
+												{% endif %}
+											</td>
+											<td class="text-left">
+												{% if sort == 'name' %}
+													<a href="{{ sort_author }}" class="{{ order|lower }}">{{ author_text }}</a>
+												{% else %}
+													<a href="{{ sort_author }}">{{ author_text }}</a>
+												{% endif %}
+											</td>
+											<td class="text-left">
+												{{ post_heading_title }}
+											</td>
+											<td class="text-left">
+												{{ comment_text }}
+											</td>
+											<td class="text-right">
+												{% if sort == 'date_added' %}
+													<a href="{{ sort_date_added }}" class="{{ order|lower }}">{{ created_text }}</a>
+												{% else %}
+													<a href="{{ sort_date_added }}">{{ created_text }}</a>
+												{% endif %}
+											</td>
+											<td style="width: 15%" class="text-right">{{ actions_text }}</td>
+								        </tr>
+							      	</thead>
+							      	<tbody>
+										{% if comments %}
+											{% for comment in comments %}
+											<tr>
+												<td class="text-center">
+													{% if comment.comment_id in selected %}
+												  		<input type="checkbox" name="selected[]" value="{{ comment.comment_id }}" checked="checked" />
+												  	{% else %}
+												  		<input type="checkbox" name="selected[]" value="{{ comment.comment_id }}" />
+												  	{% endif %}
+												</td>
+												<td class="text-left">{{ comment.comment_email }}</td>
+												<td class="text-left">{{ comment.comment_name }}</td>
+												<td class="text-left">
+													<a href="{{ comment.edit_post_link }}">{{ comment.name }}</a>
+												</td>
+												<td class="text-left">{{ comment.comment_text }}</td>
+												<td class="text-right">{{ comment.date_added }}</td>
+												<td class="text-right">
+													<a href="{{ comment.toggle_approve_link }}" data-toggle="tooltip" title="{{ comment.comment_status ? text_unapprove : text_approve }}" class="btn btn-{{ comment.comment_status ? 'primary' : 'info' }}">{{ comment.comment_status ? '<i class="fa fa-eye-slash">' : '<i class="fa fa-eye">' }}</i></a>
+													<a href="{{ comment.edit_link }}" class="btn btn-info" data-toggle="tooltip" title="{{ text_edit }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												</td>
+											</tr>
+											{% endfor %}
+										{% else %}
+											<tr>
+												<td class="text-center" colspan="7">{{ text_no_results }}</td>
+											</tr>
+										{% endif %}
+							        </tbody>
+							    </table>
+						  	</div>
+						</form>
+						<div class="row">
+							<div class="col-sm-6 text-left">{{ pagination }}</div>
+							<div class="col-sm-6 text-right">{{ results }}</div>
+						</div>
+					</div>
+		    	</div>
+		  	</div>
+		</div>
+  	</div>
+</div>
+{{ footer }}

@@ -1,0 +1,79 @@
+<div class="pavo-widget-socials social-network {{ settings.style }}">
+	{% if settings.content %}
+		<h5>{{settings.content}}</h5>
+	{% endif %}
+	<ul class="social {% if settings.layout_style == 'list-unstyled' %}list-unstyled{% else %}list-inline{% endif %} {{ settings.size }}">
+	{% if settings.facebook %}
+	<li class ="facebook">
+		<a class="_blank" href="{{settings.link_facebook}}"><i class="fa fa-facebook-square"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_facebook}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	{% if settings.youtube %}
+	<li class ="youtube">
+		<a class="_blank" href="{{settings.link_youtube}}"><i class="fa fa-youtube-square"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_youtube}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	{% if settings.instagram %}
+	<li class ="instagram">
+		<a class="_blank" href="{{settings.link_instagram}}"><i class="fa fa-instagram"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_instagram}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	{% if settings.twitter %}
+	<li class ="twitter">
+		<a class="_blank" href="{{settings.link_twitter}}"><i class="fa fa-twitter-square"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_twitter}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	{% if settings.reddit %}
+	<li class ="reddit">
+		<a class="_blank" href="{{settings.link_reddit}}"><i class="fa fa-reddit-square"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_reddit}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	{% if settings.pinterest %}
+	<li class ="pinterest">
+		<a class="_blank" href="{{settings.link_pinterest}}"><i class="fa fa-pinterest-square"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_pinterest}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	{% if settings.google_plus %}
+	<li class ="google_plus">
+		<a class="_blank" href="{{settings.link_google_plus}}"><i class="fa fa-google-plus-square"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_google_plus}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	{% if settings.flickr %}
+	<li class ="flickr">
+		<a class="_blank" href="{{settings.link_flickr}}"><i class="fa fa-flickr"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_flickr}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	{% if settings.vine %}
+	<li class ="vine">
+		<a class="_blank" href="{{settings.link_vine}}"><i class="fa fa-vimeo-square"></i></a>
+		{% if settings.label == 'true' %}
+		<label>{{entry_vine}}</label>
+		{% endif %}
+	</li>
+	{% endif %}
+	</ul>
+</div>

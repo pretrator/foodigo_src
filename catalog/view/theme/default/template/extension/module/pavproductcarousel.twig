@@ -1,0 +1,105 @@
+{% set id = random(1..9) + random() %}
+<div class="panel panel-default {{ prefix }} productcarousel" id="module{{ id }}">
+    <div class="panel-heading">
+        {% if fontawesome %}
+            <div class="font-icon"><i class="{{ fontawesome }}"></i></div>
+        {% endif %}
+        {% if title %}
+            <h3 class="panel-title">{{ title }}</h3>
+        {% endif %}
+        {% if message and message != '<p><br></p>' %}
+        <div class="box-description">{{ message }}</div>
+        {% endif %}
+    </div>
+    <div class="panel-body">
+            <div class="{% if products|length <= itemsperpage*cols %}swiper-no-swiping{% endif %}">
+                <div class="swiper-container" id="productcarousel{{ id }}">
+                    <div class="swiper-pagination productcarousel{{ id }}"></div>
+                    <div class="swiper-pager">
+                        <div class="swiper-button-next swiper-button-next{{id}}"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="swiper-wrapper">
+                        {% for i, product in products %}
+                        <div class="swiper-slide {% if k==0 %}active{% endif %}">
+                            <div class="product-layout product-inner product-thumb">{# start product-inner #}
+                                {% if product.thumb %}
+                                <div class="image">
+                                    {% if product.special %}
+                                    <div class="product-label-special label">{{ text_sale }}</div>
+                                    {% endif %}
+                                    <a href="{{ product.href }}"><img class="img-responsive" id="image{{ id }}" data="{{ product.product_id }}" src="{{ product.thumb }}" alt="{{ product.name }}"/></a>
+                                </div>
+                                {% endif %}
+                                <div class="caption">
+                                    <div class="name"><h4><a href="{{ product.href }}">{{ product.name }}</a></h4></div>
+                                    <div class="description">{{ (product.description|striptags)|slice(0,58) }}...</div>
+                                    {% if product.price %}
+                                    <div class="price">
+                                        {% if not product.special %}
+                                        {{ product.price }}
+                                        {% else %}
+                                        <span class="price-old">{{ product.price }}</span> <span class="price-new">{{ product.special }}</span>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                    {% if product.rating %}
+                                    <div class="rating">
+                                        {% set i = 1 %}{% for i in i..5 %}
+                                        {% if product.rating < i %}
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                        {% else %}
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="button-group">
+                                    <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+                                    <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+                                    <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+                                </div>
+                            </div>{# end product-inner #}
+                        </div>
+                        {# end box-product #}
+                        {% endfor %}{# endforeach #}
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<script><!--
+$('#productcarousel{{ id }}').swiper({
+    prevButton: '.swiper-button-prev',
+    nextButton: '.swiper-button-next',
+    loop:{{ loop == 'true' ? loop : 'false' }},
+    autoplay:{{ auto_play_mode == "true" ? interval:'false' }},
+    pause: 'hover',
+    slidesPerView: {{ itemsperpage ? itemsperpage : 2 }},
+    slidesPerColumn: {{ cols ? cols : 1}},
+    noSwipingClass: 'swiper-no-swiping',
+    spaceBetween: 10,
+    onReachEnd:function(swiper){
+        $('.swiper-button-next{{id}}').one('click',function () {
+            swiper.slideTo(0, 800, false);
+        });
+    },
+    breakpoints: {
+        767: {
+            slidesPerView: 1,
+            {% if products|length > 1*cols %}
+            noSwiping: false
+            {% endif %}
+        },
+        991: {
+            slidesPerView: 2,
+            {% if products|length > 2*cols %}
+            noSwiping: false
+            {% endif %}
+        }, 
+    }
+
+});
+--></script>

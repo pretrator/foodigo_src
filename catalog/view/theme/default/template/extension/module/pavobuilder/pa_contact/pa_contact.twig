@@ -1,0 +1,34 @@
+<form action="{{ settings.action }}" method="post" enctype="multipart/form-data" class="pa-contact-form form-horizontal">
+  <fieldset>
+    <div class="form-group required">
+      <label class="col-sm-2 hidden control-label" for="input-name">{{ entry_name }}</label>
+      <div class="col-sm-12">
+        <input placeholder="{{ entry_name }}" type="text" id="input-name" name="name" value="" class="form-control" />
+      </div>
+    </div>
+    <div class="form-group required">
+      <label class="col-sm-2 hidden control-label" for="input-email">{{ entry_email }}</label>
+      <div class="col-sm-12">
+        <input placeholder="{{ entry_email }}" type="text" name="email" value="" id="input-email" class="form-control" />
+      </div>
+    </div>
+    <div class="form-group required">
+      <label class="col-sm-2 hidden control-label" for="input-subject">{{ entry_subject }}</label>
+      <div class="col-sm-12">
+        <input placeholder="{{ entry_subject }}" type="text" id="input-subject" name="subject" value="" class="form-control" />
+      </div>
+    </div>
+    <div class="form-group required">
+      <label class="col-sm-2 hidden control-label" for="input-message">{{ entry_message }}</label>
+      <div class="col-sm-12">
+        <textarea placeholder="{{ entry_message }}" id="input-message" name="message" rows="3" class="form-control"></textarea>
+      </div>
+    </div>
+    {{ captcha }}
+  </fieldset>
+  <div class="buttons">
+    <div class="pull-right">
+      <input class="btn btn-primary" type="submit" value="{{ entry_send_message_text }}" />
+    </div>
+  </div>
+</form>

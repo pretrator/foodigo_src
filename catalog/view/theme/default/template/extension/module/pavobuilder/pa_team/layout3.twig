@@ -1,0 +1,45 @@
+<div class="pavo-widget-team layout-3 {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<div class="inner">
+		<div class="content-image">
+			<img src="{{ settings.src }}" class="img-responsive" alt="{{ settings.name }}" />
+		</div>
+		<div class="content-overlay">
+			<h3 class="content-title">{{ settings.name }}</h3>
+			<div class="content-subtitle">{{ settings.subtitle }}</div>
+			<div class="content-desc">{{ settings.content }}</div>
+			<div class="content-socials">
+				<div class="social-network">
+					<ul class="social list-inline">
+						{% if settings.link_facebook %}
+							<li class="facebook"><a class="_blank" href="{{settings.link_facebook}}"><i class="fa fa-facebook-square"></i></a></li>
+						{% endif %}
+						{% if settings.link_youtube %}
+							<li class="youtube"><a class="_blank" href="{{settings.link_youtube}}"><i class="fa fa-youtube-square"></i></a></li>
+						{% endif %}
+						{% if settings.link_instagram %}
+							<li class="instagram"><a class="_blank" href="{{settings.link_instagram}}"><i class="fa fa-instagram"></i></a></li>
+						{% endif %}
+						{% if settings.link_twitter %}
+							<li class="twitter"><a class="_blank" href="{{settings.link_twitter}}"><i class="fa fa-twitter-square"></i></a></li>
+						{% endif %}
+						{% if settings.link_reddit %}
+							<li class="reddit"><a class="_blank" href="{{settings.link_reddit}}"><i class="fa fa-reddit-square"></i></a></li>
+						{% endif %}
+						{% if settings.pinterest %}
+							<li class="pinterest"><a class="_blank" href="{{settings.link_pinterest}}"><i class="fa fa-pinterest-square"></i></a></li>
+						{% endif %}
+						{% if settings.link_google_plus %}
+							<li class="google_plus"><a class="_blank" href="{{settings.link_google_plus}}"><i class="fa fa-google-plus-square"></i></a></li>
+						{% endif %}
+						{% if settings.link_flickr %}
+							<li class="flickr"><a class="_blank" href="{{settings.link_flickr}}"><i class="fa fa-flickr"></i></a></li>
+						{% endif %}
+						{% if settings.link_vine %}
+							<li class="vine"><a class="_blank" href="{{settings.link_vine}}"><i class="fa fa-vimeo-square"></i></a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

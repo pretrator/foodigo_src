@@ -1,0 +1,74 @@
+/******************************************************
+ * @package Pavo Store Locator Module for Opencart 3.x
+ * @version 1.0
+ * @author http://www.pavothemes.com
+ * @copyright   Copyright (C) Feb 2017 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
+ * @license     GNU General Public License version 2
+*******************************************************/
+.pavo-testimonial  .t-avatar{
+	max-width: 100%;
+}
+.pavo-testimonial.layout-1 .testimonial-item {
+	text-align: center;
+}
+.pavo-testimonial.layout-1 .testimonial-item .t-avatar	{
+	display: block;
+	margin: 0 auto
+}
+
+
+.pavo-testimonial.layout-1 .testimonial-item .testimonial-description{
+	font-size: 18px; 
+	letter-spacing:2px;
+}
+.pavo-testimonial.layout-1 .testimonial-item .testimonial-profile{
+	font-weight: bold;
+	padding-top:12px;
+}
+/****/
+.pavo-testimonial.layout-2 .t-author{
+	display: table;
+}
+.pavo-testimonial.layout-2 .t-avatar img{
+	height: 40px;
+	width: 40px;
+}
+.pavo-testimonial.layout-2  .t-author > div{
+	display: table-cell;
+}
+.pavo-testimonial.layout-2  .t-author > div.t-avatar{
+	padding-right: 20px;
+}
+.pavo-testimonial.layout-2  .testimonial-description{
+	background: #f6f6f6;
+	padding:20px 16px;
+	margin:20px;
+}
+
+.pavo-testimonial.layout-2  .testimonial-description {
+	position: relative;
+	background: #f6f6f6;
+	border: 4px solid #f6f6f6;
+}
+.pavo-testimonial.layout-2  .testimonial-description:after, .pavo-testimonial.layout-2  .testimonial-description:before {
+	top: 100%;
+	left: 35px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.pavo-testimonial.layout-2  .testimonial-description:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-top-color: #f6f6f6;
+	border-width: 15px; 
+}
+/*.pavo-testimonial.layout-2  .testimonial-description:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-top-color: #f6f6f6;
+	border-width: 0px;
+	margin-left: -36px;
+}*/

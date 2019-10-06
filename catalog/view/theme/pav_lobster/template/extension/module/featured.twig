@@ -1,0 +1,15 @@
+<div class="box featured">
+  <h3 class="box-heading">{{ heading_title }}</h3>
+  <div class="box-content">
+    <div class="row"> {% for product in products %}
+      <div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        {% if product_grid_layout is empty %}
+      	{% include ( 'pav_lobster/template/product/layout/_product_default' )~'.twig' %}
+    	{% else %}
+        {% include ( 'pav_lobster/template/product/layout/'~product_grid_layout )~'.twig' %}
+    	{% endif %}
+      </div>
+      {% endfor %} 
+    </div>
+  </div>
+</div>

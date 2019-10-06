@@ -1,0 +1,31 @@
+<div class="box blogcategory-{{ name }}">
+    <h3 class="box-heading">{{ heading_title }}</h3>
+    <div class="box-content" id="pavo-blogcategory">
+        <ul id="accordion" class="box-category list-group accordion">
+            {% for category1 in category %}
+            {% if category1.parent_id == 0 %}
+            <li class="list-group-item accordion-group">
+                <a href="{{ category1.link }}" >{{ category1.name }} {% set count = 0 %}
+                    {% for cat_id in get_category %}
+                    {% if cat_id.category_id == category1.category_id %}
+                    {% set count = count + 1 %}
+                    {% endif %}
+                    {% endfor %}
+                    ({{ count }})
+                </a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.collapse').on('show.bs.collapse', function () {
+            $('span[href=#'+$(this).attr('id')+']').html("<i class='fa fa-angle-down'></i>");
+        });
+        $('.collapse').on('hide.bs.collapse', function () {
+            $('span[href=#'+$(this).attr('id')+']').html("<i class='fa fa-angle-right'></i>");
+        });
+    });
+</script>

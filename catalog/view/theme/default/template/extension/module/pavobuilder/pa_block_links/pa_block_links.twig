@@ -1,0 +1,44 @@
+<div class="footer">
+  {% if settings.footer_title == "information" %}
+    {% if settings.title == "true" %} 
+    <h5>{{ text_information }}</h5>
+    {% endif %}
+    <ul class="list-unstyled">
+     {% for information in settings.informations %}
+     <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+     {% endfor %}
+   </ul>
+ {% endif %}
+ {% if settings.footer_title == "service" %}
+  {% if settings.title == "true" %} 
+  <h5>{{ text_service }}</h5>
+  {% endif %}
+  <ul class="list-unstyled">
+    <li><a href="{{ settings.contact }}">{{ text_contact }}</a></li>
+    <li><a href="{{ settings.return }}">{{ text_return }}</a></li>
+    <li><a href="{{ settings.sitemap }}">{{ text_sitemap }}</a></li>
+  </ul>
+{% endif %}
+{% if settings.footer_title == "my_account" %}
+  {% if settings.title == "true" %} 
+  <h5>{{ text_account }}</h5>
+  {% endif %}
+  <ul class="list-unstyled">
+    <li><a href="{{ settings.account }}">{{ text_account }}</a></li>
+    <li><a href="{{ settings.order }}">{{ text_order }}</a></li>
+    <li><a href="{{ settings.wishlist }}">{{ text_wishlist }}</a></li>
+    <li><a href="{{ settings.newsletter }}">{{ text_newsletter }}</a></li>
+  </ul>
+{% endif %}
+{% if settings.footer_title == "extras" %}
+  {% if settings.title == "true" %} 
+  <h5>{{ text_extra }}</h5>
+  {% endif %}
+  <ul class="list-unstyled">
+    <li><a href="{{ settings.manufacturer }}">{{ text_manufacturer }}</a></li>
+    <li><a href="{{ settings.voucher }}">{{ text_voucher }}</a></li>
+    <li><a href="{{ settings.affiliate }}">{{ text_affiliate }}</a></li>
+    <li><a href="{{ settings.special }}">{{ text_special }}</a></li>
+  </ul>
+{% endif %}
+</div>

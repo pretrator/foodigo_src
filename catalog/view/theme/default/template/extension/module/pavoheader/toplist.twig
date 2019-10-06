@@ -1,0 +1,44 @@
+{% set id = random(1..9) + random() %}
+ <div id="top-list{{id}}" class="{% if settings.menu_type == "horizontal-menu" %}nav{% else %}dropdown{% endif %} {{ settings.extra_class }}">
+    {% if settings.menu_type == "vertical-dropdown" %}
+    <span class="dropdown-toggle" data-toggle="dropdown" >{% if settings.icon %}<i class="fa {{settings.icon}}"></i>{% endif %} {{settings.title_vertical}} <span class="caret"></span></span>
+    {% endif %} 
+    <ul class="{% if settings.menu_type == "vertical-dropdown" %}dropdown-menu{% else %}list-inline{% endif %}">
+        {% for option in settings.option %}
+            {% if option == "language" %}
+                <li>{{ settings.languages }}</li>
+            {% endif %}
+            {% if option == "currency" %}
+                <li>{{ settings.currency }}</li>
+            {% endif %}
+            {% if option == "telephone" %}
+                <li><a href="{{ settings.contact }}"><i class="fa fa-phone"></i></a> {% if settings.layout_style != 'icon' %}<span class="hidden-xs hidden-sm hidden-md">{{ settings.telephone }}</span>{% endif %}</li>
+            {% endif %}    
+            {% if option == "account" %}
+                <li class="dropdown"><a href="{{ settings.account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {% if settings.layout_style != 'icon' %}<span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span>{% endif %} <span class="caret"></span></a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    {% if settings.logged %}
+                    <li><a href="{{ settings.account }}">{{ text_account }}</a></li>
+                    <li><a href="{{ settings.order }}">{{ text_order }}</a></li>
+                    <li><a href="{{ settings.transaction }}">{{ text_transaction }}</a></li>
+                    <li><a href="{{ settings.download }}">{{ text_download }}</a></li>
+                    <li><a href="{{ settings.logout }}">{{ text_logout }}</a></li>
+                    {% else %}
+                    <li><a href="{{ settings.register }}">{{ text_register }}</a></li>
+                    <li><a href="{{ settings.login }}">{{ text_login }}</a></li>
+                    {% endif %}
+                  </ul>
+                </li>
+            {% endif %}    
+            {% if option == "wishlist" %}
+                <li><a href="{{ settings.wishlist }}" class="wishlist-total" title="{{ text_wishlist }}"><i class="fa fa-heart"></i> {% if settings.layout_style != 'icon' %}<span class="hidden-xs hidden-sm hidden-md">{{ settings.text_wishlist }}</span>{% endif %}</a></li>
+            {% endif %}    
+            {% if option == "shopping_cart" %}
+                <li><a href="{{ settings.shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i> {% if settings.layout_style != 'icon' %}<span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span>{% endif %}</a></li>
+            {% endif %}
+            {% if option == "checkout" %}
+                <li><a href="{{ settings.checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> {% if settings.layout_style != 'icon' %}<span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span>{% endif %}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,131 @@
+{{ header }}
+<div id="pavotheme-customize-wrapper">
+
+	<div role="navigation" id="main-control">
+		<div class="panel-header">
+			<header>
+				<a href="{{ admin_url }}" class="btn btn-danger btn-back">{{ text_back }}</a>
+				<a href="#" class="btn btn-warning btn-preview">{{ text_preview }}</a>
+				<a href="#" class="btn btn-primary btn-save">{{ text_save }}</a>
+			</header>
+		</div>
+
+		<div class="panel-control">
+
+		 	<form method="POST" id="form" class="" enctype="multipart/form-data">
+		 		<div class="panel panel-default">
+		 			<div class="panel-heading">
+		 				<h4 class="panel-title">{{ text_skins }}</h4>
+		 			</div>
+		 			<div class="panel-body">
+		 				<div class="col-sm-7">
+		 					{% if ( current_skin ) %}
+		 						<i class="clear">x</i>
+		 					{% endif %}
+			 				<select name="skin" class="skin form-control">
+			 					<option value="">{{ text_none }}</option>
+			 					{% for i, skin in skins %}
+			 						<option value="{{ i }}"{{ i == current_skin ? ' selected' : '' }}>{{ skin.name }}</option>
+			 					{% endfor %}
+			 				</select>
+		 				</div>
+		 				<div class="col-sm-5">
+			 				<button class="btn btn-info btn-clone-skin"{{ current_skin ? '' : ' disabled' }}>{{ text_clone }}</button>
+		 				</div>
+		 			</div>
+		 		</div>
+				<div class="panel-group" id="accordion">
+				 	{% set ii = 0 %} {% for i, setting in settings %}
+                    	<div id="setting-tab-{{ setting.id }}" class="panel panel-default">
+
+                      		{% if ( setting.group ) %}
+
+		                      	<div class="panel-heading">
+							      	<h4 class="panel-title">
+								        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ii}}">
+								        	<i class="{{ setting.icon }}"></i>
+								        	{{ setting.name }}
+								    	</a>
+							      	</h4>
+							    </div>
+							    <div id="collapse{{ii}}" class="collapse-panel {% if ii==0 %} in {% else %} out collapse{% endif %}">
+							    	{% set ii = ii+1 %}
+
+      								<div class="panel-body-content">
+				                        <ul class="nav nav-tabs">
+				                          	{% set c = 0 %} {% for key, group in setting.group %}
+					                            <li{{ c == 0 ? ' class="active"' : '' }}>
+					                              	<a href="#setting-group-i-{{ key }}" data-toggle="tab" aria-expanded="true">{{ group }}</a>
+					                            </li>
+				                          	{% set c = c + 1 %} {% endfor %}
+				                        </ul>
+
+				                        <div class="tab-content">
+
+				                          	{% set c = 0 %} {% for key, group in setting.group %}
+				                              	<div id="setting-group-i-{{ key }}" class="tab-pane{{ c == 0 ? ' active' : '' }}">
+					                                {% for item in setting.item %}
+
+														{# wrapper class #}
+														{% set wrapper_class = 'panel-body' %}
+														{% set wrapper_class = item.wrapper_class ? [ wrapper_class, ' ', item.wrapper_class ] | join : wrapper_class %}
+														{% set wrapper_class = item.required ? [ wrapper_class, ' ', 'required' ] | join : wrapper_class %}
+														{% if item.id in errors | keys %}
+														{% set wrapper_class = [ wrapper_class, ' ', 'has-error' ] | join %}
+														{% endif %}
+
+														{% if ( item.group == group ) %}
+						                                  	<div class="{{ wrapper_class }}">
+						                                      	{% if item.label %}
+							                                        {% if ( item.desc ) %}
+																		<label class="col-sm-12 control-label">
+																			<span data-toggle="tooltip" data-original-title="{{ item.desc | escape }}">{{ item.label }}</span>
+																		</label>
+							                                        {% else %}
+							                                          	<label class="col-sm-12 control-label" for="{{ item.id }}">{{ item.label }}
+							                                          	 	<i class="clear">x</i>
+							                                          	</label>
+							                                        {% endif %}
+						                                      	{% else %}
+							                                        <div class="col-sm-12"></div>
+						                                      	{% endif %}
+						                                      	<div class="col-sm-12">
+							                                        {{ item.output }}
+							                                        {% if item.id in errors | keys %}
+							                                          	<div class="text-danger">{{ errors[item.id] }}</div>
+							                                        {% endif %}
+						                                      	</div>
+				                              				</div>
+			                                  			{% endif %}
+					                                {% endfor %}
+				                              	</div>
+				                            {% set c = c + 1 %} {% endfor %}
+
+				                        </div>
+				                    </div>
+	                      		</div>
+
+	                      	{% endif %}
+	                    </div>
+		         	{% endfor %}
+		        </div>
+		    </form>
+
+		</div>
+	</div>
+	<iframe id="pavo-iframe" src="{{ iframeURI }}"></iframe>
+
+</div>
+<script type="text/javascript">
+	var PavoCustomize = window.PavoCustomize = {
+		skins: {{ skins | json_encode() }},
+		current_skin: '{{ current_skin }}',
+		update_url: '{{ update_customize_url }}',
+		delete_skin_url: '{{ delete_skin_url }}',
+		customize_url: '{{ customize_url }}',
+		base_skin_url: '{{ base_skin_url }}',
+		text_skin_name: '{{ text_skin_name }}',
+		text_delete_skin: '{{ text_delete_skin }}'
+	};
+</script>
+{# {{ footer }} #}

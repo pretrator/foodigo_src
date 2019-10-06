@@ -1,0 +1,46 @@
+<div class="pavo-widget-tab-group {% if settings.type == "horizontal" %}hor{% else %}ver{% endif %} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+    {% set id = random(1..9) + random() %}
+    {% set a = settings.tab_active - 1 %}
+    <div class="tab-toggle {% if settings.type == "vertical" %}col-md-3{% endif %}">
+        <ul class="nav nav-tabs {% if settings.type == "horizontal" %}nav-stacked{% endif %}" id="tab-group{{id}}">
+            {% for key,tab in settings.get_items %}
+            <li ><a href="#group-tab{{ key }}" data-toggle="tab">{{ tab.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="tab-content {% if settings.type == "vertical" %}col-md-9{% endif %} {% if settings.position == "right" %}pull-right{% endif %}">
+        {% for key, tab in settings.get_items %}
+            <div class="tab-pane {% if settings.fade_effect == "true" %}fade{% endif %}" id="group-tab{{ key }}">
+                {% if tab.image %}
+                <img class="img-responsive" src="{{tab.image}}" alt="{{tab.alt}}">
+                {% endif %}
+                {% if tab.caption %}
+                <div class="content-caption">{{ tab.caption }}</div>
+                {% endif %}
+                {% if tab.subtitle %}
+                    <div class="content-subtitle">{{ tab.subtitle }}</div>
+                {% endif %}
+                {% if tab.title %}
+                    <h3 class="content-title">{{ tab.title }}</h3>
+                {% endif %}
+                {% if tab.content %}
+                {{tab.content}}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script type="text/javascript">
+(function($){
+    $(document).ready(function(){
+        {% if settings.tab_active %}
+        $('#tab-group{{id}} li:eq({{a}}) a').tab('show');
+        {% endif %}
+        {% if settings.mouseover == "true" %}
+        $( '#tab-group{{id}} li a' ).mouseover(function() {
+            $( '#tab-group{{id}} li a[href='+$(this).attr("href")+']' ).tab('show');
+        });
+        {% endif %}
+    });
+})(jQuery);
+</script>

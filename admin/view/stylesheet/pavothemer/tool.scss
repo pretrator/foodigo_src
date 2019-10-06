@@ -1,0 +1,56 @@
+.pav-demo-sample {
+	position: relative;
+	height: 290px;
+	overflow: hidden;
+	border: solid 5px #f2f2f2;
+	border-radius: 5px;
+	margin-bottom: 15px;
+
+	:hover{
+		border-color: #1e91cf
+	}
+	img{
+		max-width: 100%;
+	}
+	.btn-demo{
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+	}
+	.demo-name{
+		position: absolute;
+		bottom: 0px;
+		left: 10px;
+		background:#FFF;
+		padding: 9px 10px;
+	}
+}
+
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 20px;
+  width: auto;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+.white-popup  .mfp-close{
+    background:#FFF;
+}
+#modal-install-samples{
+	small {
+		font-size: 80%;
+	}
+	.mfp-close{
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+	}
+	.btn {
+		white-space: unset;
+		width: 100%;
+	}
+}
+.refresh-demo{
+	float: right;
+}

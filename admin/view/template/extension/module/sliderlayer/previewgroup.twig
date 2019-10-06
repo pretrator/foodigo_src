@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+#######################################
+	- THE HEAD PART -
+######################################
+-->
+<head>
+	<script type="text/javascript" src="view/javascript/jquery/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="view/javascript/jquery/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="{{ js_plugins }}"></script>
+	<script type="text/javascript" src="{{ js_revolution }}"></script>
+	<link rel="stylesheet" href="{{ typoFile }}" type="text/css"/>
+	<style>
+		.rev_slider{ position: relative; overflow: hidden; }
+		.bannercontainer { position: relative;margin: 18px auto }
+	</style>
+</head>
+
+
+
+<!--
+#######################################
+	- THE BODY PART -
+######################################
+-->
+<body class="body-dark">		
+{% if sliderParams.show_navigator == 1 %}
+	{% set hide_navigator_after = 0 %}
+{% else %}
+	{% set hide_navigator_after = sliderParams.hide_navigator_after %}
+{% endif %}
+	<div class="bannercontainer" style="padding: {{ sliderParams.padding }}; max-width:{{ sliderParams.width }}px;height:{{ sliderParams.height }}px; ">
+		<div id="sliderlayer{{ randID }}" class="rev_slider" style="width:100%;height:100%; " >
+			<ul>
+			{% for slider in sliders %}
+				{% set thumbnail = '' %}
+				{% if slider['params'].slider_link %}
+					{% set link = slider['params'].slider_link %}
+				{% else %}
+					{% set link = ''  %}
+				{% endif %}
+
+				{% if slider['params'].slider_delay %}
+					{% set sliderDelay = slider['params'].slider_delay %}
+				{% else %}
+					{% set sliderDelay = ''  %}
+				{% endif %}
+						
+				<li data-link="{{ link }}" data-link="{{ sliderDelay }}" data-masterspeed="{{ slider['params'].slider_duration }}"  data-transition="{{ slider['params'].slider_transition }}" data-slotamount="{{ slider['params'].slider_slot }}" data-thumb="{{ slider.thumbnail }}">
+					{% if slider['params'].slider_usevideo ==  'youtube' or slider['params'].slider_usevideo ==  'vimeo' %}
+						{% set vurl = "http://player.vimeo.com/video/{{ slider['params'].slider_videoid }}" %}
+						{% if slider['params'].slider_usevideo ==  'youtube' %}
+							{% set vurl = "http://player.vimeo.com/video/{{ slider['params'].slider_videoid }}" %}
+						{% endif %}
+						<div class="caption fade fullscreenvideo" data-autoplay="true" data-x="0" data-y="0" data-speed="500" data-start="10" data-easing="easeOutBack"><iframe src="{{ vurl }}?title=0&amp;byline=0&amp;portrait=0;api=1" width="100%" height="100%"></iframe></div>
+					{% elseif slider.main_image %}				
+						<img src="{{ slider.main_image }}" >
+					{% endif %}
+
+					{% for layer in layersparams %}
+						{% set type = layer.layer_type %}
+						{% set endeffect = '' %}
+						{% if layer.layer_endanimation == 'auto' %} {% set layer_layer_endanimation = '' %} {% endif %}
+						{% if layer.layer_endtime %} 
+							{% set endeffect = ' data-end="{{ layer.layer_endtime }}"' %}
+							{% set endeffect = ' data-endspeed="{{ layer.layer_endspeed }}"' %}
+							{% if layer.layer_endeasing != 'nothing' %}
+								{% set endeffect = ' data-endeasing="{{ layer.layer_endeasing }}"' %}
+							{% endif %}
+						{% else %}
+							{% set layer_layer_endanimation = ''  %}
+						{% endif %}
+
+						<div class="caption {{ layer.layer_class }} {{ layer.layer_animation }} {{ layer.layer_easing }} {{ layer_layer_endanimation }}" data-x="{{ layer.layer_left }}" data-y="{{ layer.layer_top }}" data-speed="300" data-start="{{ layer.time_start }}" data-easing="easeOutExpo" {{ endeffect }}>
+							{% if type == 'image' %}
+								<img src="{{ layer.layer_content }}">
+							{% elseif type == 'video' %}
+								{% if layer.layer_video_type == 'vimeo' %}
+									<iframe src="http://player.vimeo.com/video/{{ layer.layer_video_id }}?title=0&amp;byline=0&amp;portrait=0;api=1" width="{{ layer.layer_video_width }}" height="{{ layer.layer_video_height }}"  style="width:{{ layer.layer_video_width }}px;height:{{ layer.layer_video_height }}px"></iframe>
+								{% else %}
+									<iframe src="http://www.youtube.com/embed/{{ layer.layer_video_id }}?title=0&amp;byline=0&amp;portrait=0;api=1" width="{{ layer.layer_video_width }}" height="{{ layer.layer_video_height }}"  style="width:{{ layer.layer_video_width }}px;height:{{ layer.layer_video_height }}px"></iframe>
+								{% endif %}
+							{% else %}
+								{{ layer.layer_caption }}
+							{% endif %}
+						</div>	
+					{% endfor %}	
+				</li>					 
+			{% endfor %}			 	
+			</ul>
+
+			{% if sliderParams.show_time_line %}
+			<div class="tp-bannertimer tp-{{ sliderParams.time_line_position }}"></div>
+			{% endif %}
+		</div>
+	</div>
+<!--
+##############################
+ - ACTIVATE THE BANNER HERE -
+##############################
+-->
+	<script type="text/javascript">
+
+	var tpj=jQuery;
+	 
+
+	tpj(document).ready(function() {
+
+	if (tpj.fn.cssOriginal!=undefined)
+		tpj.fn.css = tpj.fn.cssOriginal;
+
+		tpj('#sliderlayer{{ randID }}').revolution(
+			{
+				delay:{{ sliderParams.delay }},
+				startheight:{{ sliderParams.height }},
+				startwidth:{{ sliderParams.width }},
+
+
+				hideThumbs:{{ hide_navigator_after }},
+
+				thumbWidth:{{ sliderParams.thumbnail_width }},						
+				thumbHeight:{{ sliderParams.thumbnail_height }},
+				thumbAmount:{{ sliderParams.thumbnail_amount }},
+
+				navigationType:"{{ sliderParams.navigator_type }}",				
+				navigationArrows:"{{ sliderParams.navigator_arrows }}",	
+
+				{% if sliderParams.navigation_style != 'none' %}	
+				navigationStyle:"{{ sliderParams.navigation_style }}",			 
+				{% endif %}
+			
+				navOffsetHorizontal:{{ sliderParams.offset_horizontal }},
+				navOffsetVertical:{{ sliderParams.offset_vertical }}, 	
+
+				{% if sliderParams.touch_mobile %}			
+				touchenabled:"on",
+				{% else %}	
+				touchenabled:"off", 
+				{% endif %}
+
+				{% if sliderParams.stop_on_hover %}			
+				onHoverStop:"on",
+				{% else %}	
+				onHoverStop:"off", 
+				{% endif %}
+
+				{% if sliderParams.shuffle_mode %}			
+				shuffle:"on",
+				{% else %}	
+				shuffle:"off", 
+				{% endif %}
+
+				stopAtSlide:-1,						
+				stopAfterLoops:-1,						
+
+				hideCaptionAtLimit:0,				
+				hideAllCaptionAtLilmit:0,				
+				hideSliderAtLimit:0,			
+				fullWidth:"on",
+				shadow:{{ sliderParams.shadow_type }}
+			});
+		});
+	</script>
+	</body>
+</html>	

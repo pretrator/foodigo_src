@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+	<author>pavotheme</author>
+	<name>Theme Style</name>
+	<id>theme-style</id>
+	<icon>fa fa-gear</icon>
+	
+	<item>
+		<id>theme-color-default</id>
+		<group>Global</group>
+		<label>Global Color Default</label>
+		<type>colorpicker</type>
+		<default>#444a59</default>
+	</item>
+
+	<item>
+		<id>theme-color-second</id>
+		<group>Global</group>
+		<label>Global Color Second</label>
+		<type>colorpicker</type>
+		<default>#a8a8a8</default>
+	</item>
+
+	<item>
+		<id>theme-color-third</id>
+		<group>Global</group>
+		<label>Global Color Third</label>
+		<type>colorpicker</type>
+		<default>#333333</default>
+	</item>
+
+	<item>
+		<id>border-color</id>
+		<group>Global</group>
+		<label>Global Border Color</label>
+		<type>colorpicker</type>
+		<default>#ebebeb</default>
+	</item>
+
+
+	<item>
+		<id>topbar-bg</id>
+		<group>Layout</group>
+		<label>Topbar Bg</label>
+		<type>colorpicker</type>
+		<default>transparent</default>
+	</item>
+
+	<item>
+		<id>topbar-color</id>
+		<group>Layout</group>
+		<label>Text Color</label>
+		<type>colorpicker</type>
+		<default>#86888e</default>
+	</item>
+
+	<item>
+		<id>topbar-font-size</id>
+		<group>Layout</group>
+		<label>Font Size</label>
+		<type>select_font_size</type>
+		<default>14px</default>
+	</item>
+
+
+	<item>
+		<id>mainmenu-bg</id>
+		<group>Component</group>
+		<label>Main Memnu Bg</label>
+		<type>colorpicker</type>
+		<default>transparent</default>
+	</item>
+
+	<item>
+		<id>mainmenu-link-color</id>
+		<group>Component</group>
+		<label>Main Memnu Link</label>
+		<type>colorpicker</type>
+		<default>#444a59</default>
+	</item>
+
+	<item>
+		<id>mainmenu-dropdown-bg</id>
+		<group>Component</group>
+		<label>Dropdown Menu Bg</label>
+		<type>colorpicker</type>
+		<default>#444a59</default>
+	</item>
+
+	<item>
+		<id>mainmenu-dropdown-link-color</id>
+		<group>Component</group>
+		<label>Dropdown Menu Color</label>
+		<type>colorpicker</type>
+		<default>#a8a8a8</default>
+	</item>
+
+
+
+	<item>
+		<id>offcanvas-menu-bg</id>
+		<group>Component</group>
+		<label>Background Offcanvas</label>
+		<type>colorpicker</type>
+		<default>#fff</default>
+	</item>
+
+
+	<!-- Breadcrumb -->
+
+	<item>
+		<id>breadcrumb-bg</id>
+		<group>Component</group>
+		<label>Breadcrumb BG</label>
+		<type>colorpicker</type>
+		<default>transparent</default>
+	</item>
+
+	<item>
+		<id>breadcrumb-color</id>
+		<group>Component</group>
+		<label>Breadcrumb Color</label>
+		<type>colorpicker</type>
+		<default>#86888e</default>
+	</item>
+
+	<!-- Footer -->
+
+	<item>
+		<id>footer-group</id>
+		<group>Layout</group>
+		<label>Footer</label>
+		<type>hr</type>
+		<default>#333333</default>
+	</item>
+
+
+	<item>
+		<id>footer-bg</id>
+		<group>Layout</group>
+		<label>Footer Bg</label>
+		<type>colorpicker</type>
+		<default>#444a59</default>
+	</item>
+
+	<item>
+		<id>footer-color</id>
+		<group>Layout</group>
+		<label>Footer Text Color</label>
+		<type>colorpicker</type>
+		<default>#86888e</default>
+	</item>
+
+	<item>
+		<id>footer-link-hover-color</id>
+		<group>Layout</group>
+		<label>Footer Text Color</label>
+		<type>colorpicker</type>
+		<default>#ddba76</default>
+	</item>
+
+	<item>
+		<id>footer-font-size</id>
+		<group>Layout</group>
+		<label>Footer Font Size</label>
+		<type>select_font_size</type>
+		<default>14px</default>
+	</item>
+
+
+	<item>
+		<id>footer-heading-color</id>
+		<group>Layout</group>
+		<label>Heading Color</label>
+		<type>colorpicker</type>
+		<default>#fff</default>
+	</item>
+
+	<item>
+		<id>footer-heading-font-size</id>
+		<group>Layout</group>
+		<label>Heading Font Size</label>
+		<type>select_font_size</type>
+		<default>18px</default>
+	</item>
+
+	<!-- Power -->
+
+	<item>
+		<id>powered-by</id>
+		<group>Layout</group>
+		<label>Powered By</label>
+		<type>hr</type>
+		<default></default>
+	</item>
+
+	<item>
+		<id>copyright-bg</id>
+		<group>Layout</group>
+		<label>Copyright Bg</label>
+		<type>colorpicker</type>
+		<default>#353a47</default>
+	</item>
+
+	<item>
+		<id>copyright-color</id>
+		<group>Layout</group>
+		<label>Copyright Color</label>
+		<type>colorpicker</type>
+		<default>#86888e</default>
+	</item>
+
+	<item>
+		<id>copyright-link-color</id>
+		<group>Layout</group>
+		<label>Link Color</label>
+		<type>colorpicker</type>
+		<default>#fff</default>
+	</item>
+
+	<item>
+		<id>copyright-padding-top</id>
+		<group>Layout</group>
+		<label>Copyright Padding</label>
+		<type>select_font_size</type>
+		<default>30px</default>
+	</item>
+	<item>
+		<id>--</id>
+		<group>Layout</group>
+		<label>--</label>
+		<type>hr</type>
+		<default></default>
+	</item>
+</settings>

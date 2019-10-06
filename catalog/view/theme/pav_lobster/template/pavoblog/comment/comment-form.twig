@@ -1,0 +1,55 @@
+<h3>{{ text_leave_comment }}</h3>
+{% if ( errors.comment_warning ) %}
+	<div class="pavoblog-notice warning">{{ errors.comment_warning }}</div>
+{% endif %}
+<form action="{{ comment_action }}" method="post" id="comment-form" class="comment-form{{ captcha ? ' google-recaptcha' : '' }}">
+	<div class="form-group row">
+		<div class="col-md-12 col-xs-12">
+			<input type="text" name="comment_title" class="form-control" placeholder="{{ text_comment_title }}" value="{{ comment_title }}" />
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-md-12 col-xs-12{{ errors.comment_text ? ' has-error' : '' }}">
+			<textarea class="form-control required" name="comment_text" id="comment-text" placeholder="{{ text_comment_required }}">{{ comment_text }}</textarea>
+			{% if ( errors.comment_text ) %}
+				<p class="notice warning">{{ errors.comment_text }}</p>
+			{% endif %}
+		</div>
+	</div>
+	{% if ( logged_in == false ) %}
+		<div class="form-group row">
+			<div class="col-md-6 col-xs-12 {{ errors.comment_name ? ' has-error' : '' }}">
+				<input type="text" name="comment_name" class="comment-name form-control required" placeholder="{{ text_display_name }}" value="{{ comment_name }}" />
+				{% if ( errors.comment_name ) %}
+					<p class="notice warning">{{ errors.comment_name }}</p>
+				{% endif %}
+			</div>
+			<div class="col-md-6 col-xs-12{{ errors.comment_email ? ' has-error' : '' }}">
+				<input type="email" name="comment_email" class="comment-email form-control required" placeholder="{{ text_email }}" value="{{ comment_email }}" />
+				{% if ( errors.comment_email ) %}
+					<p class="notice warning">{{ errors.comment_email }}</p>
+				{% endif %}
+			</div>
+		</div>
+	{% endif %}
+	<div class="form-group row">
+		<div class="col-sm-12 col-xs-12 pull-left">
+			{% if ( captcha ) %}
+				{{ captcha }}
+				{% if ( errors.captcha ) %}
+					<p class="notice warning">{{ errors.captcha }}</p>
+				{% endif %}
+			{% endif %}
+			<div class="form-check">
+			  	<label class="form-check-label">
+			    	<input type="checkbox" class="form-check-input" name="comment_subscribe" /> {{ text_notify_follow_comment }}
+			 	 </label>
+			</div>
+			<input type="hidden" name="comment_parent_id" value="0" />
+			<input type="hidden" name="comment_language_id" value="{{ language_id }}" />
+			<input type="hidden" name="comment_post_id" value="{{ post_id }}" />
+			<input type="hidden" name="comment_store_id" value="{{ comment_store_id }}" />
+		</div>
+	</div>
+	<button type="submit" id="comment-form-submit" class="btn btn-primary">{{ text_submit_comment }}</button>
+</form>

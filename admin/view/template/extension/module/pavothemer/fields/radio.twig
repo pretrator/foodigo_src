@@ -1,0 +1,6 @@
+{% for i, option in item.option %}
+  	<label class="radio-inline">
+	    <input type="radio" name="{{ item.name }}" id="{{ item.name }}-{{ i }}" value="{{ option.value }}" {{ item.value == option.value ? ' checked="checked"' : '' }} />
+	    {{ option.text }}
+  	</label>
+{% endfor %}

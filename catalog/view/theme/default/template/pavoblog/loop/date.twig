@@ -1,0 +1,4 @@
+<div class="post-date entry-date">
+	<i class="fa fa-clock-o" aria-hidden="true"></i>
+  	{{ post.date_added | date( [ date_format, ' ', time_format ] | join() ) }}
+</div>

@@ -1,0 +1,24 @@
+<div class="pavo-widget-image-text layout-1 {{settings.extra_class}}">
+	<div class="inner">
+		<div class="content-image">
+			{% if settings.link %}
+				<a href="{{ settings.link }}">
+					<img class="img-responsive" src="{{ settings.src }}" alt="{{ settings.alt }}" />
+				</a>
+			{% else %}
+				<img class="img-responsive" src="{{ settings.src }}" alt="{{ settings.alt }}" />
+			{% endif %}
+		</div>
+		<div class="content-text">
+			{% if settings.title %}
+				<h3 class="content-title">{{ settings.title }}</h3>
+			{% endif %}
+			{% if settings.subtitle %}
+				<div class="content-subtitle">{{ settings.subtitle }}</div>
+			{% endif %}
+			{% if settings.content %}
+				<div class="content-description">{{ settings.content }}</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

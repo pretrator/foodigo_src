@@ -1,0 +1,116 @@
+{% set id = random(1..9) + random() %}
+<div class="panel panel-default {{settings.layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+    <div class="panel-body">
+        <ul class="nav nav-tabs {% if settings.category_status == "false" %}hidden{% endif %}" id="product-category{{id}}">
+            {% set i = 0 %}
+            {% for category in settings.get_category %}
+                {% if ((category is not empty) and (category.products1 is not empty)) %}
+                    <li{% if i == 0 %} class="active"{% endif %}>
+                        <a href="#tab-{{ category.category_id }}{{ id }}" data-target="#tab-{{ category.category_id }}{{ id }}, #tab-{{ category.category_id }}{{ id }}1,#tab-{{ category.category_id }}{{ id }}2" data-toggle="tab">{{ category.category_name}}</a>
+                    </li>
+                {% endif %}
+                {% set i = i + 1 %}
+            {% endfor %}
+        </ul>
+        <div class="row">
+            {% if settings.status3 == "true" and settings.banner_type == "left" %}
+                <div class="tab-content col-md-3 col-sm-12" >
+                    {% set i = 0 %}
+                    {% for category in settings.get_category %}
+                        <div id="tab-{{ category.category_id }}{{ id }}2" class="tab-pane{% if i == 0 %} fade in active{% endif %} banner-category">
+                            <div class="banner-image">
+                                {% if settings.banner is empty %}
+                                    <img src="{{ category.image }}" alt="{{ category.category_name }}" title="{{ category.category_name }}" class="img-responsive" />
+                                {% else %}
+                                    <img src="{{ settings.banner }}" alt="{{ settings.alt }}" title="{{ settings.alt }}" class="img-responsive" />
+                                {% endif %}
+                            </div>
+                            <div class="banner-profile">
+                                {% if settings.banner is empty %}
+                                    <div class="banner-title">
+                                        {{text_collection}} {{ category.category_name }}
+                                    </div>
+                                {% endif %}
+                                {% if settings.banner_title %}
+                                    <div class="banner-subtitle">
+                                        {{ settings.banner_title }}
+                                    </div>
+                                {% endif %}
+                                {% if settings.button_text %}
+                                    <div class="banner-button">
+                                        {% if settings.button_link %}
+                                            <a href="{{settings.server}}{{ settings.button_link }}" class="btn btn-link"> <span>{{ settings.button_text }}</span> </a>
+                                        {% else %}
+                                            <a href="{{ category.link }}" class="btn btn-link"> <span>{{ settings.button_text }}</span> </a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% set i = i + 1 %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="tab-content productcarousel1{{ settings.extra_class1 ? [ ' ', settings.extra_class1 ] | join() : '' }} {% if settings.status2 == "false" and settings.status3 == "false" %}col-md-12 col-sm-12{% elseif settings.status2 == "false" or settings.status3 == "false" %}col-md-9 col-sm-12{% else %}col-md-6 col-sm-12{% endif %}" >
+                {% if settings.product_grid_layout is not empty and settings.name_product1 is not empty %}
+                    <h4>{{settings.name_product1}}</h4>
+                {% endif %}
+                {% set i = 0 %}
+                {% for category in settings.get_category %}
+                    <div class="tab-pane fade{% if i == 0 %} in active{% endif %}" id="tab-{{ category.category_id }}{{ id }}">
+                        {% include settings.products_list_layout with { products: category.products1, settings: settings, carouselOptions: settings.mainCarousel, rows: settings.rows1, columns: settings.item1 } %}
+                    </div>
+                    {% set i = i + 1 %}
+                {% endfor %}
+            </div>
+            {% if settings.status2 == "true" %}
+                <div class="tab-content productcarousel2{{ settings.extra_class2 ? [ ' ', settings.extra_class2 ] | join() : '' }} col-md-3 col-sm-12">
+                    {% if settings.product_grid_layout is not empty and settings.name_product2 is not empty %}
+                        <h4>{{settings.name_product2}}</h4>
+                    {% endif %}
+                    {% set i = 0 %}
+                    {% for category in settings.get_category %}
+                        <div class="tab-pane fade{% if i == 0 %} in active{% endif %}" id="tab-{{ category.category_id }}{{ id }}1">
+                            {% include settings.products_list_layout with { products: category.products2, settings: settings, carouselOptions: settings.sideCarousel, rows: settings.rows2, columns: settings.item2 } %}
+                        </div>
+                        {% set i = i + 1 %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if settings.status3 == "true" and settings.banner_type == "right" %}
+                <div class="tab-content col-md-3 col-sm-12" >
+                    {% for category in settings.get_category %}
+                        <div id="tab-{{ category.category_id }}{{ id }}2" class="tab-pane {% if settings.banner is empty %}fade{% endif %} banner-category">
+                            <div class="banner-image">
+                                {% if settings.banner is empty %}
+                                    <img src="{{ category.image }}" alt="{{ category.category_name }}" title="{{ category.category_name }}" class="img-responsive" />
+                                {% else %}
+                                    <img src="{{ settings.banner }}" alt="{{ settings.alt }}" title="{{ settings.alt }}" class="img-responsive" />
+                                {% endif %}
+                            </div>
+                            <div class="banner-profile">
+                                <div class="banner-title">
+                                    {{text_collection}} {{ category.category_name }}
+                                </div>
+                                {% if settings.banner_title %}
+                                    <div class="banner-subtitle">
+                                        {{ settings.banner_title }}
+                                    </div>
+                                {% endif %}
+                                {% if settings.button_text %}
+                                    <div class="banner-button">
+                                        {% if settings.button_link %}
+                                            <a href="{{settings.server}}{{ settings.button_link }}" class="btn btn-link"> <span>{{ settings.button_text }}</span> </a>
+                                        {% else %}
+                                            <a href="{{ category.link }}" class="btn btn-link"> <span>{{ settings.button_text }}</span> </a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="pavo-widget-button {{settings.style}}">
+	<a href="{{settings.link}}" class="btn {{settings.button_style}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+		{% if settings.show_icon == "true" %}
+			{% if settings.icon_position == "left" %}
+				<i class="fa {{settings.icon}}"></i> <span style="{% if settings.font_size %}font-size: {{settings.font_size}};{% endif %}{% if settings.font_weight %}font-weight: {{settings.font_weight}};{% endif %}{% if settings.font_color %}color: {{settings.font_color}};{% endif %}">{{settings.title}}</span>
+			{% else %}
+				<span style="{% if settings.font_size %}font-size: {{settings.font_size}};{% endif %}{% if settings.font_weight %}font-weight: {{settings.font_weight}};{% endif %}{% if settings.font_color %}color: {{settings.font_color}};{% endif %}">{{settings.title}}</span> <i class="fa {{settings.icon}}"></i>
+			{% endif %}
+		{% else %}
+	 	<span style="{% if settings.font_size %}font-size: {{settings.font_size}};{% endif %}{% if settings.font_weight %}font-weight: {{settings.font_weight}};{% endif %}{% if settings.font_color %}color: {{settings.font_color}};{% endif %}">{{settings.title}}</span>
+	 	{% endif %} 
+	</a>
+</div>

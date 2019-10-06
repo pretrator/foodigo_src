@@ -1,0 +1,390 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  	<div class="page-header">
+	    <div class="container-fluid">
+			<div class="pull-right">
+				<button type="submit" form="form-post" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="{{ save_button }}"><i class="fa fa-save"></i></button>
+				<a href="{{ add_new_url }}" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="{{ menu_add_new_text }}"><i class="fa fa-plus"></i></a>
+			</div>
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+					<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+  	</div>
+  	<div class="container-fluid">
+		{% if errors.warning %}
+		    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ errors.warning }}
+	      		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    </div>
+	    {% endif %}
+	    {% if success %}
+		    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+		      	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    </div>
+	    {% endif %}
+	    <div class="row">
+	    	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-post" class="form-horizontal">
+		    	{# Start Sidebar Actions #}
+				<div id="sidebar-upload" class="col-md-3 col-md-push-9 col-sm-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+					    	<h3 class="panel-title"><i class="fa fa-filter"></i> {{ entry_image_heading }}</h3>
+					  	</div>
+						<div class="panel-body">
+							<div class="table-responsive">
+				                <table class="table table-striped table-bordered table-hover">
+				                  	<tbody>
+				                    	<tr>
+				                      		<td class="text-center">
+				                      			<a href="" id="thumb-image" data-toggle="image" class="img-thumbnail">
+				                      				{% if ( post.thumb ) %}
+				                      					<img src="{{ post.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" width="100" height="100" />
+				                      				{% endif %}
+				                      			</a>
+				                        		<input type="hidden" name="image" value="{{ post.image }}" id="input-image" />
+				                        	</td>
+				                    	</tr>
+				                  	</tbody>
+				                </table>
+			              	</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+					    	<h3 class="panel-title"><i class="fa fa-filter"></i> {{ entry_category_heading }}</h3>
+					  	</div>
+					  	<div class="panel-body">
+					  		<div class="form-group">
+					  			<div class="well well-sm" style="height: 100px; overflow: auto">
+					  				{% include 'extension/module/pavoblog/category-tree-checkbox.twig' with { 'parent_id' : 0, 'categories' : categories, 'level' : 0, 'checked' : post.categories } %}
+					  			</div>
+						    </div>
+					  	</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+					    	<h3 class="panel-title"><i class="fa fa-filter"></i> {{ entry_author_title }}</h3>
+					  	</div>
+						<div class="panel-body">
+							<select class="form-control" name="user_id" id="input-user_id">
+								{% for user in users %}
+									<option value="{{ user.user_id }}"{{ post.user_id and post.user_id == user.user_id ? ' selected' : '' }}>{{ user.username }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="panel panel-default">
+					  	<div class="panel-heading">
+					    	<h3 class="panel-title"><i class="fa fa-filter"></i> {{ entry_action_heading }}</h3>
+					  	</div>
+					  	<div class="panel-body">
+					  		<label class="control-label" for="input-featured">{{ entry_featured }}</label>
+							<select class="form-control" name="featured" id="input-featured">
+								<option value="1"{{ post.featured == 1 ? ' selected' : '' }}>{{ entry_yes_text }}</option>
+								<option value="0"{{ post.featured == 0 ? ' selected' : '' }}>{{ entry_no_text }}</option>
+							</select>
+						    <label class="control-label" for="input-status">{{ entry_status_text }}</label>
+							<select class="form-control" name="status" id="input-status">
+								<option value="1"{{ post.status == 1 ? ' selected' : '' }}>{{ entry_enable_text }}</option>
+								<option value="0"{{ post.status == 0 ? ' selected' : '' }}>{{ entry_disable_text }}</option>
+							</select>
+						    <label class="control-label" for="input-date-added">{{ entry_date_added }}</label>
+					      	<div class="input-group datetime">
+						        <input type="text" name="date_added" value="{{ post.date_added }}" placeholder="{{ entry_date_added_placeholder }}" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
+						        <span class="input-group-btn">
+						        	<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+						        </span>
+						    </div>
+						    <div class="form-group text-right">
+						    	<div class="col-sm-offset-2 col-sm-10">
+						    		<button type="submit" id="button-filter" form="form-post" class="btn btn-primary"><i class="fa fa-save"></i> {{ post_id ? update_button : save_button }}</button>
+							      	{% if ( post_id ) %}
+							      		<button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger form-control" onclick="confirm('{{ text_confirm }}') ? $('#form-post').submit() : false;"><i class="fa fa-trash-o"></i></button>
+							      	{% endif %}
+						    	</div>
+						    </div>
+					  	</div>
+					</div>
+				</div>
+				{# End Sidebar Actions #}
+				{# Main Panel #}
+				<div class="col-md-9 col-md-pull-3 col-sm-12">
+			    	<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title"><i class="fa fa-list"></i> {{ post_id ? entry_edit_post_text : entry_add_post_text }}</h3>
+						</div>
+						<div class="panel-body">
+							<ul class="nav nav-tabs">
+					            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+					            <li><a href="#tab-format" data-toggle="tab">{{ tab_post_format }}</a></li>
+					            <li><a href="#tab-data" data-toggle="tab">{{ tab_data }}</a></li>
+					            <li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>
+				          	</ul>
+							<div class="tab-content">
+								{# panel-general #}
+								<div class="tab-pane active" id="tab-general">
+									{% if ( languages ) %}
+										<ul class="nav nav-tabs" id="language">
+							                {% for language in languages %}
+							                	<li><a href="#language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
+							                {% endfor %}
+						              	</ul>
+						              	<div class="tab-content">
+						              		{% for language in languages %}
+						              			<div class="tab-pane" id="language{{ language.language_id }}">
+						              				{# post title #}
+						              				<div class="form-group required">
+									                    <label class="col-sm-2 control-label" for="input-name{{ language.language_id }}">{{ entry_post_name }}</label>
+									                    <div class="col-sm-10">
+															<input type="text" name="post_data[{{ language.language_id }}][name]" value="{{ post_data[language.language_id] ? post_data[language.language_id].name }}" placeholder="{{ entry_post_name }}" id="input-name{{ language.language_id }}" class="form-control" />
+															{% if errors.name[language.language_id] %}
+																<div class="text-danger">{{ errors.name[language.language_id] }}</div>
+															{% endif %}
+									                  	</div>
+								                  	</div>
+								                  	{# end post title #}
+								                  	{# content #}
+								                  	<div class="form-group">
+								                    	<label class="col-sm-2 control-label" for="input-content{{ language.language_id }}">{{ entry_content }}</label>
+								                    	<div class="col-sm-10">
+								                      		<textarea name="post_data[{{ language.language_id }}][content]" placeholder="{{ entry_content }}" id="input-content{{ language.language_id }}" data-toggle="summernote" data-lang="{{ summernote }}" class="form-control">{{ post_data[language.language_id] ? post_data[language.language_id].content }}</textarea>
+								                    	</div>
+								                  	</div>
+								                  	{# end content #}
+								                  	{# short description #}
+													<div class="form-group">
+								                    	<label class="col-sm-2 control-label" for="input-short-description{{ language.language_id }}">{{ entry_short_description }}</label>
+								                    	<div class="col-sm-10">
+								                      		<textarea name="post_data[{{ language.language_id }}][description]" rows="5" placeholder="{{ entry_short_description }}" id="input-short-description{{ language.language_id }}" class="form-control">{{ post_data[language.language_id] ? post_data[language.language_id].description }}</textarea>
+								                    	</div>
+								                  	</div>
+								                  	{# end short description #}
+								                  	{# meta title #}
+								                  	<div class="form-group required">
+									                    <label class="col-sm-2 control-label" for="input-meta-title{{ language.language_id }}">{{ entry_meta_title }}</label>
+									                    <div class="col-sm-10">
+									                      	<input type="text" name="post_data[{{ language.language_id }}][meta_title]" value="{{ post_data[language.language_id] ? post_data[language.language_id].meta_title }}" placeholder="{{ entry_meta_title }}" id="input-meta-title{{ language.language_id }}" class="form-control" />
+									                      	{% if errors.meta_title[language.language_id] %}
+								                      			<div class="text-danger">{{ errors.meta_title[language.language_id] }}</div>
+									                      	{% endif %}
+								                     	</div>
+								                  	</div>
+								                  	{# end meta title #}
+								                  	{# meta description #}
+								                  	<div class="form-group">
+									                    <label class="col-sm-2 control-label" for="input-meta-description{{ language.language_id }}">{{ entry_meta_description }}</label>
+									                    <div class="col-sm-10">
+								                      		<textarea name="post_data[{{ language.language_id }}][meta_description]" rows="3" placeholder="{{ entry_meta_description }}" id="input-meta-description{{ language.language_id }}" class="form-control">{{ post_data[language.language_id] ? post_data[language.language_id].meta_description }}</textarea>
+									                    </div>
+								                  	</div>
+								                  	{# end meta description #}
+								                  	{# keyword #}
+							                  		<div class="form-group">
+									                    <label class="col-sm-2 control-label" for="input-meta-keyword{{ language.language_id }}">{{ entry_meta_keyword }}</label>
+									                    <div class="col-sm-10">
+								                      		<textarea name="post_data[{{ language.language_id }}][meta_keyword]" rows="3" placeholder="{{ entry_meta_keyword }}" id="input-meta-keyword{{ language.language_id }}" class="form-control">{{ post_data[language.language_id] ? post_data[language.language_id].meta_keyword }}</textarea>
+									                    </div>
+								                  	</div>
+								                  	{# end keyword #}
+								                  	{# post tags #}
+							                  		<div class="form-group">
+									                    <label class="col-sm-2 control-label" for="input-post-tag{{ language.language_id }}">
+									                    	<span data-toggle="tooltip" data-original-title="{{ entry_post_tag_description }}">
+									                    		{{ entry_post_tag }}
+									                    	</span>
+									                    </label>
+									                    <div class="col-sm-10">
+								                      		<input type="text" name="post_data[{{ language.language_id }}][tag]" value="{{ post_data[language.language_id] ? post_data[language.language_id].tag }}" placeholder="{{ entry_post_tag }}" id="input-post-tag{{ language.language_id }}" class="form-control" />
+									                    </div>
+								                  	</div>
+								                  	{# end post tags #}
+						              			</div>
+						              		{% endfor %}
+						              	</div>
+					              	{% endif %}
+								</div>
+								<!-- format -->
+								<div class="tab-pane" id="tab-format">
+									<div class="form-group">
+				                    	<label class="col-sm-2 control-label" for="input-format">{{ entry_post_format_heading }}</label>
+				                    	<div class="col-sm-10">
+				                      		<select name="type" id="input-format" class="form-control">
+				                      			<option value="image"{{ post.type == 'image' ? ' selected' : '' }}>{{ text_image }}</option>
+				                      			<option value="gallery"{{ post.type == 'gallery' ? ' selected' : '' }}>{{ text_gallery }}</option>
+				                      			<option value="video"{{ post.type == 'video' ? ' selected' : '' }}>{{ text_video }}</option>
+				                      		</select>
+				                    	</div>
+				                  	</div>
+				                  	<div class="form-group format-option{{ post.type == 'gallery' ? '' : ' hide' }}" id="format-gallery">
+				                  		<div class="table-responsive">
+							                <table id="images" class="table table-striped table-bordered table-hover">
+							                  	<thead>
+							                    	<tr>
+								                      	<td class="text-left">{{ entry_image_heading }}</td>
+								                      	<td class="text-right">{{ text_order }}</td>
+								                      	<td></td>
+							                    	</tr>
+							                  	</thead>
+							                  	<tbody>
+							                  		{% set image_row = 0 %}
+							                  		{% for image in post.gallery %}
+								                        <tr id="image-row{{ image_row }}">
+										                    <td class="text-left"><a href="" id="thumb-image0" data-toggle="image" class="img-thumbnail">
+									                    		<img src="{{ image.thumb }}" alt="" title="" data-placeholder="{{ no_image }}"></a>
+										                      	<input type="hidden" name="gallery[{{ image_row }}][image]" value="{{ image.image }}" id="input-image{{ image_row }}" />
+										                  	</td>
+										                    <td class="text-right"><input type="text" name="gallery[{{ image_row }}][sort_order]" value="{{ image.sort_order }}" placeholder="{{ text_order }}" class="form-control" /></td>
+										                    <td class="text-left"><button type="button" onclick="return confirm( '{{ text_confirm }}' ) ? $('#image-row{{ image_row }}').remove() : false;" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Remove"><i class="fa fa-minus-circle"></i></button></td>
+								                 		</tr>
+							                 		{% set image_row = image_row + 1 %}
+							                 		{% endfor %}
+                                                </tbody>
+							                  	<tfoot>
+							                    	<tr>
+							                      		<td colspan="2"></td>
+							                      		<td class="text-left"><button type="button" onclick="addImage();" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="{{ button_image_add }}"><i class="fa fa-plus-circle"></i></button></td>
+							                    	</tr>
+							                  	</tfoot>
+							                </table>
+						              	</div>
+				                  	</div>
+				                  	<div class="form-group format-option{{ post.type == 'video' ? '' : ' hide' }}" id="format-video">
+				                  		<label class="col-sm-2 control-label" for="input-video-url">{{ entry_video_url }}</label>
+				                  		<div class="col-sm-10">
+				                  			<div class="input-group">
+				                  				<input name="video" value="{{ post.video }}" class="form-control" id="input-video-url" />
+				                  				<div class="input-group-btn">
+				                  					<button class="btn btn-default" type="button" id="video-preview-btn"><i class="fa fa-film"></i></button>
+										      	</div>
+										  	</div>
+				                  		</div>
+				                  		<div class="col-sm-12 post-video-preview">
+				                  			{% if ( post.iframe_url ) %}
+				                  				<iframe src="{{ post.iframe_url }}" style="width: 100%; border: none; margin-top: 20px;"></iframe>
+				                  			{% endif %}
+				                  		</div>
+				                  	</div>
+								</div>
+								{# end panel-general #}
+								<div class="tab-pane" id="tab-data">
+									<div class="form-group">
+						                <label class="col-sm-2 control-label">{{ entry_store }}</label>
+						                <div class="col-sm-10">
+						                  	<div class="well well-sm" style="height: 100px; overflow: auto;">
+						                    	{% for store in stores %}
+						                    		<div class="checkbox">
+								                      	<label>
+									                        {% if store.store_id in post_store %}
+									                        	<input type="checkbox" name="post_store[]" value="{{ store.store_id }}" checked="checked" />
+									                        	{{ store.name }}
+									                        {% else %}
+									                        	<input type="checkbox" name="post_store[]" value="{{ store.store_id }}" />
+									                        	{{ store.name }}
+									                        {% endif %}
+								                      	</label>
+								                    </div>
+						                    	{% endfor %}
+						                  	</div>
+						                </div>
+					              	</div>
+								</div>
+								{# panel-seo #}
+								<div class="tab-pane" id="tab-seo">
+									<div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ entry_text_keyword }}</div>
+					              	<div class="table-responsive">
+						                <table class="table table-bordered table-hover">
+						                  	<thead>
+						                    	<tr>
+						                      		<td class="text-left">{{ entry_store }}</td>
+								                  	<td class="text-left">{{ entry_keyword }}</td>
+						                    	</tr>
+						                  	</thead>
+						                  	<tbody>
+						                    {% for store in stores %}
+						                      	<tr>
+							                        <td class="text-left">{{ store.name }}</td>
+							                        <td class="text-left">
+							                        	{% for language in languages %}
+								                          	<div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+								                            	<input type="text" name="post_seo_url[{{ store.store_id }}][{{ language.language_id }}]" value="{% if post_seo_url[store.store_id][language.language_id] %}{{ post_seo_url[store.store_id][language.language_id] }}{% endif %}" placeholder="{{ entry_keyword }}" class="form-control" />
+								                          	</div>
+								                          	{% if errors.keyword[store.store_id][language.language_id] %}
+								                          		<div class="text-danger">{{ errors.keyword[store.store_id][language.language_id] }}</div>
+								                          	{% endif %}
+							                          	{% endfor %}
+							                      	</td>
+						                      	</tr>
+						                    {% endfor %}
+						                  	</tbody>
+						                </table>
+					              	</div>
+								</div>
+								{# end panel-seo #}
+							</div>
+			    		</div>
+			  		</div>
+				</div>
+				{# End Main Panel #}
+			</form>
+  		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$( '#language a:first' ).tab('show');
+	$( '.datetime' ).datetimepicker({
+		pickTime: false
+	});
+
+	$( document ).on( 'change', '#input-format', function(e) {
+		e.preventDefault();
+		var val = $( this ).val();
+		$( '.format-option' ).addClass( 'hide' );
+		$( '#format-' + val ).removeClass( 'hide' );
+		return false;
+	} );
+
+	$( document ).on( 'click', '#video-preview-btn', function(e) {
+		e.preventDefault();
+		var button = $(this);
+		$.ajax({
+			url: '{{ video_ajax_url }}',
+			type: 'POST',
+			data: {
+				url: $( '#input-video-url' ).val()
+			},
+			beforeSend: function() {
+				$( '.post-video-preview' ).empty();
+				button.find( 'i' ).addClass( 'fa-spin' );
+			}
+		}).always( function(){
+			button.find( 'i' ).removeClass( 'fa-spin' );
+		}).done( function( data ) {
+			if ( data.status == undefined ) return;
+			if ( data.url ) {
+				$( '.post-video-preview' ).html( '<iframe src="'+data.url+'" style="width: 100%; border: none; margin-top: 20px;"></iframe>' );
+			}
+		});
+
+		return false;
+	} );
+
+	<!--
+	var image_row = {{ post.gallery_count ? post.gallery_count : 0 }};
+
+	function addImage() {
+		html  = '<tr id="image-row' + image_row + '">';
+		html += '  <td class="text-left"><a href="" id="thumb-image' + image_row + '"data-toggle="image" class="img-thumbnail"><img src="{{ no_image }}" alt="" title="" data-placeholder="{{ no_image }}" /></a><input type="hidden" name="gallery[' + image_row + '][image]" value="" id="input-image' + image_row + '" /></td>';
+		html += '  <td class="text-right"><input type="text" name="gallery[' + image_row + '][sort_order]" value="" placeholder="{{ text_order }}" class="form-control" /></td>';
+		html += '  <td class="text-left"><button type="button" onclick="return confirm( \'{{ text_confirm }}\' ) ? $(\'#image-row' + image_row  + '\').remove() : false" data-toggle="tooltip" title="{{ text_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+		html += '</tr>';
+
+		$('#images tbody').append(html);
+
+		image_row++;
+	}
+	//-->
+</script>
+{{ footer }}

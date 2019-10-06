@@ -1,0 +1,4 @@
+{% set id = random(1..9) + random() %}
+<div class="pavo-widget-product_carousel {{settings.layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+    {% include settings.products_list_layout with { products: settings.products, settings: settings, carouselOptions: settings.carousel, rows: settings.rows, columns: settings.item } %}
+</div>

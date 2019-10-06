@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    {% for script in scripts %}
+        <script type="text/javascript" src="{{ script }}"></script>
+    {% endfor %}
+    {% for style in styles %}
+        <link type="text/css" href="{{ style.href }}" rel="{{ style.rel }}" media="{{ style.media }}"/>
+    {% endfor %}
+
+</head>
+<style>
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        background-color: #000;
+        opacity: .5;
+    }
+
+    .pre_loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        z-index: 1056;
+    }
+</style>
+<body>
+<div class="pre_loader">{{ pre_loader }}</div>
+<div class="modal-backdrop"></div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "{{ url }}",
+            type: 'PUT',
+            data: {
+                customer_data: {{ customer_data|json_encode() }},
+                authentication_data:{{ authentication_data|json_encode() }}
+            }
+        }).done(function (html) {
+            var protocol = window.location.protocol;
+            var url = '';
+            if ('{{ url_burn_engine }}') {
+                url = decodeURIComponent("{{ url_burn_engine }}");
+            } else {
+                url = decodeURIComponent("{{ url }}");
+            }
+            url = url.replace(/(http|https):/, protocol);
+            window.history.pushState("object or string", "Title", url);
+
+            document.open();
+            document.write(html);
+            document.close();
+        })
+    })
+    ;
+</script>
+</body>
+</html>

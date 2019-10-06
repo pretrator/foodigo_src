@@ -1,0 +1,27 @@
+{% if post %}
+  {% set cols = (12 / columns) | round( 0, 'ceil' ) %}
+  <div class="article post-item post-grid post-id-{{ post.post_id }} col-lg-{{ cols }} col-md-6 col-sm-6 col-xs-12" data-column="{{ columns }}">
+
+    {# thumbnail #}
+    {% include '/pavoblog/loop/thumbnail.twig' %}
+
+    <div class="entry-content">
+      {# title #}
+      {% include '/pavoblog/loop/title.twig' %}
+      {# endtitle #}
+
+      <div class="entry-meta">
+        {# author #}
+        {% include '/pavoblog/loop/author.twig' %}
+        {# date #}
+        {% include '/pavoblog/loop/date.twig' %}
+      </div>
+
+      {# description #}
+      {% include '/pavoblog/loop/description.twig' %}
+
+      {# readmore #}
+      {% include '/pavoblog/loop/readmore.twig' %}
+    </div>
+  </div>
+{% endif %}

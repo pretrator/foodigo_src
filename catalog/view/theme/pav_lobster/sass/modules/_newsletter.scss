@@ -1,0 +1,138 @@
+.formNewLestter.white-popup {
+	background: #739493;
+	@extend .text-center;
+	color: #fff;
+	padding: 30px;
+    max-width: 320px;  
+	@media (min-width: $screen-xs-max) {
+		max-width: 570px;
+		padding: 60px 0; 
+	}
+	.description-top {
+		font-size: 30px;
+		line-height: 40px;
+		@media (min-width: $screen-xs-max) {
+			font-size: 72px;
+			line-height: 72px;	
+		}	
+	}
+	.description-bottom {
+		@media (min-width: $screen-xs-max) {
+		width: 50%;
+		} 
+    	margin: 10px auto;
+    	font-size: 15px;
+    	line-height: 24px;
+	}
+	.form-control {
+		@media (min-width: $screen-xs-max) {
+		width: 370px; 
+		}
+		width: auto;
+		height: 46px;
+		margin: auto;
+	}
+	.checkbox {
+		font-style: italic;
+	}
+	.mfp-close {
+		@include border-radius(50%);
+		@include opacity(1);
+		@extend .btn-primary;
+		margin-top: -20px;
+		margin-right: -20px;
+	}
+}
+.valid{
+    margin-top: 35px;
+    z-index: 9999;
+    .alert {padding: 5px;}
+}
+.formNewLestter.default {
+	//font-size: 15px;
+	line-height: 24px;
+	padding: 80px 20px 190px;
+	width: 352px;
+	height: 496px;
+	position: relative;
+	background: #e54c2a;
+	margin: 0 auto;
+	&:after {
+	  content: "";
+	  position: absolute;
+	  left: 0;
+	  bottom: 0;
+	  width: 0;
+	  height: 0;
+	  border-bottom: 80px solid #21201e;
+	  border-left: 176px solid transparent;
+	  border-right: 176px solid transparent;
+	}
+	.content-heading {
+		text-transform: uppercase;
+		font-weight: bold;
+		font-family: "Playfair Display", serif;
+	}
+	.description-top {
+		color: $body-bg;
+	}
+	.form-group {
+		position: relative;
+		margin: 0;
+	}
+	.form-control {
+		height: 46px;
+		background: #21201e;
+		border: none;
+	}
+	.description-top {
+		margin-bottom: 30px;
+		padding-top: 20px;
+		letter-spacing: 0.2pt;
+	}
+	.button-submit {
+		position: absolute;
+		right: 2px;
+		top: 5px;
+		background: #21201e;
+		button {
+			position: relative;
+			font-size: 0;
+			width: 60px;;
+			height: 35px;
+			border: 0;
+			/*border-left: 1px solid $border-color;*/
+			line-height: 35px;
+			padding: 0 20px;
+			background: transparent;
+			&:before {
+				content: "\f003";
+				font-family: $font-icon;
+				color: $body-bg;
+				position: absolute;
+				font-size: 16px;
+			}
+			&:hover:before {
+				color: $theme-color-default;
+			}
+		}
+	}
+}
+@media (max-width: $screen-xs-max) {
+	.formNewLestter.default{
+		width: 270px;
+		&:after {
+			border-bottom: 40px solid #21201e;
+	  		border-left: 135px solid transparent;
+	  		border-right: 135px solid transparent;
+		}
+	}
+}
+.footer-2 {
+	.formNewLestter.default {
+		&:after {
+	  		content: "";
+	  		border-bottom: 80px solid #fff;
+	  	}
+	}
+}

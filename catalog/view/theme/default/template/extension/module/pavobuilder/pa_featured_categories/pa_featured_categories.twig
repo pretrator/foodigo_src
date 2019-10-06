@@ -1,0 +1,49 @@
+<div class="pavo-widget-featured-categories {{settings.layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<div class="featured-categories-content">
+		{% if settings.banner_image and settings.banner_type == "top" %}
+			<div class="banner-image">
+                {% if settings.url_link  %}
+                    <a href="{{settings.server}}{{settings.url_link}}"><img src="{{ settings.banner_image }}" alt="{{ settings.name }}"  class="img-responsive" /></a>
+                {% else %}
+                    <img src="{{ settings.banner_image }}" alt="{{ settings.name }}"  class="img-responsive" />
+                {% endif %}
+            </div>
+		{% endif %}
+		{% if settings.name %}
+		<div class="category-name">
+			<h4>{{settings.name}}</h4>
+		</div>
+		{% endif %}
+		<div class="category-block">
+			{% if settings.banner_image and (settings.banner_type == "left" or settings.banner_type == "right") %}
+				<div class="banner-image {% if settings.banner_type == "left" %}pull-left{% elseif settings.banner_type == "right" %}pull-right{% endif %}">
+	                {% if settings.url_link  %}
+	                    <a href="{{settings.server}}{{settings.url_link}}"><img src="{{ settings.banner_image }}" alt="{{ settings.name }}"  class="img-responsive" /></a>
+	                {% else %}
+	                    <img src="{{ settings.banner_image }}" alt="{{ settings.name }}"  class="img-responsive" />
+	                {% endif %}
+	            </div>
+			{% endif %}
+			<div class="subcategory-info">
+				<ul>
+					{% for category in settings.categories %}
+						<li><a href="{{category.category_link}}">{{ category.category_name }}</a></li>
+					{% endfor %}
+				</ul>
+				{% if settings.button_text %}
+					<a href="{{settings.server}}{{settings.url_link}}" class="btn btn-link"> <span>{{ settings.button_text }}</span> </a>
+				{% endif %}
+			</div>
+		</div>
+
+		{% if settings.banner_image and settings.banner_type == "bottom" %}
+			<div class="banner-image">
+                {% if settings.url_link  %}
+                    <a href=""><img src="{{ settings.banner_image }}" alt="{{ settings.name }}"  class="img-responsive" /></a>
+                {% else %}
+                    <img src="{{ settings.banner_image }}" alt="{{ settings.name }}"  class="img-responsive" />
+                {% endif %}
+            </div>
+		{% endif %}
+	</div>
+</div>

@@ -1,0 +1,6 @@
+{% if post.tag %}
+	<div class="post-tags entry-tag">
+	  	<i class="fa fa-tags" aria-hidden="true"></i>
+	  	<a href="{{ post.tag_href }}">{{ post.tag }}</a>
+	</div>
+{% endif %}

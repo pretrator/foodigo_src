@@ -1,0 +1,21 @@
+<div class="pavo-widget-tabs{{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<ul class="nav nav-tabs">
+		{% for k, tab in settings.tabs %}
+			<li class="nav-item{{ k == 0 ? ' active' : '' }}">
+				<a href="#{{ settings.uniqid_id }}-{{ k }}" class="nav-link" data-toggle="tab">
+					{% if tab.settings.use_icon and tab.settings.icon %}
+						<i class="fa {{ tab.settings.icon }}"></i>
+					{% endif %}
+					{{ tab.settings.title }}
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+	<div class="tab-content">
+		{% for k, tab in settings.tabs %}
+			<div class="tab-pane fade{{ k == 0 ? ' in active' : '' }}" id="{{ settings.uniqid_id }}-{{ k }}">
+				{{ tab.row }}
+			</div>
+		{% endfor %}
+	</div>
+</div>

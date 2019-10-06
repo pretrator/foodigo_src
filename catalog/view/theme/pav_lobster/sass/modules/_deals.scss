@@ -1,0 +1,25 @@
+/** Product deals**/
+
+.product-timing-deal {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    letter-spacing: 2px;
+    .unit {
+    	font-size: 12px;
+    	line-height: 12px;
+    	display: block;
+    }
+    .time-group {
+    	display: inline-block;
+        background: $theme-color;
+        color: #fff;
+        width: 60px;
+        padding: 0 5px 10px;
+    }
+}
+
+
+

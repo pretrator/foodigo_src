@@ -1,0 +1,32 @@
+{{ header }}
+  <div id="pavoblog-posts" class="container">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+      {% endfor %}
+    </ul>
+    {% if success %}
+      <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+    {% endif %}
+    <div class="row">{{ column_left }}
+      {% if column_left and column_right %}
+      {% set class = 'col-md-6' %}
+      {% elseif column_left or column_right %}
+      {% set class = 'col-md-9' %}
+      {% else %}
+      {% set class = 'col-md-12' %}
+      {% endif %}
+      <div id="content" class="{{ class }}">
+        {{ content_top }}
+
+          <div class="pavoblog-post single">
+            <div class="article content-single-{{ post.type }}">
+              {% include ( '/pavoblog/content-single-' ~ post.type ~ '.twig' ) %}
+            </div>
+          </div>
+
+        {{ content_bottom }}
+      </div>
+      {{ column_right }}</div>
+  </div>
+{{ footer }}

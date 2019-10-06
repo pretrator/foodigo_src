@@ -1,0 +1,156 @@
+.product-thumb {
+    .group-action {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        @include transition (all .35s ease 0s);
+        button {
+            display: block;
+            cursor: pointer;
+            -webkit-transition-duration: 0.6s;
+            transition-duration: 0.6s;
+            -webkit-transition-timing-function: cubic-bezier(1.000, -0.530, 0.405, 1.425);
+            transition-timing-function: cubic-bezier(1.000, -0.530, 0.405, 1.425);   
+            &:hover {
+                -webkit-transition-duration: 0s;
+                transition-duration: 0s;
+            }     
+        } 
+    } 
+    .caption {
+        position: relative;
+        z-index: 12;
+        background: #fff;
+    }
+    .product-meta {
+        padding: 20px 0;
+        position: relative;
+    }  
+    .product-layout & .pav-quickview {
+        position: absolute;
+        left: auto;
+        right: -100px;        
+        top: 140px;
+        bottom: auto;
+        background: transparent;
+        z-index: 10;
+        display: block;
+        @include opacity(0);
+        @include transition (all .35s ease 0s);
+    } 
+    .btn-cart {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        margin-top: -15px;
+                      
+    }  
+}
+.product-layout-default {
+    .image {
+        img {
+            //@include transform(scale(1));
+                -webkit-transition: opacity .5s ease,transform 2s cubic-bezier(0,0,.44,1.18);
+            -webkit-transition: opacity .5s ease,-webkit-transform 2s cubic-bezier(0,0,.44,1.18);
+            transition: opacity .5s ease,-webkit-transform 2s cubic-bezier(0,0,.44,1.18);
+            transition: opacity .5s ease,transform 2s cubic-bezier(0,0,.44,1.18);
+            transition: opacity .5s ease,transform 2s cubic-bezier(0,0,.44,1.18),-webkit-transform 2s cubic-bezier(0,0,.44,1.18);
+           // @include transition(.3s ease-in-out);
+        }
+        &:after {
+            position: absolute; 
+            top: 0;
+            left: 0;
+            z-index: 2;
+            content: "";
+            width: 100%;
+            height: 100%;
+            pointer-events: none;   
+            background-size: 200%;            
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+            -webkit-animation: hoverGradient 7s infinite;
+            animation: hoverGradient 7s infinite;
+            @include opacity(0);
+        }
+    }
+}
+@-webkit-keyframes hoverGradient{
+    0%,100%{
+        background-position:0
+    }
+    50%{
+        background-position:100%
+    }
+}
+@keyframes hoverGradient{
+    0%,100%{
+        background-position:0
+    }
+    50%{
+        background-position:100%
+    }
+}
+@media (min-width: $screen-md){
+    .product-layout-default {
+         &:hover, .product-layout:hover & {
+             .image {
+                img {
+                    /*-webkit-filter: blur(3px);
+                    filter: blur(3px);*/
+                    @include transform(scale(1.1));
+                }
+                &:after {
+                   @include opacity(1); 
+                }
+            }
+         }
+    }
+    .product-thumb {
+        .group-action {
+            @include opacity(0);
+            z-index: 10;
+            button {
+                position: relative;
+                right: -100px;
+                @include opacity(0);
+                &:nth-of-type(1) {	
+                    -webkit-transition-delay: 0.1s;
+                            transition-delay: 0.1s;
+                }
+                &:nth-of-type(2) {
+                    -webkit-transition-delay: 0.2s;
+                            transition-delay: 0.2s;
+                }
+            }
+        } 
+        .btn-cart {
+            /*@include transition (all .35s ease 0s);*/
+            @include opacity(0);
+            @include transform (translateY(-10px));
+        }
+              
+        &:hover, .product-layout:hover & {
+            .group-action {
+                @include opacity(1);
+                button {
+                    right: 0px;
+                    @include opacity(1);
+                }
+            }  
+            .btn-cart {           
+                @include opacity(1);
+                @include transform (translateY(0px));
+            } 
+             
+            .pav-quickview {
+                background: transparent;
+                right: 35px; 
+                @include opacity(1); 
+            }       
+        }
+    }
+}
+

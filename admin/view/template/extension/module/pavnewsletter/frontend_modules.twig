@@ -1,0 +1,190 @@
+{{ header }}
+{{ column_left }}
+
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+		        {% for breadcrumb in breadcrumbs %}
+		        	<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		        {% endfor %}
+	      	</ul>
+		</div>
+	</div><!-- end div .page-header -->
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success and success != '' %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ heading_title }}</h3>
+			</div>
+			<div class="panel-body" >
+
+				<div class="col-sm-2">
+					<div class="logo"><h3>{{ heading_title }}</h3></div>
+					<div class="slidebar">{% include '/extension/module/pavnewsletter/toolbar.twig' %}</div>
+					<div class="clear clr"></div>
+				</div>
+
+				<div class="col-sm-10">
+					<div class="heading"><h3>{{ text_frontend_modules }}</h1></div>
+
+					<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+					<div class="content">
+						<div class="col-sm-2">
+							<ul class="nav nav-pills nav-stacked">
+								{% if extensions %}
+									{% for extension in extensions %}
+										{% if module_id is empty %} {% set actived = 'class="active"' %} {% else %} {% set actived = '' %} {% endif %}
+										<li {{ actived }}><a href="{{ extension.edit }}" ><i class="fa fa-plus-circle"></i> {{ extension.name }}</a></li>
+										{% set i = 0 %}
+									
+										{% for module in extension.module %}
+										{% if module.module_id == module_id %} {% set active = 'class="active"' %} {% else %} {% set active = '' %} {% endif %}
+										<li {{ active }}><a href="{{ module.edit }}" ><i class="fa fa-minus-circle"></i> {{ module.name }}</a></li>
+										{% endfor %}
+									{% endfor %}
+								{% endif %}
+							</ul>
+						</div>
+
+						<div class="col-sm-10">
+							<div class="pull-right">
+
+								<a class="btn btn-success" title="" onclick="$('#form').submit();" data-toggle="tooltip" data-original-title="Save"><i class="fa fa-save"> Save </i></a>
+								{% if module_id is not empty %}
+								<a onclick="confirm('Are you sure?') ? location.href='{{ delete }}' : false;" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="{{ text_delete }}"><i class="fa fa-trash-o"> {{ text_delete }} </i></a>
+								{% endif %}
+							</div>
+							<div class="clearfix"></div>
+							<hr>
+
+							<div class="tab-content" id="tab-content-newsletter">
+								<div class="tab-pane active" id="tab-module-newsletter">
+									<table class="table noborder">
+										<tr class="alert alert-warning">
+											<td class="col-sm-2">
+												{{ text_display_mode }} 
+											</td>
+
+											<td class="col-sm-10">
+												<select name="displaymode" id="input-status" class="form-control">
+													{% for key,val in modes %}
+													{% if displaymode == key %} {% set selected = 'selected="selected"' %} {% else %} {% set selected = '' %} {% endif %}
+													<option {{ selected }} value="{{ key }}">{{ val }}</option>
+													{% endfor %}
+												</select>	
+											</td>
+										</tr>
+										<tr class="alert alert-warning">
+											<td class="col-sm-2">
+												{{ entry_layout }} 
+											</td>
+
+											<td class="col-sm-10">
+												<select name="layoutmode" id="input-status" class="form-control">
+													{% for key,val in layoutmodes %}
+													{% if layoutmode == key %} {% set selected = 'selected="selected"' %} {% else %} {% set selected = '' %} {% endif %}
+													<option {{ selected }} value="{{ key }}">{{ val }}</option>
+													{% endfor %}
+												</select>	
+											</td>
+										</tr>
+										<tr>
+											<td class="col-sm-2">{{ entry_additional_class }} </td>
+											<td class="col-sm-10">
+												<input class="form-control" type="text" placeholder="{{ entry_additional_class }} " value="{% if extra_class %}{{ extra_class }}{% endif %}" name="extra_class" />
+											</td>
+										</tr>
+										<tr>
+											<td class="col-sm-2">{{ entry_module_name }} </td>
+											<td class="col-sm-10">
+												<input class="form-control" type="text" placeholder="{{ entry_module_name }} " value="{{ name }}" name="name" />
+											</td>
+										</tr>
+										<tr>
+											<td class="col-sm-2">
+											  	<label class="control-label" for="input-status">{{ entry_background_banner }}</label>
+											</td>
+											<td>
+												<a href="" id="thumb-img" data-toggle="image" class="img-thumbnail">
+												<img src="{% if thumb is empty %} {{ placeholder }} {% else %} {{ thumb }} {% endif %}" alt="" title="" data-placeholder="{{ placeholder }}" />
+												</a>
+												<input type="hidden" name="banner" value="{{ banner ? banner }}" id="input-icon-menu" />
+											</td>
+										</tr>	
+										<tr>
+											<td class="col-sm-2">{{entry_status }}</td>
+											<td class="col-sm-10">
+												<select name="status" id="input-status" class="form-control">
+													{% if status %}
+													<option value="1" selected="selected">{{ text_enabled }}</option>
+													<option value="0">{{ text_disabled }}</option>
+													{% else %}
+													<option value="1">{{ text_enabled }}</option>
+													<option value="0" selected="selected">{{ text_disabled }}</option>
+													{% endif %}
+												</select>
+											</td>
+										</tr>
+									</table>
+									<ul class="nav nav-tabs" id="language">
+										{% for language in languages %}
+										<li><a href="#tab-module-language-{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
+										{% endfor %}
+									</ul>
+									<div class="tab-content">
+										{% for language in languages %}
+										<div class="tab-pane " id="tab-module-language-{{ language.language_id }}">
+											<table class="table noborder">
+												<tr>
+													<td class="col-sm-2">{{ entry_description }}</td>
+													<td class="col-sm-10">
+														<textarea class="form-control" data-toggle="summernote" id="description-{{ language.language_id }}" name="description[{{ language.language_id }}]">
+															{{ description[language.language_id] ? description[language.language_id] }}
+														</textarea>
+													</td>
+												</tr>
+												<tr>
+													<td class="col-sm-2">{{ entry_description_bottom }}</td>
+													<td class="col-sm-10">
+														<textarea class="form-control" data-toggle="summernote" id="social-{{ language.language_id }}" name="social[{{ language.language_id }}]">
+															{{ social[language.language_id] ? social[language.language_id] }}
+														</textarea>
+														<span class="help">{{ about_entry_description_bottom }} </span>
+													</td>
+												</tr>
+											</table>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div><!-- end div .panel-body -->
+		</div><!-- end div .panel -->
+	</div><!-- end div #page-content -->
+
+</div><!-- end div #content -->
+<script type="text/javascript">
+	$('#language a:first').tab('show');
+</script>
+<style type="text/css">
+	.noborder tbody > tr > td {border: 1px solid #fff;}
+	.help {font-style:italic;}
+</style>
+{{ footer }}

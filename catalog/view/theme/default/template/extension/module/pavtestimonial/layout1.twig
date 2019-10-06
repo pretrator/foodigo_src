@@ -1,0 +1,63 @@
+<div class="pavo-testimonial {{ class }} layout-1">
+    {% set id = random(1,10)+ random() %}
+    <div class="swiper-viewport">
+        <div id="pavtestimonial{{ id }}" class="swiper-container pavtestimonial {% if testimonials|length <= slides_view*cols %}swiper-no-swiping{% endif %}">
+            <div class="swiper-wrapper ">
+                {% for i,testimonial in testimonials %}
+                <div class="swiper-slide">       
+                    <div class="row">
+                        <div class="testimonial-item clearfix">
+                            <div class="t-avatar">
+                                <img  alt="{{ testimonial.profile|striptags }}" src="{{ testimonial.thumb }}" class="img-circle ">
+                            </div>
+                            <div class="testimonial-info clearfix">
+                                {% if testimonial.profile %}
+                                <div class="testimonial-profile">
+                                    {{ testimonial.profile }}
+                                </div>
+                                {% endif %}
+                                {% if testimonial.description %}
+                                <div class="testimonial-description">
+                                    {{ testimonial.description }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next swiper-button-next{{id}}"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+<script>
+    <!--
+    $('#pavtestimonial{{ id }}').swiper({
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        slidesPerColumn: {{cols ? cols : 1}},
+        slidesPerView: {{slides_view ? slides_view : 1}},
+        loop: {{loop == 'true' ? loop : 'false'}},
+        autoplay: {{ auto_play_mode == "true" ? text_interval : 'false' }},
+        pause:'hover',
+        onReachEnd:function(swiper){
+            $('.swiper-button-next{{id}}').one('click',function () {
+                swiper.slideTo(0, 800, false);
+            });
+        },
+        breakpoints: {
+            767: {
+                slidesPerView: 1,
+                {% if testimonials|length > 1*cols %}
+                noSwiping: false
+                {% endif %}
+            }
+        } 
+    });
+    -->
+</script>

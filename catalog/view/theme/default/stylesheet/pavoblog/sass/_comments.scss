@@ -1,0 +1,40 @@
+#pavoblog-comments{
+	.comment-list{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		.comment{
+			border-top: 1px solid $main-border-color;
+			padding: 20px 0;
+			.avatar{
+				padding-right: 20px;
+			    float: left;
+			    border-radius: 50%;
+			    overflow: hidden;
+			}
+			.comment-content{
+				display: table-cell;
+
+				.name{
+					float: left;
+					margin-right: 20px;
+					strong{
+						font-size: $font-size-lg;
+						font-weight: $font-weight-lg;
+					}
+				}
+				.comment-date{
+					time{
+						font-size: $font-size-sm;
+					}
+				}
+			}
+		}
+	}
+	.comment-form{
+		p{
+			margin-bottom: 10px;
+		}
+	}
+}

@@ -1,0 +1,113 @@
+.overflow-y-hidden{
+	overflow-y: hidden;
+}
+@-webkit-keyframes pavo_search_out{
+    0%{
+        opacity:1;
+        visibility:visible
+    }
+    100%{
+        opacity:0;
+        visibility:hidden
+    }
+}
+@keyframes pavo_search_out{
+    0%{
+        opacity:1;
+        visibility:visible
+    }
+    100%{
+        opacity:0;
+        visibility:hidden
+    }
+}
+@-webkit-keyframes pavo_search_in{
+    0%{
+        opacity:0;
+        visibility:hidden
+    }
+    100%{
+        opacity:1;
+        visibility:visible
+    }
+}
+@keyframes pavo_search_in{
+    0%{
+        opacity:0;
+        visibility:hidden
+    }
+    100%{
+        opacity:1;
+        visibility:visible
+    }
+}
+.pavo-popup-search{
+	.popup-search-container{
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    z-index: 105;
+	    opacity: 0;
+	    opacity: 0;
+    	background-color: #fff;
+        visibility: hidden;
+	    -webkit-backface-visibility: hidden;
+	    backface-visibility: hidden;
+	    box-sizing: border-box;
+	    -webkit-animation: pavo_search_out 0.3s;
+	    -moz-animation: pavo_search_out 0.3s;
+	    animation: pavo_search_out 0.3s;
+	}
+
+	.searchbox-inner{
+	    position: relative;
+	    display: table-cell;
+	    height: 100%;
+	    width: 100%;
+	    vertical-align: middle;
+	    text-align: center;
+	}
+
+	&.active{
+		.popup-search-container{
+			opacity: 1;
+        	visibility: visible;
+		    -webkit-animation: pavo_search_in 0.3s;
+		    -moz-animation: pavo_search_in 0.3s;
+		    animation: pavo_search_in 0.3s;
+
+			.searchbox{
+		        display: table;
+			    width: 100%;
+			    height: 100%;
+			}
+
+			.searchbox-inner{
+			    position: relative;
+			    width: 40%;
+			    margin: auto;
+			}
+			.quick-search-form{
+			    position: relative;
+			    width: 40%;
+			    margin: auto;
+
+			    .btn{
+			    	position: absolute;
+			    	right: 0;
+			    	top: 0;
+			    }
+			}
+		}
+		.close{
+			position: absolute;
+			right: 20px;
+			top: 20px;
+			&:hover{
+				cursor: pointer;
+			}
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{% if settings.logo_type == 'custom' %}
+ <div id="logo">
+	<a href="{{ settings.home }}"><img src="{{ settings.logo }}" title="{{ settings.name }}" alt="{{ settings.name }}" /></a>
+</div>
+{% else %}
+ <div id="logo">
+ 	{% if settings.logo %}
+		<a href="{{ settings.home }}"><img src="{{ settings.logo }}" title="{{ settings.name }}" alt="{{ settings.name }}" /></a>
+	{% else %}
+          <h1><a href="{{ settings.home }}">{{ settings.name }}</a></h1>
+    {% endif %}
+</div>
+{% endif %}

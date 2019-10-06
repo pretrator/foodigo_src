@@ -1,0 +1,55 @@
+{% set id = random(1..9) + random() %}
+<div class="widget-addtocart_button {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+    {% if settings.title %}
+        <div class="addtocart-title">{{settings.title}}</div>
+    {% endif %}
+    {% if settings.subtitle %}
+        <div class="addtocart-subtitle">{{settings.subtitle}}</div>
+    {% endif %}
+    {% if settings.content and settings.content != '<p><br></p>' %}
+        <div class="addtocart-content">{{settings.content}}</div>
+    {% endif %}
+    {% if settings.product_price %}
+        <p class="price">
+          {% if not settings.product_special %}
+          {{ settings.product_price }}
+          {% else %}
+          <span class="price-new">{{ settings.product_special }}</span>
+          {% endif %}
+        </p>
+    {% endif %}
+    <div class="product-quantity">
+        {% if settings.quantity == "true" %}
+            {% if settings.quantity_text %}
+                <label class="control-label" for="input-quantity">{{settings.quantity_text}}</label>
+            {% endif %}
+             <div class="product-btn-quantity">
+               <input type="button" value="-" class="minus">
+               <input type="number" name="quantity" step="1" min="1" value="1" size="2" class="form-control" id="quantity{{id}}">
+               <input type="button" value="+" class="plus">
+            </div>
+
+        {% endif %}
+
+        {% if settings.products %}
+            <div class="addtocart-button">
+                <button type="button" class="btn btn-primary" id="btn{{id}}">{% if settings.icon %}<i class="fa {{settings.icon}}"></i>{% endif %} {% if settings.button_text %}<span class="addtocart-button-text">{{ settings.button_text }}</span>{% endif %}</button>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% if settings.products %}
+    <script type="text/javascript">
+        (function($){
+            $(document).ready(function(){
+                $('#btn{{id}}').on('click', function(event) {
+                    {% if settings.quantity == "true" %}
+                        cart.add('{{ settings.products }}', document.getElementById("quantity{{id}}").value);
+                    {% else %}
+                        cart.add('{{ settings.products }}', '1');
+                    {% endif %}
+                });
+            });
+        })(jQuery);
+    </script>
+{% endif %}

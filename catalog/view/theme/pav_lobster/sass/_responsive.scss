@@ -1,0 +1,178 @@
+// Large desktops and laptops 1200px
+@media (min-width: $screen-lg) {
+
+}
+
+// Landscape tablets and medium desktops
+//@media (min-width: 992px) and (max-width: 1199px)
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+	#pav-verticalmenu .vertical-titile {
+		padding-right: 25px;
+		padding-left: 25px;
+	}
+	.header-default {
+		.pav-megamenu .navbar-nav > li.aligned-left .dropdown-menu {
+			left: -30vw;
+		}
+	}
+	#pavo-sticky-header .navbar-nav > li > a {
+		padding-bottom: 0px;
+	}
+	#pavo-sticky-header .menu-categories {
+		padding: 0 30px 30px;
+	}
+	#pavo-sticky-header .pav-mainmenu .navbar-nav.verticalmenu > li + li {
+	    padding-left: 10px;
+	}
+	#pavo-sticky-header .pav-mainmenu .navbar-nav.verticalmenu > li > a {
+		padding-left: 0;
+	    padding-right: 0;
+	    font-size: 13px;
+	}
+	.footer-blockbuilder ul.list li + li {
+		margin-left: 0;
+	}
+	.pav-mainmenu .navbar-nav > li > a {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.pavo-widget-vertical-menu .vertical-title {
+		padding-right: 15px;
+		padding-left: 15px;
+		.fa {
+			margin-right: 5px;
+		}
+	}
+	#pavoblog-posts {
+    	.entry-content {
+    		img {
+    			max-width: 48%;
+    		}
+    	}
+    }
+}
+
+@media (max-width: $screen-sm-max) {
+	.form-currency {
+		padding-right: 12px;
+	}
+	ul.breadcrumb {
+		min-height: 50px;
+		padding: 90px 0;
+		margin-bottom: 30px;
+	}
+ 	.category-thumb {
+ 		.image a {
+ 			display: block;
+ 			text-align: center;
+ 		}
+ 	}
+ 	.swiper-container-multirow {
+		.product-thumb {
+			margin-bottom: 65px;
+		}
+	}
+	.interactive-banner.style3 .image {
+		text-align: center;
+	}
+	.text-sm-left {
+		text-align: left!important;
+	}
+	.product-group-buttons button {
+		display: block;
+		+ button {
+			margin: 0;
+			margin-top: 10px;
+		}
+	}
+	.product-thumb {
+		margin-bottom: 70px;
+	}
+    .navbar-nav > li.aligned-fullwidth .content-blockbuilder .container,
+    .navbar-nav > li.aligned-fullwidth .content-blockbuilder ul.breadcrumb {
+        width: auto;
+    }
+    .pavo-widget-team {
+    	 &.layout-1{
+	    	.content-desc {
+				font-size: 11px;
+	    	}
+	    }
+    }
+    #pavoblog-posts {
+    	.entry-content {
+    		img {
+    			max-width: 48%;
+    		}
+    	}
+    }
+    .products-collection {
+    	.select2-container {margin-bottom: 10px;}
+    }
+}
+// Portrait tablets and small desktops
+//@media (min-width: 768px) and (max-width: 991px)
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+
+// Landscape phones and portrait tablets
+//@media (max-width: 767px)
+@media (max-width: $screen-xs-max) {
+ 	.pavo-footer {
+ 		[class*="col-"] {
+ 			margin-bottom: 40px;
+ 		}
+ 	}
+ 	.text-xs-center {
+		text-align: center!important;;
+	}
+	.text-xs-left {
+		text-align: left!important;;
+	}
+	.text-xs-right {
+		text-align: right!important;;
+	}
+	#logo img {
+	    max-width: 130px;
+	}
+	.pa_social_network_element ul.social {
+		text-align: left;
+	}
+	.pa-heading-home{
+		.content-heading {
+			font-size: 45px;
+		}
+		.content-subheading {
+			font-size: 20px;
+		}
+	}
+	ul.breadcrumb {
+		padding: 50px 0;
+	}
+	.tp-intro {
+		box-shadow: none;
+	}
+	.pa_latest_blogs .panel-body { float: left; width: 100%; overflow: hidden;}
+	.select2-container--default .select2-selection--single {border: none;}
+	.mainmenu .navbar .navbar-nav > li .dropdown-menu {
+		visibility: visible;
+		opacity: 1;
+	}
+
+}
+
+// Portrait phones and smaller
+//@media (max-width: 480px)
+@media (max-width: $screen-phone) {
+    .mini-cart.minicart-style-default {
+        .cart-inner {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 320px) {
+
+}

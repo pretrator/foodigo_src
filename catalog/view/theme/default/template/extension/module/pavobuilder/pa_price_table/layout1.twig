@@ -1,0 +1,43 @@
+<div class="pavo-widget-price-table {{settings.layout}} {{ settings.extra_class }}">		
+	<div class="price_table_inner">
+		<div class="type">
+			{% if settings.offer %}
+			<div class="ribbon-right" >
+				<span >{{settings.offer}}</span>
+			</div>
+			{% endif %}
+			{% if settings.title %}
+			<p>{{settings.title}}</p>
+			{% endif %}
+		</div>
+		<div class="price_table_plan">
+			{% if settings.price == "true" %}
+				<div class="price_header" >
+					{% if settings.currency %}
+					<span class="price_curr">
+						{{settings.currency}}
+					</span>
+					{% endif %}
+					{% if settings.amount %}
+					<span class="amount">
+						{{settings.amount}}
+					</span>
+					{% endif %}
+					{% if settings.price_plan %}		
+						<p class="price_plan">{{settings.price_plan}}</p>
+					{% endif %}
+				</div>
+			{% endif %}
+			{% if settings.content and settings.content != '<p><br></p>' %}
+			<div class="content">
+				{{settings.content}}
+			</div>
+			{% endif %}
+			{% if settings.button_text %}			
+			<div class="price_button">
+	      		<a href="{{settings.button_link}}" class="price-btn">{{settings.button_text}}</a>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

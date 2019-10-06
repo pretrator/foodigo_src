@@ -1,0 +1,24 @@
+{% set rows = rows is defined and rows > 1 ? rows : 1 %}
+{% set columns = columns is defined ? columns : 4 %}
+{% set productCount = products|length %}
+
+<div class="owl-carousel owl-theme" data-owlcarousel-options="{{ carouselOptions|json_encode()|escape }}">
+	{% set i = 0 %}
+	{# calculator #}
+	{% for product in products %}
+		{% set i = i + 1 %}
+		{% if (i % rows == 1 or rows == 1) and productCount > columns %}
+			<div class="item">
+		{% endif %}
+
+			{# include template file #}
+			<div class="product-layout">
+				{% include settings.product_grid_layout with { product_grid_style: settings.product_grid_style is not empty ? settings.product_grid_style : '' } %}
+			</div>
+			{# end include template file #}
+
+		{% if (rows == 1 or i % rows == 0 or i == productCount) and productCount > columns %}
+			</div>
+		{% endif %}
+    {% endfor %}
+</div>

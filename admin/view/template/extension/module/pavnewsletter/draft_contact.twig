@@ -1,0 +1,114 @@
+{{ header }}
+{{ column_left }}
+
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+		        {% for breadcrumb in breadcrumbs %}
+		        	<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		        {% endfor %}
+	      	</ul>
+		</div>
+	</div><!-- end div .page-header -->
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success and success != '' %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ heading_title }}</h3>
+			</div>
+			<div class="panel-body" >
+
+				<div class="col-sm-2">
+					<div class="logo"><h3>{{ heading_title }}</h3></div>
+					<div class="slidebar">{% include '/extension/module/pavnewsletter/toolbar.twig' %}</div>
+					<div class="clear clr"></div>
+				</div>
+
+				<div class="col-sm-10">
+					<div class="heading"><h3>{{ text_create_newsletter }}</h1></div>
+					<div class="toolbar">{% include '/extension/module/pavnewsletter/action_bar.twig' %}</div>
+					<br/>
+					
+					<div class="content">
+						<!-- content -->
+						<div class="panel-body">
+							<form action="{{ url_delete }}" method="post" enctype="multipart/form-data" id="form-draft">
+
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<td style="width: 1px;" class="text-center">
+												<input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+											</td>
+											<td class="text-left">
+												{% if sort == 'subject' %}
+												<a href="{{ sort_subject }}" class="{{ order }}">{{ column_subject }}</a>
+												{% else %}
+												<a href="{{ sort_subject }}">{{ column_subject }}</a>
+												{% endif %}
+											</td>
+											<td class="text-left">
+												{{ column_to }}
+											</td>
+											<td class="text-right">{{ column_date_added }}</td>
+
+											<td class="text-right">{{ column_action }}</td>
+										</tr>
+									</thead>
+									<tbody>
+										{% if drafts is defined %}
+											{% for draft in drafts %}
+											<tr>
+												<td class="text-center">
+													{% if draft.draft_id in selected|keys %}
+														<input type="checkbox" name="selected[]" value="{{ draft.draft_id }}" checked="checked" />
+													{% else %}
+														<input type="checkbox" name="selected[]" value="{{ draft.draft_id }}" />
+													{% endif %}
+												</td>
+												<td class="text-left">{{ draft.subject }}</td>
+												<td class="text-right">{{ draft.to }}</td>
+												<td class="text-right">{{ draft.date_added }}</td>
+
+												<td class="text-right"><a href="{{ draft.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+											</tr>
+											{% endfor %}
+										{% else %}
+										<tr>
+											<td class="text-center" colspan="5">{{ text_no_results }}</td>
+										</tr>
+										{% endif %}
+									</tbody>
+								</table>
+
+							</form>
+
+							<div class="row">
+								<div class="col-sm-6 text-left">{{ pagination }}</div>
+								<div class="col-sm-6 text-right">{{ results }}</div>
+							</div>
+							
+						</div>
+						<!-- end content form -->
+					</div>
+				</div>
+
+			</div><!-- end div .panel-body -->
+		</div><!-- end div .panel -->
+	</div><!-- end div #page-content -->
+
+</div><!-- end div #content -->
+{{ footer }}

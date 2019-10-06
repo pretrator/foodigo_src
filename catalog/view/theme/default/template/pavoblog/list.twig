@@ -1,0 +1,31 @@
+{% if ( posts ) %}
+	<div class="row pavoblog-posts">
+	  	{% for post in posts %}
+	  		<div class="post-item post-list post-id-{{ post.post_id }} col-xs-12">
+	  			<div class="thumb">
+	  				<a href="{{ post.href }}"><img src="{{ post.thumb }}" alt="{{ post.name }}" title="{{ post.name }}" class="img-responsive" /></a>
+	  			</div>
+	  			<div class="caption">
+	  				<h4 class="entry-title"><a href="{{ post.href }}">{{ post.name }}</a></h4>
+	  				<div class="entry-meta">
+	  					<div class="post-author">
+	  						<i class="fa fa-user-o" aria-hidden="true"></i>
+	  						{{ text_posted_by }}
+	  						<a href="{{ post.author_href }}">{{ post.username }}</a>
+	  					</div>
+	  					<div class="post-date">
+	  						<i class="fa fa-clock-o" aria-hidden="true"></i>
+	  						{{ post.date_added | date( [ date_format, ' ', time_format ] | join() ) }}
+	  					</div>
+	  				</div>
+	  				<div class="entry-description">
+	  					<p>{{ post.description }}</p>
+	  				</div>
+		  			<div class="readmore">
+		  				<a href="{{ post.href }}" class="readmore-text">{{ text_readmore }}</a>
+		  			</div>
+	  			</div>
+	  		</div>
+		{% endfor %}
+	</div>
+{% endif %}

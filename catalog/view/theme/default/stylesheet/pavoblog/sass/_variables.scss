@@ -1,0 +1,40 @@
+// main
+$font-size-lg 					: 16px ! default;
+$font-size 						: 14px ! default;
+$font-size-sm 					: 13px ! default;
+$font-color 					: #666666;
+$font-weight 					: 400;
+$font-weight-lg 				: 600;
+$link-color 					: $font-color ! default;
+$link-color-hover 				: #165077 ! default;
+$line-height 					: 1.5 ! default;
+$main-border-color 				: #eee ! default;
+$theme-color					: #999999 !default;
+
+$warning-color 					: #F44336;
+$success-color 					: #8BC34A;
+$white 							: #fff;
+$black 							: #000;
+
+// heading
+$heading-lineheight				: $line-height ! default;
+$heading-font-size				: 22px;
+$heading-font-color				: #212121;
+$heading-font-color-hover		: #444;
+$heading-font-weight			: 600;
+
+// button
+$btn-padding 					: 8px 15px;
+$btn-color 						: $font-color ! default;
+$btn-color-hover 				: $black ! default;
+$btn-background 				: $white ! default;
+$btn-background-hover 			: #eee ! default;
+$btn-border 					: 1px solid #ccc ! default;
+$btn-border-radius 				: 5px ! default;
+$btn-border-hover 				: 1px solid #555 ! default;
+$btn-primary-background 		: #03A9F4 ! default;
+$btn-primary-background-hover 	: #165077 ! default;
+$btn-primary-border 			: 1px solid #dddddd ! default;
+$btn-primary-border-hover 		: 1px solid #165077 ! default;
+$btn-primary-color 				: $white ! default;
+$btn-primary-color-hover 		: $btn-primary-color ! default;

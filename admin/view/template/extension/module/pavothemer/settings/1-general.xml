@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+	<author>pavotheme</author>
+	<name>General</name>
+	<id>general</id>
+	<icon>fa fa-gear</icon>
+
+	<item>
+		<id>default_skin</id>
+		<group>Global</group>
+		<label>Default Skin</label>
+		<type>select_skin</type>
+		<wrapper_class>default-skin</wrapper_class>
+	</item>
+	<item>
+		<id>header_blockbuilder</id>
+		<group>Global</group>
+		<label>Header Block Builder</label>
+		<type>select_headerbuilder</type>
+		<wrapper_class></wrapper_class>
+		<desc>Set header block display on all pages</desc>
+	</item>
+
+	<item>
+		<id>footer_blockbuilder</id>
+		<group>Global</group>
+		<label>Footer Block Builder</label>
+		<type>select_blockbuilder</type>
+		<wrapper_class></wrapper_class>
+		<desc>Set footer block builder display replacing default footer</desc>
+	</item>
+
+	<item>
+		<id>home_headerbuilder</id>
+		<group>Global</group>
+		<label>Home Header Builder</label>
+		<type>select_headerbuilder</type>
+		<wrapper_class></wrapper_class>
+		<desc>Override show other header for only home page</desc>
+	</item>
+
+
+	<item>
+		<label>Keep Header Sticky</label>
+		<id>keepheader</id>
+		<group>Global</group>
+		<default>1</default>
+		<type>select</type>
+		<option>
+			<text>Yes</text>
+			<value>1</value>
+		</option>
+		<option>
+			<text>No</text>
+			<value>0</value>
+		</option>
+	</item>
+
+
+	<item>
+		<id>google_map_api_key</id>
+		<group>Global</group>
+		<label>Google Map API Key</label>
+		<type>input</type>
+		<default><![CDATA[AIzaSyB9ytDC_XmgWVG7CMMPvNpvz9t58jfu4j0]]></default>
+	</item>
+	<item>
+		<label>Category Layout</label>
+		<id>category_layout</id>
+		<type>select_category_layout</type>
+		<group>Global</group>
+	</item>
+
+	<item>
+		<label>Product Grid Layout</label>
+		<id>product_grid_layout</id>
+		<type>select_product_grid_layout</type>
+		<group>Global</group>
+	</item>
+
+	<item>
+		<label>Product Grid Style</label>
+		<id>product_grid_style</id>
+		<type>select</type>
+		<group>Global</group>
+		<option>
+			<text>Default</text>
+			<value></value>
+		</option>
+	</item>
+
+	<item>
+		<label>Product Layout</label>
+		<id>product_layout</id>
+		<type>select_product_layout</type>
+		<group>Global</group>
+	</item>
+
+	<item>
+		<label>Product Detail Image Zoom Style</label>
+		<id>preview</id>
+		<group>Global</group>
+		<default>1</default>
+		<type>select</type>
+		<option>
+			<text>Preview and Thumbs Bottom</text>
+			<value>style-bottom has-swiper-horizontal xzoom-container</value>
+		</option>
+		<option>
+			<text>Preview and Thumbs Top</text>
+			<value>style-top has-swiper-horizontal xzoom-container</value>
+		</option>
+		<option>
+			<text>Preview and Thumbs Left</text>
+			<value>style-left has-swiper-vertical xzoom-container</value>
+		</option>
+		<option>
+			<text>Preview and Thumbs Right</text>
+			<value>style-right has-swiper-vertical xzoom-container</value>
+		</option>
+
+		<option>
+			<text>Style One Column</text>
+			<value>style-one no-zoom</value>
+		</option>
+
+		<option>
+			<text>Style Two Column</text>
+			<value>style-two no-zoom</value>
+		</option>
+
+	</item>
+
+
+	<item>
+		<label>Zoom Mode</label>
+		<id>zoommode</id>
+		<group>Global</group>
+		<default>1</default>
+		<type>select</type>
+		<option>
+			<text>Zoom</text>
+			<value>zoom</value>
+		</option>
+		<option>
+			<text>Lens</text>
+			<value>lens</value>
+		</option>
+	</item>
+
+	<item>
+		<label>Offcanvas menu</label>
+		<id>offcanvas</id>
+		<group>Global</group>
+		<default>category</default>
+		<type>select</type>
+		<option>
+			<text>Category</text>
+			<value>category</value>
+		</option>
+		<option>
+			<text>Megamenu</text>
+			<value>megamenu</value>
+		</option>
+		<option>
+			<text>Vertical Megamenu</text>
+			<value>verticalmegamenu</value>
+		</option>
+	</item>
+
+
+	<item>
+		<label>Enable Compress Css</label>
+		<id>compresscss</id>
+		<group>Global</group>
+		<default>0</default>
+		<type>select</type>
+		<option>
+			<text>No</text>
+			<value>0</value>
+		</option>
+		<option>
+			<text>Yes</text>
+			<value>1</value>
+		</option>
+	</item>
+	<item>
+		<group>Global</group>
+		<id>excludecssfiles</id>
+		<label>Exclude Css Files</label>
+		<type>code_editor</type>
+		<mode>text/javascript</mode>
+		<default></default>
+		<desc>Enter online file name with comma: bootstrap.css, jquery.css</desc>
+	</item>
+
+	<item>
+		<label>Enable Combine Js</label>
+		<id>combinejs</id>
+		<group>Global</group>
+		<default>0</default>
+		<type>select</type>
+		<option>
+			<text>No</text>
+			<value>0</value>
+		</option>
+		<option>
+			<text>Yes</text>
+			<value>1</value>
+		</option>
+	</item>
+	<item>
+		<group>Global</group>
+		<id>excludejsfiles</id>
+		<label>Exclude Js Files</label>
+		<type>code_editor</type>
+		<mode>text/javascript</mode>
+		<default></default>
+		<desc>Enter online file name with comma: bootstrap.js, jquery.js</desc>
+	</item>
+</settings>

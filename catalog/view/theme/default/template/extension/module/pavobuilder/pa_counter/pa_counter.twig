@@ -1,0 +1,43 @@
+<div class="pavo-widget-counter {{ settings.layout }} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	{% set id = random(1..9) + random() %}
+	<div class="inner" {% if settings.src is not empty %}style="background-image: url('{{ settings.src  }}');"{% endif %}>
+		{% if settings.icon %}	
+			<div class="counter-icon fa {{settings.icon}}"></div>
+		{% endif %}
+		<div class="counter-group">
+		<span id="counter{{id}}" class="counter-value" data-count="{{settings.number}}">0</span>
+		{% if settings.label %}
+			<span class="counter-label">{{settings.label}}</span>
+		{% endif %}
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	(function($){
+		$(document).ready(function(){
+			var a = 0;
+			$(window).scroll(function() {
+				var oTop = $('.counter-group').offset().top - window.innerHeight;
+				if (a == 0 && $(window).scrollTop() > oTop) {
+					$('#counter{{id}}').each(function() {
+						var $this = $(this),
+						countTo = $this.attr('data-count');
+						$({ countNum: $this.text() }).animate({
+							countNum: countTo
+						},
+						{
+							duration: {{settings.speed ? settings.speed : 500}},
+							easing: 'linear',
+							step: function() {
+								$this.text(Math.floor(this.countNum));
+							},
+							complete: function() {
+								$this.text(this.countNum);
+							}
+						});
+					});
+				}
+			});
+		});
+	})(jQuery);
+</script>

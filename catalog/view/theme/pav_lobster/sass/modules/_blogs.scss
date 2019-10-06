@@ -1,0 +1,263 @@
+#pavoblog-posts {
+	.post-author, .related-username , .related-date, .related-category {
+		font-size: 12px;
+		color: $text-color;
+		display: inline-block;
+		float: none;
+		a {
+			color: $theme-color-default;
+		}
+		.fa {
+			@extend .hide;
+		}
+	}
+	.post-categories a {
+		color: $theme-color;
+		+ a {
+			margin-left: 10px;
+		}
+		&:hover {
+			color: $theme-color-default;
+		}
+	}
+	.post-date {
+		float: none;
+		display: inline-block;
+		.fa {
+			@extend .hide;
+		}
+	} 
+	.entry-description {
+		font-size: 14px;
+		line-height: 24px;
+		color: $theme-color-default;
+	}
+	.entry-readmore a {
+		@extend .btn-link;
+	}
+	.archive + .row {
+		border-top: 1px solid $border-color;
+		padding-top: 30px;
+		margin-top: 30px;
+	}
+	/*single post*/
+	h1 {
+		font-size: 30px;
+		+ .entry-meta {
+			margin-bottom: 20px;
+		}
+	}
+	.post-categories {
+		float: none;
+		display: inline-block;
+		.fa {
+			@extend .hide;
+		}
+	}
+	.entry-content {
+		margin-bottom: 30px;
+		color: $text-color;
+		line-height: 30px;
+		blockquote {
+			border-left: none;
+			font-family: $font-family-second;
+			font-size: 15px;
+			padding-left: 53px;
+			color: #333333;
+		}
+		img {
+			padding-top: 15px;
+		}
+	}
+	.comments {
+		#pavoblog-comments {
+			h3 {
+    			background-color: $theme-color;
+			    text-align: center;
+			    height: 60px;
+			    width: 100%;
+			    padding-top: 20px;
+			    padding-bottom: 20px;
+			    font-family: $font-family-base;
+			    color: $body-bg;
+			}
+		}
+	}
+	.media-gallery {
+		position: relative;
+	}
+	/*related post*/
+	
+	.pavoblog-post.single { 
+		display: block; 
+    	margin-bottom: -70px;
+	}
+	.related_posts {
+		margin: 60px 0;
+		.panel-title {
+			margin-bottom: 40px;
+			@extend .panel-title;
+		}
+	}
+	
+	.related-thumb {
+		.image {
+			margin-bottom: 20px;
+		}
+	}
+}
+.pavoblog-posts, .pavoblog-post {
+	padding: 0 30px;
+	@media (max-width: $screen-md-max) {padding: 0;}
+	.paging {
+		.text-right {padding-top: 15px;}
+	}
+}
+.pavoblog-posts.archive > .row:first-child {
+	display: flex;
+	flex-flow: row wrap;
+}
+.pavblog-comments {
+	a {
+		float: left;
+    	padding-right: 20px;
+	}
+	.pav-comment + .pav-comment {
+		margin-top: 20px;
+	}
+}
+
+#pavoblog-comments {
+	h3 {
+		@extend .panel-title;
+	}
+	form {
+		margin-top: 20px;
+	}
+	.comment-list {
+		+ h3 {
+			margin-top: 60px;
+		}
+		.comment {
+			border: 0;
+			.avatar {
+				@include border-radius(0);
+				img {
+					@include border-radius(50%);
+				}
+			}
+			.comment-content {
+				header {
+					overflow: hidden;
+				}
+				.name strong {
+					font-size: 13px;
+				}
+				.comment-text {
+					color: $text-color;
+					margin-top: 10px;
+				}
+			}
+		}
+	}
+}
+#comment-form-submit {
+	margin-top: 20px;
+}
+.post-grid {
+	.thumb {
+		overflow: hidden;
+	}
+	.entry-title a {
+		font-size: 16px!important;
+		color: $theme-color-default!important;
+	}
+	.entry-content {
+		padding-top: 10px;
+	}
+	@extend .effect-v10;
+}
+/* lates blogs */
+.blogs-thumb {
+	color: $theme-color-default;
+	line-height: 24px;
+	position: relative;
+	@extend .effect-v10;
+	.image {
+		overflow: hidden;
+	}
+	.blog-body {
+		padding-top: 20px;	
+		.blog-title {
+			font-family: $font-family-second;
+			font-size: 18px;
+			line-height: 24px;
+			padding-bottom: 10px;
+			a {
+				font-size: 20px;
+				font-weight: 600;
+				color: #333333;
+				&:hover, &:focus {
+					color: $theme-color;
+				}
+			}
+		}	
+	}
+	.blog-username {
+		font-family: $font-family-second;
+		font-size: 15px;
+		font-style: italic;
+		padding: 10px 0 30px;
+		.post-author {
+			color: $theme-color;
+		}
+	}
+	.blog-meta {
+		margin: 10px 0;
+	}
+	.entry-category {
+		margin-left: 10px;
+	}
+	.post-content, .btn-readmore {
+		@extend .hide;
+	}
+	&.style-list {
+		img {width: 100%;}
+		.blog-body {
+			padding: 70px 0;
+		}
+		.btn-readmore {
+			margin-top: 50px;
+		}
+		.post-content, .btn-readmore {
+			display: block!important;
+		}
+	}
+
+}
+.event-blog{
+	.image {
+		display: none;
+	}
+	.panel-heading {display: none;}
+	.blog-title {min-height: 40px !important;}
+}
+.pavoblog-post .entry-content .entry-title, 
+.pavoblog-post .entry-content .entry-title a, 
+.pavoblog-posts .entry-content .entry-title, 
+.pavoblog-posts .entry-content .entry-title a {
+	height: auto;
+}
+.pa_latest_blogs_element {
+	.layout1 {
+		.blogs-thumb {
+			display: flex;
+			padding-top: 20px;
+			.image {width: 50%;}
+			.blog-body {padding-left: 15px;width: 50%;}
+		}
+	}
+	.style2 {
+		.blog-title {min-height: 65px;}
+	}
+}

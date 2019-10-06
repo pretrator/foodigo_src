@@ -1,0 +1,298 @@
+{{ header }} {{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %} 
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+		  <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+          </ul>
+		  <div class="tab-content">
+            <div class="tab-pane active" id="tab-general">
+			  <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+				<div class="col-sm-10">
+				  <input type="text" name="name" value="{{ name }}" id="input-name" class="form-control" />
+				</div>
+			  </div>
+			  <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-type">{{ entry_type }}</label>
+				<div class="col-sm-10">
+				  <select name="type" id="input-type" class="form-control">
+					{% if type == 'register' %}
+					<option value="register" selected="selected">{{ text_register }}</option>
+					{% else %}   
+					<option value="register">{{ text_register }}</option>
+					{% endif %}
+					{% if type == 'affiliate' %} 
+					<option value="affiliate" selected="selected">{{ text_affiliate }}</option>
+					{% else %}   
+					<option value="affiliate">{{ text_affiliate }}</option>
+					{% endif %}
+					{% if type == 'order' %} 
+					<option value="order" selected="selected">{{ text_order }}</option>
+					{% else %}   
+					<option value="order">{{ text_order }}</option>
+					{% endif %}
+					{% if type == 'forgotten' %} 
+					<option value="forgotten" selected="selected">{{ text_forgotten }}</option>
+					{% else %}   
+					<option value="forgotten">{{ text_forgotten }}</option>
+					{% endif %}
+					{% if type == 'reward' %} 
+					<option value="reward" selected="selected">{{ text_reward }}</option>
+					{% else %}   
+					<option value="reward">{{ text_reward }}</option>
+					{% endif %}
+					{% if type == 'account_approve' %} 
+					<option value="account_approve" selected="selected">{{ text_account_approve }}</option>
+					{% else %}  
+					<option value="account_approve">{{ text_account_approve }}</option>
+					{% endif %}
+					{% if type == 'account_transaction' %} 
+					<option value="account_transaction" selected="selected">{{ text_account_transaction }}</option>
+					{% else %}   
+					<option value="account_transaction">{{ text_account_transaction }}</option>
+					{% endif %}
+					{% if type == 'affiliate_approve' %} 
+					<option value="affiliate_approve" selected="selected">{{ text_affiliate_approve }}</option>
+					{% else %}   
+					<option value="affiliate_approve">{{ text_affiliate_approve }}</option>
+					{% endif %}
+					{% if type == 'affiliate_transaction' %} 
+					<option value="affiliate_transaction" selected="selected">{{ text_affiliate_transaction }}</option>
+					{% else %}   
+					<option value="affiliate_transaction">{{ text_affiliate_transaction }}</option>
+					{% endif %}
+					{% for order_status in order_statuses %} 
+					  {% if order_status.order_status_id == type %} 
+					  <option value="{{ order_status.order_status_id }}" selected="selected">{{ text_status }} {{ order_status.name }}</option>
+					  {% else %}
+					  <option value="{{ order_status.order_status_id }}">{{ text_status }} {{ order_status.name }}</option>
+					  {% endif %}
+					{% endfor %}
+				  </select>
+				</div>
+			  </div>
+			  <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-store">{{ entry_store }}</label>
+				<div class="col-sm-10">
+				  <select name="store_id" class="form-control">
+					{% if not store_id %}
+					<option value="0" selected="selected">{{ text_default }}</option>
+					{% else %}   
+					<option value="0">{{ text_default }}</option>
+					{% endif %}
+					{% for store in stores %} 
+					  {% if store_id == store.store_id %} 
+					  <option value="{{ store.store_id }}" selected="selected">{{ store.name }}</option>
+					  {% else %}   
+					  <option value="{{ store.store_id }}">{{ store.name }}</option>
+					  {%endif %}
+					{%endfor %}
+				  </select>
+				</div>
+			  </div>
+			  <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-bcc">{{ entry_bcc }}</label>
+				<div class="col-sm-10">
+				  <input type="text" name="bcc" value="{{ bcc }}" class="form-control" />
+				</div>
+			  </div>
+			  <ul id="languages" class="nav nav-tabs">
+				{% for language in languages %} 
+				<li><a href="#language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name}}" /> {{ language.name }}</a></li>
+				{% endfor %} 
+			  </ul>
+			  <div class="tab-content">
+				{% for language in languages %} 
+				  <div id="language{{ language.language_id }}" class="tab-pane">
+					<div class="form-group required">
+					  <label class="col-sm-2 control-label" for="input-description-{{ language.language_id }}">{{ entry_message }}</label>
+					  <div class="col-sm-10">
+						<textarea name="description[{{ language.language_id }} ][message]" id="input-description-{{ language.language_id }}" class="form-control" rows="5">{{ description[language.language_id].message }}</textarea></td>
+					    <div id="length-{{ language.language_id }}"></div>
+					  </div>
+					</div>
+				  </div>
+				{% endfor %} 
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">{{ text_code }}</label>
+				<div class="col-sm-10">
+				  <div id="code"></div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('select[name=\'type\']').on('change', function() {
+	var html = '';
+	
+	var value = $('select[name=\'type\']').val();
+	
+	if (value == 'register') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '    <td>Telephone - {telephone}</td>';
+		html += '    <td>Password - {password}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else if (value == 'affiliate') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '    <td>Telephone - {telephone}</td>';
+		html += '    <td>Password - {password}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else if (value == 'order') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>Order ID - {order_id}</td>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '    <td>Telephone - {telephone}</td>';
+		html += '  </tr>';
+		html += '  <tr>';
+		html += '    <td>Date Added - {date_added}</td>';
+		html += '    <td>Payment Method - {payment_method}</td>';
+		html += '    <td>Shipping Method - {shipping_method}</td>';
+		html += '    <td>IP Address - {ip}</td>';
+		html += '    <td>Payment Address - {payment_address}</td>';
+		html += '  </tr>';
+		html += '  <tr>';
+		html += '    <td>Shipping Address - {shipping_address}</td>';
+		html += '    <td>Purchased Products - {products}</td>';
+		html += '    <td>Order Comment - {order_comment}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else if (value == 'forgotten') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '    <td>Password - {password}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else if (value == 'reward') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '    <td>Points - {points}</td>';
+		html += '    <td>Total Points - {total_points}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else if (value == 'account_approve') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else if (value == 'account_transaction') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '    <td>Credits - {credits}</td>';
+		html += '    <td>Total Credits - {total_credits}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else if (value == 'affiliate_approve') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else if (value == 'affiliate_transaction') {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '    <td>Commission - {commission}</td>';
+		html += '    <td>Total Commission - {total_commission}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	} else {
+		html += '<table class="table">';
+		html += '  <tr>';
+		html += '    <td>Order ID - {order_id}</td>';
+		html += '    <td>First Name - {firstname}</td>';
+		html += '    <td>Last Name - {lastname}</td>';
+		html += '    <td>Email - {email}</td>';
+		html += '    <td>Telephone - {telephone}</td>';
+		html += '  </tr>';
+		html += '  <tr>';
+		html += '    <td>Date Added - {date_added}</td>';
+		html += '    <td>Payment Method - {payment_method}</td>';
+		html += '    <td>Shipping Method - {shipping_method}</td>';
+		html += '    <td>IP Address - {ip}</td>';
+		html += '    <td>Payment Address - {payment_address}</td>';
+		html += '  </tr>';
+		html += '  <tr>';
+		html += '    <td>Shipping Address - {shipping_address}</td>';
+		html += '    <td>Purchased Products - {products}</td>';
+		html += '    <td>Order Comment - {order_comment}</td>';
+		html += '  </tr>';
+		html += '</table>';
+	}
+
+	$('#code').html(html);
+});
+
+$('select[name=\'type\']').trigger('change');
+
+{% for language in languages %} 
+$('#input-description-{{ language.language_id }}').on('keyup', function() {
+	var unit = Math.ceil($(this).val().length / 160);
+	
+	$('#length-{{ language.language_id }} ').html('Approximately ' + $(this).val().length + ' characters. (' + unit + ' unit)');
+});
+
+$('#input-description-{{ language.language_id }}').trigger('keyup');
+{% endfor %} 
+
+$('#languages a:first').tab('show');
+//--></script> 
+{{ footer }}

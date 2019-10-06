@@ -1,0 +1,398 @@
+<!--
+/******************************************************
+ * @package Pav Verticalmenu module for Opencart 3.x
+ * @version 1.0
+ * @author http://www.pavothemes.com
+ * @copyright	Copyright (C) Feb 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
+ * @license		GNU General Public License version 2
+*******************************************************/
+-->
+{% if menu is defined %} {% set module_row = 'ss' %}
+
+	{% if menu.verticalmenu_id > 0 %}
+		<h3>{{ text_edit_menu|format(menu.title, menu.verticalmenu_id) }}</h3>
+	{% else %}
+		<h3>{{ text_create_new }}</h3>
+	{% endif %}
+
+	<h4>{{ entry_menu_information }}</h4>
+
+	<ul class="nav nav-tabs" id="language-{{ module_row }}">
+		{% for language in languages %}
+		<li>
+			<a href="#tab-language-{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
+		</li>
+		{% endfor %}
+	</ul>
+	
+	<div class="tab-content">
+		{% for language in languages %}
+		<div class="tab-pane" id="tab-language-{{ language.language_id }}">
+			<table class="table no-border">
+				<tr>
+					<td>{{ entry_menu_title }}</td>
+					<td>
+						<input class="form-control" name="verticalmenu_description[{{ language.language_id }}][title]" value="{{ menu_description[language.language_id] ? menu_description[language.language_id].title }}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>{{ entry_description }}</td>
+					<td>
+						<textarea class="form-control" name="verticalmenu_description[{{ language.language_id }}][description]" value="">{{ menu_description[language.language_id] ? menu_description[language.language_id].description }}</textarea>
+					</td>
+				</tr>
+			</table>
+		</div>
+		{% endfor %}
+	</div>
+
+	<h4>{{ entry_menu_type }}</h4>
+	<input type="hidden" name="verticalmenu[item]" value="{{ menu.item }}" />
+	<table class="table">
+		<tr>
+			<td class="col-sm-3">{{ entry_publish }}</td>
+			<td class="col-sm-9">
+				<select class="form-control" type="list" name="verticalmenu[published]" >
+					{% for key, val in yesno %}
+					<option value="{{ key }}" {% if key== menu.published %} selected="selected" {% endif %}>{{ val }}</option>
+					{% endfor %}
+				</select>
+ 			</td>
+		</tr>
+		<tr class="bg-warning">
+			<td class="col-sm-3">{{ entry_type }}</td>
+			<td class="col-sm-9"> 
+				<select class="form-control" name="verticalmenu[type]" id="verticalmenutype">
+					{% for mt, val in verticalmenutypes %} 
+					<option value="{{ mt }}" {% if mt == menu.type %} selected="selected" {% endif %}>{{ val }}</option>
+					{% endfor %}
+				</select>
+ 			</td>
+		</tr>
+		<tr id="verticalmenutype-url" class="verticalmenutype">
+			<td class="col-sm-3">{{ entry_url }}</td>
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="verticalmenu[url]" value="{{ menu.url }}" size="50"/>
+			</td>
+		</tr>
+		<tr id="verticalmenutype-category" class="verticalmenutype">
+			<td class="col-sm-3">{{ entry_category }}</td>
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="path" value="{{ menu.verticalmenu_category }}" size="100" />
+                <i>{{ text_explain_input_auto }}</i>
+			</td>
+		</tr>
+		<tr id="verticalmenutype-product" class="verticalmenutype">
+			<td class="col-sm-3">{{ entry_product }}</td>
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="verticalmenu_product" value="{{ menu.verticalmenu_product }}" size="50"/>
+				<i>{{ text_explain_input_auto }}</i>
+			</td>
+		</tr>
+		<tr id="verticalmenutype-manufacturer" class="verticalmenutype">
+			<td class="col-sm-3">{{ entry_manufacturer }}</td>
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="verticalmenu_manufacturer" value="{{ menu.verticalmenu_manufacturer }}" size="50"/>
+				<i>{{ text_explain_input_auto }}</i>
+			</td>
+		</tr>
+		<tr id="verticalmenutype-information" class="verticalmenutype">
+			<td class="col-sm-3">{{ entry_information }}</td>
+			<td class="col-sm-9">
+				
+				<select class="form-control" type="text" name="verticalmenu_information" id="verticalmenu_information">
+					{% for info in informations %}
+					<option value="{{ info.information_id }}" {% if menu.verticalmenu_information == info.information_id %} selected="selected" {% endif %}>{{ info.title }}</option>
+					{% endfor %}
+				</select>
+				
+			</td>
+		</tr>
+
+	
+		<tr id="verticalmenutype-html" class="verticalmenutype">
+			<td class="col-sm-3">{{ entry_html }}</td>
+			<td class="col-sm-9">
+				<textarea type="text" name="verticalmenu[content_text]" class="form-control " id="content_text" size="50">{{ menu.content_text }}</textarea>
+				<i>{{ text_explain_input_html }}</i>
+			</td>
+		</tr>
+	</table>
+
+	<h4>{{ entry_menu_param }}</h4>	  
+	<table class="table">
+		<tr>
+			<td class="col-sm-3">{{ entry_parent_id }}</td>
+				
+			<td class="col-sm-9">
+				{{ menus }}
+ 			</td>
+		</tr>
+	 	<tr>
+			<td class="col-sm-2 control-label">{{ entry_image }}</td>
+			<td class="col-sm-10">
+				<a href="" id="thumb-img" data-toggle="image" class="img-thumbnail">
+					<img src="{% if thumb is empty %} {{ placeholder }} {% else %} {{ thumb }} {% endif %}" alt="" title="" data-placeholder="{{ placeholder }}" />
+				</a>
+				<input type="hidden" name="verticalmenu[image]" value="{{ menu.image }}" id="input-icon-menu" />
+			</td>
+        </tr>
+	 	<tr>
+			<td class="col-sm-2 control-label">{{ entry_icon }}</td>
+			<td class="col-sm-10">
+				<input type="text" class="form-control" name="verticalmenu[icon]" value="{{ menu.icon }}"/>
+				<i>{{ text_explain_input_icon }}</i>
+			</td>
+        </tr>
+		<tr>
+			<td class="col-sm-3">{{ entry_menuclass }}</td>
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="verticalmenu[menu_class]" value="{{ menu.menu_class }}"/>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-sm-3">{{ entry_badges }}</td>
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="verticalmenu[badges]" value="{{ menu.badges ? menu.badges }}"/>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="col-sm-3">{{ entry_showtitle }}</td>
+				
+			<td class="col-sm-9">
+				<select class="form-control" type="list" name="verticalmenu[show_title]" >
+					{% for key, val in yesno %}
+					<option value="{{ key }}" {% if key == menu.show_title %} selected="selected" {% endif %}>{{ val }}</option>
+					{% endfor %}
+				</select>
+ 			</td>
+		</tr>
+		<tr class="hide">
+			<td class="col-sm-3">{{ entry_isgroup }}</td>
+				
+			<td class="col-sm-9">
+				<select class="form-control" type="list" name="verticalmenu[is_group]" value="">
+					{% for key, val in yesno %}
+					<option value="{{ key }}" {% if key == menu.is_group %} selected="selected" {% endif %}>{{ val }}</option>
+					{% endfor %}
+				</select>
+				<i>{{ text_explain_group }}</i>
+ 			</td>
+		</tr>
+		<tr style="display:none">
+			<td class="col-sm-3">{{ entry_iscontent }}</td>
+			<td class="col-sm-9">
+				<select class="form-control" type="list" name="verticalmenu[is_content]">
+					{% for key, val in yesno %}
+					<option value="{{ key }}" {% if key == menu.is_content %} selected="selected" {% endif %}>{{ val }}</option>
+					{% endfor %}
+				</select>
+ 			</td>
+		</tr>
+		
+		
+		
+		<tr class="alert alert-danger">
+			<td class="col-sm-3">{{ entry_sub_menutype }}</td>
+			<td class="col-sm-9">
+				<select class="form-control" name="verticalmenu[type_submenu]" id="verticalmenu-type_submenu">
+					{% for stype, text in submenutypes %}
+					<option value="{{ stype }}" {% if stype == menu.type_submenu %} selected="selected" {% endif %}>{{ text }}</option>
+					{% endfor %}
+				</select>
+				<i>{{ text_explain_submenu_type }}</i>
+			</td>
+		</tr>
+		<tr class="type_submenu" id="type_submenu-html" style="display:none;">
+			<td class="col-sm-3">{{ entry_submenu_content }}</td>
+			<td class="col-sm-9">
+				<textarea name="verticalmenu[submenu_content]" id="submenu_content">{{ menu.submenu_content }}</textarea>
+			
+			</td>
+		<tr>
+ 		{% if blockbuilders %}
+		<tr id="type_submenu-blkbuilder" class="type_submenu" style="display: none">
+			<td class="col-sm-3">{{ entry_blockbuilder }}</td>
+			<td class="col-sm-9">
+				
+				<select class="form-control" name="verticalmenu[widget_id]">
+					{% for blockbuilder in blockbuilders %}
+					<option value="{{ blockbuilder.module_id }}" {% if menu.widget_id == blockbuilder.module_id %} selected="selected" {% endif %}>{{ blockbuilder.name }}</option>
+					{% endfor %}
+				</select>
+				<a href="#" class="edit-blockbuilder" data-href="{{blockbuilder_edit_url}}"><i class="fa fa-pencil"></i></a>
+			</td>
+		</tr>
+	 	{% endif %}
+	 	<tr>
+			<td class="col-sm-3">
+				{{ entry_submenu_width }}
+			</td>	
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="verticalmenu[submenu_width]" value="{{ menu.submenu_width }}"/>
+				<i>{{ entry_submenu_width_explain }}</i>
+ 			</td>
+		</tr>
+
+		<tr>
+
+			<td class="col-sm-3">
+				{{ entry_submenu_alignment }}
+			</td>	
+			<td class="col-sm-9">
+				<select class="form-control" name="verticalmenu[width]">
+					{% for key, align in width_aligns %}
+					<option value="{{ key }}" {% if menu.width == key %} selected="selected" {% endif %}>{{ align }}</option>
+					{% endfor %}
+				</select>
+				<i>{{ entry_submenu_alignment_explain }}</i>
+ 			</td>
+		</tr>
+
+	</table>
+	<input type="hidden" name="verticalmenu[verticalmenu_id]" value="{{ menu.verticalmenu_id }}"/>
+</div>
+{% endif %}
+
+<script type="text/javascript"> 
+
+$('.edit-blockbuilder').click( function(){ 
+	var id = $(this).parent().find('select' ).val(); 
+	var url = $(this).data('href').replace('MODULE_ID', id );
+   	window.open(url , '_blank');
+	return false;
+});	
+$("#type_submenu-"+$("#verticalmenu-type_submenu").val()).show();
+$("#verticalmenu-type_submenu").change( function(){
+	$(".type_submenu").hide();
+	$("#type_submenu-"+$(this).val()).show();
+} );
+
+
+$('#submenu_content').summernote({
+	height: 300
+});
+
+$('#content_text').summernote({
+	height: 300
+});
+
+
+$('#language-{{ module_row }} li:first-child a').tab('show');
+
+
+$(".verticalmenutype").hide();
+$("#verticalmenutype-"+ $("#verticalmenutype").val()).show();
+$("#verticalmenutype").change( function(){
+	$(".verticalmenutype").hide();
+	$("#verticalmenutype-"+$(this).val()).show();
+} );
+
+   
+
+$('input[name=\'verticalmenu_manufacturer\']').autocomplete({
+	delay: 500,
+	source: function(request, response) {		
+		$.ajax({
+			url: 'index.php?route=catalog/manufacturer/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {
+				json.unshift({
+					'manufacturer_id':  0,
+					'name':  '{{ text_none }}'
+				});
+				
+				response($.map(json, function(item) {
+					return {
+						label: item.name,
+						value: item.manufacturer_id
+					}
+				}));
+			}
+		});
+	},
+	select: function(event, ui) {
+		$('input[name=\'verticalmenu_manufacturer\']').val(ui.item.label);
+		$('input[name=\'verticalmenu[item]\']').val(ui.item.value);
+		
+		return false;
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
+});
+
+$("#verticalmenu-blockbuilder").change( function(){ 
+	$('input[name=\'verticalmenu[item]\']').val($(this).val());
+} );
+
+$("#verticalmenu_information").change( function(){ 
+	$('input[name=\'verticalmenu[item]\']').val($(this).val());
+} );
+
+$('input[name=\'verticalmenu_product\']').autocomplete({
+	delay: 500,
+	source: function(request, response) {		
+		$.ajax({
+			url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {
+				json.unshift({
+					'product_id':  0,
+					'name':  '{{ text_none }}'
+				});
+				
+				response($.map(json, function(item) {
+					return {
+						label: item.name,
+						value: item.product_id
+					}
+				}));
+			}
+		});
+	},
+	select: function(event, ui) {
+		$('input[name=\'verticalmenu_product\']').val(ui.item.label);
+		$('input[name=\'verticalmenu[item]\']').val(ui.item.value);
+		
+		return false;
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
+});
+
+$('input[name=\'path\']').autocomplete({
+	delay: 500,
+	source: function(request, response) {		
+		$.ajax({
+			url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {
+				json.unshift({
+					'category_id':  0,
+					'name':  '{{ text_none }}'
+				});
+				
+				response($.map(json, function(item) {
+					return {
+						label: item.name,
+						value: item.category_id
+					}
+				}));
+			}
+		});
+	},
+	select: function(event, ui) {
+		$('input[name=\'path\']').val(ui.item.label);
+		$('input[name=\'verticalmenu[item]\']').val(ui.item.value);
+		
+		return false;
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
+});
+</script>

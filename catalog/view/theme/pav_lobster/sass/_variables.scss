@@ -1,0 +1,37 @@
+//Global variables
+$image-theme-path                : '../image/' !default;
+$image-theme-skin                : '../image/' !default;
+$fonts-theme-path                : '../fonts/' !default;
+// standard colors 
+$white		    : #FFF !default;
+$black			: #000 !default;
+$nocolor		: transparent !default;
+
+// color for default theme
+$primary  : $brand-primary !default;
+$success  : $brand-success !default; 
+$warning  : $brand-warning !default;
+$info  : $brand-info !default;
+$danger : $brand-danger !default;
+
+$body-color : $text-color !default; 
+$theme-color    : #e54c2a !default; // main color which will be used for all main block styles... 
+$border-color	: #e1e1e1 !default;
+
+$theme-color-default             : $link-color !default;
+$theme-color-second  			 : #333333 !default;
+
+
+// Theme Margin, Padding 
+$theme-margin    : 30px !default;
+$theme-padding   : 30px !default;
+
+// Fonts 
+$font-icon: "FontAwesome";
+
+
+//Import component variables 
+@import "vars/elements";
+@import "vars/product";
+@import "vars/layout";
+@import "vars/modules";

@@ -1,0 +1,45 @@
+{% set id = random(1..9) + random() %}
+<div class="pavo-widget-custom_blog layout-2 {{settings.layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="custom-blog">
+                <div class="owl-carousel owl-theme customblog{{id}}" data-owlcarousel-options="{{ settings.carousel|json_encode()|escape }}">
+                    {% for post in settings.posts %}
+                        <div class="post-list">
+                            <div class="blogs-thumb transition">
+                                <div class="entry-meta">
+                                    <span class="blog-userimage">
+                                        <img src="{{ post.userimage }}" alt="{{post.username}}" class="img-responsive">
+                                    </span>
+                                    <span class="post-author">{{ post.username }}</span>
+                                    <span class="post-date">{{ post.date_added }}</span>
+                                    {% if post.comment > 0 %}
+                                    <span class="comment-count">{{ post.comment }} {{text_comment}}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="entry-body">
+                                    <div class="image text-center">
+                                        <a href="{{ post.link }}" class="pa-element blog-image">
+                                            <img src="{{ post.thumb }}" alt="{{post.name}}" class="img-responsive">
+                                        </a>
+                                    </div>
+                                    <h4 class="entry-title">
+                                        <a href="{{ post.link }}" class="pa-element title">
+                                        {{ (post.name|striptags)|slice(0,58) }}
+                                        </a>
+                                    </h4>
+                                    <div class="entry-description">
+                                        {{ (post.content|striptags)|slice(0,58) }}...
+                                    </div>
+                                    <div class="readmore entry-readmore">
+                                        <a href="{{ post.link }}" class="readmore-text btn btn-primary">{{ entry_read_more_text }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

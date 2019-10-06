@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+	<author>pavotheme</author>
+	<name>Advanced</name>
+	<id>customize</id>
+	<icon>fa fa-paint-brush</icon>
+	<item>
+		<id>custom_css</id>
+		<label>Custom Css</label>
+		<type>code_editor</type>
+		<mode>text/css</mode>
+		<default>0</default>
+	</item>
+	<item>
+		<id>custom_js</id>
+		<label>Custom Javascript</label>
+		<type>code_editor</type>
+		<mode>text/javascript</mode>
+		<default>0</default>
+	</item>
+</settings>

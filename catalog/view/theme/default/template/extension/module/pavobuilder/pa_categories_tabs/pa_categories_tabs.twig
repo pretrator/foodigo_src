@@ -1,0 +1,27 @@
+{% set id = random(1..9) + random() %}
+<div class="pavo-widget-tabs-productcategory {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+    <div class="tabs-productcategory-content">
+        <ul class="nav nav-tabs" id="tabs-productcategory{{ settings.random_id }}">
+            {% set i = 0 %}
+            {% for category in settings.categories %}
+                <li{% if ( i == 0 ) %} class="active"{% endif %}>
+                    <a href="#tab-{{ category.category_id }}{{ uniqid_id }}" data-toggle="tab">
+                        <img src="{{ category.image }}" alt="{{ category.name }}" />
+                        <span class="title">{{ category.name }}</span>
+                        <p class="description">{{ category.description }}</p>
+                    </a>
+                </li>
+                {% set i = i + 1 %}
+            {% endfor %}
+        </ul>
+        <div class="tab-content">
+            {% set i = 0 %}
+            {% for category in settings.categories %}
+                <div class="tab-pane fade{% if ( i == 0 ) %} active in{% endif %}" id="tab-{{ category.category_id }}{{ uniqid_id }}">
+                    {% include settings.products_list_layout with { products: category.products, settings: settings, carouselOptions: settings.carousel, rows: settings.rows, columns: settings.item } %}
+                </div>
+                {% set i = i + 1 %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,283 @@
+{{ header }}
+{{ column_left }}
+
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div><!-- end div .page-header -->
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success and success is not empty %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ heading_title }}</h3>
+			</div>
+			<div class="panel-body" >
+
+				<div class="col-sm-2">
+					
+					<div class="logo"><h3>{{ heading_title }}</h3></div>
+					<div class="slidebar">{% include '/extension/module/pavnewsletter/toolbar.twig' %}</div>
+					<div class="clear clr"></div>
+					
+				</div>
+
+				<div class="col-sm-10">
+					<div class="heading">
+						<h3>{{ text_draft_newsletter }}</h1>
+					</div>
+					<div class="toolbar">{% include '/extension/module/pavnewsletter/action_bar.twig' %}</div>
+					<!-- ###################################### -->
+					<div class="content">
+						<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+							<input type="hidden" id="action" name="action" value=""/>
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
+										<td class="left">
+											{% if soort == 'date' %}
+											<a href="{{ sort_date }}" class="{{ order }}">{{ column_date }}</a>
+											{% else %}
+											<a href="{{ sort_date }}">{{ column_date }}</a>
+											{% endif %}
+										</td>
+										<td class="left">
+											{% if sort == 'subject' %}
+											<a href="{{ sort_subject }}" class="{{ order }}">{{ column_subject }}</a>
+											{% else %}
+											<a href="{{ sort_subject }}">{{ column_subject }}</a>
+											{% endif %}
+										</td>
+										<td class="left">
+											{% if sort == 'to' %}
+											<a href="{{ sort_to }}" class="{{ order }}">{{ column_to }}</a>
+											{% else %}
+											<a href="{{ sort_to }}">{{ column_to }}</a>
+											{% endif %}
+										</td>
+										<td class="right">
+											{% if sort == 'store_id' %}
+											<a href="{{ sort_store }}" class="{{ order }}">{{ column_store }}</a>
+											{% else %}
+											<a href="{{ sort_store }}">{{ column_store }}</a>
+											{% endif %}
+										</td>
+										<td class="right">{{ column_actions }}</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="filter">
+										<td></td>
+										<td><input class="form-control" type="text" name="filter_date" value="{{ filter_date }}" class="date" /></td>
+										<td><input class="form-control" type="text" name="filter_subject" value="{{ filter_subject }}" /></td>
+										<td>
+											<select class="form-control" name="filter_to">
+												{% if filter_to == '' %}
+												<option value="" selected="selected"></option>
+												{% else %}
+												<option value=""></option>
+												{% endif %}
+
+												{% if filter_to == 'newsletter' %}
+												<option value="newsletter" selected="selected">{{ text_newsletter }}</option>
+												{% else %}
+												<option value="newsletter">{{ text_newsletter }}</option>
+												{% endif %}
+
+												{% if filter_to == 'customer_all' %}
+												<option value="customer_all" selected="selected">{{ text_customer_all }}</option>
+												{% else %}
+												<option value="customer_all">{{ text_customer_all }}</option>
+												{% endif %}
+
+												{% if filter_to == 'customer_group' %}
+												<option value="customer_group" selected="selected">{{ text_customer_group }}</option>
+												{% else %}
+												<option value="customer_group">{{ text_customer_group }}</option>
+												{% endif %}
+
+												{% if filter_to == 'customer' %}
+												<option value="customer" selected="selected">{{ text_customer }}</option>
+												{% else %}
+												<option value="customer">{{ text_customer }}</option>
+												{% endif %}
+
+												{% if filter_to == 'affiliate_all' %}
+												<option value="affiliate_all" selected="selected">{{ text_affiliate_all }}</option>
+												{% else %}
+												<option value="affiliate_all">{{ text_affiliate_all }}</option>
+												{% endif %}
+
+												{% if filter_to == 'affiliate' %}
+												<option value="affiliate" selected="selected">{{ text_affiliate }}</option>
+												{% else %}
+												<option value="affiliate">{{ text_affiliate }}</option>
+												{% endif %}
+
+												{% if filter_to == 'product' %}
+												<option value="product" selected="selected">{{ text_product }}</option>
+												{% else %}
+												<option value="product">{{ text_product }}</option>
+												{% endif %}
+
+												{% if filter_to == 'subscriber' %}
+													<option value="subscriber" selected="selected">{{ text_subscriber_all }}</option>
+												{% else %}
+													<option value="subscriber">{{ text_subscriber_all }}</option>
+												{% endif %}
+
+												{% if filter_to == 'all' %}
+													<option value="all" selected="selected">{{ text_all }}</option>
+												{% else %}
+													<option value="all">{{ text_all }}</option>
+												{% endif %}
+											  </select>
+										</td>
+										<td class="right">
+											<select class="form-control" name="filter_store">
+												<option value=""></option>
+												{% if filter_store == '0' %}
+												<option value="0" selected="selected">{{ text_default }}</option>
+												{% else %}
+												<option value="0">{{ text_default }}</option>
+												{% endif %}
+
+												{% for store in stores %}
+													{% if filter_store == store.store_id %}
+													<option value="{{ store.store_id }}" selected="selected">{{ store.name }}</option>
+													{% else %}
+													<option value="{{ store.store_id }}">{{ store.name }}</option>
+													{% endif %}
+												{% endfor %}
+											</select>
+										</td>
+										<td align="right"><a onclick="filter();" class="btn btn-warning"><span>{{ button_filter }}</span></a></td>
+									</tr>
+									{% if draft %}
+									{% for entry in draft %}
+									<tr>
+										<td style="text-align: center;">
+											{% if entry.selected %}
+											<input type="checkbox" name="selected[]" value="{{ entry.email_id }}" checked="checked" />
+											{% else %}
+											<input type="checkbox" name="selected[]" value="{{ entry.email_id }}" />
+											{% endif %}
+										</td>
+										<td class="left">{{ entry.date_added }}</td>
+										<td class="left">{{ entry.subject }}</td>
+										<td class="left">
+											{% if entry.to == 'newsletter' %}
+												{{ text_newsletter }} 
+											{% elseif entry.to == 'customer_all' %}
+												{{ text_customer_all }}
+											{% elseif entry.to == 'customer_group' %}
+												{{ text_customer_group }}
+											{% elseif entry.to == 'customer' %}
+												{{ text_customer }}
+											{% elseif entry.to == 'affiliate_all' %}
+												{{ text_affiliate_all }}
+											{% elseif entry.to == 'affiliate' %}
+												{{ text_affiliate }}
+											{% elseif entry.to == 'product' %}
+												{{ text_product }}
+											{% elseif entry.to == 'subscriber' %}
+												{{ text_subscriber_all }}
+											{% elseif entry.to == 'all' %}
+												{{ text_all }}
+											{% endif %}
+										</td>
+										<td class="right">
+											{% if entry.store_id == '0' %}
+												{{ text_default }}
+											{% else %}
+												{% set keepFor = true %}
+												{% for store in stores %}
+													{% if entry.store_id == store.store_id %}
+														{{ store.name }}
+														{% keepFor = false %}
+													{% endif %}
+												{% endfor %}
+											{% endif %}
+										</td>
+										<td align="right"><a href="{{ detail ~ entry.email_id }}">[{{ text_view }}]</a></td>
+									</tr>
+									{% endfor %}
+									{% else %}
+									<tr>
+										<td class="center" colspan="6">{{ text_no_results }}</td>
+									</tr>
+									{% endif %}
+								</tbody>
+							</table>
+						</form>
+						<div class="pagination">{{ pagination }}</div>
+					</div>
+					<!-- ###################################### -->
+				</div>
+			</div><!-- end div .panel-body -->
+		</div><!-- end div .panel -->
+	</div><!-- end div #page-content -->
+
+</div><!-- end div #content -->
+<script type="text/javascript"><!--
+function filter() {
+	url = 'index.php?route=extension/module/pavnewsletter/draft&user_token={{ user_token }}';
+	
+	var filter_date = $('input[name=\'filter_date\']').attr('value');
+	
+	if (filter_date) {
+		url += '&filter_date=' + encodeURIComponent(filter_date);
+	}
+	
+	var filter_subject = $('input[name=\'filter_subject\']').attr('value');
+	
+	if (filter_subject) {
+		url += '&filter_subject=' + encodeURIComponent(filter_subject);
+	}
+
+	var filter_to = $('select[name=\'filter_to\']').attr('value');
+	
+	if (filter_to) {
+		url += '&filter_to=' + encodeURIComponent(filter_to);
+	}
+
+	var filter_store = $('select[name=\'filter_store\']').attr('value');
+	
+	if (filter_store) {
+		url += '&filter_store=' + encodeURIComponent(filter_store);
+	}
+	
+	location = url;
+}
+//--></script>
+<script type="text/javascript"><!--
+$(document).ready(function() {
+	$('.date').datepicker({dateFormat: 'yy-mm-dd'});
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#form input').keydown(function(e) {
+	if (e.keyCode == 13) {
+		filter();
+	}
+});
+//--></script>
+{{ footer }}

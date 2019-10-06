@@ -1,0 +1,64 @@
+<div class="pavlayerednavigation" data-action="{{ action }}" data-store-action="{{ store_action }}">
+	
+	<div class="panel panel-default">
+
+	  <div class="panel-heading">{{ heading_title }}</div>
+
+	 <div class="list-group filter-selection hide">
+		<a class="list-group-item">{{ filter_group_selection }}</a>
+		<div class="list-group-content"> 
+		</div>	
+		<div class="clear-all">{{ text_clear_all }}</div>
+	</div>
+
+
+	<div class="list-group filter-by-price pav-slider" data-min="{{ min_price }}" data-max="{{ max_price }}" data-prefix="{{ currency_symbol_left }}" data-postfix="{{ currency_symbol_right }}"> 
+		<a class="list-group-item">{{ filter_group_price_name }} 
+			<span class="clear-price hide"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+		<div class="list-group-item">
+	        <input id="filter_price" name="filter_price" class="pav-slider-el" />
+	    </div>
+	</div>
+
+
+	<div class="list-group filter-by-others filter-group" data-group="filter" > 
+	  	{% for filter_group in filter_groups %} <a class="list-group-item">{{ filter_group.name }}</a>
+	    <div class="list-group-item">
+	      <div id="filter-group{{ filter_group.filter_group_id }}">{% for filter in filter_group.filter %}
+	        <div class="checkbox">
+	          <label>{% if filter.filter_id in filter_category %}
+	            <input type="checkbox" name="filter[]" value="{{ filter.filter_id }}" data-group="filter" checked="checked" data-filter-name="{{ filter.filter_name }}" />
+	            {{ filter.name }}
+	            {% else %}
+	            <input type="checkbox" name="filter[]" value="{{ filter.filter_id }}" data-filter-name="{{ filter.filter_name }}"/>
+	            {{ filter.name }}
+	            {% endif %}</label>
+	        </div>
+	        {% endfor %}</div>
+	    </div>
+	    {% endfor %}
+	</div>
+
+	<div class="list-group filter-by-manufacturers filter-group" data-group="manufacturer" >
+		<a class="list-group-item">{{ filter_group_manufacturers }} </a>
+		<div class="list-group-item">
+			<div id="filter-group-manufacturers">{% for filter in manufacturers %}
+	        <div class="checkbox">
+	          <label>{% if filter.manufacturer_id in filter_category %}
+	            <input type="checkbox" name="manufacturer[]" data-group="manufacturer" value="{{ filter.manufacturer_id }}" checked="checked" data-filter-name="{{ filter.name }}" />
+	            {{ filter.name }}
+	            {% else %}
+	            <input type="checkbox" name="manufacturer[]" data-group="manufacturer" 
+	            value="{{ filter.manufacturer_id }}" data-filter-name="{{ filter.filter_name }}"/>
+	            {{ filter.name }}
+	            {% endif %}</label>
+	        </div>
+	        {% endfor %}</div>
+	    </div>    
+	</div>	
+
+	</div>
+</div>
+<script type="text/javascript"><!--
+
+//--></script> 

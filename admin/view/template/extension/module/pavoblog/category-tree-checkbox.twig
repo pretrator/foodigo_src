@@ -1,0 +1,12 @@
+{% set level = level + 1 %}
+{% for category in categories %}
+	{% if category.parent_id == parent_id %}
+		<div class="checkbox" style="margin-left:{{ level * 10 }}px">
+		  	<label>
+		        <input type="checkbox" name="categories[]" value="{{ category.category_id }}"{{ category.category_id in checked ? ' checked' : '' }}>
+		        <b>{{ category.name }}</b>
+		  	</label>
+		</div>
+		{% include 'extension/module/pavoblog/category-tree-checkbox.twig' with { 'parent_id' : category.category_id, 'categories' : categories, 'checked' : checked } %}
+	{% endif %}
+{% endfor %}

@@ -1,0 +1,38 @@
+{% set id = random(1..9) + random() %}
+<div class="widget-image-text-carousel {{settings.layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}{% if settings.effect1 == "cube" or settings.effect1 == "flip" or settings.effect1 == "fade" %}{{settings.effect1}}{% endif %}">
+    <div class="row">
+        <div class="owl-carousel owl-theme gallery-top image-carousel{{id}}" data-owlcarousel-options="{{ settings.carousel|json_encode()|escape }}">
+            {% for image in settings.get_items %}
+                <div class="item">
+                    <div class="image-text-carousel">
+                        <div class="image-carousel col-md-4 col-sm-4 col-xs-12">
+                            <img class="img-responsive" src="{{image.image}}" alt="{{image.alt}}"></a>
+                        </div>
+                        <div class="text-carousel col-md-8 col-sm-8 col-xs-12">
+                            <div class="gallery-thumbs">
+                                {% if image.title %}
+                                <div class="item-title">{{image.title}}</div>
+                                {% endif %}
+                                {% if image.content and image.content != '<p><br></p>' %}
+                                <div class="item-content">{{image.content}}</div>
+                                {% endif %}
+                                {% if image.button_link %}
+                                <div class="button-video">
+                                    <a href="{{ image.button_link }}" class="btn btn-primary">
+                                        {% if image.icon %}
+                                        <i class="fa {{image.icon}}"></i>
+                                        {% endif %}
+                                        {% if image.button_text %}
+                                        <span>{{ image.button_text }}</span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

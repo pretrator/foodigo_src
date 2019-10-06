@@ -1,0 +1,158 @@
+
+// Topbar
+// -------------------------
+$topbar-bg                                      : transparent !default;
+$topbar-link-color                              : $theme-color-second  !default;
+$topbar-link-hover-color                        : $theme-color !default;
+$topbar-link-padding                            : 20px 0 !default;
+$topbar-color                                   : $text-color !default;
+$topbar-border                                  : 0 !default;
+$topbar-font-size                               : 14px !default;
+$topbar-icon-color                              : $theme-color-default  !default;
+$topbar-icon-font-size                          : 18px !default;
+$topbar-text-transform                          : uppercase !default;
+$topbar-font-weight                             : bold !default;
+$topbar-padding                            		: 0 !default;
+$topbar-margin 									: 0px !default;
+$topbar-font-family 							: $font-family-base !default;
+
+//// Header
+
+$header-main-padding           : 20px 0 !default;
+$header-bg                     : #f6f6f6 !default;
+$header-color                  : $theme-color !default;
+
+
+// Mega Menu Module
+// ========================================================================
+$mainmenu-bg:                      transparent !default;
+$mainmenu-link-margin:             0 !default;
+$mainmenu-link-padding:             23px 18px 40px 18px!default;
+$mainmenu-link-font-size:           16px !default;
+$mainmenu-link-font-weight:         600 !default;
+$mainmenu-font-family:             inherit !default;
+$mainmenu-link-color:               #333333 !default;
+$mainmenu-link-hover-color:         $theme-color;
+$mainmenu-link-font-family:        $mainmenu-font-family !default;
+$mainmenu-link-text-transform:     uppercase !default;
+ // dropdown
+$mainmenu-dropdown-padding:       30px !default;
+$mainmenu-dropdown-bg:           $theme-color !default;
+$mainmenu-dropdown-minwidth:        250px !default;
+
+
+$mainmenu-dropdown-link-color: $theme-color-second !default;
+$mainmenu-dropdown-link-hover-color: $theme-color !default;
+$mainmenu-dropdown-link-font-size: 14px !default;
+$mainmenu-dropdown-link-font-weight: 400 !default; 
+$mainmenu-dropdown-link-line-height: 22px !default;
+$mainmenu-dropdown-link-transform: initial !default;
+
+$mainmenu-widget-title-color: $black !default;
+$mainmenu-widget-title-margin: 0 0 10px !default;
+$mainmenu-widget-title-font-weight: 600 !default;
+$mainmenu-widget-title-font-size: 18px !default;
+
+
+// Vertical Menu Module
+// ========================================================================
+$vertical-menu-font-family:         $font-family-base;
+$vertical-menu-content-bg:          $white;
+$vertical-menu-content-height:      409px;
+$vertical-menu-content-padding:     0;
+$vertical-menu-content-margin:      0;
+$vertical-menu-content-border:      2px solid $theme-color;
+$vertical-menu-font-size:           14px;
+$vertical-menu-color:               $theme-color-default;
+$vertical-menu-font-weight:         400;
+$vertical-menu-link-padding: 		12px 0;
+$vertical-menu-link-hover-color:    $theme-color;
+$vertical-border-color:             $theme-color;
+$vertical-description-font-size:    11px;          
+$vertical-description-font-style:   italic;
+$vertical-description-color: 	    $theme-color;
+$vertical-description-font-weight:  300;
+$vertical-caret-border:             $theme-color;
+$vertical-dropdown-menu-padding:         20px 28px;
+$vertical-dropdown-menu-width:           225px;
+$vertical-dropdown-menu-link-color:      $text-color;
+$vertical-dropdown-menu-link-font-size:  $font-size-base;
+$vertical-dropdown-menu-link-font:       $font-family-base;
+$vertical-dropdown-menu-heading-color:   $black;
+$vertical-dropdown-menu-bg:              $theme-color-default;
+$vertical-dropdown-product-link:         $black;
+$vertical-menu-link-hover:          $theme-color;
+$vertical-dropdown-shadow:  				0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+$vertical-font-size:                $font-size-base - 1;
+$vertical-line-height:              normal;
+// OffCanvas Menu
+// ========================================================================
+$offcanvas-menu-bg:                 $white !default;
+$offcanvas-menu-padding:            12px 15px !default;
+$offcanvas-menu-link-color:         $white !default;
+$offcanvas-menu-font-size:          $font-size-base !default;
+$offcanvas-menu-transform:          uppercase !default;
+$offcanvas-menu-font-family:        $font-family-base !default;
+$offcanvas-menu-border:             1px solid lighten($offcanvas-menu-bg, 10%) !default;
+$offcanvas-menu-icon-color:         $white !default;
+$offcanvas-menu-icon-font-size:     $font-size-base * 2 + 2 !default;
+$offcanvas-menu-icon-padding:       8px 15px !default;
+$offcanvas-menu-border-caret:       1px solid $white !default;
+$offcanvas-menu-caret-color:        $white !default;
+$offcanvas-menu-text-color:         $theme-color-default !default;
+$offcanvas-menu-text-fs:            $font-size-base + 1 !default;
+
+// Footer
+// -------------------------
+$footer-bg                                  : $theme-color-default !default;
+$footer-color                               : $text-color !default;
+$footer-padding                             : 50px 0 !default;
+$footer-font-size                           : 14px !default;
+$footer-heading-color                       : #fff !default;
+$footer-heading-font-size                   : 18px !default;
+$footer-heading-font-weight                 : 400 !default;
+$footer-heading-margin                      : 30px 0 !default;
+$footer-heading-padding                     : 0 !default;
+$footer-link-color                          : $theme-color-second !default;
+$footer-link-hover-color                    : $theme-color !default;
+$footer-link-font-size                      : 15px !default;
+$footer-link-light-height                   : 24px !default;
+
+$footer-top-bg                                  : #562310 !default;
+$footer-top-color                               : $footer-color !default;
+$footer-top-padding                             : 12px !default;
+$footer-top-font-size                           : 20px !default;
+$footer-top-heading-color                       : $white !default;
+$footer-top-heading-font-size                   : 20px !default;
+$footer-top-heading-margin                      : 30px 0 !default;
+$footer-top-heading-padding                     : 0 !default;
+$footer-top-link-color                          : $footer-top-color !default;
+$footer-top-link-hover-color                    : $white !default;
+$footer-top-link-font-size                      : 15px !default;
+$footer-top-link-light-height                   : 24px !default;
+
+$footer-bottom-bg                                  : $footer-bg !default;
+$footer-bottom-color                               : $footer-color !default;
+$footer-bottom-padding                             : 12px !default;
+$footer-bottom-font-size                           : 36px !default;
+$footer-bottom-heading-color                       : $white !default;
+$footer-bottom-heading-font-size                   : 20px !default;
+$footer-bottom-heading-margin                      : 30px 0 !default;
+$footer-bottom-heading-padding                     : 0 !default;
+$footer-bottom-link-color                          : $footer-bottom-color !default;
+$footer-bottom-link-hover-color                    : $theme-color !default;
+$footer-bottom-link-font-size                      : 15px !default;
+$footer-bottom-link-light-height                   : 24px !default;
+
+ // Copyright
+// -------------------------
+$copyright-bg                                   : #353a47 !default;
+$copyright-color                                : $text-color !default;
+$copyright-link-color                           : #fff !default;
+$copyright-padding-top                          : 30px !default;
+$copyright-padding-bottom                       : 30px !default;
+$copyright-font-size							: 13px !default;
+$copyright-font-weight							: 300 !default;
+
+$del-font-size									: 12px !default;
+$del-color										: $theme-color-second;

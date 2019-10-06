@@ -1,0 +1,81 @@
+// Framework grid generation
+//
+// Used only by Bootstrap to generate the correct number of grid classes given
+// any value of `$grid-columns`.
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin pa-make-grid-columns($i: 1, $list: ".pa-col-xs-#{$i}, .pa-col-sm-#{$i}, .pa-col-md-#{$i}, .pa-col-lg-#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .pa-col-xs-#{$i}, .pa-col-sm-#{$i}, .pa-col-md-#{$i}, .pa-col-lg-#{$i}";
+  }
+  #{$list} {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    padding-left:  ceil(($grid-gutter-width / 2));
+    padding-right: floor(($grid-gutter-width / 2));
+  }
+}
+
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin pa-float-grid-columns($class, $i: 1, $list: ".pa-col-#{$class}-#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .pa-col-#{$class}-#{$i}";
+  }
+  #{$list} {
+    float: left;
+  }
+}
+
+
+@mixin pa-calc-grid-column($index, $class, $type) {
+  @if ($type == width) and ($index > 0) {
+    .pa-col-#{$class}-#{$index} {
+      width: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == push) and ($index > 0) {
+    .pa-col-#{$class}-push-#{$index} {
+      left: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == push) and ($index == 0) {
+    .pa-col-#{$class}-push-0 {
+      left: auto;
+    }
+  }
+  @if ($type == pull) and ($index > 0) {
+    .pa-col-#{$class}-pull-#{$index} {
+      right: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == pull) and ($index == 0) {
+    .pa-col-#{$class}-pull-0 {
+      right: auto;
+    }
+  }
+  @if ($type == offset) {
+    .pa-col-#{$class}-offset-#{$index} {
+      margin-left: percentage(($index / $grid-columns));
+    }
+  }
+}
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin pa-loop-grid-columns($columns, $class, $type) {
+  @for $i from 0 through $columns {
+    @include pa-calc-grid-column($i, $class, $type);
+  }
+}
+
+
+// Create grid for specific class
+@mixin pa-make-grid($class) {
+  @include pa-float-grid-columns($class);
+  @include pa-loop-grid-columns($grid-columns, $class, width);
+  @include pa-loop-grid-columns($grid-columns, $class, pull);
+  @include pa-loop-grid-columns($grid-columns, $class, push);
+  @include pa-loop-grid-columns($grid-columns, $class, offset);
+}

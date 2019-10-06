@@ -1,0 +1,254 @@
+2018-09-10 15:06:07 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Pavo Blog
+
+FILE: admin/controller/common/column_left.php
+CODE: // Catalog
+LINE: 80
+CODE: $template = new Template($this->registry->get('config')->get('template_engine'));
+LINE: 118
+
+FILE: system/library/template.php
+CODE: public function __construct($adaptor) {
+LINE: 21
+CODE: $this->adaptor = new $class();
+LINE: 27
+CODE: public function __construct() {
+LINE: 6
+CODE: $config = array('autoescape' => false);
+LINE: 46
+
+FILE: catalog/controller/startup/seo_url.php
+CODE: $this->request->get['route'] = $query->row['query'];
+LINE: 44
+CODE: } elseif ($key == 'path') {
+LINE: 107
+
+FILE: catalog/controller/common/header.php
+CODE: $data['telephone'] = $this->config->get('config_telephone');
+LINE: 74
+
+FILE: catalog/view/theme/default/template/common/header.twig
+CODE: <meta http-equiv="X-UA-Compatible" content="IE=edge">
+LINE: 13
+
+FILE: catalog/view/theme/pav_lobster/template/common/header.twig
+CODE: <meta http-equiv="X-UA-Compatible" content="IE=edge">
+LINE: 13
+----------------------------------------------------------------
+MOD: Pavo Layered Navigation
+
+FILE: catalog/model/catalog/product.php
+CODE: if (!empty($data['filter_manufacturer_id'])) {
+LINE: 167
+LINE: 540
+
+FILE: catalog/controller/product/category.php
+CODE: $product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+LINE: 183
+
+FILE: catalog/view/theme/default/template/product/category.twig
+CODE: {% if products %}
+LINE: 54
+CODE: {% if not categories and not products %}
+LINE: 166
+----------------------------------------------------------------
+MOD: Pavo Megamenu
+CODE: // Catalog
+LINE: 106
+----------------------------------------------------------------
+MOD: Pavo Newsletter
+----------------------------------------------------------------
+MOD: Pavo Product Carousel
+----------------------------------------------------------------
+MOD: Pavo QuickView
+CODE: $data['title'] = $this->document->getTitle();
+LINE: 29
+----------------------------------------------------------------
+MOD: Pavo User Popup
+
+FILE: catalog/controller/common/footer.php
+CODE: $data['contact'] = $this->url->link('information/contact');
+LINE: 21
+
+FILE: catalog/view/theme/default/template/common/footer.twig
+CODE: </body>
+LINE: 54
+
+FILE: catalog/view/theme/pav_lobster/template/common/footer.twig
+CODE: </body>
+LINE: 63
+----------------------------------------------------------------
+MOD: Pavo Verticalmenu
+CODE: // Catalog
+LINE: 132
+----------------------------------------------------------------
+MOD: PavoThemer
+
+FILE: admin/controller/user/user_permission.php
+CODE: $data['permissions'] = array();
+LINE: 319
+CODE: // Catalog
+LINE: 209
+CODE: $data['title'] = $this->document->getTitle();
+LINE: 41
+CODE: $data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+LINE: 58
+CODE: return $this->load->view('common/header', $data);
+LINE: 109
+CODE: return $this->load->view('common/header', $data);
+LINE: 109
+CODE: return $this->load->view('common/footer', $data);
+LINE: 68
+CODE: foreach ($data as $key => $value) {
+LINE: 121
+
+FILE: catalog/controller/product/compare.php
+CODE: $this->response->redirect($this->url->link('product/compare'));
+LINE: 22
+
+FILE: catalog/controller/product/product.php
+CODE: $this->response->setOutput($this->load->view('product/product', $data));
+LINE: 448
+CODE: $data['products'][] = array(
+LINE: 424
+CODE: $data['products'][] = array(
+LINE: 427
+
+FILE: catalog/controller/product/search.php
+CODE: $data['products'][] = array(
+LINE: 237
+CODE: $data['products'][] = array(
+LINE: 240
+CODE: $this->response->setOutput($this->load->view('product/category', $data));
+NOT FOUND - OPERATIONS ABORTED!
+
+FILE: catalog/controller/product/special.php
+CODE: $data['products'][] = array(
+LINE: 127
+CODE: $data['products'][] = array(
+LINE: 130
+CODE: $this->response->setOutput($this->load->view('product/category', $data));
+NOT FOUND - OPERATIONS ABORTED!
+CODE: $data['products'][] = array(
+LINE: 232
+CODE: $data['products'][] = array(
+LINE: 235
+CODE: $this->response->setOutput($this->load->view('product/category', $data));
+LINE: 401
+
+FILE: admin/controller/catalog/information.php
+CODE: public function add() {
+LINE: 17
+CODE: public function edit() {
+LINE: 52
+
+FILE: catalog/controller/information/information.php
+CODE: $data['continue'] = $this->url->link('common/home');
+LINE: 58
+LINE: 102
+
+FILE: catalog/controller/information/contact.php
+CODE: $data['continue'] = $this->url->link('common/home');
+LINE: 189
+
+FILE: catalog/controller/account/edit.php
+CODE: $data['back'] = $this->url->link('account/account', '', true);
+LINE: 145
+
+FILE: catalog/controller/account/password.php
+CODE: $data['back'] = $this->url->link('account/account', '', true);
+LINE: 71
+
+FILE: catalog/controller/account/wishlist.php
+CODE: $data['continue'] = $this->url->link('account/account', '', true);
+LINE: 106
+
+FILE: catalog/controller/account/order.php
+CODE: $data['continue'] = $this->url->link('account/account', '', true);
+LINE: 78
+
+FILE: catalog/controller/account/download.php
+CODE: $data['continue'] = $this->url->link('account/account', '', true);
+LINE: 90
+
+FILE: catalog/controller/account/recurring.php
+CODE: $data['continue'] = $this->url->link('account/account', '', true);
+LINE: 78
+
+FILE: catalog/controller/account/reward.php
+CODE: $data['continue'] = $this->url->link('account/account', '', true);
+LINE: 76
+
+FILE: catalog/controller/account/return.php
+CODE: $data['continue'] = $this->url->link('account/account', '', true);
+LINE: 76
+
+FILE: catalog/controller/account/transaction.php
+CODE: $data['continue'] = $this->url->link('account/account', '', true);
+LINE: 76
+
+FILE: catalog/controller/account/newsletter.php
+CODE: $data['back'] = $this->url->link('account/account', '', true);
+LINE: 47
+
+FILE: catalog/controller/account/affiliate.php
+CODE: $data['back'] = $this->url->link('account/account', '', true);
+LINE: 245
+
+FILE: catalog/controller/account/logout.php
+CODE: $data['continue'] = $this->url->link('common/home');
+LINE: 46
+
+FILE: catalog/controller/account/tracking.php
+CODE: $data['continue'] = $this->url->link('account/account', '', true);
+LINE: 42
+
+FILE: catalog/controller/account/register.php
+CODE: $data['column_left'] = $this->load->controller('common/column_left');
+LINE: 212
+
+FILE: catalog/controller/account/forgotten.php
+CODE: $data['column_left'] = $this->load->controller('common/column_left');
+LINE: 59
+
+FILE: catalog/controller/account/success.php
+CODE: $data['column_left'] = $this->load->controller('common/column_left');
+LINE: 39
+
+FILE: catalog/controller/account/reset.php
+CODE: $data['column_left'] = $this->load->controller('common/column_left');
+LINE: 80
+
+FILE: catalog/controller/account/voucher.php
+CODE: $data['column_left'] = $this->load->controller('common/column_left');
+LINE: 150
+LINE: 182
+----------------------------------------------------------------

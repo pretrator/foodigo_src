@@ -1,0 +1,31 @@
+$white 					: #fff;
+$main 					: #00aeee;
+$main_lower 			: #ef6ea8;//#c0bfbf;
+$row_background		: $white;//rgba(171,214,224,.56);
+$ele_background		: $white;
+$colum_background	: $white;
+$colum_empty_background : hsla(0,0%,62%,.12);
+$column_border		: 1px solid 1px #e9e7e7;
+$main_color			: #605f5f;
+$white_color			: $white;
+$lg_fontsize			: 24px;
+$main_fontsize		: 15px;
+$dashed_border		: 1px dashed rgba(125, 125, 125, 0.4);
+$dashed_border_hover	: 1px dashed hsla(210, 71%, 63%, 0.4);
+$row_margin 			: 20px;
+
+// buttons
+$success_bg			: #7bcd2d;
+$success_bg_hover	: #6bb128;
+$info_bg				: $main;
+$info_bg_hover		: #069ad0;
+$warning_bg			: #feb710;
+$warning_bg_hover	: #eaaf25;
+
+// icons
+$icon_background 		: $row_background;
+$icon_background_hover	: $info_bg_hover;
+$primary-color 			: #28292f;
+$primary-text-color 	: #9798b1;
+$info_bg_gradient 	: linear-gradient( to right, $main_lower, $main );
+$info_bg_gradient_hover: linear-gradient( to left, $main_lower, $main );

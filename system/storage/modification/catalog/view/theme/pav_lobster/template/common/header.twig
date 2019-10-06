@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" class="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+                <meta property="fb:app_id" content="{{ facebook_app_id }}"/>
+            
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" ></script>
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js"></script>
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script }}"></script>
+{% endfor %}
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+</head>
+<body class= "{{ body_class }} ">
+<div id="page" class="hfeed site">
+<div class="row-offcanvas row-offcanvas-left">
+<div id="pavo-sidebar-offcanvas" class="sidebar-offcanvas hidden-lg hidden-md">
+  <div class="offcanvas-inner panel-offcanvas">
+    <div class="offcanvas-heading clearfix">
+      <button data-toggle="offcanvas" class="btn btn-danger btn-xs pull-right" type="button"><span class="fa fa-close"></span></button>
+      {{ search }}
+    </div>
+    <div class="offcanvas-body">
+      <div class="inner">
+          <div class="offcanvas-center">
+             {% if offcanvas == "megamenu" %}
+              {{ pavmegamenu }}
+             {% elseif offcanvas == "verticalmegamenu" and not pavverticalmegamenu is empty %}
+              {{ pavverticalmegamenu }}
+             {% else %}
+                {{menu}}
+             {% endif %}
+          </div>
+          <div class="offcanvas-bottom"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-inner">
+{% if pavoheader is not empty %}
+  <div class="visible-xs visible-sm pav-mobile-nav">
+    <div class="inner">
+        <div class="setting pull-left">
+          {{ currency }}
+          {{ language }}
+        </div>
+        <div id="top-links" class="nav pull-right">
+            <ul class="list-inline">
+              <li><a href="{{ contact }}"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ telephone }}</span></li>
+              <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  {% if logged %}
+                  <li><a href="{{ account }}">{{ text_account }}</a></li>
+                  <li><a href="{{ order }}">{{ text_order }}</a></li>
+                  <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+                  <li><a href="{{ download }}">{{ text_download }}</a></li>
+                  <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+                  {% else %}
+                  <li><a href="{{ register }}">{{ text_register }}</a></li>
+                  <li><a href="{{ login }}">{{ text_login }}</a></li>
+                  {% endif %}
+                </ul>
+              </li>
+            <li><a href="{{ wishlist }}" class="wishlist-total" title="{{ text_wishlist }}"> <i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span></a></li>
+              <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span></a></li>
+              <li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="inner">
+        <button class="btn-show-offcanvas" data-toggle="offcanvas"><i class="fa fa-bars"></i></button>
+        <div id="mobile-logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
+              <div class="logo-text"><a href="{{ home }}">{{ name }}</a></div>
+              {% endif %}</div>
+        {{ cart }}
+    </div>
+  </div>
+  <header id="pav-header-builder" class="hidden-xs hidden-sm">
+    {{ pavoheader }}
+  </header>
+{% else %}
+<div class="header-default">
+<nav id="top" class="topbar">
+  <div class="container">
+    {{ currency }}
+    {{ language }}
+    <div id="top-links" class="nav pull-right">
+      <ul class="list-inline">
+        <li><a href="{{ contact }}"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ telephone }}</span></li>
+        <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            {% if logged %}
+            <li><a href="{{ account }}">{{ text_account }}</a></li>
+            <li><a href="{{ order }}">{{ text_order }}</a></li>
+            <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+            <li><a href="{{ download }}">{{ text_download }}</a></li>
+            <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+            {% else %}
+            <li><a href="{{ register }}">{{ text_register }}</a></li>
+            <li><a href="{{ login }}">{{ text_login }}</a></li>
+            {% endif %}
+          </ul>
+        </li>
+        <li><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span></a></li>
+        <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span></a></li>
+        <li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="header-main">
+  <div class="container">
+    <div class="inner">
+      <div class="visible-xs visible-sm">
+          <button class="btn-show-offcanvas" data-toggle="offcanvas"><i class="fa fa-bars"></i></button>
+      </div>
+      <div id="logo" class="text-xs-center">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
+          <div class="logo-text"><a href="{{ home }}">{{ name }}</a></div>
+          {% endif %}</div>
+      <div class="hidden-sm hidden-xs">
+      {{ search }}
+      </div>
+      {{ cart }}
+    </div>
+  </div>
+  <section class="header-bottom hidden-xs hidden-sm">
+	  <div class="container">
+	    <div class="header-buttom-menu mainmenu clearfix">
+	      <div class="col-lg-12 col-md-12">
+	        <div class="row">
+	          {% if pavmegamenu is empty %}
+	          {{ menu }}
+	          {% else %}
+	          {{ pavmegamenu }}
+	          {% endif %}
+	        </div>
+	      </div>
+
+	    </div>
+	  </div>
+	</section>
+</header>
+</div>
+{% endif %}

@@ -1,0 +1,67 @@
+.pa-element-tabs-section{
+	margin-bottom: 10px;
+}
+.pa-section-wrap{
+	.section-label{
+		display: inline-block;
+		padding: 10px;
+		background-color: $row_background;
+		color: $main;
+		margin-right: 1px;
+
+		&.active,
+		&:hover{
+			background-color: $main;
+			color: $white;
+			cursor: pointer;
+		}
+		.sort-handler{
+			&:hover{
+				cursor: move;
+			}
+		}
+	}
+	.pa-sortable-placeholder{
+		display: inline-block;
+		width: 50px !important;
+		min-height: 37px;
+		margin-bottom: -14px;
+	}
+	.pa-tab-element-wrap{
+		padding-top: 3px;
+		border: 1px solid $column_border;
+		display: none;
+
+		&.active{
+			display: block;
+		}
+
+		> .pa-controls {
+		    position: absolute;
+		    left: 50%;
+		    transform: translateX(-50%);
+			> a {
+				border-radius: 3px;
+				border: 1px solid $column_border;
+			}
+		}
+		> .pa-tab-elements{
+			margin-top: 30px;
+		}
+	}
+	.pa-tabs-contents-group{
+		> .pa-row-container{
+			position: relative;
+
+			> .pa-controls{
+				position: absolute;
+				left: 0;
+				right: 0;
+				border-bottom: 1px solid $column_border;
+			}
+			> .pa-element-wrapper{
+				padding-top: 30px;
+			}
+		}
+	}
+}

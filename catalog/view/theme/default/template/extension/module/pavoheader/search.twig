@@ -1,0 +1,16 @@
+{% set id = random(1..9) + random() %}
+{% if  settings.style == 'popup-search' %}
+	<div class="pavo-popup-search {{ settings.extra_class }} {{ settings.layout }}">
+		<a href="#" class="{{ settings.button }}" data-target="#popup-search{{id}}"><i class="fa fa-search popup-search"></i></a>
+		<div id="popup-search{{id}}" class="popup-search-container">
+			<a href="#" class="close"><i class="fa fa-times" aria-hidden="true"></i></a>
+			<div class="searchbox">
+				<div class="searchbox-inner">
+					{{ settings.search }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% else %}
+	<div class="searchbox searchbox-default {{ settings.extra_class }} {{ settings.layout }}">{{ settings.search }}</div>
+{% endif %}

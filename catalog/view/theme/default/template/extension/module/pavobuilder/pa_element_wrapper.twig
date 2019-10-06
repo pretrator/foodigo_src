@@ -1,0 +1,5 @@
+<div class="pa-element-container {{ data.widget ? [ data.widget, '_', 'element_wrapper' ] | join() : ( data.module ? [ data.module, '_', 'module' ] | join() : '' ) }}" data-uniqid="{{ settings.uniqid_id }}">
+	<div class="pa-element-inner {{ data.widget ? [ data.widget, '_', 'element' ] | join() : ( data.module ? [ data.module, '_', 'module' ] | join() : '' ) }}">
+		{{ content }}
+	</div>
+</div>

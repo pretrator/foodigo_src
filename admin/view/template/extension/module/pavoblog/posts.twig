@@ -1,0 +1,108 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  	<div class="page-header">
+	    <div class="container-fluid">
+			<div class="pull-right">
+				<a href="{{ add_new_url }}" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="{{ menu_add_new_text }}"><i class="fa fa-plus"></i></a>
+				<button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-posts').submit() : false;"><i class="fa fa-trash-o"></i></button>
+			</div>
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+			{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+  	</div>
+  	<div class="container-fluid">
+		{% if errors.error_warning %}
+		    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ errors.error_warning }}
+	      		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    </div>
+	    {% endif %}
+	    {% if success %}
+		    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+		      	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    </div>
+	    {% endif %}
+	    <div class="row">
+			<div class="col-xs-12">
+		    	<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="fa fa-list"></i> {{ menu_posts_text }}</h3>
+					</div>
+					<div class="panel-body">
+						<form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-posts">
+						  	<div class="table-responsive">
+							    <table class="table table-bordered table-hover">
+							      	<thead>
+								        <tr>
+											<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+											<td class="text-left">
+												{% if sort == 'title' %}
+													<a href="{{ sort_title }}" class="{{ order|lower }}">{{ title_text }}</a>
+												{% else %}
+													<a href="{{ sort_title }}">{{ title_text }}</a>
+												{% endif %}
+											</td>
+											<td class="text-left">
+												{% if sort == 'author' %}
+													<a href="{{ sort_author }}" class="{{ order|lower }}">{{ author_text }}</a>
+												{% else %}
+													<a href="{{ sort_author }}">{{ author_text }}</a>
+												{% endif %}
+											</td>
+											<td class="text-right">
+												{% if sort == 'date' %}
+													<a href="{{ sort_date_added }}" class="{{ order|lower }}">{{ created_text }}</a>
+												{% else %}
+													<a href="{{ sort_date_added }}">{{ created_text }}</a>
+												{% endif %}
+											</td>
+											<td class="text-right">{{ actions_text }}</td>
+								        </tr>
+							      	</thead>
+							      	<tbody>
+										{% if posts %}
+											{% for post in posts %}
+											<tr>
+												<td class="text-center">
+													{% if post.post_id in selected %}
+												  		<input type="checkbox" name="selected[]" value="{{ post.post_id }}" checked="checked" />
+												  	{% else %}
+												  		<input type="checkbox" name="selected[]" value="{{ post.post_id }}" />
+												  	{% endif %}
+												</td>
+												<td class="text-left">
+													<i class="fa fa-{{ post.type == 'image' ? 'file-image-o' : ( post.type == 'gallery' ? 'picture-o' : 'film' ) }}"></i>
+													{{ post.name }}
+												</td>
+												<td class="text-left">
+													<a href="{{ post.user_url }}">
+														{{ post.username }}
+													</a>
+												</td>
+												<td class="text-right">{{ post.date_added | date( [ date_format, ' ', time_format ] | join() ) }}</td>
+												<td class="text-right"><a href="{{ post.edit }}" data-toggle="tooltip" title="{{ edit_text }}" class="btn btn-info"><i class="fa fa-pencil"></i></a></td>
+											</tr>
+											{% endfor %}
+										{% else %}
+											<tr>
+												<td class="text-center" colspan="6">{{ text_no_results }}</td>
+											</tr>
+										{% endif %}
+							        </tbody>
+							    </table>
+						  	</div>
+						</form>
+						<div class="row">
+							<div class="col-sm-6 text-left">{{ pagination }}</div>
+							<div class="col-sm-6 text-right">{{ results }}</div>
+						</div>
+					</div>
+		    	</div>
+		  	</div>
+		</div>
+  	</div>
+</div>
+{{ footer }}

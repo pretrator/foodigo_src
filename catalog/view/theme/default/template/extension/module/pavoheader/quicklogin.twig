@@ -1,0 +1,64 @@
+<div class="pavo-widget-quicklogin {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<ul class="list-inline">
+        <li class="dropdown">
+    		<a class="btn btn-link dropdown-toggle" href="#" data-toggle="dropdown">
+    			<i class="fa fa-user"></i>
+    			{% if settings.logged %}
+				<span class="text-label {{ settings.style }}">{{ text_myaccount }}</span>
+    			{% else %}
+    			<span class="text-label {{ settings.style }}">{{ text_login }}</span>
+    			{% endif %}
+				<span class="caret"></span>
+			</a>
+        	<div class="dropdown-menu {% if settings.logged %}dropdown-menu-logged{% endif %}">
+        		 <div class="inner">
+        		 	{% if settings.logged %}
+		            <ul><li><a href="{{ settings.account }}">{{ text_account }}</a></li>
+		            <li><a href="{{ settings.order }}">{{ text_order }}</a></li>
+		            <li><a href="{{ settings.transaction }}">{{ text_transaction }}</a></li>
+		            <li><a href="{{ settings.download }}">{{ text_download }}</a></li>
+		            <li><a href="{{ settings.logout }}">{{ text_logout }}</a></li></ul>
+		            {% else %}
+
+		    	 	<div class="row">
+					             {% if settings.description !="" %}
+					            <div class="col-md-6">
+					              {% else %}
+					                <div class="col-md-12">
+					              {% endif %}
+
+					              <div class="quicklogin-head clearfix">
+					              	<span>{{ text_sign_in }}</span>
+					              	<a href="{{ settings.register }}" class="pull-right"> <i class="fa fa-user-plus"></i> {{ text_register }}</a>
+					              </div>
+
+					              <form action="{{ settings.action }}" method="post" enctype="multipart/form-data">
+					                <div class="form-group">
+					                  <label class="control-label" for="input-popup-email">{{ entry_email }}</label>
+					                  <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-popup-email" class="form-control" />
+					                </div>
+					                <div class="form-group">
+					                 	 <label class="control-label" for="input-popup-password">{{ entry_password }}</label>
+					                 	 <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-popup-password" class="form-control" />
+					                </div>
+					                <div class="clearfix padding-bottom-10">
+					                	 <a class="pull-right" href="{{ settings.forgotten }}">{{ text_forgotten }}</a>
+					                </div>
+						                <input type="submit" value="{{ button_login }}" class="btn btn-primary btn-block" />
+						                {% if redirect %}
+						                <input type="hidden" name="redirect" value="{{ redirect }}" />
+						                {% endif %}
+					              </form>
+					            </div>
+					            {% if settings.description !="" %}
+					            <div class="col-md-6">
+					              {{ settings.description }}
+					            </div>
+					            {% endif %}
+					          </div>
+					{% endif %}
+			      </div>
+        	</div>
+        </li>
+	</ul>
+</div>

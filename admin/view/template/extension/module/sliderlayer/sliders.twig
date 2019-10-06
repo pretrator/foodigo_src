@@ -1,0 +1,493 @@
+{{ header }} {{ column_left }}
+<div id="content">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+		    {% for breadcrumb in breadcrumbs %}
+		        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		    {% endfor %}
+		    </ul>
+		</div>
+	</div>
+
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ heading_title }} </h3>
+			</div>
+			<div class="panel-body">
+				<ul id="grouptabs" class="nav nav-tabs" role="tablist">
+					<li class="active">
+						<a href="#tab-listmodules" role="tab" data-toggle="tab"><i class="fa fa-plus"></i>{{ tab_manage_module }}</a>
+					</li>
+					<li>
+						<a href="#tab-slidergroups" role="tab" data-toggle="tab"><i class="fa fa-database"></i>{{ tab_manage_slider_group }}</a>
+					</li>
+					<li>
+						<a href="#tab-importtools" role="tab" data-toggle="tab"><i class="fa fa-cloud-download"></i>{{ tab_import_tools }}</a>
+					</li>
+				</ul>
+
+				<div class="tab-content">
+					<!-- List Modules -->
+					<div class="tab-pane active" id="tab-listmodules">
+						<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+							<input type="hidden" name="action_mode" id="action_mode" value="module-only">
+						
+							<div class="col-sm-2">
+								<ul class="nav nav-pills nav-stacked" id="module">
+									{% if extensions is defined %}
+										{% for extension in extensions %}
+											{% if module_id is empty %}{% set actived = 'active' %} {% else %} {% set actived = '' %} {% endif %}
+											<li class="{{ actived }}"><a href="{{ extension.edit }}" ><i class="fa fa-plus-circle"></i> {{ extension.name }}</a></li>
+											{% set i = 0 %}
+											{% for m in extension.module %}
+												{% set i = i + 1 %}
+												{% if m.module_id == module_id %} {% set active = 'active'  %} {% else %} {% set active = '' %} {% endif %}
+												<li class="{{ active }}"><a href="{{ m.edit }}" ><i class="fa fa-plus-circle"></i> {{ m.name }}</a></li>
+											{% endfor %}
+										{% endfor %}
+									{% endif %}
+								</ul>
+							</div>
+							<div class="pull-right">
+								<a class="btn btn-success" title="{{ button_save_module }}" onclick="$('#action_mode').val('module-only');$('#form-module').submit();" data-toggle="tooltip"><i class="fa fa-save"></i> Save Module</a>
+								{% if module_id is defined %}
+								<a onclick="confirm('{{ text_confirm }}') ? location.href='{{ mdelete }}' : false;" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+								{% endif %}
+							</div><br><br>
+							<div class="col-sm-10">
+								<div class="tab-content" id="tab-content">
+									<div class="tab-pane active">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">{{ entry_module_name }}</label>
+											<div class="col-sm-10">
+												<input class="form-control" type="text" placeholder="Module name" value="{{ name }}" name="name"/>
+												<br>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+											<div class="col-sm-10">
+												<select class="form-control" name="status" id="input-status">
+												{% if status %}
+									                <option value="1" selected="selected">{{ text_enabled }}</option>
+									                <option value="0">{{ text_disabled }}</option>
+								                {% else %}
+									                <option value="1">{{ text_enabled }}</option>
+									                <option value="0" selected="selected">{{ text_disabled }}</option>
+								                {% endif %}
+												</select><br>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label" for="input-status">{{ entry_banner }}</label>
+											<div class="col-sm-10">
+												<select class="form-control" name="group_id">
+													{% for sg in slidergroups %}
+														{% if sg.id == group_id %}
+														<option value="{{ sg.id }}" selected="selected">{{ sg.title }}</option>
+														{% else %}
+														<option value="{{ sg.id }}">{{ sg.title }}</option>
+														{% endif %}
+													{% endfor %}
+												</select>
+												<br>
+											</div>
+										</div>
+										<br/>
+									</div>
+								</div>
+							</div>
+						</form><!-- End Form-Module -->
+					</div>
+					<!-- Slider Groups -->
+					<div class="tab-pane" id="tab-slidergroups">
+						<div class="pull-right">
+							<a class="btn btn-primary" title="{{ button_save_all_and_edit_group }}" onclick="$('#form-sliders').submit();" data-toggle="tooltip"><i class="fa fa-pencil"></i> Save And Edit Group</a>
+							<a class="btn btn-info" title="{{ button_save_all_and_create_new }}" onclick="$('#action_mode').val('create-new');$('#form-sliders').submit();" data-toggle="tooltip"><i class="fa fa-plus-circle"></i> Save And Create Group</a> | <a class="btn btn-danger" title="{{ button_cancel }}" href="{{ cancel }}" data-toggle="tooltip"><i class="fa fa-reply"></i></a>
+						</div>
+			
+						<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-sliders">
+							<input type="hidden" name="action_mode" id="action_mode" value="">
+							<div class="groups">
+								<h4>Slider Groups</h4>
+								<ul>
+									{% for sgroup in edit_slider_in_group %}
+									<li {% if sgroup.id == manage_sliders_detail.id %} class= "active" {% endif %} >    
+										<a class="text-warning" title="Edit Sliders In Group" href="{{ sgroup.link1 }}"  >
+											<i class="fa fa-list-alt"></i>  | </a>
+										<a title="Edit This Group" {% if sgroup.id == manage_sliders_detail.id %} class="btn-edit-group active" {% endif %} href="{{ sgroup.link2 }}">
+											<i class="fa fa-edit"></i>
+	 										{{ sgroup.title }}
+	 										<span>(ID:{{ sgroup.id }})</span> 
+										</a> 							
+									</li>
+									{% endfor %}
+								</ul>
+								<hr>
+								<p class="alert alert-info" style="margin-right:20px;">Click above group to edit setting and manage sliders</p>
+							</div>
+
+							<div class="group-form">
+								<h4>Slider Group Form {% if manage_sliders_detail.id %} Edit: <span>{{ params.title }}</span> {% else %}: Create New Group {% endif %}</h4>
+								<div class="group-form-inner">
+									
+									<table class="table">
+										
+										<tr>
+											
+											<td>ID: {{ manage_sliders_detail.id }}<input type="hidden" name="id" value="{{ manage_sliders_detail.id }}"></td>
+											<td>
+
+												{% if manage_sliders_detail.id %}
+												
+												<div class="buttons">
+													<a class="btn btn-primary btn-sm" href="{{ manage_sliders_detail.manage_sliders }}" class="btn btn-green" ><i class="fa fa-list-alt fa-2x"></i><br> Manages Sliders</a>
+														
+													<a class="btn btn-warning btn-sm" href="{{ manage_sliders_detail.export_group_and_sliders }}"  class="btn orange" id="preview-sliders">
+														<i class="fa fa-floppy-o fa-2x"></i><br> Export Group And Sliders </a>
+
+													<p class="pull-right">
+														<a class="btn btn-success btn-sm" id="btn-preview-ingroup" href="{{ manage_sliders_detail.preview_sliders_in_group }}" class="button grey" id="preview">
+															<i class="fa fa-play fa-2x"></i><br>
+															Preview Sliders In Group
+														</a>
+														<a class="btn btn-danger btn-sm" href="{{ manage_sliders_detail.delete_slider_group }}" onclick="return confirm('Are you sure to delete this');" class="btn " id="preview-sliders">
+															<i class="fa fa-trash fa-2x"></i><br>
+															Delete This
+														</a>
+													</p>
+												</div>
+
+												{% endif %} 
+												
+											</td> 
+											
+										</tr>
+										
+
+										<tr>
+											<td> Slide Group Title </td>
+											<td><input class="form-control" type="text" name="slider[title]" value="{{ params.title }}"/></td>
+										</tr>
+
+										<tr>
+											<td> Delay </td>
+											<td><input class="form-control" type="text" name="slider[delay]" value="{{ params.delay }}"/></td>
+										</tr>
+
+										<tr>
+											<td> FullWidth Mode </td>
+											<td>
+												<select class="form-control" name="slider[fullwidth]">
+												{% for key,value in fullwidth %}
+												<option value="{{ key }}" {% if params.fullwidth is defined and key == params.fullwidth %} selected="selected" {% endif %} >{{ value }}</option>
+												{% endfor %}
+												</select>
+											</td>
+										</tr>
+
+										<tr>
+											<td> Slider Demension </td>
+											<td>
+												<label> Width </label>
+												<input class="form-control" type="text" name="slider[width]" value="{{ params.width }}"/>
+												<label>Height</label>
+												<input class="form-control" type="text" name="slider[height]" value="{{ params.height }}"/>
+											</td>
+										</tr>
+
+										<tr>
+											<td> Touch Mobile </td>
+											<td>    
+												<select class="form-control" name="slider[touch_mobile]">
+													{% for key,value in yesno %}
+													<option value="{{ key }}" {% if key == params.touch_mobile %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %}
+												</select>   
+											</td>
+										</tr>
+
+										<tr>
+											<td> Stop On Hover </td>
+											<td>
+												<select class="form-control" name="slider[stop_on_hover]">
+													{% for key,value in yesno %}
+													<option value="{{ key }}" {% if key == params.stop_on_hover %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %}
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Shuffle Mode </td>
+											<td>
+												<select class="form-control" name="slider[shuffle_mode]">
+													{% for key,value in yesno %}
+													<option value="{{ key }}" {% if key == params.shuffle_mode %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %}
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Image Cropping </td>
+											<td>
+												<select class="form-control" name="slider[image_cropping]">
+													{% for key,value in yesno %}
+													<option value="{{ key }}" {% if key == params.image_cropping %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %}
+												</select>   
+											</td>
+										</tr>
+									</table> 
+
+									<!-- Image Croping -->
+									<h4> Image Cropping </h4>
+									<table class="table">
+										<tr>
+											<td> Shadow Type </td>
+											<td>
+												<select class="form-control" name="slider[shadow_type]">
+													{% for key,value in shadow_types %}
+													<option value="{{ key }}" {% if key == params.shadow_type %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %}
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Show Time Line </td>
+											<td>
+												<select class="form-control" name="slider[show_time_line]">
+													{% for key,value in yesno %}
+													<option value="{{ key }}" {% if key == params.show_time_line %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %} 
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Time Liner Position </td>
+											<td>
+												<select class="form-control" name="slider[time_line_position]">
+													{% for key,value in linepostions %}
+													<option value="{{ key }}" {% if key == params.time_line_position %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %}
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Background Color </td>
+											<td><input class="form-control" type="text" name="slider[background_color]" value="{{ params.background_color }}"/></td>
+										</tr>
+										<tr>
+											<td> Margin </td>
+											<td><input class="form-control" type="text" name="slider[margin]" value="{{ params.margin }}"/> Example: 5px 0; or 5px 10px 20px</td>
+										</tr>
+										<tr>
+											<td> Padding(border) </td>
+											<td><input class="form-control" type="text" name="slider[padding]" value="{{ params.padding }}"/> Example: 5px 0; or 5px 10px 20px</td>
+										</tr>
+										<tr>
+											<td> Show Background Image </td>
+											<td>
+												<select class="form-control" name="slider[background_image]">
+													{% for key,value in yesno %}
+													<option value="{{ key }}" {% if key == params.background_image %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %} 
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Background URL </td>
+											<td><input class="form-control" type="text" value="{{ params.background_url }}" name="slider[background_url]"/></td>
+										</tr>
+									</table>
+
+									<!-- Navigator -->
+									<h4> Navigator </h4>
+									<table class="table">
+										<tr>
+											<td> Navigator Type </td>
+											<td>
+												<select class="form-control" name="slider[navigator_type]">
+													{% for key,value in navigator_types %}
+													<option value="{{ key }}" {% if key == params.navigator_type %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %} 
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Arrows </td>
+											<td>
+												<select class="form-control" name="slider[navigator_arrows]">
+													{% for key,value in navigation_arrows %}
+													<option value="{{ key }}" {% if key == params.navigator_arrows %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %} 
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Style </td>
+											<td>
+												<select class="form-control" name="slider[navigation_style]">
+													{% for key,value in navigation_style %}
+													<option value="{{ key }}" {% if key == params.navigation_style %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %} 
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Offset Horizontal </td>
+											<td><input class="form-control" type="text" value="{{ params.offset_horizontal }}" name="slider[offset_horizontal]"/></td>
+										</tr>
+										<tr>
+											<td> Offset Vertical </td>
+											<td><input class="form-control" type="text" value="{{ params.offset_vertical }}" name="slider[offset_vertical]"/></td>
+										</tr>
+										<tr>
+											<td> Always Show Navigator </td>
+											<td>
+												<select class="form-control" name="slider[show_navigator]">
+													{% for key,value in yesno %}
+													<option value="{{ key }}" {% if key == params.show_navigator %} selected="selected" {% endif %} >{{ value }}</option>
+													{% endfor %} 
+												</select>   
+											</td>
+										</tr>
+										<tr>
+											<td> Hide Navigator After </td>
+											<td><input class="form-control" type="text" value="{{ params.hide_navigator_after }}" name="slider[hide_navigator_after]"/></td>
+										</tr>   
+									</table>
+
+									<!-- Thumbnails -->
+									<h4> Thumbnails </h4>
+									<table class="table">
+										<tr>
+											<td> Thumbnail Width </td>
+											<td>
+												<input class="form-control" type="text" value="{{ params.thumbnail_width }}" name="slider[thumbnail_width]"/>
+											</td>
+										</tr>
+										<tr>
+											<td> Thumbnail Height </td>
+											<td>
+												<input class="form-control" type="text" value="{{ params.thumbnail_height }}" name="slider[thumbnail_height]"/>
+											</td>
+										</tr>
+										<tr>
+											<td> Number of Thumbnails </td>
+											<td>
+												<input class="form-control" type="text" value="{{ params.thumbnail_amount }}" name="slider[thumbnail_amount]"/>
+											</td>
+										</tr>
+									</table>
+
+									<!-- Mobile Visiblity -->
+									<h4> Mobile Visiblity </h4>
+									<table class="table">
+										<tr>
+											<td> Hide Under Width </td>
+											<td><input class="form-control" type="text" value="{{ params.hide_screen_width }}" name="slider[hide_screen_width]"/></td>
+										</tr>
+									</table> 
+								</div><!-- End Group Form -->
+							</div>						
+						</form><!-- End Form-Module -->
+					</div>
+
+					<!-- Import Tools -->
+					<div class="tab-pane" id="tab-importtools">
+						<form id="import" method="post" enctype="multipart/form-data" action="{{ actionImport }}">
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<input type="file" class="input_import_slider" id="input-file" name="import_file"><br/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button class="btn btn-warning" type="submit">{{ button_import_slider }}</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+ <!-- Modal Form Group Layer Sliders-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">{{ text_preview_sliders_in_group }}</h4>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{ text_close }}</button>
+			</div>
+		</div> 
+	</div> 
+</div>	
+
+<script type="text/javascript">
+//Preview Group LayerSlider
+$("#btn-preview-ingroup").click( function(){
+
+	$('#myModal1 .modal-dialog').css('width',1170);
+	var a = $( '<span class="glyphicon glyphicon-refresh"></span><iframe frameborder="0" scrolling="no" src="'+$(this).attr('href')+'" style="width:100%;height:500px; display:none"/>'  );
+	$('#myModal1 .modal-body').html( a );
+		
+	$('#myModal1').modal('show');
+	$('#myModal1').attr('rel', $(this).attr('rel') );
+	$(a).load( function(){  
+		$('#myModal1 .modal-body .glyphicon-refresh').hide();
+		$('#myModal1 .modal-body iframe').show();
+	});
+	return false; 
+});
+
+// dropdown multiple store
+$('#pavstores').bind('change', function () {
+	url = 'index.php?route=extension/module/pavsliderlayer&user_token={{ user_token }}';
+	var id = $(this).val();
+	if (id) {
+		url += '&store_id=' + encodeURIComponent(id);
+	}
+	window.location = url;
+});
+
+$('#grouptabs a').click( function(){
+	$.cookie("sactived_tab", $(this).attr("href") );
+});
+
+if( $.cookie("sactived_tab") !="undefined" ){
+	$('#grouptabs a').each( function(){ 
+		if( $(this).attr("href") ==  $.cookie("sactived_tab") ){
+			$(this).click();
+			return ;
+		}
+	});
+}
+</script>
+
+{{ footer }}

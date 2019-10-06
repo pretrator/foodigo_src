@@ -1,0 +1,24 @@
+
+<div class="pavo-widget-custom-menu {% if settings.language_code['menu_type'] == 'hor' %}hor{% endif %} {{ settings.extra_class }}{% if  settings.language_code['menu_type'] == 'dropdown' %} dropdown {% endif %} {{settings.layout}}">
+ 
+		{% if settings.language_code['title'] %}
+		<h3 class="menu-title">
+			<a href="{{settings.server}}{{ settings.language_code['url_title'] }}"  {% if  settings.language_code['menu_type'] == 'dropdown' %} data-toggle="dropdown" {% endif %}>{{settings.language_code['title']}}</a>
+		</h3>
+		{% endif %}
+		<ul class="{% if settings.language_code['menu_type'] == 'hor' %}list-inline{% elseif  settings.language_code['menu_type'] == 'dropdown' %}dropdown-menu{% else %}list-unstyled{% endif %} ">
+			{% for key, item in settings.get_language %}
+				{% if item.language['text_link'] %}
+					<li class="custom-menu-item item-{{ key }}">
+						<a href="{{settings.server}}{{ item.language['url_link'] }}">
+							<i class="fa {% if settings.direction == "rtl" %}{{ settings.items[key].icon_rtl }}{% else %}{{ settings.items[key].icon }}{% endif %}"></i>
+							{{ item.language['text_link'] }}
+						</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+ 
+
+
+</div>

@@ -1,0 +1,46 @@
+<div class="pavo-widget-deals {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }} {{settings.layout}}">
+  {% set id = random(1..9) + random() %}
+  {% set date_now = "now"|date("Y-m-d") %}
+  <div class="content-products">
+    <div class="row">
+      {% if settings.banner_image %}
+          <div class="banner-deals {% if settings.banner_type == 'right' %}pull-right{% endif %} col-md-3 col-sm-3 col-xs-12">
+            <div class="image">
+              {% if settings.banner_link %}
+                <a href="{{settings.server}}{{settings.banner_link}}"><img src="{{ settings.banner_image }}" alt="{{ settings.alt }}" class="img-responsive" /></a>
+              {% else %}
+                <img src="{{ settings.banner_image }}" alt="{{ settings.alt }}" class="img-responsive" />
+              {% endif %}
+            </div>
+            {% if settings.banner_countdown == "true" %}
+            <div class="product-timing-deal countdown-timer" data-countdown="1" data-start="{{ settings.start_time }}" data-end="{{ settings.end_time }}" data-format="{{ date_format_simple_day_hour }}">        
+              <div class="date-format">
+                <div class="format-date format-date-days">
+                  <span class="time-group"><span class="timer">%D</span>  <span class="unit">{{ text_days }}</span></span> 
+                  <span class="time-group"><span class="timer">%H</span>  <span class="unit">{{ text_hours }} </span></span>
+                  <span class="time-group"><span class="timer">%M</span>  <span class="unit">{{ text_min }}</span></span>
+                  <span class="time-group"><span class="timer">%S</span>  <span class="unit">{{ text_sec }}</span></span>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        <div class="{% if settings.banner_image %}col-md-9 col-sm-9 col-xs-12{% else %}col-md-12{% endif %}">
+          <div class="swiper-container pavo-swiper-slide" data-id="{{id}}" data-slidesperview="{{ settings.item }}" data-rows="{{ settings.rows }}" {% if settings.auto_play == "false" %} data-play="0" {% else %} data-play="{{settings.auto_play_time}}" {% endif %} {% if settings.loop == "true" %} data-loop="true" {% else %} data-loop="false" {% endif %}>
+            <div class="swiper-wrapper">
+            {% for product in settings.products %}
+            {% if product.date_start <= date_now and product.date_end <= settings.end_time and product.date_end >= date_now or product.date_end == '0000-00-00' %}
+              <div class="swiper-slide"><div class="product-layout">
+              {% include settings.product_grid_layout with { product_grid_style: settings.product_grid_style is not empty ? settings.product_grid_style : '' } %}
+              </div></div>
+            {% endif %}
+            {% endfor %}
+            </div>
+            <div class="swiper-button-next button-next{{id}}"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+        </div>
+    </div>                     
+  </div>
+</div>

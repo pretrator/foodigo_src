@@ -1,0 +1,60 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900);
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+
+@font-face {
+  font-family: "font_icons8";
+  src: url("#{$fonts-theme-path}icon8/font_icons8_d3687850192d27613582847548044cb1.eot");
+  src: url("#{$fonts-theme-path}icon8/font_icons8_d3687850192d27613582847548044cb1.eot?#iefix") format("embedded-opentype"),
+       url("#{$fonts-theme-path}icon8/font_icons8_d3687850192d27613582847548044cb1.woff2") format("woff2"),
+       url("#{$fonts-theme-path}icon8/font_icons8_d3687850192d27613582847548044cb1.woff") format("woff"),
+       url("#{$fonts-theme-path}icon8/font_icons8_d3687850192d27613582847548044cb1.ttf") format("truetype"),
+       url("#{$fonts-theme-path}icon8/font_icons8_d3687850192d27613582847548044cb1.svg#font_icons8") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "font_icons8";
+    src: url("#{$fonts-theme-path}icon8/font_icons8_d3687850192d27613582847548044cb1.svg#font_icons8") format("svg");
+  }
+}
+
+[data-icons8]:before { content: attr(data-icons8); }
+
+.icons8, [data-icons8]:before,
+.icons8-align-left:before,
+.icons8-diamond:before,
+.icons8-discount:before,
+.icons8-eye:before,
+.icons8-heart:before,
+.icons8-male-user:before,
+.icons8-refresh:before,
+.icons8-settings:before,
+.icons8-shipped:before,
+.icons8-shopping-cart:before {
+  display: inline-block;
+  font-family: "font_icons8";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.icons8-align-left:before { content: "\f102"; }
+.icons8-diamond:before { content: "\f108"; }
+.icons8-discount:before { content: "\f107"; }
+.icons8-eye:before { content: "\f105"; }
+.icons8-heart:before { content: "\f103"; }
+.icons8-male-user:before { content: "\f100"; }
+.icons8-refresh:before { content: "\f104"; }
+.icons8-settings:before { content: "\f10a"; }
+.icons8-shipped:before { content: "\f106"; }
+.icons8-shopping-cart:before { content: "\f101"; }

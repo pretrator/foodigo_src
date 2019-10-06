@@ -1,0 +1,154 @@
+@import "modules/deals";
+@import "modules/newsletter";
+@import "modules/blogs";
+@import "modules/testimonial";
+@import "modules/autosearch";
+
+@import "modules/blocks-builder";
+@import "modules/header-builder";
+
+.category {
+    .list-group-item {
+        padding: 0;
+        color: $text-color;
+        &:hover, &.active {
+            color: $theme-color;
+        }
+    }
+}
+
+/*** text element***/
+.list-group {
+    > a.list-group-item {
+        border: 0;
+        color: $theme-color-default;
+        border: 0;
+        padding: 5px 0;
+		margin-bottom: 0;
+        &:hover {
+            color: $theme-color;
+        }
+    }
+}
+
+/*categoryfeature*/
+.categoryfeature {
+	margin-bottom: 0;
+	.category-thumb {
+		margin-bottom: 0;
+		text-align: center;
+		h4 {
+			text-transform: uppercase;    
+			font-weight: 600;   
+			font-size: 16px;
+			margin-top: 30px;
+			a {
+				color: $theme-color-default;
+			}
+		}
+		&:hover {
+			h4 {
+				animation: tracking-in-contract 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0s 1 normal both;
+			}
+		}
+	}
+	.swiper-pager {
+		margin-top: -35px;
+	}
+}
+@-webkit-keyframes tracking-in-contract { 
+	0% {
+		letter-spacing: 4px;
+		opacity:0
+	}
+	40% {
+		opacity:.6
+	}
+	to {
+		letter-spacing:normal;
+		opacity:1
+	}
+}
+@keyframes tracking-in-contract {
+	0% {
+		letter-spacing: 4px; 
+		opacity:0
+	}
+	40% {
+		opacity:.6
+	}
+	to {
+		letter-spacing:normal;
+		opacity:1
+	}
+}
+
+/*pavlayerednavigation*/
+.pavlayerednavigation, .filter-default {
+    .list-group {
+        + .list-group {
+            margin-top: 60px;
+        }
+        > a.list-group-item {
+            padding: 0;
+            @extend .panel-title;
+        }
+        .list-group-item {
+            padding: 0;
+            border: 0;
+        }
+        &.filter-group {
+            div.list-group-item + a.list-group-item{
+                margin-top: 60px;
+            }
+        }
+    }
+    .filter-selection {
+        background-color: transparent;
+        .list-group-content {
+            padding: 0;
+            .list-group-item-choosed {
+                font-weight: 400;
+                .remove {float: right;}
+            }
+        }
+        .clear-all {
+            display: inline-block;
+            @extend .btn-link;
+        }
+    }
+    .filter-by-price {
+        .irs-from, .irs-to, .irs-single {
+            background: $theme-color;
+            &:after {
+                border-top-color: $theme-color;
+            }
+        }
+    }
+    .pav-slider a span {
+    	margin-right: 20px;
+        color: #fff;
+    }
+}
+#pav-user-login-popup {
+ 	.modal-title {
+ 		text-transform: uppercase;
+ 	}   
+ 	label {
+ 		font-weight: 400;
+ 	}  
+ 	.modal-footer {
+ 		display: none;
+ 	} 
+ 	ul {
+ 		padding-left: 20px;
+ 	}
+ 	.button {
+ 		margin-top: 25px;
+ 	}
+}
+.pavo-header-builder {
+    li.dropdown {
+        @extend .effect-dropdown-menu; 
+    }
+}

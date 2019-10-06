@@ -1,0 +1,83 @@
+{{ header }}
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <h1>{{ heading_title }}</h1>
+  {% if description %}
+  <div class="locator-description">{{ description }}</div>
+  {% endif %}
+<div class="row">
+  <div class="pav-store-locator col-lg-8 col-md-6">
+    <div id="opallocation-map-preview" style="min-height:1000px;">
+      <div id="mapView">
+        <div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="information-information" class="col-lg-4 col-md-6">
+
+    <div class="row">{{ column_left }}
+
+      <div id="locator-content">
+        <div class="store-locations">
+            <div class="locations-inner">
+              {% for key,location in locations %}
+              <div class="row" >
+                  <div class="maker-item{{ key }} col-lg-4 col-md-6" data-id="{{ location.location_id }}">
+                    <div class="location-image">
+                      <img src="{{ location.image }}" class="img-responsive">
+
+                      <div class="abs-buttons ">
+                        <div class="abs-button button-marker"><i class="icon fa fa-map-marker"></i></div>
+
+                        {% if location.video %}
+                        <a class="location-youtube-button abs-button" href="{{ location.video }}"><i class="icon fa fa-youtube"></i></a>
+                        {% endif %}
+                        <div class="place-gallery-content">
+                          <a href="{{ location.image }}"  class="abs-button"> <i class="fa fa-picture-o"></i></a>
+                          {% for km,image in location.images %}
+                          <a href="{{ image }}" class="hide"></a>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                   <h4>{{ location.name }}</h4>
+                    <div class="location-address"><i class="fa fa-map"></i> {{ location.name }}</div>
+                    {% if location.telephone %}
+                    <div class="location-telephone"><i class="fa fa-phone"> </i> {{ location.telephone }}</div>
+                    {% endif %}
+                    {% if location.email %}
+                    <div class="location-email"><i class="fa fa-envelope"> </i> <a href="mailto:{{ location.email }}">{{ location.email }}</a></div>
+                    {% endif %}
+                    {% if location.fax %}
+                    <div class="location-fax"><i class="fa fa-fax"> </i> {{ location.fax }}</div>
+                    {% endif %}
+                    <div class="button-direction">
+                     <a href="https://maps.google.com/maps?q={{ location.geocode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> {{ button_map }}</a>
+                    </div>
+                </div>
+              </div>
+
+              {% endfor %}
+            </div>
+        </div>
+      {{ content_bottom }}</div>
+
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+(function($){
+    $(document).ready(function(){
+        var mapsJson = {{ json_maps }}
+        pavoOnloadMaps( mapsJson, '{{ store_url }}' );
+    });
+})(jQuery);
+</script>
+{{ footer }}

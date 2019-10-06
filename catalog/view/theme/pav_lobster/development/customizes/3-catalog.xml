@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+	<author>pavotheme</author>
+	<name>Catalog Style</name>
+	<id>theme-style</id>
+	<icon>fa fa-gear</icon>
+
+	<item>
+		<id>button-addtocart-bg</id>
+		<group>Product</group>
+		<label>Button Cart Bg</label>
+		<type>colorpicker</type>
+		<default>#333333</default>
+	</item>
+
+	<item>
+		<id>button-addtocart-color</id>
+		<group>Product</group>
+		<label>Button Cart Color</label>
+		<type>colorpicker</type>
+		<default>#ddba76</default>
+	</item>
+
+	<item>
+		<id>product-price-color</id>
+		<group>Product</group>
+		<label>Price Color</label>
+		<type>colorpicker</type>
+		<default>#ddba76</default>
+	</item>
+
+	<item>
+		<id>product-price-old-color</id>
+		<group>Product</group>
+		<label>Sale Price Color</label>
+		<type>colorpicker</type>
+		<default>#a8a8a8</default>
+	</item>
+
+</settings>

@@ -1,0 +1,25 @@
+{% if ( post ) %}
+	<div class="article post-item post-list post-id-{{ post.post_id }} col-xs-12">
+    {# thumbnail #}
+    {% include '/pavoblog/loop/thumbnail.twig' %}
+
+    <div class="entry-content">
+      {# title #}
+      {% include '/pavoblog/loop/title.twig' %}
+      {# endtitle #}
+
+      <div class="entry-meta">
+        {# author #}
+        {% include '/pavoblog/loop/author.twig' %}
+        {# date #}
+        {% include '/pavoblog/loop/date.twig' %}
+      </div>
+
+      {# description #}
+      {% include '/pavoblog/loop/description.twig' %}
+
+      {# readmore #}
+      {% include '/pavoblog/loop/readmore.twig' %}
+    </div>
+  </div>
+{% endif %}

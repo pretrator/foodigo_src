@@ -1,0 +1,54 @@
+{% set id=random(100)~product.product_id %}
+<div class="product-layout-slide">    
+  <div class="product-thumb">
+       {% if product.special %}
+      <div class="product-label product-label-special">{{ text_sale }}</div>
+      {% endif %}
+      <div class="image">
+      {% if product.images %}
+        <div class="product-image-slide">
+          <div class="pavo-carousel-play carousel slide" id="product-carousel{{id}}">
+                <div class="carousel-inner">
+                    {% for k, image in product.images %}
+                    <div class="item {% if k == 0 %}active {% endif %}"><img src="{{image}}" alt=""></div>
+                    {% endfor %}
+                </div>
+                <!-- Add Arrows -->
+                <div class="carousel-controls-v1">
+                    <a class="carousel-control left" href="#product-carousel{{id}}" data-slide="prev"><i class="fa fa-caret-left" aria-hidden="true"></i></a>
+                    <a class="carousel-control right" href="#product-carousel{{id}}" data-slide="next"><i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                </div>  
+            </div>
+        </div>
+      {% else %}
+         <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>          
+        {% endif %} 
+        <div class="group-action">                     
+          <button class="btn btn-wishlist" type="button" data-toggle="tooltip" data-placement="left" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="icons8-heart"></i></button>
+          <button class="btn btn-compare" type="button" data-toggle="tooltip" data-placement="left" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="icons8-refresh"></i></button>
+        </div>
+    </div> 
+    
+    <div class="product-meta">
+      <div class="caption">
+        {% if product.price %}
+          <div class="price">
+            {% if not product.special %}
+            {{ product.price }}
+            {% else %}
+            <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+            {% endif %}
+          </div>
+          {% endif %}
+        <h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
+        <div class="description">{{ product.description }}</div>
+        {% if product.rating %}
+        <div class="rating"> {% for i in 1..5 %}
+          {% if product.rating < i %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>{% endif %}
+          {% endfor %} </div>
+        {% endif %}                 
+      </div>
+      <button class="btn btn-cart" type="button" onclick="cart.add('{{ product.product_id }}');">{{ button_cart }}</button>
+    </div>
+  </div>
+</div>  

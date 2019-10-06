@@ -1,0 +1,22 @@
+.pavo-extensions-list{
+	position: relative;
+}
+.pavo-extensions-list .extension-preview {
+	height: 200px;
+	overflow: hidden;
+	position: relative;
+}
+.extension-label{
+	position: absolute;
+	top:10px;
+	right: 10px;
+
+	padding: 3px 6px;
+	font-size: 11px;
+	color:#FFF;
+}
+#extension-list.pavo-extensions-list .extension-name{
+	height: 50px;
+	overflow: hidden;
+	min-height: 50px;
+}

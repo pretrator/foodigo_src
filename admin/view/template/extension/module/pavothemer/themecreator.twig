@@ -1,0 +1,155 @@
+{{ header }}
+
+  {# start admin panel left sidebar #}
+  {{ column_left }}
+  {# end admin panel left sidebar #}
+
+  {# start lexus theme control #}
+  <div id="content">
+  	 <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <a class="btn btn-primary" onclick="$('#form').submit();">{{ button_save }}</a>
+        
+                <a class="btn btn-danger" href="{{ cancel }}">{{ button_cancel }}</a>
+
+                 <a class="btn btn-info" title="{{ text_guide }}" id="btn-guide" href="http://www.pavothemes.com/guides/3/pavtestimonial/"><i class="fa fa-book"></i>{{ text_guide }}</a>
+            </div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div><!-- End div#page-header -->
+
+    <div id="page-content" class="container-fluid">
+ 
+    	<div class="panel panel-info">
+    	 	<h4 class="panel-heading">List custom skin by yourself </h4> 
+    		<div class="panel-body">
+    			<div class="pavo-custom-skins">
+		   
+		    		<ul class="list-inline">
+		    		{% for skin in skins %}
+		    			<li>
+		    				<a href="{{ skin.link }}"> {{ skin.bar }}
+		    					<em>{{ skin.name }}</em>
+		    				</a>
+		    			<li>
+		    		{% endfor %}
+		    		</ul>
+		    	</div>	
+    			
+    		</div>
+    	</div>
+    
+
+    	
+    	<div class="panel panel-primary">
+    	 	<h4 class="panel-heading">Skin Creator</h3> 
+    		<div class="panel-body">
+		 		<form method="POST" id="form" class="form-horizontal" enctype="multipart/form-data">
+					 
+					  {% for i, setting in settings %}
+			                    <div id="setting-tab-{{ setting.id }}" class="tab-pane{{ current_tab == i ? ' active' : '' }}">
+
+			                      {% if ( setting.group ) %}
+			                        <ul class="nav nav-tabs">
+			                          {% set c = 0 %}
+			                          {% for key, group in setting.group %}
+			                            <li{{ c == 0 ? ' class="active"' : '' }}>
+			                              <a href="#setting-group-i-{{ key }}" data-toggle="tab" aria-expanded="true">
+			                                {{ group }}
+			                              </a>
+			                            </li>
+			                          {% set c = c + 1 %}
+			                          {% endfor %}
+			                        </ul>
+
+			                        <div class="tab-content">
+
+			                          {% set c = 0 %}
+			                            {% for key, group in setting.group %}
+			                              <div id="setting-group-i-{{ key }}" class="tab-pane{{ c == 0 ? ' active' : '' }}">
+			                                {% for item in setting.item %}
+
+			                                  {# wrapper class #}
+			                                  {% set wrapper_class = 'form-group' %}
+			                                  {% set wrapper_class = item.wrapper_class ? [ wrapper_class, ' ', item.wrapper_class ] | join : wrapper_class %}
+			                                  {% set wrapper_class = item.required ? [ wrapper_class, ' ', 'required' ] | join : wrapper_class %}
+			                                  {% if item.id in errors | keys %}
+			                                      {% set wrapper_class = [ wrapper_class, ' ', 'has-error' ] | join %}
+			                                  {% endif %}
+
+			                                  {% if ( item.group == group ) %}
+			                                    <div class="{{ wrapper_class }}">
+			                                      {% if item.label %}
+			                                        {% if ( item.desc ) %}
+			                                          <label class="col-sm-2 control-label">
+			                                            <span data-toggle="tooltip" data-original-title="{{ item.desc | escape }}">{{ item.label }}</span>
+			                                          </label>
+			                                        {% else %}
+			                                          <label class="col-sm-2 control-label" for="{{ item.id }}">{{ item.label }}</label>
+			                                        {% endif %}
+			                                      {% else %}
+			                                        <div class="col-sm-2"></div>
+			                                      {% endif %}
+			                                      <div class="col-sm-10">
+			                                        {{ item.output }}
+			                                        {% if item.id in errors | keys %}
+			                                          <div class="text-danger">{{ errors[item.id] }}</div>
+			                                        {% endif %}
+			                                      </div>
+			                                    </div>
+			                                  {% endif %}
+			                                {% endfor %}
+			                              </div>
+			                            {% set c = c + 1 %}
+			                          {% endfor %}
+
+			                        </div>
+
+			                      {% else %}
+			                        {% for item in setting.item %}
+
+			                          {# wrapper class #}
+			                          {% set wrapper_class = 'form-group' %}
+			                          {% set wrapper_class = item.wrapper_class ? [ wrapper_class, ' ', item.wrapper_class ] | join : wrapper_class %}
+			                          {% set wrapper_class = item.required ? [ wrapper_class, ' ', 'required' ] | join : wrapper_class %}
+			                          {% if item.id in errors | keys %}
+			                              {% set wrapper_class = [ wrapper_class, ' ', 'has-error' ] | join %}
+			                          {% endif %}
+
+			                          <div class="{{ wrapper_class }}">
+			                            {% if item.label %}
+			                              {% if ( item.desc ) %}
+			                                <label class="col-sm-2 control-label">
+			                                  <span data-toggle="tooltip" data-original-title="{{ item.desc | escape }}">{{ item.label }}</span>
+			                                </label>
+			                              {% else %}
+			                                <label class="col-sm-2 control-label" for="{{ item.id }}">{{ item.label }}</label>
+			                              {% endif %}
+			                            {% else %}
+			                              <div class="col-sm-2"></div>
+			                            {% endif %}
+			                            <div class="col-sm-10">
+			                              {{ item.output }}
+			                              {% if item.id in errors | keys %}
+			                                <div class="text-danger">{{ errors[item.id] }}</div>
+			                              {% endif %}
+			                            </div>
+			                          </div>
+			                        {% endfor %}
+			                      {% endif %}
+
+			                    </div>
+			         {% endfor %}
+			    </form> 
+			</div>    
+		</div>
+	</div>    
+  </div>
+  {# end lexus theme control #}
+{{ footer }}

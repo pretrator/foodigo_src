@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings>
+	<author>pavotheme</author>
+	<name>Bootstrap</name>
+	<id>bootstrap</id>
+	<icon>fa fa-gear</icon>
+
+	<item>
+		<id>brand-primary</id>
+		<group>Base</group>
+		<label>Brand Primary</label>
+		<type>colorpicker</type>
+		<default>#ddba76</default>
+	</item>
+
+	<item>
+		<id>brand-success</id>
+		<group>Base</group>
+		<label>Brand Success</label>
+		<type>colorpicker</type>
+		<default>#5cb85c</default>
+	</item>
+
+	<item>
+		<id>brand-info</id>
+		<group>Base</group>
+		<label>Brand Info</label>
+		<type>colorpicker</type>
+		<default>#5bc0de</default>
+	</item>
+
+	<item>
+		<id>brand-warning</id>
+		<group>Base</group>
+		<label>Brand Warning</label>
+		<type>colorpicker</type>
+		<default>#f0ad4e</default>
+	</item>
+
+	<item>
+		<id>brand-danger</id>
+		<group>Base</group>
+		<label>Brand Danger</label>
+		<type>colorpicker</type>
+		<default>#d9534f</default>
+	</item>
+
+	<item>
+		<id>body-bg</id>
+		<group>Base</group>
+		<label>Body Background</label>
+		<type>colorpicker</type>
+		<default>#FFF</default>
+	</item>
+
+	<item>
+		<id>text-color</id>
+		<group>Base</group>
+		<label>Text Color</label>
+		<type>colorpicker</type>
+		<default>#86888e</default>
+	</item>
+
+	<item>
+		<id>link-color</id>
+		<group>Base</group>
+		<label>Link Color</label>
+		<type>colorpicker</type>
+		<default>#444a59</default>
+	</item>
+	<item>
+		<id>font-family-base</id>
+		<label>Body Font</label>
+		<group>Font</group>
+		<type>select_font</type>
+		<font>name</font>
+	</item>
+	<item>
+		<id>font-family-base</id>
+		<label>Body Font Weight</label>
+		<group>Font</group>
+		<type>select_font_weight</type>
+		<font>weight</font>
+	</item>
+
+	<item>
+		<id>font-size-base</id>
+		<group>Font</group>
+		<label>Font Size Base</label>
+		<type>select_font_size</type>
+		<default>14px</default>
+	</item>
+
+	<item>
+		<id>line-height-base</id>
+		<group>Font</group>
+		<label>Light Height</label>
+		<type>select_font_size</type>
+		<default></default>
+	</item>
+
+	<item>
+		<id>font-size-h1</id>
+		<group>Font</group>
+		<label>Font Size H1</label>
+		<type>select_font_size</type>
+		<default></default>
+	</item>
+
+	<item>
+		<id>font-size-h2</id>
+		<group>Font</group>
+		<label>Font Size H2</label>
+		<type>select_font_size</type>
+		<default></default>
+	</item>
+
+	<item>
+		<id>font-size-h3</id>
+		<group>Font</group>
+		<label>Font Size H3</label>
+		<type>select_font_size</type>
+		<default></default>
+	</item>
+
+
+	<item>
+		<id>font-size-h3</id>
+		<group>Font</group>
+		<label>Font Size H3</label>
+		<type>select_font_size</type>
+		<default></default>
+	</item>
+
+	<item>
+		<id>font-size-h4</id>
+		<group>Font</group>
+		<label>Font Size H4</label>
+		<type>select_font_size</type>
+		<default></default>
+	</item>
+
+
+	<!-- Components -->
+
+	<item>
+		<id>input-bg</id>
+		<group>Components</group>
+		<label>Input BG</label>
+		<type>colorpicker</type>
+		<default>#f8f8f8</default>
+	</item>
+
+	<item>
+		<id>input-border</id>
+		<group>Components</group>
+		<label>Input Border</label>
+		<type>colorpicker</type>
+		<default>#ebebeb</default>
+	</item>
+
+	<item>
+		<id>input-border-focus</id>
+		<group>Components</group>
+		<label>Input Focus</label>
+		<type>colorpicker</type>
+		<default>#ddba76</default>
+	</item>
+
+
+	<item>
+		<id>input-group-addon-bg</id>
+		<group>Components</group>
+		<label>Input Group BG</label>
+		<type>colorpicker</type>
+		<default>#f2f2f2</default>
+	</item>
+
+	<item>
+		<id>input-group-addon-border-color</id>
+		<group>Components</group>
+		<label>Input Group Border</label>
+		<type>colorpicker</type>
+		<default>#ebebeb</default>
+	</item>
+
+
+
+	<item>
+		<id>btn-default-color</id>
+		<group>Components</group>
+		<label>Button Default Color</label>
+		<type>colorpicker</type>
+		<default>#fff</default>
+	</item>
+
+	<item>
+		<id>btn-default-bg</id>
+		<group>Components</group>
+		<label>Button Default BG</label>
+		<type>colorpicker</type>
+		<default>#444a59</default>
+	</item>
+
+	<item>
+		<id>btn-default-border</id>
+		<group>Components</group>
+		<label>Button Default Border</label>
+		<type>colorpicker</type>
+		<default>#444a59</default>
+	</item>
+
+	<!-- Grid -->
+
+	<item>
+		<id>container-large-desktop</id>
+		<group>Grid</group>
+		<label>Container Desktop Width</label>
+		<type>text</type>
+		<default>1170px</default>
+	</item>
+	<item>
+		<id>grid-gutter-width</id>
+		<group>Grid</group>
+		<label>Gutter Width</label>
+		<type>select_font_size</type>
+		<default>30px</default>
+		<desc>Empty</desc>
+	</item>
+
+
+</settings>

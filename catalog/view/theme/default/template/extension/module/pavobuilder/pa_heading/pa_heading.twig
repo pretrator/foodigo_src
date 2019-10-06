@@ -1,0 +1,6 @@
+<div class="pavo-widget-heading {{settings.layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }} {{ settings.style }}">
+	<{{ settings.tag }} class="content-heading" style="{% if settings.hfont_size %}font-size: {{settings.hfont_size}};{% endif %}{% if settings.hfont_weight %}font-weight: {{settings.hfont_weight}};{% endif %}{% if settings.hfont_color %}color: {{settings.hfont_color}};{% endif %}{% if settings.htext_spacing %}letter-spacing: {{settings.htext_spacing}};{% endif %}">{{ settings.heading }}</{{ settings.tag}}>
+	{% if settings.subheading %}
+	<div class="content-subheading" style="{% if settings.sfont_size %}font-size: {{settings.sfont_size}};{% endif %}{% if settings.sfont_weight %}font-weight: {{settings.sfont_weight}};{% endif %}{% if settings.sfont_color %}color: {{settings.sfont_color}};{% endif %}{% if settings.stext_spacing %}letter-spacing: {{settings.stext_spacing}};{% endif %}">{{ settings.subheading }}</div>
+	{% endif %}
+</div>

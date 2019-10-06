@@ -1,0 +1,9 @@
+<select name="{{ item.name }}{{ item.multiple ? '[]' : '' }}" id="{{ item.id }}" class="{{ item.class }}"{{ item.multiple ? ' multiple' : '  ' }}>
+	{% for option in item.option %}
+	  {% if ( item.multiple ) %}
+	    <option value="{{ option.value }}"{{ item.value in option.value ? ' selected="selected"' : '' }}>{{ option.text }}</option>
+	  {% else %}
+	    <option value="{{ option.value }}"{{ item.value == option.value ? ' selected="selected"' : '' }}>{{ option.text }}</option>
+	  {% endif %}
+	{% endfor %}
+</select>

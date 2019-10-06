@@ -1,0 +1,35 @@
+@import './sass/variables';
+@import './sass/mixins';
+@import './sass/posts';
+@import './sass/comments';
+
+.pavo-btn-info {
+    @include button( $font-size, $font-color, $white, $btn-padding, $btn-background, $btn-primary-background-hover, $btn-border, $btn-primary-border-hover );
+}
+
+.pavoblog-notice{
+	padding: 5px 8px;
+	margin-bottom: 7px;
+	&.warning{
+		background-color: $warning-color;
+		color: $white;
+	}
+}
+
+.has-error{
+	.required{
+		border: 1px solid $warning-color;
+	}
+	p{
+		color: $warning-color;
+	}
+}
+.validated{
+	.required{
+		border: 1px solid $success-color;
+	}
+}
+.pavoblog-video-iframe{
+	width: 100%;
+	border: none;
+}

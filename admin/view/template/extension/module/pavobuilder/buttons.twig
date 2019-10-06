@@ -1,0 +1,20 @@
+<div class="well">
+	<div class="form-group">
+		<label>{{ text_select_block_builder }}</label>
+		<select name="blockbuilder[id]"  id="blockbuilder-id" class="form-control">
+			<option value="">{{ text_use_html_content }}</option>
+			{% for block in blockbuilders %}
+			<option value="{{ block.module_id }}"> {{ block.name }} </option>
+			{% endfor %}
+		</select>
+	</div>	
+	<div class="form-group">
+		<label>{{ text_show_breadcrumb }}</label>
+		<select name="blockbuilder[breadcumb]" id="showbreabcrumb" class="form-control">
+			{% for k,v in options %}
+			<option value="{{ k }}"> {{ v }} </option>
+			{% endfor %}
+		</select>
+	</div>	
+</div>
+<hr> 

@@ -1,0 +1,2643 @@
+html > body{
+	overflow: hidden;
+}
+#pavotheme-customize-wrapper {
+    margin-left: 300px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+#header{
+	display: none;
+}
+#form{
+    .panel-body{
+        border-bottom: 1px solid #eee;
+    }
+}
+#main-preview{
+	position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+#pavo-iframe{
+    width: 100%;
+    margin: 0 auto;
+    border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    &.loading{
+        body{
+            &:before{
+                position: absolute;
+                content: '';
+                background-color: #fff;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                opacity: 0.7;
+                z-index: 99999;
+            }
+        }
+    }
+}
+.select2-container{
+    &:focus{
+        outline: none !important;
+    }
+    &.select2-container--bootstrap{
+        width: 100% !important;
+    }
+}
+#main-control{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    min-width: 300px;
+    max-width: 600px;
+    background: #eee;
+    border-right: 1px solid #ddd;
+    .panel-control{
+        padding: 12px 5px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: 100%;
+    }
+    .panel-heading{
+        padding:6px 12px;
+        .panel-title{
+            font-size: 11px;
+            font-weight: bold;
+        }
+    }
+    .panel-body-content{
+        padding:5px 0px
+    }
+    .collapse-panel{
+        background: #f3f3f3;
+    }
+    .nav-tabs{
+        margin: 0 12px;
+        text-align: center;
+    }
+    .tab-content{
+        background: #fff;
+        padding-left:3px;
+        padding-right:3px;
+    }
+    .nav > li > a{
+        padding:5px 6px;
+        font-size: 11px;
+    }
+    .form-group{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    label{
+        font-size: 11px;
+        position:relative;
+    }
+    .clear{
+        font-size: 9px;
+        width: 10px;
+        height:10px;
+        line-height: 9px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+        top:45%;
+        right: 0;
+        color: #fff;
+        text-align: center;
+    }
+    .form-group:hover .clear {
+        display: block;
+    }
+}
+
+.select2-container--open {
+    z-index: 999999;
+    .select2-results__options {
+        li {
+            margin-bottom: 0;
+            position: relative;
+        }
+        .select2-results__option {
+            line-height: 20px;
+            height: 28px;
+        }
+    }
+
+    .select2-selection__rendered {
+        padding-bottom: 6px;
+        padding-top: 6px;
+    }
+
+    .select2-container{
+        margin-bottom: 10px;
+        width: 100%!important;
+        .select2-selection--single {
+            border-radius: 0;
+            height: 40px;
+            .select2-selection__arrow {
+                height: 40px;
+            }
+        }
+    }
+    .select2-container--open .select2-dropdown--above {
+        border-radius: 0;
+    }
+    .google-font-extend{
+        .select-control{
+            float: left;
+            width: calc(50% - 5px);
+            &:first-child{
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.pavo-font {
+    background-image: url('./images/fonts.png');
+    background-repeat: no-repeat;
+    background-position-x: 15px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background-position-y: 0;
+}
+
+/** inject:google-font-icon **/
+.pavo-font.abeezee {
+    background-position-y: -5px;
+}
+.pavo-font.abel {
+    background-position-y: -45px;
+}
+.pavo-font.abhaya-libre {
+    background-position-y: -85px;
+}
+.pavo-font.abril-fatface {
+    background-position-y: -125px;
+}
+.pavo-font.aclonica {
+    background-position-y: -165px;
+}
+.pavo-font.acme {
+    background-position-y: -205px;
+}
+.pavo-font.actor {
+    background-position-y: -245px;
+}
+.pavo-font.adamina {
+    background-position-y: -285px;
+}
+.pavo-font.advent-pro {
+    background-position-y: -325px;
+}
+.pavo-font.aguafina-script {
+    background-position-y: -365px;
+}
+.pavo-font.akronim {
+    background-position-y: -405px;
+}
+.pavo-font.aladin {
+    background-position-y: -445px;
+}
+.pavo-font.aldrich {
+    background-position-y: -485px;
+}
+.pavo-font.alef {
+    background-position-y: -525px;
+}
+.pavo-font.alegreya {
+    background-position-y: -565px;
+}
+.pavo-font.alegreya-sc {
+    background-position-y: -605px;
+}
+.pavo-font.alegreya-sans {
+    background-position-y: -645px;
+}
+.pavo-font.alegreya-sans-sc {
+    background-position-y: -685px;
+}
+.pavo-font.alex-brush {
+    background-position-y: -725px;
+}
+.pavo-font.alfa-slab-one {
+    background-position-y: -765px;
+}
+.pavo-font.alice {
+    background-position-y: -805px;
+}
+.pavo-font.alike {
+    background-position-y: -845px;
+}
+.pavo-font.alike-angular {
+    background-position-y: -885px;
+}
+.pavo-font.allan {
+    background-position-y: -925px;
+}
+.pavo-font.allerta {
+    background-position-y: -965px;
+}
+.pavo-font.allerta-stencil {
+    background-position-y: -1005px;
+}
+.pavo-font.allura {
+    background-position-y: -1045px;
+}
+.pavo-font.almendra {
+    background-position-y: -1085px;
+}
+.pavo-font.almendra-display {
+    background-position-y: -1125px;
+}
+.pavo-font.almendra-sc {
+    background-position-y: -1165px;
+}
+.pavo-font.amarante {
+    background-position-y: -1205px;
+}
+.pavo-font.amaranth {
+    background-position-y: -1245px;
+}
+.pavo-font.amatic-sc {
+    background-position-y: -1285px;
+}
+.pavo-font.amatica-sc {
+    background-position-y: -1325px;
+}
+.pavo-font.amethysta {
+    background-position-y: -1365px;
+}
+.pavo-font.amiko {
+    background-position-y: -1405px;
+}
+.pavo-font.amiri {
+    background-position-y: -1445px;
+}
+.pavo-font.amita {
+    background-position-y: -1485px;
+}
+.pavo-font.anaheim {
+    background-position-y: -1525px;
+}
+.pavo-font.andada {
+    background-position-y: -1565px;
+}
+.pavo-font.andika {
+    background-position-y: -1605px;
+}
+.pavo-font.angkor {
+    background-position-y: -1645px;
+}
+.pavo-font.annie-use-your-telescope {
+    background-position-y: -1685px;
+}
+.pavo-font.anonymous-pro {
+    background-position-y: -1725px;
+}
+.pavo-font.antic {
+    background-position-y: -1765px;
+}
+.pavo-font.antic-didone {
+    background-position-y: -1805px;
+}
+.pavo-font.antic-slab {
+    background-position-y: -1845px;
+}
+.pavo-font.anton {
+    background-position-y: -1885px;
+}
+.pavo-font.arapey {
+    background-position-y: -1925px;
+}
+.pavo-font.arbutus {
+    background-position-y: -1965px;
+}
+.pavo-font.arbutus-slab {
+    background-position-y: -2005px;
+}
+.pavo-font.architects-daughter {
+    background-position-y: -2045px;
+}
+.pavo-font.archivo-black {
+    background-position-y: -2085px;
+}
+.pavo-font.archivo-narrow {
+    background-position-y: -2125px;
+}
+.pavo-font.aref-ruqaa {
+    background-position-y: -2165px;
+}
+.pavo-font.arima-madurai {
+    background-position-y: -2205px;
+}
+.pavo-font.arimo {
+    background-position-y: -2245px;
+}
+.pavo-font.arizonia {
+    background-position-y: -2285px;
+}
+.pavo-font.armata {
+    background-position-y: -2325px;
+}
+.pavo-font.arsenal {
+    background-position-y: -2365px;
+}
+.pavo-font.artifika {
+    background-position-y: -2405px;
+}
+.pavo-font.arvo {
+    background-position-y: -2445px;
+}
+.pavo-font.arya {
+    background-position-y: -2485px;
+}
+.pavo-font.asap {
+    background-position-y: -2525px;
+}
+.pavo-font.asar {
+    background-position-y: -2565px;
+}
+.pavo-font.asset {
+    background-position-y: -2605px;
+}
+.pavo-font.assistant {
+    background-position-y: -2645px;
+}
+.pavo-font.astloch {
+    background-position-y: -2685px;
+}
+.pavo-font.asul {
+    background-position-y: -2725px;
+}
+.pavo-font.athiti {
+    background-position-y: -2765px;
+}
+.pavo-font.atma {
+    background-position-y: -2805px;
+}
+.pavo-font.atomic-age {
+    background-position-y: -2845px;
+}
+.pavo-font.aubrey {
+    background-position-y: -2885px;
+}
+.pavo-font.audiowide {
+    background-position-y: -2925px;
+}
+.pavo-font.autour-one {
+    background-position-y: -2965px;
+}
+.pavo-font.average {
+    background-position-y: -3005px;
+}
+.pavo-font.average-sans {
+    background-position-y: -3045px;
+}
+.pavo-font.averia-gruesa-libre {
+    background-position-y: -3085px;
+}
+.pavo-font.averia-libre {
+    background-position-y: -3125px;
+}
+.pavo-font.averia-sans-libre {
+    background-position-y: -3165px;
+}
+.pavo-font.averia-serif-libre {
+    background-position-y: -3205px;
+}
+.pavo-font.bad-script {
+    background-position-y: -3245px;
+}
+.pavo-font.bahiana {
+    background-position-y: -3285px;
+}
+.pavo-font.baloo {
+    background-position-y: -3325px;
+}
+.pavo-font.baloo-bhai {
+    background-position-y: -3365px;
+}
+.pavo-font.baloo-bhaina {
+    background-position-y: -3405px;
+}
+.pavo-font.baloo-chettan {
+    background-position-y: -3445px;
+}
+.pavo-font.baloo-da {
+    background-position-y: -3485px;
+}
+.pavo-font.baloo-paaji {
+    background-position-y: -3525px;
+}
+.pavo-font.baloo-tamma {
+    background-position-y: -3565px;
+}
+.pavo-font.baloo-thambi {
+    background-position-y: -3605px;
+}
+.pavo-font.balthazar {
+    background-position-y: -3645px;
+}
+.pavo-font.bangers {
+    background-position-y: -3685px;
+}
+.pavo-font.barrio {
+    background-position-y: -3725px;
+}
+.pavo-font.basic {
+    background-position-y: -3765px;
+}
+.pavo-font.battambang {
+    background-position-y: -3805px;
+}
+.pavo-font.baumans {
+    background-position-y: -3845px;
+}
+.pavo-font.bayon {
+    background-position-y: -3885px;
+}
+.pavo-font.belgrano {
+    background-position-y: -3925px;
+}
+.pavo-font.belleza {
+    background-position-y: -3965px;
+}
+.pavo-font.benchnine {
+    background-position-y: -4005px;
+}
+.pavo-font.bentham {
+    background-position-y: -4045px;
+}
+.pavo-font.berkshire-swash {
+    background-position-y: -4085px;
+}
+.pavo-font.bevan {
+    background-position-y: -4125px;
+}
+.pavo-font.bigelow-rules {
+    background-position-y: -4165px;
+}
+.pavo-font.bigshot-one {
+    background-position-y: -4205px;
+}
+.pavo-font.bilbo {
+    background-position-y: -4245px;
+}
+.pavo-font.bilbo-swash-caps {
+    background-position-y: -4285px;
+}
+.pavo-font.biorhyme {
+    background-position-y: -4325px;
+}
+.pavo-font.biorhyme-expanded {
+    background-position-y: -4365px;
+}
+.pavo-font.biryani {
+    background-position-y: -4405px;
+}
+.pavo-font.bitter {
+    background-position-y: -4445px;
+}
+.pavo-font.black-ops-one {
+    background-position-y: -4485px;
+}
+.pavo-font.bokor {
+    background-position-y: -4525px;
+}
+.pavo-font.bonbon {
+    background-position-y: -4565px;
+}
+.pavo-font.boogaloo {
+    background-position-y: -4605px;
+}
+.pavo-font.bowlby-one {
+    background-position-y: -4645px;
+}
+.pavo-font.bowlby-one-sc {
+    background-position-y: -4685px;
+}
+.pavo-font.brawler {
+    background-position-y: -4725px;
+}
+.pavo-font.bree-serif {
+    background-position-y: -4765px;
+}
+.pavo-font.bubblegum-sans {
+    background-position-y: -4805px;
+}
+.pavo-font.bubbler-one {
+    background-position-y: -4845px;
+}
+.pavo-font.buda {
+    background-position-y: -4885px;
+}
+.pavo-font.buenard {
+    background-position-y: -4925px;
+}
+.pavo-font.bungee {
+    background-position-y: -4965px;
+}
+.pavo-font.bungee-hairline {
+    background-position-y: -5005px;
+}
+.pavo-font.bungee-inline {
+    background-position-y: -5045px;
+}
+.pavo-font.bungee-outline {
+    background-position-y: -5085px;
+}
+.pavo-font.bungee-shade {
+    background-position-y: -5125px;
+}
+.pavo-font.butcherman {
+    background-position-y: -5165px;
+}
+.pavo-font.butterfly-kids {
+    background-position-y: -5205px;
+}
+.pavo-font.cabin {
+    background-position-y: -5245px;
+}
+.pavo-font.cabin-condensed {
+    background-position-y: -5285px;
+}
+.pavo-font.cabin-sketch {
+    background-position-y: -5325px;
+}
+.pavo-font.caesar-dressing {
+    background-position-y: -5365px;
+}
+.pavo-font.cagliostro {
+    background-position-y: -5405px;
+}
+.pavo-font.cairo {
+    background-position-y: -5445px;
+}
+.pavo-font.calligraffitti {
+    background-position-y: -5485px;
+}
+.pavo-font.cambay {
+    background-position-y: -5525px;
+}
+.pavo-font.cambo {
+    background-position-y: -5565px;
+}
+.pavo-font.candal {
+    background-position-y: -5605px;
+}
+.pavo-font.cantarell {
+    background-position-y: -5645px;
+}
+.pavo-font.cantata-one {
+    background-position-y: -5685px;
+}
+.pavo-font.cantora-one {
+    background-position-y: -5725px;
+}
+.pavo-font.capriola {
+    background-position-y: -5765px;
+}
+.pavo-font.cardo {
+    background-position-y: -5805px;
+}
+.pavo-font.carme {
+    background-position-y: -5845px;
+}
+.pavo-font.carrois-gothic {
+    background-position-y: -5885px;
+}
+.pavo-font.carrois-gothic-sc {
+    background-position-y: -5925px;
+}
+.pavo-font.carter-one {
+    background-position-y: -5965px;
+}
+.pavo-font.catamaran {
+    background-position-y: -6005px;
+}
+.pavo-font.caudex {
+    background-position-y: -6045px;
+}
+.pavo-font.caveat {
+    background-position-y: -6085px;
+}
+.pavo-font.caveat-brush {
+    background-position-y: -6125px;
+}
+.pavo-font.cedarville-cursive {
+    background-position-y: -6165px;
+}
+.pavo-font.ceviche-one {
+    background-position-y: -6205px;
+}
+.pavo-font.changa {
+    background-position-y: -6245px;
+}
+.pavo-font.changa-one {
+    background-position-y: -6285px;
+}
+.pavo-font.chango {
+    background-position-y: -6325px;
+}
+.pavo-font.chathura {
+    background-position-y: -6365px;
+}
+.pavo-font.chau-philomene-one {
+    background-position-y: -6405px;
+}
+.pavo-font.chela-one {
+    background-position-y: -6445px;
+}
+.pavo-font.chelsea-market {
+    background-position-y: -6485px;
+}
+.pavo-font.chenla {
+    background-position-y: -6525px;
+}
+.pavo-font.cherry-cream-soda {
+    background-position-y: -6565px;
+}
+.pavo-font.cherry-swash {
+    background-position-y: -6605px;
+}
+.pavo-font.chewy {
+    background-position-y: -6645px;
+}
+.pavo-font.chicle {
+    background-position-y: -6685px;
+}
+.pavo-font.chivo {
+    background-position-y: -6725px;
+}
+.pavo-font.chonburi {
+    background-position-y: -6765px;
+}
+.pavo-font.cinzel {
+    background-position-y: -6805px;
+}
+.pavo-font.cinzel-decorative {
+    background-position-y: -6845px;
+}
+.pavo-font.clicker-script {
+    background-position-y: -6885px;
+}
+.pavo-font.coda {
+    background-position-y: -6925px;
+}
+.pavo-font.coda-caption {
+    background-position-y: -6965px;
+}
+.pavo-font.codystar {
+    background-position-y: -7005px;
+}
+.pavo-font.coiny {
+    background-position-y: -7045px;
+}
+.pavo-font.combo {
+    background-position-y: -7085px;
+}
+.pavo-font.comfortaa {
+    background-position-y: -7125px;
+}
+.pavo-font.coming-soon {
+    background-position-y: -7165px;
+}
+.pavo-font.concert-one {
+    background-position-y: -7205px;
+}
+.pavo-font.condiment {
+    background-position-y: -7245px;
+}
+.pavo-font.content {
+    background-position-y: -7285px;
+}
+.pavo-font.contrail-one {
+    background-position-y: -7325px;
+}
+.pavo-font.convergence {
+    background-position-y: -7365px;
+}
+.pavo-font.cookie {
+    background-position-y: -7405px;
+}
+.pavo-font.copse {
+    background-position-y: -7445px;
+}
+.pavo-font.corben {
+    background-position-y: -7485px;
+}
+.pavo-font.cormorant {
+    background-position-y: -7525px;
+}
+.pavo-font.cormorant-garamond {
+    background-position-y: -7565px;
+}
+.pavo-font.cormorant-infant {
+    background-position-y: -7605px;
+}
+.pavo-font.cormorant-sc {
+    background-position-y: -7645px;
+}
+.pavo-font.cormorant-unicase {
+    background-position-y: -7685px;
+}
+.pavo-font.cormorant-upright {
+    background-position-y: -7725px;
+}
+.pavo-font.courgette {
+    background-position-y: -7765px;
+}
+.pavo-font.cousine {
+    background-position-y: -7805px;
+}
+.pavo-font.coustard {
+    background-position-y: -7845px;
+}
+.pavo-font.covered-by-your-grace {
+    background-position-y: -7885px;
+}
+.pavo-font.crafty-girls {
+    background-position-y: -7925px;
+}
+.pavo-font.creepster {
+    background-position-y: -7965px;
+}
+.pavo-font.crete-round {
+    background-position-y: -8005px;
+}
+.pavo-font.crimson-text {
+    background-position-y: -8045px;
+}
+.pavo-font.croissant-one {
+    background-position-y: -8085px;
+}
+.pavo-font.crushed {
+    background-position-y: -8125px;
+}
+.pavo-font.cuprum {
+    background-position-y: -8165px;
+}
+.pavo-font.cutive {
+    background-position-y: -8205px;
+}
+.pavo-font.cutive-mono {
+    background-position-y: -8245px;
+}
+.pavo-font.damion {
+    background-position-y: -8285px;
+}
+.pavo-font.dancing-script {
+    background-position-y: -8325px;
+}
+.pavo-font.dangrek {
+    background-position-y: -8365px;
+}
+.pavo-font.david-libre {
+    background-position-y: -8405px;
+}
+.pavo-font.dawning-of-a-new-day {
+    background-position-y: -8445px;
+}
+.pavo-font.days-one {
+    background-position-y: -8485px;
+}
+.pavo-font.dekko {
+    background-position-y: -8525px;
+}
+.pavo-font.delius {
+    background-position-y: -8565px;
+}
+.pavo-font.delius-swash-caps {
+    background-position-y: -8605px;
+}
+.pavo-font.delius-unicase {
+    background-position-y: -8645px;
+}
+.pavo-font.della-respira {
+    background-position-y: -8685px;
+}
+.pavo-font.denk-one {
+    background-position-y: -8725px;
+}
+.pavo-font.devonshire {
+    background-position-y: -8765px;
+}
+.pavo-font.dhurjati {
+    background-position-y: -8805px;
+}
+.pavo-font.didact-gothic {
+    background-position-y: -8845px;
+}
+.pavo-font.diplomata {
+    background-position-y: -8885px;
+}
+.pavo-font.diplomata-sc {
+    background-position-y: -8925px;
+}
+.pavo-font.domine {
+    background-position-y: -8965px;
+}
+.pavo-font.donegal-one {
+    background-position-y: -9005px;
+}
+.pavo-font.doppio-one {
+    background-position-y: -9045px;
+}
+.pavo-font.dorsa {
+    background-position-y: -9085px;
+}
+.pavo-font.dosis {
+    background-position-y: -9125px;
+}
+.pavo-font.dr-sugiyama {
+    background-position-y: -9165px;
+}
+.pavo-font.droid-sans {
+    background-position-y: -9205px;
+}
+.pavo-font.droid-sans-mono {
+    background-position-y: -9245px;
+}
+.pavo-font.droid-serif {
+    background-position-y: -9285px;
+}
+.pavo-font.duru-sans {
+    background-position-y: -9325px;
+}
+.pavo-font.dynalight {
+    background-position-y: -9365px;
+}
+.pavo-font.eb-garamond {
+    background-position-y: -9405px;
+}
+.pavo-font.eagle-lake {
+    background-position-y: -9445px;
+}
+.pavo-font.eater {
+    background-position-y: -9485px;
+}
+.pavo-font.economica {
+    background-position-y: -9525px;
+}
+.pavo-font.eczar {
+    background-position-y: -9565px;
+}
+.pavo-font.ek-mukta {
+    background-position-y: -9605px;
+}
+.pavo-font.el-messiri {
+    background-position-y: -9645px;
+}
+.pavo-font.electrolize {
+    background-position-y: -9685px;
+}
+.pavo-font.elsie {
+    background-position-y: -9725px;
+}
+.pavo-font.elsie-swash-caps {
+    background-position-y: -9765px;
+}
+.pavo-font.emblema-one {
+    background-position-y: -9805px;
+}
+.pavo-font.emilys-candy {
+    background-position-y: -9845px;
+}
+.pavo-font.engagement {
+    background-position-y: -9885px;
+}
+.pavo-font.englebert {
+    background-position-y: -9925px;
+}
+.pavo-font.enriqueta {
+    background-position-y: -9965px;
+}
+.pavo-font.erica-one {
+    background-position-y: -10005px;
+}
+.pavo-font.esteban {
+    background-position-y: -10045px;
+}
+.pavo-font.euphoria-script {
+    background-position-y: -10085px;
+}
+.pavo-font.ewert {
+    background-position-y: -10125px;
+}
+.pavo-font.exo {
+    background-position-y: -10165px;
+}
+.pavo-font.exo-2 {
+    background-position-y: -10205px;
+}
+.pavo-font.expletus-sans {
+    background-position-y: -10245px;
+}
+.pavo-font.fanwood-text {
+    background-position-y: -10285px;
+}
+.pavo-font.farsan {
+    background-position-y: -10325px;
+}
+.pavo-font.fascinate {
+    background-position-y: -10365px;
+}
+.pavo-font.fascinate-inline {
+    background-position-y: -10405px;
+}
+.pavo-font.faster-one {
+    background-position-y: -10445px;
+}
+.pavo-font.fasthand {
+    background-position-y: -10485px;
+}
+.pavo-font.fauna-one {
+    background-position-y: -10525px;
+}
+.pavo-font.federant {
+    background-position-y: -10565px;
+}
+.pavo-font.federo {
+    background-position-y: -10605px;
+}
+.pavo-font.felipa {
+    background-position-y: -10645px;
+}
+.pavo-font.fenix {
+    background-position-y: -10685px;
+}
+.pavo-font.finger-paint {
+    background-position-y: -10725px;
+}
+.pavo-font.fira-mono {
+    background-position-y: -10765px;
+}
+.pavo-font.fira-sans {
+    background-position-y: -10805px;
+}
+.pavo-font.fira-sans-condensed {
+    background-position-y: -10845px;
+}
+.pavo-font.fira-sans-extra-condensed {
+    background-position-y: -10885px;
+}
+.pavo-font.fjalla-one {
+    background-position-y: -10925px;
+}
+.pavo-font.fjord-one {
+    background-position-y: -10965px;
+}
+.pavo-font.flamenco {
+    background-position-y: -11005px;
+}
+.pavo-font.flavors {
+    background-position-y: -11045px;
+}
+.pavo-font.fondamento {
+    background-position-y: -11085px;
+}
+.pavo-font.fontdiner-swanky {
+    background-position-y: -11125px;
+}
+.pavo-font.forum {
+    background-position-y: -11165px;
+}
+.pavo-font.francois-one {
+    background-position-y: -11205px;
+}
+.pavo-font.frank-ruhl-libre {
+    background-position-y: -11245px;
+}
+.pavo-font.freckle-face {
+    background-position-y: -11285px;
+}
+.pavo-font.fredericka-the-great {
+    background-position-y: -11325px;
+}
+.pavo-font.fredoka-one {
+    background-position-y: -11365px;
+}
+.pavo-font.freehand {
+    background-position-y: -11405px;
+}
+.pavo-font.fresca {
+    background-position-y: -11445px;
+}
+.pavo-font.frijole {
+    background-position-y: -11485px;
+}
+.pavo-font.fruktur {
+    background-position-y: -11525px;
+}
+.pavo-font.fugaz-one {
+    background-position-y: -11565px;
+}
+.pavo-font.gfs-didot {
+    background-position-y: -11605px;
+}
+.pavo-font.gfs-neohellenic {
+    background-position-y: -11645px;
+}
+.pavo-font.gabriela {
+    background-position-y: -11685px;
+}
+.pavo-font.gafata {
+    background-position-y: -11725px;
+}
+.pavo-font.galada {
+    background-position-y: -11765px;
+}
+.pavo-font.galdeano {
+    background-position-y: -11805px;
+}
+.pavo-font.galindo {
+    background-position-y: -11845px;
+}
+.pavo-font.gentium-basic {
+    background-position-y: -11885px;
+}
+.pavo-font.gentium-book-basic {
+    background-position-y: -11925px;
+}
+.pavo-font.geo {
+    background-position-y: -11965px;
+}
+.pavo-font.geostar {
+    background-position-y: -12005px;
+}
+.pavo-font.geostar-fill {
+    background-position-y: -12045px;
+}
+.pavo-font.germania-one {
+    background-position-y: -12085px;
+}
+.pavo-font.gidugu {
+    background-position-y: -12125px;
+}
+.pavo-font.gilda-display {
+    background-position-y: -12165px;
+}
+.pavo-font.give-you-glory {
+    background-position-y: -12205px;
+}
+.pavo-font.glass-antiqua {
+    background-position-y: -12245px;
+}
+.pavo-font.glegoo {
+    background-position-y: -12285px;
+}
+.pavo-font.gloria-hallelujah {
+    background-position-y: -12325px;
+}
+.pavo-font.goblin-one {
+    background-position-y: -12365px;
+}
+.pavo-font.gochi-hand {
+    background-position-y: -12405px;
+}
+.pavo-font.gorditas {
+    background-position-y: -12445px;
+}
+.pavo-font.goudy-bookletter-1911 {
+    background-position-y: -12485px;
+}
+.pavo-font.graduate {
+    background-position-y: -12525px;
+}
+.pavo-font.grand-hotel {
+    background-position-y: -12565px;
+}
+.pavo-font.gravitas-one {
+    background-position-y: -12605px;
+}
+.pavo-font.great-vibes {
+    background-position-y: -12645px;
+}
+.pavo-font.griffy {
+    background-position-y: -12685px;
+}
+.pavo-font.gruppo {
+    background-position-y: -12725px;
+}
+.pavo-font.gudea {
+    background-position-y: -12765px;
+}
+.pavo-font.gurajada {
+    background-position-y: -12805px;
+}
+.pavo-font.habibi {
+    background-position-y: -12845px;
+}
+.pavo-font.halant {
+    background-position-y: -12885px;
+}
+.pavo-font.hammersmith-one {
+    background-position-y: -12925px;
+}
+.pavo-font.hanalei {
+    background-position-y: -12965px;
+}
+.pavo-font.hanalei-fill {
+    background-position-y: -13005px;
+}
+.pavo-font.handlee {
+    background-position-y: -13045px;
+}
+.pavo-font.hanuman {
+    background-position-y: -13085px;
+}
+.pavo-font.happy-monkey {
+    background-position-y: -13125px;
+}
+.pavo-font.harmattan {
+    background-position-y: -13165px;
+}
+.pavo-font.headland-one {
+    background-position-y: -13205px;
+}
+.pavo-font.heebo {
+    background-position-y: -13245px;
+}
+.pavo-font.henny-penny {
+    background-position-y: -13285px;
+}
+.pavo-font.herr-von-muellerhoff {
+    background-position-y: -13325px;
+}
+.pavo-font.hind {
+    background-position-y: -13365px;
+}
+.pavo-font.hind-guntur {
+    background-position-y: -13405px;
+}
+.pavo-font.hind-madurai {
+    background-position-y: -13445px;
+}
+.pavo-font.hind-siliguri {
+    background-position-y: -13485px;
+}
+.pavo-font.hind-vadodara {
+    background-position-y: -13525px;
+}
+.pavo-font.holtwood-one-sc {
+    background-position-y: -13565px;
+}
+.pavo-font.homemade-apple {
+    background-position-y: -13605px;
+}
+.pavo-font.homenaje {
+    background-position-y: -13645px;
+}
+.pavo-font.im-fell-dw-pica {
+    background-position-y: -13685px;
+}
+.pavo-font.im-fell-dw-pica-sc {
+    background-position-y: -13725px;
+}
+.pavo-font.im-fell-double-pica {
+    background-position-y: -13765px;
+}
+.pavo-font.im-fell-double-pica-sc {
+    background-position-y: -13805px;
+}
+.pavo-font.im-fell-english {
+    background-position-y: -13845px;
+}
+.pavo-font.im-fell-english-sc {
+    background-position-y: -13885px;
+}
+.pavo-font.im-fell-french-canon {
+    background-position-y: -13925px;
+}
+.pavo-font.im-fell-french-canon-sc {
+    background-position-y: -13965px;
+}
+.pavo-font.im-fell-great-primer {
+    background-position-y: -14005px;
+}
+.pavo-font.im-fell-great-primer-sc {
+    background-position-y: -14045px;
+}
+.pavo-font.iceberg {
+    background-position-y: -14085px;
+}
+.pavo-font.iceland {
+    background-position-y: -14125px;
+}
+.pavo-font.imprima {
+    background-position-y: -14165px;
+}
+.pavo-font.inconsolata {
+    background-position-y: -14205px;
+}
+.pavo-font.inder {
+    background-position-y: -14245px;
+}
+.pavo-font.indie-flower {
+    background-position-y: -14285px;
+}
+.pavo-font.inika {
+    background-position-y: -14325px;
+}
+.pavo-font.inknut-antiqua {
+    background-position-y: -14365px;
+}
+.pavo-font.irish-grover {
+    background-position-y: -14405px;
+}
+.pavo-font.istok-web {
+    background-position-y: -14445px;
+}
+.pavo-font.italiana {
+    background-position-y: -14485px;
+}
+.pavo-font.italianno {
+    background-position-y: -14525px;
+}
+.pavo-font.itim {
+    background-position-y: -14565px;
+}
+.pavo-font.jacques-francois {
+    background-position-y: -14605px;
+}
+.pavo-font.jacques-francois-shadow {
+    background-position-y: -14645px;
+}
+.pavo-font.jaldi {
+    background-position-y: -14685px;
+}
+.pavo-font.jim-nightshade {
+    background-position-y: -14725px;
+}
+.pavo-font.jockey-one {
+    background-position-y: -14765px;
+}
+.pavo-font.jolly-lodger {
+    background-position-y: -14805px;
+}
+.pavo-font.jomhuria {
+    background-position-y: -14845px;
+}
+.pavo-font.josefin-sans {
+    background-position-y: -14885px;
+}
+.pavo-font.josefin-slab {
+    background-position-y: -14925px;
+}
+.pavo-font.joti-one {
+    background-position-y: -14965px;
+}
+.pavo-font.judson {
+    background-position-y: -15005px;
+}
+.pavo-font.julee {
+    background-position-y: -15045px;
+}
+.pavo-font.julius-sans-one {
+    background-position-y: -15085px;
+}
+.pavo-font.junge {
+    background-position-y: -15125px;
+}
+.pavo-font.jura {
+    background-position-y: -15165px;
+}
+.pavo-font.just-another-hand {
+    background-position-y: -15205px;
+}
+.pavo-font.just-me-again-down-here {
+    background-position-y: -15245px;
+}
+.pavo-font.kadwa {
+    background-position-y: -15285px;
+}
+.pavo-font.kalam {
+    background-position-y: -15325px;
+}
+.pavo-font.kameron {
+    background-position-y: -15365px;
+}
+.pavo-font.kanit {
+    background-position-y: -15405px;
+}
+.pavo-font.kantumruy {
+    background-position-y: -15445px;
+}
+.pavo-font.karla {
+    background-position-y: -15485px;
+}
+.pavo-font.karma {
+    background-position-y: -15525px;
+}
+.pavo-font.katibeh {
+    background-position-y: -15565px;
+}
+.pavo-font.kaushan-script {
+    background-position-y: -15605px;
+}
+.pavo-font.kavivanar {
+    background-position-y: -15645px;
+}
+.pavo-font.kavoon {
+    background-position-y: -15685px;
+}
+.pavo-font.kdam-thmor {
+    background-position-y: -15725px;
+}
+.pavo-font.keania-one {
+    background-position-y: -15765px;
+}
+.pavo-font.kelly-slab {
+    background-position-y: -15805px;
+}
+.pavo-font.kenia {
+    background-position-y: -15845px;
+}
+.pavo-font.khand {
+    background-position-y: -15885px;
+}
+.pavo-font.khmer {
+    background-position-y: -15925px;
+}
+.pavo-font.khula {
+    background-position-y: -15965px;
+}
+.pavo-font.kite-one {
+    background-position-y: -16005px;
+}
+.pavo-font.knewave {
+    background-position-y: -16045px;
+}
+.pavo-font.kotta-one {
+    background-position-y: -16085px;
+}
+.pavo-font.koulen {
+    background-position-y: -16125px;
+}
+.pavo-font.kranky {
+    background-position-y: -16165px;
+}
+.pavo-font.kreon {
+    background-position-y: -16205px;
+}
+.pavo-font.kristi {
+    background-position-y: -16245px;
+}
+.pavo-font.krona-one {
+    background-position-y: -16285px;
+}
+.pavo-font.kumar-one {
+    background-position-y: -16325px;
+}
+.pavo-font.kumar-one-outline {
+    background-position-y: -16365px;
+}
+.pavo-font.kurale {
+    background-position-y: -16405px;
+}
+.pavo-font.la-belle-aurore {
+    background-position-y: -16445px;
+}
+.pavo-font.laila {
+    background-position-y: -16485px;
+}
+.pavo-font.lakki-reddy {
+    background-position-y: -16525px;
+}
+.pavo-font.lalezar {
+    background-position-y: -16565px;
+}
+.pavo-font.lancelot {
+    background-position-y: -16605px;
+}
+.pavo-font.lateef {
+    background-position-y: -16645px;
+}
+.pavo-font.lato {
+    background-position-y: -16685px;
+}
+.pavo-font.league-script {
+    background-position-y: -16725px;
+}
+.pavo-font.leckerli-one {
+    background-position-y: -16765px;
+}
+.pavo-font.ledger {
+    background-position-y: -16805px;
+}
+.pavo-font.lekton {
+    background-position-y: -16845px;
+}
+.pavo-font.lemon {
+    background-position-y: -16885px;
+}
+.pavo-font.lemonada {
+    background-position-y: -16925px;
+}
+.pavo-font.libre-baskerville {
+    background-position-y: -16965px;
+}
+.pavo-font.libre-franklin {
+    background-position-y: -17005px;
+}
+.pavo-font.life-savers {
+    background-position-y: -17045px;
+}
+.pavo-font.lilita-one {
+    background-position-y: -17085px;
+}
+.pavo-font.lily-script-one {
+    background-position-y: -17125px;
+}
+.pavo-font.limelight {
+    background-position-y: -17165px;
+}
+.pavo-font.linden-hill {
+    background-position-y: -17205px;
+}
+.pavo-font.lobster {
+    background-position-y: -17245px;
+}
+.pavo-font.lobster-two {
+    background-position-y: -17285px;
+}
+.pavo-font.londrina-outline {
+    background-position-y: -17325px;
+}
+.pavo-font.londrina-shadow {
+    background-position-y: -17365px;
+}
+.pavo-font.londrina-sketch {
+    background-position-y: -17405px;
+}
+.pavo-font.londrina-solid {
+    background-position-y: -17445px;
+}
+.pavo-font.lora {
+    background-position-y: -17485px;
+}
+.pavo-font.love-ya-like-a-sister {
+    background-position-y: -17525px;
+}
+.pavo-font.loved-by-the-king {
+    background-position-y: -17565px;
+}
+.pavo-font.lovers-quarrel {
+    background-position-y: -17605px;
+}
+.pavo-font.luckiest-guy {
+    background-position-y: -17645px;
+}
+.pavo-font.lusitana {
+    background-position-y: -17685px;
+}
+.pavo-font.lustria {
+    background-position-y: -17725px;
+}
+.pavo-font.macondo {
+    background-position-y: -17765px;
+}
+.pavo-font.macondo-swash-caps {
+    background-position-y: -17805px;
+}
+.pavo-font.mada {
+    background-position-y: -17845px;
+}
+.pavo-font.magra {
+    background-position-y: -17885px;
+}
+.pavo-font.maiden-orange {
+    background-position-y: -17925px;
+}
+.pavo-font.maitree {
+    background-position-y: -17965px;
+}
+.pavo-font.mako {
+    background-position-y: -18005px;
+}
+.pavo-font.mallanna {
+    background-position-y: -18045px;
+}
+.pavo-font.mandali {
+    background-position-y: -18085px;
+}
+.pavo-font.marcellus {
+    background-position-y: -18125px;
+}
+.pavo-font.marcellus-sc {
+    background-position-y: -18165px;
+}
+.pavo-font.marck-script {
+    background-position-y: -18205px;
+}
+.pavo-font.margarine {
+    background-position-y: -18245px;
+}
+.pavo-font.marko-one {
+    background-position-y: -18285px;
+}
+.pavo-font.marmelad {
+    background-position-y: -18325px;
+}
+.pavo-font.martel {
+    background-position-y: -18365px;
+}
+.pavo-font.martel-sans {
+    background-position-y: -18405px;
+}
+.pavo-font.marvel {
+    background-position-y: -18445px;
+}
+.pavo-font.mate {
+    background-position-y: -18485px;
+}
+.pavo-font.mate-sc {
+    background-position-y: -18525px;
+}
+.pavo-font.maven-pro {
+    background-position-y: -18565px;
+}
+.pavo-font.mclaren {
+    background-position-y: -18605px;
+}
+.pavo-font.meddon {
+    background-position-y: -18645px;
+}
+.pavo-font.medievalsharp {
+    background-position-y: -18685px;
+}
+.pavo-font.medula-one {
+    background-position-y: -18725px;
+}
+.pavo-font.meera-inimai {
+    background-position-y: -18765px;
+}
+.pavo-font.megrim {
+    background-position-y: -18805px;
+}
+.pavo-font.meie-script {
+    background-position-y: -18845px;
+}
+.pavo-font.merienda {
+    background-position-y: -18885px;
+}
+.pavo-font.merienda-one {
+    background-position-y: -18925px;
+}
+.pavo-font.merriweather {
+    background-position-y: -18965px;
+}
+.pavo-font.merriweather-sans {
+    background-position-y: -19005px;
+}
+.pavo-font.metal {
+    background-position-y: -19045px;
+}
+.pavo-font.metal-mania {
+    background-position-y: -19085px;
+}
+.pavo-font.metamorphous {
+    background-position-y: -19125px;
+}
+.pavo-font.metrophobic {
+    background-position-y: -19165px;
+}
+.pavo-font.michroma {
+    background-position-y: -19205px;
+}
+.pavo-font.milonga {
+    background-position-y: -19245px;
+}
+.pavo-font.miltonian {
+    background-position-y: -19285px;
+}
+.pavo-font.miltonian-tattoo {
+    background-position-y: -19325px;
+}
+.pavo-font.miniver {
+    background-position-y: -19365px;
+}
+.pavo-font.miriam-libre {
+    background-position-y: -19405px;
+}
+.pavo-font.mirza {
+    background-position-y: -19445px;
+}
+.pavo-font.miss-fajardose {
+    background-position-y: -19485px;
+}
+.pavo-font.mitr {
+    background-position-y: -19525px;
+}
+.pavo-font.modak {
+    background-position-y: -19565px;
+}
+.pavo-font.modern-antiqua {
+    background-position-y: -19605px;
+}
+.pavo-font.mogra {
+    background-position-y: -19645px;
+}
+.pavo-font.molengo {
+    background-position-y: -19685px;
+}
+.pavo-font.molle {
+    background-position-y: -19725px;
+}
+.pavo-font.monda {
+    background-position-y: -19765px;
+}
+.pavo-font.monofett {
+    background-position-y: -19805px;
+}
+.pavo-font.monoton {
+    background-position-y: -19845px;
+}
+.pavo-font.monsieur-la-doulaise {
+    background-position-y: -19885px;
+}
+.pavo-font.montaga {
+    background-position-y: -19925px;
+}
+.pavo-font.montez {
+    background-position-y: -19965px;
+}
+.pavo-font.montserrat {
+    background-position-y: -20005px;
+}
+.pavo-font.montserrat-alternates {
+    background-position-y: -20045px;
+}
+.pavo-font.montserrat-subrayada {
+    background-position-y: -20085px;
+}
+.pavo-font.moul {
+    background-position-y: -20125px;
+}
+.pavo-font.moulpali {
+    background-position-y: -20165px;
+}
+.pavo-font.mountains-of-christmas {
+    background-position-y: -20205px;
+}
+.pavo-font.mouse-memoirs {
+    background-position-y: -20245px;
+}
+.pavo-font.mr-bedfort {
+    background-position-y: -20285px;
+}
+.pavo-font.mr-dafoe {
+    background-position-y: -20325px;
+}
+.pavo-font.mr-de-haviland {
+    background-position-y: -20365px;
+}
+.pavo-font.mrs-saint-delafield {
+    background-position-y: -20405px;
+}
+.pavo-font.mrs-sheppards {
+    background-position-y: -20445px;
+}
+.pavo-font.mukta-vaani {
+    background-position-y: -20485px;
+}
+.pavo-font.muli {
+    background-position-y: -20525px;
+}
+.pavo-font.mystery-quest {
+    background-position-y: -20565px;
+}
+.pavo-font.ntr {
+    background-position-y: -20605px;
+}
+.pavo-font.neucha {
+    background-position-y: -20645px;
+}
+.pavo-font.neuton {
+    background-position-y: -20685px;
+}
+.pavo-font.new-rocker {
+    background-position-y: -20725px;
+}
+.pavo-font.news-cycle {
+    background-position-y: -20765px;
+}
+.pavo-font.niconne {
+    background-position-y: -20805px;
+}
+.pavo-font.nixie-one {
+    background-position-y: -20845px;
+}
+.pavo-font.nobile {
+    background-position-y: -20885px;
+}
+.pavo-font.nokora {
+    background-position-y: -20925px;
+}
+.pavo-font.norican {
+    background-position-y: -20965px;
+}
+.pavo-font.nosifer {
+    background-position-y: -21005px;
+}
+.pavo-font.nothing-you-could-do {
+    background-position-y: -21045px;
+}
+.pavo-font.noticia-text {
+    background-position-y: -21085px;
+}
+.pavo-font.noto-sans {
+    background-position-y: -21125px;
+}
+.pavo-font.noto-serif {
+    background-position-y: -21165px;
+}
+.pavo-font.nova-cut {
+    background-position-y: -21205px;
+}
+.pavo-font.nova-flat {
+    background-position-y: -21245px;
+}
+.pavo-font.nova-mono {
+    background-position-y: -21285px;
+}
+.pavo-font.nova-oval {
+    background-position-y: -21325px;
+}
+.pavo-font.nova-round {
+    background-position-y: -21365px;
+}
+.pavo-font.nova-script {
+    background-position-y: -21405px;
+}
+.pavo-font.nova-slim {
+    background-position-y: -21445px;
+}
+.pavo-font.nova-square {
+    background-position-y: -21485px;
+}
+.pavo-font.numans {
+    background-position-y: -21525px;
+}
+.pavo-font.nunito {
+    background-position-y: -21565px;
+}
+.pavo-font.nunito-sans {
+    background-position-y: -21605px;
+}
+.pavo-font.odor-mean-chey {
+    background-position-y: -21645px;
+}
+.pavo-font.offside {
+    background-position-y: -21685px;
+}
+.pavo-font.old-standard-tt {
+    background-position-y: -21725px;
+}
+.pavo-font.oldenburg {
+    background-position-y: -21765px;
+}
+.pavo-font.oleo-script {
+    background-position-y: -21805px;
+}
+.pavo-font.oleo-script-swash-caps {
+    background-position-y: -21845px;
+}
+.pavo-font.open-sans {
+    background-position-y: -21885px;
+}
+.pavo-font.open-sans-condensed {
+    background-position-y: -21925px;
+}
+.pavo-font.oranienbaum {
+    background-position-y: -21965px;
+}
+.pavo-font.orbitron {
+    background-position-y: -22005px;
+}
+.pavo-font.oregano {
+    background-position-y: -22045px;
+}
+.pavo-font.orienta {
+    background-position-y: -22085px;
+}
+.pavo-font.original-surfer {
+    background-position-y: -22125px;
+}
+.pavo-font.oswald {
+    background-position-y: -22165px;
+}
+.pavo-font.over-the-rainbow {
+    background-position-y: -22205px;
+}
+.pavo-font.overlock {
+    background-position-y: -22245px;
+}
+.pavo-font.overlock-sc {
+    background-position-y: -22285px;
+}
+.pavo-font.overpass {
+    background-position-y: -22325px;
+}
+.pavo-font.overpass-mono {
+    background-position-y: -22365px;
+}
+.pavo-font.ovo {
+    background-position-y: -22405px;
+}
+.pavo-font.oxygen {
+    background-position-y: -22445px;
+}
+.pavo-font.oxygen-mono {
+    background-position-y: -22485px;
+}
+.pavo-font.pt-mono {
+    background-position-y: -22525px;
+}
+.pavo-font.pt-sans {
+    background-position-y: -22565px;
+}
+.pavo-font.pt-sans-caption {
+    background-position-y: -22605px;
+}
+.pavo-font.pt-sans-narrow {
+    background-position-y: -22645px;
+}
+.pavo-font.pt-serif {
+    background-position-y: -22685px;
+}
+.pavo-font.pt-serif-caption {
+    background-position-y: -22725px;
+}
+.pavo-font.pacifico {
+    background-position-y: -22765px;
+}
+.pavo-font.padauk {
+    background-position-y: -22805px;
+}
+.pavo-font.palanquin {
+    background-position-y: -22845px;
+}
+.pavo-font.palanquin-dark {
+    background-position-y: -22885px;
+}
+.pavo-font.pangolin {
+    background-position-y: -22925px;
+}
+.pavo-font.paprika {
+    background-position-y: -22965px;
+}
+.pavo-font.parisienne {
+    background-position-y: -23005px;
+}
+.pavo-font.passero-one {
+    background-position-y: -23045px;
+}
+.pavo-font.passion-one {
+    background-position-y: -23085px;
+}
+.pavo-font.pathway-gothic-one {
+    background-position-y: -23125px;
+}
+.pavo-font.patrick-hand {
+    background-position-y: -23165px;
+}
+.pavo-font.patrick-hand-sc {
+    background-position-y: -23205px;
+}
+.pavo-font.pattaya {
+    background-position-y: -23245px;
+}
+.pavo-font.patua-one {
+    background-position-y: -23285px;
+}
+.pavo-font.pavanam {
+    background-position-y: -23325px;
+}
+.pavo-font.paytone-one {
+    background-position-y: -23365px;
+}
+.pavo-font.peddana {
+    background-position-y: -23405px;
+}
+.pavo-font.peralta {
+    background-position-y: -23445px;
+}
+.pavo-font.permanent-marker {
+    background-position-y: -23485px;
+}
+.pavo-font.petit-formal-script {
+    background-position-y: -23525px;
+}
+.pavo-font.petrona {
+    background-position-y: -23565px;
+}
+.pavo-font.philosopher {
+    background-position-y: -23605px;
+}
+.pavo-font.piedra {
+    background-position-y: -23645px;
+}
+.pavo-font.pinyon-script {
+    background-position-y: -23685px;
+}
+.pavo-font.pirata-one {
+    background-position-y: -23725px;
+}
+.pavo-font.plaster {
+    background-position-y: -23765px;
+}
+.pavo-font.play {
+    background-position-y: -23805px;
+}
+.pavo-font.playball {
+    background-position-y: -23845px;
+}
+.pavo-font.playfair-display {
+    background-position-y: -23885px;
+}
+.pavo-font.playfair-display-sc {
+    background-position-y: -23925px;
+}
+.pavo-font.podkova {
+    background-position-y: -23965px;
+}
+.pavo-font.poiret-one {
+    background-position-y: -24005px;
+}
+.pavo-font.poller-one {
+    background-position-y: -24045px;
+}
+.pavo-font.poly {
+    background-position-y: -24085px;
+}
+.pavo-font.pompiere {
+    background-position-y: -24125px;
+}
+.pavo-font.pontano-sans {
+    background-position-y: -24165px;
+}
+.pavo-font.poppins {
+    background-position-y: -24205px;
+}
+.pavo-font.port-lligat-sans {
+    background-position-y: -24245px;
+}
+.pavo-font.port-lligat-slab {
+    background-position-y: -24285px;
+}
+.pavo-font.pragati-narrow {
+    background-position-y: -24325px;
+}
+.pavo-font.prata {
+    background-position-y: -24365px;
+}
+.pavo-font.preahvihear {
+    background-position-y: -24405px;
+}
+.pavo-font.press-start-2p {
+    background-position-y: -24445px;
+}
+.pavo-font.pridi {
+    background-position-y: -24485px;
+}
+.pavo-font.princess-sofia {
+    background-position-y: -24525px;
+}
+.pavo-font.prociono {
+    background-position-y: -24565px;
+}
+.pavo-font.prompt {
+    background-position-y: -24605px;
+}
+.pavo-font.prosto-one {
+    background-position-y: -24645px;
+}
+.pavo-font.proza-libre {
+    background-position-y: -24685px;
+}
+.pavo-font.puritan {
+    background-position-y: -24725px;
+}
+.pavo-font.purple-purse {
+    background-position-y: -24765px;
+}
+.pavo-font.quando {
+    background-position-y: -24805px;
+}
+.pavo-font.quantico {
+    background-position-y: -24845px;
+}
+.pavo-font.quattrocento {
+    background-position-y: -24885px;
+}
+.pavo-font.quattrocento-sans {
+    background-position-y: -24925px;
+}
+.pavo-font.questrial {
+    background-position-y: -24965px;
+}
+.pavo-font.quicksand {
+    background-position-y: -25005px;
+}
+.pavo-font.quintessential {
+    background-position-y: -25045px;
+}
+.pavo-font.qwigley {
+    background-position-y: -25085px;
+}
+.pavo-font.racing-sans-one {
+    background-position-y: -25125px;
+}
+.pavo-font.radley {
+    background-position-y: -25165px;
+}
+.pavo-font.rajdhani {
+    background-position-y: -25205px;
+}
+.pavo-font.rakkas {
+    background-position-y: -25245px;
+}
+.pavo-font.raleway {
+    background-position-y: -25285px;
+}
+.pavo-font.raleway-dots {
+    background-position-y: -25325px;
+}
+.pavo-font.ramabhadra {
+    background-position-y: -25365px;
+}
+.pavo-font.ramaraja {
+    background-position-y: -25405px;
+}
+.pavo-font.rambla {
+    background-position-y: -25445px;
+}
+.pavo-font.rammetto-one {
+    background-position-y: -25485px;
+}
+.pavo-font.ranchers {
+    background-position-y: -25525px;
+}
+.pavo-font.rancho {
+    background-position-y: -25565px;
+}
+.pavo-font.ranga {
+    background-position-y: -25605px;
+}
+.pavo-font.rasa {
+    background-position-y: -25645px;
+}
+.pavo-font.rationale {
+    background-position-y: -25685px;
+}
+.pavo-font.ravi-prakash {
+    background-position-y: -25725px;
+}
+.pavo-font.redressed {
+    background-position-y: -25765px;
+}
+.pavo-font.reem-kufi {
+    background-position-y: -25805px;
+}
+.pavo-font.reenie-beanie {
+    background-position-y: -25845px;
+}
+.pavo-font.revalia {
+    background-position-y: -25885px;
+}
+.pavo-font.rhodium-libre {
+    background-position-y: -25925px;
+}
+.pavo-font.ribeye {
+    background-position-y: -25965px;
+}
+.pavo-font.ribeye-marrow {
+    background-position-y: -26005px;
+}
+.pavo-font.righteous {
+    background-position-y: -26045px;
+}
+.pavo-font.risque {
+    background-position-y: -26085px;
+}
+.pavo-font.roboto {
+    background-position-y: -26125px;
+}
+.pavo-font.roboto-condensed {
+    background-position-y: -26165px;
+}
+.pavo-font.roboto-mono {
+    background-position-y: -26205px;
+}
+.pavo-font.roboto-slab {
+    background-position-y: -26245px;
+}
+.pavo-font.rochester {
+    background-position-y: -26285px;
+}
+.pavo-font.rock-salt {
+    background-position-y: -26325px;
+}
+.pavo-font.rokkitt {
+    background-position-y: -26365px;
+}
+.pavo-font.romanesco {
+    background-position-y: -26405px;
+}
+.pavo-font.ropa-sans {
+    background-position-y: -26445px;
+}
+.pavo-font.rosario {
+    background-position-y: -26485px;
+}
+.pavo-font.rosarivo {
+    background-position-y: -26525px;
+}
+.pavo-font.rouge-script {
+    background-position-y: -26565px;
+}
+.pavo-font.rozha-one {
+    background-position-y: -26605px;
+}
+.pavo-font.rubik {
+    background-position-y: -26645px;
+}
+.pavo-font.rubik-mono-one {
+    background-position-y: -26685px;
+}
+.pavo-font.ruda {
+    background-position-y: -26725px;
+}
+.pavo-font.rufina {
+    background-position-y: -26765px;
+}
+.pavo-font.ruge-boogie {
+    background-position-y: -26805px;
+}
+.pavo-font.ruluko {
+    background-position-y: -26845px;
+}
+.pavo-font.rum-raisin {
+    background-position-y: -26885px;
+}
+.pavo-font.ruslan-display {
+    background-position-y: -26925px;
+}
+.pavo-font.russo-one {
+    background-position-y: -26965px;
+}
+.pavo-font.ruthie {
+    background-position-y: -27005px;
+}
+.pavo-font.rye {
+    background-position-y: -27045px;
+}
+.pavo-font.sacramento {
+    background-position-y: -27085px;
+}
+.pavo-font.sahitya {
+    background-position-y: -27125px;
+}
+.pavo-font.sail {
+    background-position-y: -27165px;
+}
+.pavo-font.salsa {
+    background-position-y: -27205px;
+}
+.pavo-font.sanchez {
+    background-position-y: -27245px;
+}
+.pavo-font.sancreek {
+    background-position-y: -27285px;
+}
+.pavo-font.sansita {
+    background-position-y: -27325px;
+}
+.pavo-font.sarala {
+    background-position-y: -27365px;
+}
+.pavo-font.sarina {
+    background-position-y: -27405px;
+}
+.pavo-font.sarpanch {
+    background-position-y: -27445px;
+}
+.pavo-font.satisfy {
+    background-position-y: -27485px;
+}
+.pavo-font.scada {
+    background-position-y: -27525px;
+}
+.pavo-font.scheherazade {
+    background-position-y: -27565px;
+}
+.pavo-font.schoolbell {
+    background-position-y: -27605px;
+}
+.pavo-font.scope-one {
+    background-position-y: -27645px;
+}
+.pavo-font.seaweed-script {
+    background-position-y: -27685px;
+}
+.pavo-font.secular-one {
+    background-position-y: -27725px;
+}
+.pavo-font.sevillana {
+    background-position-y: -27765px;
+}
+.pavo-font.seymour-one {
+    background-position-y: -27805px;
+}
+.pavo-font.shadows-into-light {
+    background-position-y: -27845px;
+}
+.pavo-font.shadows-into-light-two {
+    background-position-y: -27885px;
+}
+.pavo-font.shanti {
+    background-position-y: -27925px;
+}
+.pavo-font.share {
+    background-position-y: -27965px;
+}
+.pavo-font.share-tech {
+    background-position-y: -28005px;
+}
+.pavo-font.share-tech-mono {
+    background-position-y: -28045px;
+}
+.pavo-font.shojumaru {
+    background-position-y: -28085px;
+}
+.pavo-font.short-stack {
+    background-position-y: -28125px;
+}
+.pavo-font.shrikhand {
+    background-position-y: -28165px;
+}
+.pavo-font.siemreap {
+    background-position-y: -28205px;
+}
+.pavo-font.sigmar-one {
+    background-position-y: -28245px;
+}
+.pavo-font.signika {
+    background-position-y: -28285px;
+}
+.pavo-font.signika-negative {
+    background-position-y: -28325px;
+}
+.pavo-font.simonetta {
+    background-position-y: -28365px;
+}
+.pavo-font.sintony {
+    background-position-y: -28405px;
+}
+.pavo-font.sirin-stencil {
+    background-position-y: -28445px;
+}
+.pavo-font.six-caps {
+    background-position-y: -28485px;
+}
+.pavo-font.skranji {
+    background-position-y: -28525px;
+}
+.pavo-font.slabo-13px {
+    background-position-y: -28565px;
+}
+.pavo-font.slabo-27px {
+    background-position-y: -28605px;
+}
+.pavo-font.slackey {
+    background-position-y: -28645px;
+}
+.pavo-font.smokum {
+    background-position-y: -28685px;
+}
+.pavo-font.smythe {
+    background-position-y: -28725px;
+}
+.pavo-font.sniglet {
+    background-position-y: -28765px;
+}
+.pavo-font.snippet {
+    background-position-y: -28805px;
+}
+.pavo-font.snowburst-one {
+    background-position-y: -28845px;
+}
+.pavo-font.sofadi-one {
+    background-position-y: -28885px;
+}
+.pavo-font.sofia {
+    background-position-y: -28925px;
+}
+.pavo-font.sonsie-one {
+    background-position-y: -28965px;
+}
+.pavo-font.sorts-mill-goudy {
+    background-position-y: -29005px;
+}
+.pavo-font.source-code-pro {
+    background-position-y: -29045px;
+}
+.pavo-font.source-sans-pro {
+    background-position-y: -29085px;
+}
+.pavo-font.source-serif-pro {
+    background-position-y: -29125px;
+}
+.pavo-font.space-mono {
+    background-position-y: -29165px;
+}
+.pavo-font.special-elite {
+    background-position-y: -29205px;
+}
+.pavo-font.spectral {
+    background-position-y: -29245px;
+}
+.pavo-font.spicy-rice {
+    background-position-y: -29285px;
+}
+.pavo-font.spinnaker {
+    background-position-y: -29325px;
+}
+.pavo-font.spirax {
+    background-position-y: -29365px;
+}
+.pavo-font.squada-one {
+    background-position-y: -29405px;
+}
+.pavo-font.sree-krushnadevaraya {
+    background-position-y: -29445px;
+}
+.pavo-font.sriracha {
+    background-position-y: -29485px;
+}
+.pavo-font.stalemate {
+    background-position-y: -29525px;
+}
+.pavo-font.stalinist-one {
+    background-position-y: -29565px;
+}
+.pavo-font.stardos-stencil {
+    background-position-y: -29605px;
+}
+.pavo-font.stint-ultra-condensed {
+    background-position-y: -29645px;
+}
+.pavo-font.stint-ultra-expanded {
+    background-position-y: -29685px;
+}
+.pavo-font.stoke {
+    background-position-y: -29725px;
+}
+.pavo-font.strait {
+    background-position-y: -29765px;
+}
+.pavo-font.sue-ellen-francisco {
+    background-position-y: -29805px;
+}
+.pavo-font.suez-one {
+    background-position-y: -29845px;
+}
+.pavo-font.sumana {
+    background-position-y: -29885px;
+}
+.pavo-font.sunshiney {
+    background-position-y: -29925px;
+}
+.pavo-font.supermercado-one {
+    background-position-y: -29965px;
+}
+.pavo-font.sura {
+    background-position-y: -30005px;
+}
+.pavo-font.suranna {
+    background-position-y: -30045px;
+}
+.pavo-font.suravaram {
+    background-position-y: -30085px;
+}
+.pavo-font.suwannaphum {
+    background-position-y: -30125px;
+}
+.pavo-font.swanky-and-moo-moo {
+    background-position-y: -30165px;
+}
+.pavo-font.syncopate {
+    background-position-y: -30205px;
+}
+.pavo-font.tangerine {
+    background-position-y: -30245px;
+}
+.pavo-font.taprom {
+    background-position-y: -30285px;
+}
+.pavo-font.tauri {
+    background-position-y: -30325px;
+}
+.pavo-font.taviraj {
+    background-position-y: -30365px;
+}
+.pavo-font.teko {
+    background-position-y: -30405px;
+}
+.pavo-font.telex {
+    background-position-y: -30445px;
+}
+.pavo-font.tenali-ramakrishna {
+    background-position-y: -30485px;
+}
+.pavo-font.tenor-sans {
+    background-position-y: -30525px;
+}
+.pavo-font.text-me-one {
+    background-position-y: -30565px;
+}
+.pavo-font.the-girl-next-door {
+    background-position-y: -30605px;
+}
+.pavo-font.tienne {
+    background-position-y: -30645px;
+}
+.pavo-font.tillana {
+    background-position-y: -30685px;
+}
+.pavo-font.timmana {
+    background-position-y: -30725px;
+}
+.pavo-font.tinos {
+    background-position-y: -30765px;
+}
+.pavo-font.titan-one {
+    background-position-y: -30805px;
+}
+.pavo-font.titillium-web {
+    background-position-y: -30845px;
+}
+.pavo-font.trade-winds {
+    background-position-y: -30885px;
+}
+.pavo-font.trirong {
+    background-position-y: -30925px;
+}
+.pavo-font.trocchi {
+    background-position-y: -30965px;
+}
+.pavo-font.trochut {
+    background-position-y: -31005px;
+}
+.pavo-font.trykker {
+    background-position-y: -31045px;
+}
+.pavo-font.tulpen-one {
+    background-position-y: -31085px;
+}
+.pavo-font.ubuntu {
+    background-position-y: -31125px;
+}
+.pavo-font.ubuntu-condensed {
+    background-position-y: -31165px;
+}
+.pavo-font.ubuntu-mono {
+    background-position-y: -31205px;
+}
+.pavo-font.ultra {
+    background-position-y: -31245px;
+}
+.pavo-font.uncial-antiqua {
+    background-position-y: -31285px;
+}
+.pavo-font.underdog {
+    background-position-y: -31325px;
+}
+.pavo-font.unica-one {
+    background-position-y: -31365px;
+}
+.pavo-font.unifrakturcook {
+    background-position-y: -31405px;
+}
+.pavo-font.unifrakturmaguntia {
+    background-position-y: -31445px;
+}
+.pavo-font.unkempt {
+    background-position-y: -31485px;
+}
+.pavo-font.unlock {
+    background-position-y: -31525px;
+}
+.pavo-font.unna {
+    background-position-y: -31565px;
+}
+.pavo-font.vt323 {
+    background-position-y: -31605px;
+}
+.pavo-font.vampiro-one {
+    background-position-y: -31645px;
+}
+.pavo-font.varela {
+    background-position-y: -31685px;
+}
+.pavo-font.varela-round {
+    background-position-y: -31725px;
+}
+.pavo-font.vast-shadow {
+    background-position-y: -31765px;
+}
+.pavo-font.vesper-libre {
+    background-position-y: -31805px;
+}
+.pavo-font.vibur {
+    background-position-y: -31845px;
+}
+.pavo-font.vidaloka {
+    background-position-y: -31885px;
+}
+.pavo-font.viga {
+    background-position-y: -31925px;
+}
+.pavo-font.voces {
+    background-position-y: -31965px;
+}
+.pavo-font.volkhov {
+    background-position-y: -32005px;
+}
+.pavo-font.vollkorn {
+    background-position-y: -32045px;
+}
+.pavo-font.voltaire {
+    background-position-y: -32085px;
+}
+.pavo-font.waiting-for-the-sunrise {
+    background-position-y: -32125px;
+}
+.pavo-font.wallpoet {
+    background-position-y: -32165px;
+}
+.pavo-font.walter-turncoat {
+    background-position-y: -32205px;
+}
+.pavo-font.warnes {
+    background-position-y: -32245px;
+}
+.pavo-font.wellfleet {
+    background-position-y: -32285px;
+}
+.pavo-font.wendy-one {
+    background-position-y: -32325px;
+}
+.pavo-font.wire-one {
+    background-position-y: -32365px;
+}
+.pavo-font.work-sans {
+    background-position-y: -32405px;
+}
+.pavo-font.yanone-kaffeesatz {
+    background-position-y: -32445px;
+}
+.pavo-font.yantramanav {
+    background-position-y: -32485px;
+}
+.pavo-font.yatra-one {
+    background-position-y: -32525px;
+}
+.pavo-font.yellowtail {
+    background-position-y: -32565px;
+}
+.pavo-font.yeseva-one {
+    background-position-y: -32605px;
+}
+.pavo-font.yesteryear {
+    background-position-y: -32645px;
+}
+.pavo-font.yrsa {
+    background-position-y: -32685px;
+}
+.pavo-font.zeyada {
+    background-position-y: -32725px;
+}
+
+/** endinject:google-font-icon **/

@@ -1,0 +1,102 @@
+<div id="pavo-demos-list" class="panel panel-primary">
+  <h4 class="panel-heading">
+    <i class="fa fa-gear"></i> {{ text_sample_demo_heading }}
+    <a href="{{ refesh_demo }}" class="refresh-demo">
+      <i class="fa fa-refresh"></i>
+    </a>
+  </h4>
+  <div class="panel-body">
+    <p class="text-black"><b> {{ text_explain_use_tool_sample_data }} </b></p>
+    <div class="row">
+    {% for sample in samples %}
+      <div class="col-md-3 col-sm-4 col-sx-12">
+        <div class="pav-demo-sample">
+          <img src="{{ sample.preview }}">
+          <p class="demo-name"> {{ sample.name }} </p>
+          <a href="{{ import_live_server }}&demo={{sample.key}}" class="btn btn-warning btn-demo" data-demo="{{ sample.key }}">{{ text_install }}</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  </div>
+</div>
+<div class="hide">
+  <div id="modal-install-samples" class="white-popup">
+    <div class="inner">
+      <div class="row form-group">
+        <label class="col-sm-2 control-label">{{ entry_progress_text }}</label>
+        <div class="col-sm-10">
+          <div id="progress-install" class="progress progress-striped">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="progress-text"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <a href="#" class="btn btn-primary" id="pav-install">
+            {{ text_start_install }}
+            <br />
+            <small>{{ text_install_info }}</small>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="#" class="btn btn-danger col-md-6" id="pav-mass-install">
+            {{ text_mass_install }}
+            <br />
+            <small>{{ text_mass_install_info }}</small>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var PAV_PARAMS = window.PAV_PARAMS = {
+    exporturl     : '{{ exporturl }}',
+    liveinstall   : '{{ liveinstall }}',
+    massinstall   : '{{ massinstall }}',
+    text_make_dir : '{{ text_create_directory }}',
+    text_confirm  : '{{ text_confirm_delete }}',
+    empty_select  : '{{ entry_empty_select }}',
+    confirm_import: '{{ text_confirm_import }}',
+    confirm_mass_import: '{{ text_confirm_mass_import }}',
+    uploading_text: '{{ entry_uploading }}'
+  }
+</script>
+<script type="text/template" id="tmpl-import-manager">
+  <div id="modal-install-samples" class="white-popup" style="max-width: 800px">
+    <div class="inner">
+      <p class="text-warning">{{ text_warning_using_installation }}</p>
+      <div class="row form-group">
+        <label class="col-sm-2 control-label">{{ entry_progress_text }}</label>
+        <div class="col-sm-10">
+          <div id="progress-install" class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="progress-text"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="alert alert-info">
+          <div class="col-md-12">
+            <p>{{ text_install_info }}     </p>
+              <a href="#" class="btn btn-primary" id="pav-install">
+                <i class="fa fa-cog" aria-hidden="true"></i> {{ text_start_install }}
+              </a>
+       
+          </div>
+        </div>
+         <div class="alert alert-warning">
+            <div class="col-md-12">
+              <p>
+               {{ text_mass_install_info }}   </p> 
+                <a href="#" class="btn btn-danger" id="pav-mass-install"><i class="fa fa-cogs" aria-hidden="true"></i> {{ text_mass_install }}</a>
+           
+            </div>
+         </div>   
+      </div>
+    </div>
+  </div>
+</script>

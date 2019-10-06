@@ -1,0 +1,90 @@
+{% set id = random(1..9) + random() %}
+<div class = "panel panel-default">
+    <h3 class="panel-title">{{ related_heading_title }}</h3>
+    <div class="panel-body">
+        <div class="relatedblogs{{id}} swiper-container {% if get_related|length <= related_number*related_rows %}swiper-no-swiping{% endif %}">
+            <div class="swiper-wrapper">
+                {% for related in get_related %}
+                {% if related.post_id != post.post_id %}
+                <div class="swiper-slide">
+                    <div class="related-thumb transition">
+                        <div class="image text-center">
+                            <a href="{{ related.link }}" class="pa-element related-image">
+                                <img src="{{ related.thumb }}" alt="{{related.post_name}}" class="img-responsive"/>
+                            </a>
+                        </div>
+                        <div class="related-username ">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            {{ text_posted_by }}
+                            <a href="{{ related.author_href }}">{{ related.user_nicename }}</a>
+                        </div>
+                        <div class="related-date">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{ related.date_added | date( [ date_format, ' ', time_format ] | join() ) }}</div>
+                        {% if ( related.category_id ) %}
+                        <div class="related-category entry-category">
+                            <i class="fa fa-tasks" aria-hidden="true"></i>
+                            {{ text_categories }} :
+                            <a href="{{ related.category_url}}">{{ related.cat_name }}</a>
+                        </div>
+                        {% endif %}
+                        {% if related.tag %}
+                        <div class="related-tags entry-tag">
+                            <i class="fa fa-tags" aria-hidden="true"></i>
+                            <a href="{{ related.tag_href }}">{{ related.tag }}</a>
+                        </div>
+                        {% endif %}
+                        <div class="related-body">
+                            <div class="related-title">
+                                <a href="{{ related.link }}" class="pa-element title">
+                                    {{ (related.post_name|striptags)|slice(0,58) }}
+                                </a>
+                            </div>
+                            <div class="related-content">
+                                {{ (related.content|striptags)|slice(0,58) }}...
+                                <a href="{{ related.link }}" class="related-content1"></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="swiper-pager">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next swiper-button-next{{id}}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script><!--
+$('.relatedblogs{{id}}').swiper({
+    pause: 'hover',
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    slidesPerView: {{ related_number ? related_number : 2 }},
+    noSwipingClass: 'swiper-no-swiping',
+    slidesPerColumn:{{ related_rows ? related_rows : 1 }},
+    spaceBetween: 0,
+    onReachEnd:function(swiper){
+        $('.swiper-button-next{{id}}').one('click',function () {
+            swiper.slideTo(0, 800, false);
+        });
+    },
+    breakpoints:{
+        767: {
+            slidesPerView: 1,
+            {% if (get_related|length) > (1*related_rows) %}
+            noSwiping: false
+            {% endif %}
+        },
+        991: {
+            slidesPerView: 2,
+            {% if (get_related|length) > (2*related_rows) %}
+            noSwiping: false
+            {% endif %}
+        }, 
+    }
+});
+--></script>

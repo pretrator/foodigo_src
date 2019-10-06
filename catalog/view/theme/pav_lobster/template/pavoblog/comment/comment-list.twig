@@ -1,0 +1,9 @@
+{% if ( comments ) %}
+	<ol class="comment-list">
+		{% for comment in comments %}
+			{% if comment.comment_status == 1 %}
+				{% include 'pavoblog/comment/loop-comment.twig' with { 'comment' : comment, 'comments': comments, 'parent_id' : parent_id } %}
+			{% endif %}
+		{% endfor %}
+	</ol>
+{% endif %}

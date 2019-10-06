@@ -1,0 +1,44 @@
+{% set rows = settings.rows is defined and settings.rows > 1 ? settings.rows : 1 %}
+{% set columns = settings.columns is defined ? settings.columns : 4 %}
+{% set itemsLength = settings.get_item|length %}
+
+<div class="pavo-widget-gallery {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	{% set id = random(1..9) + random() %}
+	<div class="inner">
+		<div class="image-gallery owl-carousel owl-theme custom-testimonial{{id}}" data-owlcarousel-options="{{ settings.carousel|json_encode()|escape }}" data-id="image-gallery{{id}}">
+			{% set i = 0 %}
+			{% for image in settings.get_item %}
+				{% set i = i + 1 %}
+				{% if (i % rows == 1 or rows == 1) and itemsLength > columns %}
+					<div class="item">
+				{% endif %}
+					<div class="gallery-inner">
+						{% if image.link %}
+							<div class="item-image" data-cols="{{settings.columns}}">
+								<a href="{{image.link}}">
+									<img class="img-responsive" src="{{image.src}}" alt="{{image.alt}}">
+								</a>
+							</div>
+							{% for lang in image.languages[settings.language_code] %}
+								{% if lang %}
+									<div class="item-text">{{lang}}</div>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<div class="item-image" data-cols="{{settings.columns}}">
+								<img class="img-responsive" src="{{image.src}}" alt="{{image.alt}}">
+							</div>
+							{% for lang in image.languages[settings.language_code] %}
+								{% if lang %}
+									<div class="item-text">{{lang}}</div>
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+					</div>
+				{% if (rows == 1 or i % rows == 0 or i == itemsLength) and itemsLength > columns %}
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>

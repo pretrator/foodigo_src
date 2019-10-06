@@ -1,0 +1,23 @@
+{% set id = random(1..9) + random() %}
+ <div id="top-links{{id}}" class="nav {{ settings.extra_class }}">
+      <ul class="list-inline">
+        <li><a href="{{ settings.contact }}"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ settings.telephone }}</span></li>
+        <li class="dropdown"><a href="" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            {% if settings.logged %}
+            <li><a href="{{ settings.account }}">{{ text_account }}</a></li>
+            <li><a href="{{ settings.order }}">{{ text_order }}</a></li>
+            <li><a href="{{ settings.transaction }}">{{ text_transaction }}</a></li>
+            <li><a href="{{ settings.download }}">{{ text_download }}</a></li>
+            <li><a href="{{ settings.logout }}">{{ text_logout }}</a></li>
+            {% else %}
+            <li><a href="{{ settings.register }}">{{ text_register }}</a></li>
+            <li><a href="{{ settings.login }}">{{ text_login }}</a></li>
+            {% endif %}
+          </ul>
+        </li>
+        <li><a href="{{ settings.wishlist }}" class="wishlist-total" title="{{ text_wishlist }}"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ settings.text_wishlist }}</span></a></li>
+        <li><a href="{{ settings.shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span></a></li>
+        <li><a href="{{ settings.checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>
+      </ul>
+    </div>

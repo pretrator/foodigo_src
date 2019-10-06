@@ -1,0 +1,49 @@
+<div class="interactive-banner {% if settings.button_type == "video" %}style-video{% endif %} {{ settings.class ? [ ' ', settings.class ] | join() : '' }}">
+	<div class="image effect-v10">
+		<img src="{{ settings.banner_image }}" alt="" width="{{ settings.width }}" height="{{ settings.height }}" class="img-responsive" />
+		{% if settings.button_type == "video" %}
+			<a href="{{ settings.button_link }}" class="popup-video">
+			</a>
+		{% endif %}	
+	</div>
+	<div class="content">
+		<div class="content-inner">
+			<div class="interactive-profile">
+				<header>
+					{% if settings.banner_title %}
+					<h3 class="heading-title">{{ settings.banner_title }}</h3>
+					{% endif %}
+					{% if settings.banner_subtitle %}
+					<h2 class="heading-subtitle">{{ settings.banner_subtitle }}</h2>
+					{% endif %}
+				</header>
+				{% if settings.description %}
+				<div class="htmlcontent">
+					{{ settings.description }}
+				</div>
+				{% endif %} 
+				{% if settings.button_text %}
+				<div class="action-button">
+					<a href="{{ settings.button_link }}" class="btn btn-link">							
+						{{ settings.button_text }}							
+					</a>
+				</div>
+				{% endif %}
+				
+			</div>
+		</div>
+	</div>
+</div>
+{% if settings.button_type == "video" %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.popup-video').magnificPopup({
+			type: 'iframe',
+			mainClass: 'mfp-fade',
+			removalDelay: 160,
+			preloader: false,
+			fixedContentPos: false
+		});
+	});
+</script>
+{% endif %}

@@ -1,0 +1,5 @@
+<select name="{{ item.name }}" id="{{ item.id }}" class="{{ item.class }} select-google-font" data-value="{{ item.value.name }}">
+	{% for option in item.option %}
+		<option value="{{ option.value }}"{{ item.value == option.value ? ' selected="selected"' : '' }}>{{ option.text }}</option>
+	{% endfor %}
+</select>

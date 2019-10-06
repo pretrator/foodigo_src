@@ -1,0 +1,22 @@
+/*!
+ * PAVOTHEMES OPENCART TEMPLATES.
+ * Copyright © 2018 pavothemes.com. All Rights Reserved.
+ * Pavothemes is not affiliated with or endorsed by Open 
+ * Source Matters or Opencart Project. 
+ */
+/*! http://www.pavothemes.com/ -  https://pavothemes.ticksy.com */
+
+Pav Lobster - change log
+The first, thank you for purchasing the theme, below is detail of the changes list in this update:
+
+ 2018/07/05: Release theme.
+
+////////////////////////////////////////////////////////////////////////////
+We are so happy to support you more via our ticket system and email address if you need to help more. 
+Please visting our main site http://www.pavothemes.com for get more information.
+
+Thanks and Best regards,
+
+
+
+

@@ -1,0 +1,35 @@
+<div class="pull-right pavbtn">
+	{% if menu_active is defined %}
+
+		{% if menu_active == 'subscribes' %}
+			<a onclick="$('#action').val('delete');$('#form').submit();" class="btn btn-danger">{{ button_delete }}</a>
+		{% elseif menu_active == 'modules' %}
+			<a onclick="$('#form').submit();" class="btn btn-primary">{{ button_save }}</a>&nbsp;&nbsp;
+			<a href="{{ cancel }}" class="btn btn-danger">{{ button_cancel }}</a>&nbsp;&nbsp;
+		{% elseif menu_active == 'templates' %}
+			<a onclick="$('#action').val('copy_default');$('#form').submit();" class="btn btn-primary">{{ button_copy_default }}</a>&nbsp;&nbsp;
+			<a onclick="$('#action').val('copy');$('#form').submit();" class="btn btn-success">{{ button_copy }}</a>&nbsp;&nbsp;
+			<a href="{{ insert_link }}" class="btn btn-success">{{ button_insert }}</a>&nbsp;&nbsp;
+			<a onclick="$('#action').val('delete');$('#form').submit();" class="btn btn-danger">{{ button_delete }}</a>&nbsp;&nbsp;
+		{% elseif menu_active == 'template' %}
+			<a onclick="$('#form').submit();" class="btn btn-success">{{ button_save }}</a>&nbsp;&nbsp;
+			<a href="{{ cancel }}" class="btn btn-danger">{{ button_cancel }}</a>&nbsp;&nbsp;
+		{% elseif menu_active == 'create_newsletter' %}
+			<a onclick="$('#action').val('save_draft');$('#form').submit();" class="btn btn-primary">{{ button_save_draft }}</a>&nbsp;&nbsp;
+			<a onclick="$('#action').val('send');$('#form').submit();" class="btn btn-success">{{ button_send }}</a>&nbsp;&nbsp;
+			<a onclick="$('#action').val('check_spam');$('#form').submit();" class="btn btn-warning">{{ button_check }}</a>&nbsp;&nbsp;
+		{% elseif menu_active == 'draft' %}
+			<a onclick="$('#action').val('delete');$('#form').submit();" class="btn btn-danger">{{ button_delete }}</a>
+		{% elseif menu_active == 'config' %}
+			<a onclick="$('#form').submit();" class="btn btn-primary">{{ button_save }}</a>&nbsp;&nbsp;
+			<a href="{{ cancel }}" class="btn btn-danger">{{ button_cancel }}</a>
+		{% elseif menu_active == 'contact' %}
+			<button id="button-send" data-toggle="tooltip" title="{{ button_send }}" class="btn btn-primary" onclick="send('{{ url_send }}');"><i class="fa fa-envelope"></i> {{ button_send }}</button>
+			<button id="button-draft" data-toggle="tooltip" title="{{ button_draft }}" class="btn btn-success" onclick="draft('{{ url_draft }}');"><i class="fa fa-save"></i> {{ button_draft }}</button>&nbsp;&nbsp;
+		{% elseif menu_active == 'draft_contact' %}
+			<a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a> <a href="{{ repair }}" data-toggle="tooltip" title="{{ button_rebuild }}" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+			<button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-draft').submit() : false;"><i class="fa fa-trash-o"></i></button>
+		{% endif %}
+
+	{% endif %}
+</div>

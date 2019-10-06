@@ -1,0 +1,319 @@
+{{ header }}{{ column_left }}{% set module_row = 0 %}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <a class="btn btn-primary" onclick="$('#form').submit();">{{ button_save }}</a>
+                <a class="btn btn-success" onclick="$('#action').val('save-edit');$('#form').submit();">{{ button_save_stay }}</a>
+                <a class="btn btn-danger" href="{{ cancel }}">{{ button_cancel }}</a>
+
+                 <a class="btn btn-info" title="{{ text_guide }}" id="btn-guide" href="http://www.pavothemes.com/guides/3/pavtestimonial/"><i class="fa fa-book"></i>{{ text_guide }}</a>
+            </div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div><!-- End div#page-header -->
+    <div id="page-content" class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        {% if (success is defined and  success is not empty) %}
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+                    <input type="hidden" name="action_mode" value="" id="action"/>
+
+                    <div>
+                        <table class="table table-striped table-bordered table-hover">
+
+                            <tr>
+                                <td class="col-sm-2">{{ text_name }}</td>
+                                <td class="col-sm-10"><input type="text" name="pavtestimonial_module[{{ module_row }}][name]" value="{{ module.name }}" size="3" class="form-control" style="width:100%;"/></td>
+                            </tr>
+
+
+                            <tr class="alert alert-warning">
+                                <td class="col-sm-2">{{ text_layout_style }}</td>
+                                <td class="col-sm-10"><select name="pavtestimonial_module[{{ module_row }}][layout]" class="form-control" style="width:100%;">
+                                    {% for key, layout in layout_styles %}    
+                                    <option value="{{ key }}" {% if key == module.layout %} selected="selected" {% endif %}>{{ layout }}</option>
+                                    {% endfor %}       
+                                  
+                                    </select></td>
+                            </tr>
+
+
+                            <tr class="alert alert-warning">
+                                <td class="col-sm-2">{{ text_load_module_css }}</td>
+                                <td class="col-sm-10"><select name="pavtestimonial_module[{{ module_row }}][load_css]" class="form-control" style="width:100%;">
+                                    {% for key,value in yesno %}    
+                                    <option value="{{ key }}" {% if key == module.load_css %} selected="selected" {% endif %}>{{ value }}</option>
+                                    {% endfor %}       
+                                  
+                                    </select></td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-sm-2">{{ text_status }}</td>
+                                <td class="col-sm-10"><select name="pavtestimonial_module[{{ module_row }}][status]" class="form-control" style="width:100%;">
+                                        {% if module.status is defined and module.status %}
+                                            <option value="1" selected="selected">{{ text_enabled }}</option>
+                                            <option value="0">{{ text_disabled }}</option>
+                                        {% else %}
+                                            <option value="1">{{ text_enabled }}</option>
+                                            <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %}
+                                    </select></td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-sm-2">{{ text_auto_play }}</td>
+                                <td class="col-sm-10"><select name="pavtestimonial_module[{{ module_row }}][auto_play]" class="form-control" style="width:100%;">
+                                        {% if module.auto_play is defined and module.auto_play %}
+                                            <option value="1" selected="selected">{{ text_enabled }}</option>
+                                            <option value="0">{{ text_disabled }}</option>
+                                        {% else %}
+                                            <option value="1">{{ text_enabled }}</option>
+                                            <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %}
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-2">{{text_loop}}</td>
+                                <td class="col-sm-10"><select name="pavtestimonial_module[{{module_row}}][loop]" class="form-control" style="width: 100%;" >
+                                    {% if module.loop is defined and module.loop %}
+                                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                                    <option value="0">{{ text_disabled }}</option>
+                                    {% else %}
+                                    <option value="1">{{ text_enabled }}</option>
+                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %}
+                                </select>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-2">{{text_slidesperview}}</td>
+                                <td class="col-sm-10"><input type="text" name="pavtestimonial_module[{{module_row}}][slides_view]" value="{{module.slides_view}}" size="3" class="form-control" style="width: 100%;">
+                            </tr>
+                            <tr>
+                                <td class="col-sm-2">{{ text_interval }}</td>
+                                <td class="col-sm-10"><input type="text" name="pavtestimonial_module[{{ module_row }}][text_interval]" value="{{ module.text_interval }}" size="3" class="form-control" style="width:100%;"/></td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-sm-2">{{ entry_width }}</td>
+                                <td class="col-sm-10"><input type="text" name="pavtestimonial_module[{{ module_row }}][width]" value="{{ module.width }}" size="8" class="form-control" style="width:100%;"/></td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-2">{{ entry_height }}</td>
+                                <td class="col-sm-10"><input type="text" name="pavtestimonial_module[{{ module_row }}][height]" value="{{ module.height }}" size="8" class="form-control" style="width:100%;"/></td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-sm-2">{{ text_column }}</td>
+                                <td class="col-sm-10"><input type="text" name="pavtestimonial_module[{{ module_row }}][column_item]" value="{{ module.column_item }}" class="form-control" style="width:100%;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-2">{{ entry_class }}</td>
+                                <td class="col-sm-10"><input type="text" name="pavtestimonial_module[{{ module_row }}][class]" value="{{ module.class }}" size="8" class="form-control" style="width:100%;"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>{{ text_header_group_data }}</h3>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <ul class="nav nav-pills nav-stacked" id="module">
+                                {% set banner_row = 1 %}
+                                {% for banner in module.testimonial_item %}
+                                    <li><a href="#tab-module{{ banner_row }}" data-toggle="tab">
+                                    <i class="fa fa-minus-circle" onclick="$('a[href=\'#tab-module{{ banner_row }}\']').parent().remove(); $('#tab-module{{ banner_row }}').remove(); $('#module a:first').tab('show');"></i>{{ tab_module_banner ~ ' ' ~ banner_row }}</a></li>
+                                    {% set banner_row = banner_row + 1 %}
+                                {% endfor %}
+
+                                <li id="module-add"><a onclick="addModule();"><i class="fa fa-plus-circle"></i> {{ button_module_add_item }}</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="tab-content" id="tab-content">
+                                {% set banner_row = 1 %}
+                                {% for banner in module.testimonial_item %}
+                                    <div class="tab-pane" id="tab-module{{ banner_row }}">
+
+                                        <table class="table table-striped table-bordered table-hover">
+
+                                            <tr>
+                                                <td class="col-sm-2">Avartar</td>
+                                                <td class="col-sm-10">
+                                                    <a href="" id="thumb-image{{ banner_row }}" data-toggle="image" class="img-thumbnail">
+                                                        <img src="{{ banner.thumb ? banner.thumb : placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}"/></a>
+                                                    <input type="hidden" name="testimonial_item[{{ banner_row }}][image]" value="{{ banner.image }}" id="input-image{{ banner_row }}"/>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="col-sm-2">Testimonial Link (youtube or video link)</td>
+                                                <td class="col-sm-2"><input type="text" name="testimonial_item[{{ banner_row }}][video_link]" size="100" value="{{ banner.video_link }}" class="form-control" style="width:55%;"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-sm-2">{{ entry_profile }}</td>
+                                                <td class="col-sm-2">
+                                                    <ul class="nav nav-tabs" id="language-profile-{{ banner_row }}">
+                                                        {% set j = 0 %}
+                                                        {% for language in languages %}
+                                                            {% set j = j + 1 %}
+                                                            <li {% if j == 1 %}class="active"{% endif %}><a href="#tab-language-profile{{ banner_row }}-language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}"/> {{ language.name }}</a></li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        {% set j = 0 %}{% for language in languages %}{% set j = j + 1 %}
+                                                            <div class="tab-pane {% if j == 1 %}active{% endif %}" id="tab-language-profile{{ banner_row }}-language{{ language.language_id }}">
+                                                                <textarea class="pavo-editor" name="testimonial_item[{{ banner_row }}][profile][{{ language.language_id }}]" id="profile-{{ banner_row }}-{{ language.language_id }}">{{ ((banner.profile[language.language_id]) is defined)?(banner.profile[language.language_id]):'' }}</textarea>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="col-sm-2">{{ entry_description }}</td>
+                                                <td class="col-sm-2">
+                                                    <ul class="nav nav-tabs" id="language{{ banner_row }}">
+                                                        {% set j = 0 %}{% for language in languages %}{% set j = j + 1 %}
+                                                            <li {% if j == 1 %}class="active"{% endif %}><a href="#tab-module{{ banner_row }}-language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}"/> {{ language.name }}</a></li>
+                                                        {% endfor %}
+                                                    </ul>
+
+                                                    <div class="tab-content">
+                                                        {% set j = 0 %}{% for language in languages %}{% set j = j + 1 %}
+                                                            <div class="tab-pane {% if j == 1 %}active{% endif %}" id="tab-module{{ banner_row }}-language{{ language.language_id }}">
+                                                                <textarea class="pavo-editor" name="testimonial_item[{{ banner_row }}][description][{{ language.language_id }}]" id="description-{{ banner_row }}-{{ language.language_id }}">{{ ((banner.description[language.language_id])is defined)?(banner.description[language.language_id]):'' }}</textarea>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    {% set banner_row = banner_row + 1 %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                     Developed by <a target="_blank" href="http://www.pavothemes.com">PavoThemes.Com</a>. Get More Free Extensions From <a target="_blank" href="http://www.pavothemes.com/opencart-modules/opencart-3.html">Site</a>.
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+    <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+    <link href="view/javascript/summernote/summernote.css" type="text/css" rel="stylesheet" media="screen"/>
+    <script type="text/javascript"><!--
+        $('.pavo-editor').summernote({
+            height: 300
+        });
+        //--></script>
+    <script type="text/javascript"><!--
+        var banner_row = {{ banner_row }};
+
+        function addModule() {
+            html = '<div class="tab-pane" id="tab-module' + banner_row + '">';
+
+
+            html += '<table class="table table-striped table-bordered table-hover">';
+            html += '<tr>';
+            html += '<td class="col-sm-2">Avartar</td>';
+            html += '<td class="col-sm-10">';
+            html += ' <a href="" id="thumb-image' + banner_row + '" data-toggle="image" class="img-thumbnail">';
+            html += ' <img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>';
+            html += '<input type="hidden" name="testimonial_item[' + banner_row + '][image]" value="" id="input-image' + banner_row + '" />';
+            html += '</td>';
+            html += '</tr>';
+
+            html += '<tr><td class="col-sm-2">Video Testimonial Code</td><td class="col-sm-2"><input type="text" name="testimonial_item[' + banner_row + '][video_link]" size="100" class="form-control" style="width:55%;"/></td></tr>';
+            html += '<tr><td class="col-sm-2">{{ entry_profile }}</td>';
+            html += '<td class="col-sm-2">';
+            html += '<ul class="nav nav-tabs" id="language-profile-' + banner_row + '">';
+            {% for language in languages %}
+            html += '<li><a href="#tab-language-profile' + banner_row + '-language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>';
+            {% endfor %}
+            html += '</ul>';
+            html += '<div class="tab-content">';
+            {% for language in languages %}
+            html += '<div class="tab-pane" id="tab-language-profile' + banner_row + '-language{{ language.language_id }}">';
+            html += '<textarea class="pavo-editor" name="testimonial_item[{{ banner_row }}][profile][{{ language.language_id }}]" id="profile-{{ banner_row }}-{{ language.language_id }}"></textarea>';
+            html += '</div>';
+            {% endfor %}
+            html += '</div>';
+            html += '</td>';
+            html += '</tr>';
+
+
+            html += '<tr><td class="col-sm-2">{{ entry_description }}</td>';
+            html += '<td class="col-sm-2">';
+            html += '<ul class="nav nav-tabs" id="language' + banner_row + '">';
+            {% for language in languages %}
+            html += '<li><a href="#tab-module' + banner_row + '-language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>';
+            {% endfor %}
+            html += ' </ul>';
+            html += '<div class="tab-content">';
+            {% for language in languages %}
+            html += '<div class="tab-pane" id="tab-module' + banner_row + '-language{{ language.language_id }}">';
+            html += '<textarea class="pavo-editor" name="testimonial_item[' + banner_row + '][description][{{ language.language_id }}]" id="description-' + banner_row + '-{{ language.language_id }}"></textarea>';
+            html += ' </div>';
+            {% endfor %}
+            html += ' </div>';
+            html += '</td>';
+            html += '</tr>';
+            html += '</table>';
+
+
+            html += '</div>';
+
+
+            $('#tab-content').append(html);
+
+            $('.pavo-editor').summernote({
+                height: 300
+            });
+
+            $('#module-add').before('<li><a href="#tab-module' + banner_row + '" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$(\'a[href=\\\'#tab-module' + banner_row + '\\\']\').parent().remove(); $(\'#tab-module' + banner_row + '\').remove(); $(\'#module a:first\').tab(\'show\');"></i> {{ tab_module }} ' + banner_row + '</a></li>');
+
+            $('#module a[href=\'#tab-module' + banner_row + '\']').tab('show');
+
+            $('#language' + banner_row + ' li:first-child a').tab('show');
+
+            $('#language-profile-' + banner_row + ' li:first-child a').tab('show');
+
+            banner_row++;
+        }
+
+        //--></script>
+
+    <script type="text/javascript"><!--
+        $('#module li:first-child a').tab('show');
+        {% set banner_row = 1 %}
+        {% for banner_row,banner in testimonial_item %}
+        $('#language{{ banner_row }} li:first-child a').tab('show');
+        $('#language-profile-{{ banner_row }} li:first-child a').tab('show');
+        banner_row++;
+        {% endfor %}
+        //--></script>
+</div>
+{{ footer }}

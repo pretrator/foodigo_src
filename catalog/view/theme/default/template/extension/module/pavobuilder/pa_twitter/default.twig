@@ -1,0 +1,17 @@
+<div class="pavo-widget-video{{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}"> 
+	<div class="inner">
+		{% if (settings.feeds) %}
+			<ol>
+				{% for feed in settings.feeds %}
+					<li>
+						<a href="https://twitter.com/pavothemes/status/{{ feed.id_str }}" target="_blank">
+							<img src="{{ feed.user.profile_image_url }}" alt="{{ feed.user.name }}" />
+							{{ feed.full_text }}
+						</a>
+						<span class="date-time">{{ entry_at_text }} {{ feed.date_format }}</span>
+					</li>
+				{% endfor %}
+			</ol>
+		{% endif %}
+	</div>
+</div>

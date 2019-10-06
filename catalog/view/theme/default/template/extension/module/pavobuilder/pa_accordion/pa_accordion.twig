@@ -1,0 +1,40 @@
+{% set id = random(1..9) + random() %}
+<div class="pavo-widget-accordion {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<div class="panel-group" id="accordion{{id}}">
+		{% for key, item in settings.get_items %}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion{{id}}" href="#collapse{{key}}">{{item.title}} {% if settings.icon_open %}<span class="collapse{{key}} pull-right"><i class="fa {{settings.icon_close}}"></i>
+                </span>{% endif %}</a>
+				</h4>
+			</div>
+			<div id="collapse{{key}}" class="panel-collapse collapse">
+				<div class="panel-body">{{item.content}}</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		$( '#collapse0' ).addClass( "in" );
+	});
+})(jQuery);
+</script>
+{% if settings.icon_open and settings.icon_close %}
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		$('a[href=#collapse0] span i').removeClass('{{settings.icon_close}}').addClass('{{settings.icon_open}}');
+	    $('.collapse').on('show.bs.collapse', function () {
+	        $('a[href=#'+$(this).attr('id')+'] span').html("<i class='fa {{settings.icon_open}}'></i>");
+	    });
+	    $('.collapse').on('hide.bs.collapse', function () {
+	        $('a[href=#'+$(this).attr('id')+'] span').html("<i class='fa {{settings.icon_close}}'></i>");
+	    });
+	});
+})(jQuery);
+</script>
+{% endif %}

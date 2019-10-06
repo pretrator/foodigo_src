@@ -1,0 +1,193 @@
+/**
+ * Advanded search
+ */
+ $height : 45px !default;
+
+ #pav-adv-search {
+ 	position: relative;
+ 	select {
+ 		display: none;
+ 	}
+ 	.select2-container .select2-selection--single {
+ 		height:  $height ;
+ 		border: solid 1px $border-color;
+ 		border-top-width: 0;
+ 		border-bottom-width: 0;
+ 		border-radius: 0;
+
+ 	}
+ 	.select2-container--default .select2-selection--single .select2-selection__arrow {
+ 		height:  $height ;
+ 		b {
+ 			top: 20px;
+ 			margin: 0;
+ 			right: 10px;
+ 			left: auto;
+ 		}
+ 	}
+ 	.select2-container--default .select2-selection--single .select2-selection__rendered {
+ 		line-height:  $height ;
+ 	}
+ 	.categories-selection{
+ 		width: 200px;
+ 		position: absolute;
+ 		top: 0;
+ 		right:  $height ;
+ 	}
+ 	input {
+ 		padding-right: 265px;
+ 		border:0;
+ 		background: #fff;
+ 		border-radius: 0;
+ 		height:  $height;
+ 	}
+ 	button {
+ 		position: absolute;
+ 		top: 0;
+ 		right: 0;
+ 		width: 50px;
+ 		border-radius: 0;
+ 		border:0;
+ 		height: $height;
+ 		padding: 0;
+ 		@extend .btn-primary;
+ 	}
+ }
+ .search-hm {
+ 	.fa-search {
+ 		color: #fff;
+ 		right: 30%;
+ 	}
+ }
+ .pa_quicklogin_element_wrapper {
+ 	display: inline-block;
+ 	    vertical-align: top;
+ 	+ .pa_minicart_element_wrapper {
+ 		display: inline-block;
+ 		margin-left: 10px;
+ 	}
+ }
+ .pa_languages_element_wrapper
+ + .pa_currencies_element_wrapper .form-currency {
+ 	margin-left: 20px;
+ }
+ /**
+ * PopUp Search
+ */
+ .pavo-popup-search {
+
+ 	a {
+ 		&.btn {
+			background: transparent;
+			font-size: 16px;
+			border: 0;
+			padding: 15px;
+			&:active:focus {
+				background: transparent;
+			}
+		}
+		&.btn-search-default {
+			&:hover, &:active {
+				color: $theme-color;
+			}
+		}
+		&.btn-default {
+			color: $white;
+			&:hover, &:active {
+				color: $theme-color;
+			}
+		}
+		&.btn-primary {
+			color: $primary;
+			&:hover, &:active {
+				color: darken($primary, 10%);
+			}
+		}
+		&.btn-info {
+			color: $info;
+			&:hover, &:active {
+				color: darken($info, 10%);
+			}
+		}
+		&.btn-warning {
+			color: $warning;
+			&:hover, &:active {
+				color: darken($warning, 10%);
+			}
+		}
+		&.btn-success {
+			color: $success;
+			&:hover, &:active {
+				color: darken($success, 10%);
+			}
+		}
+		&.btn-danger {
+			color: $danger;
+			&:hover, &:active {
+				color: darken($danger, 10%);
+			}
+		}
+ 	}
+    .popup-search-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 105;
+        opacity: 0;
+        background-color: #fff;
+        visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        box-sizing: border-box;
+        -webkit-animation: pavo_search_out .3s;
+        -moz-animation: pavo_search_out .3s;
+        animation: pavo_search_out .3s;
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+    &.active .popup-search-container {
+        opacity: 1;
+        visibility: visible;
+        -webkit-animation: pavo_search_in .3s;
+        -moz-animation: pavo_search_in .3s;
+        animation: pavo_search_in .3s;
+        display: block!important;
+
+        .searchbox-inner {
+            position: relative;
+            width: 38%;
+            margin: auto;
+        }
+        .quick-search-form {
+        	position: relative;
+            width: 53%;
+            margin: auto;
+            .fa-search {right: 20%;}
+        }
+    }
+    .searchbox-inner {
+        position: relative;
+        display: table-cell;
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        text-align: center;
+    }
+}
+/**
+ * mini cart, search
+ */
+.fa-search {
+	position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 7%;
+    color: $link-color;
+    &:hover{color:$theme-color;}
+}
+.cart-icon {
+	top: 50%;
+}

@@ -1,0 +1,24 @@
+<div class="pavo-widget-text-box {{settings.layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }} {{ settings.style }}">
+	<div class="text-box" style="background-image:url({{settings.server}}{{settings.src}});">
+		{% if settings.iconpicker %}
+		<div class="tbox-icon {{ settings.iconstyle }}">
+			<i class="{{ settings.iconpicker }}"></i>
+		</div>
+		{% endif %}
+		{% if settings.title %}
+		<div class="tbox-title">
+		<h3>{{ settings.title }}</h3>
+		</div>
+		{% endif %}
+		{% if settings.subtitle %}
+		<div class="tbox-subtitle">
+		<h3>{{ settings.subtitle }}</h3>
+		</div>
+		{% endif %}
+	</div>
+	{% if settings.content %}
+	<div class="text-box-content">
+		{{ settings.content }}
+	</div>
+	{% endif %}
+</div>

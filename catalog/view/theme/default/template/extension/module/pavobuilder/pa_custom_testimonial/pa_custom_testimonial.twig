@@ -1,0 +1,66 @@
+{% set id = random(1..9) + random() %}
+{% set rows = settings.rows is defined and settings.rows > 1 ? settings.rows : 1 %}
+{% set columns = settings.item is defined ? settings.item : 4 %}
+{% set itemsCount = settings.get_items|length %}
+
+<div class="pavo-widget-custom_testimonial {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }} {{ settings.layout }}">
+    <div class="custom-testimonial-inner">
+        <div class="owl-carousel owl-theme custom-testimonial{{id}}" data-owlcarousel-options="{{ settings.carousel|json_encode()|escape }}">\
+            {% set i = 0 %}
+            {% for item in settings.get_items %}
+                {% set i = i + 1 %}
+                {% if (i % rows == 1 or rows == 1) and itemsCount > columns %}
+                    <div class="item">
+                {% endif %}
+                    <div class="testimonials-body">
+                        {% if item.title %}
+                            <h4>{{item.title}}</h4>
+                        {% endif %}
+                        {% if item.subtitle %}
+                        <div class="testimonial-subtitle">
+                            {{item.subtitle}}
+                        </div>
+                        {% endif %}
+                        {% if item.content %}
+                        <div class="testimonial-content">
+                            {{item.content}}
+                        </div>
+                        {% endif %}
+                        {% if item.rating %}
+                        <div class="rating">
+                            {% for i in 1..5 %}
+                            {% if item.rating < i %}
+                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                            {% else %}
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% if item.image %}
+                        <div class="testimonial-avatar">
+                            <img src="{{ item.image }}" alt="avatar-{{item.name}}" class="img-responsive" />
+                        </div>
+                        {% endif %}
+                        {% if item.name or item.note %}
+                        <div class="testimonials-profile">
+                            <div class="testimonials-name">
+                                {% if item.name %}
+                                    {{item.name}}
+                                {% endif %}
+                            </div>
+                            <div class="testimonials-note">
+                                {% if item.note %}
+                                {{text_from}} {{item.note}}
+                            {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% if (rows == 1 or i % rows == 0 or i == itemsCount) and itemsCount > columns %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

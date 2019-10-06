@@ -1,0 +1,24 @@
+{% set id = random(1..9) + random() %}
+<div class="pavo-widget-animated-bar {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+    {% for item in settings.get_items %}
+        {% if item.title %}<h5>{{item.title}}</h5>{% endif %}
+        <div class="progress skill-bar" id ="progress{{id}}">
+            <div class="progress-bar {% if settings.style == "striped" %}progress-bar-striped active{% endif %}" role="progressbar" aria-valuenow="{{item.percent}}" aria-valuemin="0" aria-valuemax="100" style="background-color: {{item.color}};">
+                <span class="skill">{% if item.content %}{{item.content}}{% endif %} {% if settings.percent == "true" %}<i class="val pull-right">{{item.percent}}%</i>{% endif %}</span>
+            </div>
+        </div>
+    {% endfor %}  
+</div>
+<script type="text/javascript">
+    (function($){
+        $(window).bind('scroll', function(ev) {
+            var oTop = $('#progress{{id}}').offset().top - window.innerHeight;
+            if ($(window).scrollTop() > oTop) {
+                $('#progress{{id}} .progress-bar').each(function() { 
+                    var progressBar = $(this).attr('aria-valuenow')+ '%'; 
+                    $(this).css('width', progressBar);
+                });          
+            }
+        });
+    })(jQuery);
+</script>

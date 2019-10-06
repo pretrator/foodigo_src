@@ -1,0 +1,42 @@
+<div class="entry-post-video">
+
+	<header>
+		<div class="entry-media">
+			{% include ( 'pavoblog/single/video.twig' ) %}
+		</div>
+		<div class="entry-heading">
+			{# post title #}
+			{% include ( 'pavoblog/single/title.twig' ) %}
+
+			<div class="entry-meta">
+				{# posted by #}
+				{% include ( 'pavoblog/loop/author.twig' ) %}
+
+				{# post date #}
+				{% include ( 'pavoblog/loop/date.twig' ) %}
+
+				{# post date #}
+				{% include ( 'pavoblog/loop/comment-count.twig' ) %}
+
+				{# post categories #}
+				{% include ( 'pavoblog/loop/categories.twig' ) %}
+			</div>
+		</div>
+	</header>
+
+	<section class="entry-content">
+		{# content #}
+		{% include ( 'pavoblog/single/content.twig' ) %}
+	</section>
+	{% if related_posts %}
+	<section class="related_posts">
+		{# related_posts #}
+		{% include ( 'pavoblog/single/related_posts.twig' ) %}
+	</section>
+	{% endif %}
+	<section class="comments">
+		{# comments #}
+		{{ comment_section }}
+	</section>
+
+</div>

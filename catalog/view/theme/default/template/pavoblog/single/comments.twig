@@ -1,0 +1,49 @@
+<div id="pavoblog-comments">
+	{% if facebook == 1%}
+	<div class="fb-comments" data-href="{{ facebook_url }}" data-numposts="{{ facebook_posts }}" data-width = "{{ facebook_width }}"></div>
+{% else %}
+	{% if ( comments ) %}
+		<h3>
+			{{ text_comments }}
+			<span class="comment-count">({{ comment_count }})</span>
+		</h3>
+		{% include '/pavoblog/comment/comment-list.twig' with { 'parent_id' : 0 } %}
+	{% endif %}
+	{% include '/pavoblog/comment/comment-form.twig' %}
+{% endif %}
+
+</div>
+<div id="fb-root"></div>
+<script>
+$( document ).ready(function() {
+	if (typeof fbAsyncInit !== 'function') {
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/{{facebook_language}}/sdk.js#xfbml=1&version=v2.11&appId={{facebook_app_id}}';
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	}
+});
+</script>
+<script type="text/javascript">
+(function($){
+
+	$( document ).on( 'click', '.reply-comment', function( e ) {
+		e.preventDefault();
+		var button = $( this );
+		var comment = button.parents( '.comment:first' );
+		var comment_id = comment.data( 'comment' );
+
+		$( '#comment-form input[name="comment_parent_id"]' ).val( comment_id );
+
+		$('html, body').animate({
+			scrollTop: $( '#comment-form' ).offset().top
+		}, 500);
+
+		return false;
+	} );
+
+})(jQuery);
+</script>

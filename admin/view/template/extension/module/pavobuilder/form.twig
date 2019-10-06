@@ -1,0 +1,115 @@
+{{ header }}
+
+  	{# start admin panel left sidebar #}
+  	{{ column_left }}
+  	{# end admin panel left sidebar #}
+
+  	{# start pavo builder control #}
+  	<div id="content">
+
+	    <div class="page-header">
+	      	<div class="container-fluid">
+		        <h1><b>{{ heading_title }}</b></h1>
+		        <ul class="breadcrumb">
+		          	{% for breadcrumb in breadcrumbs %}
+		            	<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		          	{% endfor %}
+		        </ul>
+		        <div class="pull-right">
+		        	<button type="submit" form="pavohomebuilder-layout-edit" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="{{ entry_save_text }}"><i class="fa fa-save"></i></button>
+		        </div>
+	      	</div>
+	    </div>
+
+	    <div class="container-fluid">
+	      	{% if success %}
+            	<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+              		<button type="button" class="close" data-dismiss="alert">&times;</button>
+            	</div>
+            {% endif %}
+            {% if errors.error_warning %}
+            	<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ errors.error_warning }}
+              		<button type="button" class="close" data-dismiss="alert">&times;</button>
+           		</div>
+            {% endif %}
+
+	      	<div class="panel panel-default">
+		        <div class="panel-heading"><h3 class="panel-title"><i class="fa fa-exchange"></i> {{ layout_id ? entry_edit_text : entry_add_new_text }}</h3></div>
+		        <div class="panel-body">
+		          	<form method="POST" id="pavohomebuilder-layout-edit" class="form-horizontal" enctype="multipart/form-data">
+		            	<div class="form-group">
+		            		<label class="col-sm-2 control-label" for="input-name">{{ entry_module_name }}</label>
+		            		<div class="col-sm-10">
+		            			<input type="text" name="name" value="{{ layout.name }}" placeholder="{{ entry_module_name }}" id="input-name" class="form-control" />
+		            			<input type="hidden" name="uniqid_id" value="{{ layout.uniqid_id }}" />
+		            		</div>
+		            	</div>
+		            	<div class="form-group">
+		            		<label class="col-sm-2 control-label" for="status">{{ entry_status_text }}</label>
+		            		<div class="col-sm-10">
+		            			<select name="status" id="input-status" class="form-control">
+	                                <option value="1"{{ layout.status == 1 ? ' selected' : '' }}>{{ entry_enabled_text }}</option>
+	                				<option value="0"{{ layout.status == 0 ? ' selected' : '' }}>{{ entry_disabled_text }}</option>
+                              	</select>
+		            		</div>
+		            	</div>
+
+		            	{% if show_absolute %}
+			            	<div class="form-group">
+			            		<label class="col-sm-2 control-label" for="absolute">{{ entry_absolute_text }}</label>
+			            		<div class="col-sm-10">
+			            			<select name="absolute" id="input-absolute" class="form-control">
+			            				<option value="0"{{ layout.absolute == 0 ? ' selected' : '' }}>{{ entry_disabled_text }}</option>
+		                                <option value="1"{{ layout.absolute == 1 ? ' selected' : '' }}>{{ entry_absolute_top }}</option>
+		                				<option value="2"{{ layout.absolute == 2 ? ' selected' : '' }}>{{ entry_absolute_left }}</option>
+		                				<option value="3"{{ layout.absolute == 3 ? ' selected' : '' }}>{{ entry_absolute_right }}</option>
+	                              	</select>
+			            		</div>
+			            	</div>
+		            	{% endif %}
+
+		    	 	 	<div class="form-group">
+		             		<label class="col-sm-2 control-label" for="input-banner">{{ entry_preview }}</label>
+		             		<div class="col-sm-10">
+				              	<a href="" id="thumb-img" data-toggle="image" class="img-thumbnail">
+			                		<img src="{% if thumb is empty %} {{ placeholder }} {% else %} {{ thumb }} {% endif %}" alt="" title="" data-placeholder="{{ placeholder }}" />
+				              	</a>
+				              	<input type="hidden" name="preview" value="{{ layout.preview }}" id="input-icon-menu" />
+		             		</div>
+		         	 	</div>
+
+		            	<div class="form-group">
+		            		<label class="col-sm-2 control-label" for="status">{{ entry_group_text }}</label>
+		            		<div class="col-sm-10">
+		            			<input type="text" name="group" name="group" value="{{ layout.group }}" class="form-control" />
+		            		</div>
+		            	</div>
+
+		            	<div id="pa-container">
+			            	<div class="form-group text-center">
+			            		<div class="btn-group button-alignments">
+				                    <button class="btn btn-default active" data-screen="lg" type="button" data-placement="top"><span class="fa fa-desktop"></span></button>
+				                    <button class="btn btn-default" data-screen="md" type="button" data-placement="top"><span class="fa fa-laptop"></span></button>
+				                    <button class="btn btn-default" data-screen="sm" type="button" data-placement="top"> <span class="fa fa-tablet"></span></button>
+				                    <button class="btn btn-default" data-screen="xs" type="button" data-placement="top"><span class="fa fa-mobile"></span> </button>
+				                </div>
+			            	</div>
+			            	<div id="pa-footer">
+			            		<div class="pa-buttons">
+			            			<a href="#" id="pa-add-element" class="pa-add-element pa-button pa-button-info"><i class="fa fa-plus" aria-hidden="true"></i> {{ entry_add_row_text }}</a>
+    								<a href="#" id="pa-paste" class="pa-add-element pa-button pa-button-info"><i class="fa fa-copy" aria-hidden="true"></i> {{ entry_paste_row_text }}</a>
+			            		</div>
+			            	</div>
+		            	</div>
+		            	<textarea class="hidden" id="pavo-home-pagebuilder-content" name="content"></textarea>
+		          	</form>
+		        </div>
+	      	</div>
+
+	    </div>
+  	</div>
+  	{# end pavo builder control #}
+
+  	{{ underscore_template }}
+
+{{ footer }}

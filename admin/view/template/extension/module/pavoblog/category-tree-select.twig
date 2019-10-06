@@ -1,0 +1,16 @@
+{% set preset = '' %}
+{% if ( level > 0 ) %}
+	{% for i in 1..level %}
+		{% set preset = [ preset, '-' ] | join() %}
+	{% endfor %}
+{% endif %}
+
+{% if ( categories ) %}
+	{% for category in categories %}
+		{% if ( category.parent_id == parent_id ) %}
+			<option value="{{ category.category_id }}"{{ category.category_id == selected ? ' selected' : '' }}>{{ preset }}{{ category.name }}</option>
+			{% set level = level + 1 %}
+			{% include 'extension/module/pavoblog/category-tree-select.twig' with { 'parent_id' : category.category_id, 'categories' : categories, 'level' : level, 'selected' : selected } %}
+		{% endif %}
+	{% endfor %}
+{% endif %}

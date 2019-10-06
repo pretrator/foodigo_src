@@ -1,0 +1,103 @@
+<div class="pavo-widget-deals">
+{% set id = random(1..9) + random() %}
+  {% set date_now = "now"|date("Y-m-d") %}
+    <div class="content-products">
+        <div class="row swiper-container pavo-swiper {% if settings.products|length <= settings.item*settings.rows %}swiper-no-swiping{% endif %}" id="deals{{id}}">
+            <div class="swiper-wrapper">
+                {% for product in settings.products %}
+                {% if product.date_start <= date_now and product.date_end <= settings.end_time and product.date_end >= date_now %}
+                <div class="swiper-slide product-layout">
+                    <div class="product-label-percentage">{{ product.percentage }} % {{ text_sale_off }}</div>
+                    <div class="product-thumb">
+                        <div class="image">
+                          <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>
+                          <div class="group-action">
+                            <button class="btn btn-wishlist" type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="icons8-heart"></i></button>
+                            <button class="btn btn-compare" type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="icons8-refresh"></i></button>
+                          </div>
+                          <div class="product-timing-deal countdown-timer" data-countdown="1" data-start="{{ product.date_start }}" data-end="{{ product.date_end }}" data-format="{{ date_format_simple_day_hour }}">
+                            
+                            <div class="date-format hidden">
+                              <div class="format-date format-date-days">
+                                <span class="time-group"><span class="timer">%D</span>  <span class="unit">{{ text_days }}</span></span> 
+                                <span class="time-group"><span class="timer">%H</span>  <span class="unit">{{ text_hours }} </span></span>
+                                <span class="time-group"><span class="timer">%M</span>  <span class="unit">{{ text_min }}</span></span>
+                                <span class="time-group"><span class="timer">%S</span>  <span class="unit">{{ text_sec }}</span></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="product-meta">
+                          <div class="caption">
+                            {% if product.price %}
+                            <p class="price">
+                              {% if  not product.special %}
+                              {{ product.price }}
+                              {% else %}
+                              <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                              {% endif %}
+                              {% if product.tax %}
+                              <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                              {% endif %}
+                            </p>
+                            {% endif %}
+                            <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                            <div class="description hide">{{ product.description }}</div>
+                            
+                          {% if product.rating %}
+                          <div class="rating">
+                              {% for i in 1..5 %}
+                              {% if product.rating < i %}
+                              <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                              {% else %}
+                              <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                              {% endif %}
+                              {% endfor %}
+                          </div>
+                          {% endif %}
+                          {% if settings.sold == "enabled" %}
+                          <div class="product-sold">{{ product.sold }} {{ text_sold }}</div>
+                          {% endif %}
+                      </div>
+                      <button class="btn btn-cart" type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');">{{ button_cart }}</button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="swiper-pager">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>                     
+</div>
+</div>
+<script type="text/javascript"><!--
+$('#deals{{id}}').swiper({
+    pause: 'hover',
+    speed: 800,
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    slidesPerView: {{ settings.item ? settings.item : 2 }},
+    loop:{{ settings.loop ? settings.loop : 'false' }},
+    {% if settings.auto_play == 'true' %}autoplay: {{ settings.auto_play_time ? settings.auto_play_time : 0 }},
+    {% endif %}noSwipingClass: 'swiper-no-swiping',
+    slidesPerColumn:{{ settings.rows ? settings.rows : 1 }},
+    spaceBetween: 10,
+    breakpoints: {
+      767: {
+        slidesPerView: 1,
+        {% if (settings.products|length) > (1*settings.rows) %}
+        noSwiping: false
+        {% endif %}
+      },
+      991: {
+        slidesPerView: 2,
+        {% if (settings.products|length) > (2*settings.rows) %}
+        noSwiping: false
+        {% endif %}
+      }, 
+    }
+});
+--></script>

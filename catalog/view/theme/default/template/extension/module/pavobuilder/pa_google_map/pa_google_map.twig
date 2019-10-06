@@ -1,0 +1,12 @@
+{% if settings.height and settings.height >= 200 %}
+	{% set height = settings.height %}
+{% else %}
+	{% set height = 200 %}
+{% endif %}
+
+{% if settings.key and settings.place_map %}
+	<div class="pa-element pa_google_map">
+		<iframe height="{{height}}" style="border:0;width:100%;" src="https://www.google.com/maps/embed/v1/place?key={{settings.key}}&q={{settings.place_map}}{% if settings.zoomControl %}&zoom={{settings.zoom ? settings.zoom : 10}}{% endif %}" allowfullscreen>
+		</iframe>
+	</div>
+{% endif %}

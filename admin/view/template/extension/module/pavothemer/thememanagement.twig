@@ -1,0 +1,88 @@
+{{ header }}
+
+  {# start admin panel left sidebar #}  
+  {{ column_left }}
+  {# end admin panel left sidebar #}
+
+  {# start lexus theme control #}
+  <div id="content">
+
+    <div class="page-header">
+      <div class="container-fluid">
+        {% if ( settings ) %}
+          <div class="pull-right">
+            <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+            <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+          </div>
+        {% endif %}
+        <h1><b>{{ heading_title }}</b></h1>
+        <ul class="breadcrumb">
+          {% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      {% if notices %}
+        {% for i, notice in notices %}
+          {{ notice }}
+        {% endfor %}
+      {% endif %}
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><i class="fa fa-puzzle-piece"></i>{{ theme_management_title }}</h3>
+        </div>
+        <div class="panel-body">
+          <fieldset>
+            <legend>{{ text_purchase_code }}</legend>
+          </fieldset>
+          <div class="well">
+            {% if ( purchased_code ) %}
+              {{ purchased_code }}
+            {% else %}
+              <div class="input-group">
+                <input class="form-control" name="purchased-code" placeholder="{{ text_enter_purchase_code }}" />
+                <a class="input-group-addon" href="{{ enter_purchased_code_url }}" id="pavothemer-puchased-code"><i class="fa fa-filter"></i> {{ text_enter }}</a>
+              </div>
+            {% endif %}
+
+          </div>
+          <div class="well">
+           Below extensions are loaded from our server at <a href="http://www.pavothemes.com" target="_blank">pavothemes.com</a>, if you need any support please keep  <a href="http://www.pavothemes.com/support.html" target="_blank">contact us </a> now 
+         </div> 
+          <div class="row">
+            <div class="col-sm-9 col-xs-7">
+              <div class="btn-group extension-tabs">
+               
+                <a href="{{ extension_download_available_url }}" class="btn btn-default download-available active">{{ entry_download_theme_available_text }}</a>
+                <a href="{{ extension_download_module_available_url }}" class="btn btn-default download-available">{{ entry_download_module_available_text }}</a>
+                <a href="{{ extension_themes_url }}" class="btn btn-default themes hide ">{{ entry_themes_text }}</a>
+                <a href="{{ extension_installed_url }}" class="btn btn-default installed hide">{{ entry_installed_text }}</a>
+              </div>
+            </div>
+          </div>
+
+          <div id="extension-list" class="pavo-extensions-list"></div>
+          <div id="paid-list"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {# end lexus theme control #}
+
+<script type="text/javascript">
+  var PA_MANAGEMENT = window.PA_MANAGEMENT = {
+    'liveinstall_url': '{{ liveinstall_url }}',
+    'activate_url'  : '{{ activate_url }}',
+    'deactivate_url': '{{ deactivate_url }}',
+    'activate_text' : '{{ text_activate }}',
+    'deactivate_text' : '{{ text_deactivate }}'
+  }
+</script>
+
+{{ footer }}

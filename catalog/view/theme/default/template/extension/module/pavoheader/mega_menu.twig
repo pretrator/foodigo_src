@@ -1,0 +1,18 @@
+<div class="pavo-widget-megamenu {{settings.menu_layout}} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }} {% if settings.ismain  == true %} is-mainmenu {% endif %}">
+ 	
+ 	{% if settings.menu_type == "horizontal-menu" %}
+ 		{{settings.menu}}
+ 	{% else %}
+ 		<div  class="{% if settings.menu_type != "veritcal-menu" %}  dropdown {% endif %} {{settings.menu_type}}-style" >
+			{% if settings.title_vertical %}
+			<div class="megamenu-heading">
+				<h3><span data-toggle="dropdown" >{% if settings.icon %}<i class="fa {{settings.icon}}"></i>{% endif %}{{settings.title_vertical}}</span></h3>
+			</div>	
+			{% endif %}
+				
+			<div class="{% if settings.menu_type == "vertical-dropdown" %} dropdown-menu pav-verticalmenu {% endif %} pav-verticalmenu">
+				{{settings.menu}}
+			</div>
+		</div>	
+	{% endif %}	
+</div>

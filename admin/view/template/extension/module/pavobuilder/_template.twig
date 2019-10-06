@@ -1,0 +1,753 @@
+<script type="text/javascript">
+	var PA_PARAMS = window.PA_PARAMS = {
+		google_map_api_key: '{{ google_map_api_key }}',
+		editLayoutURL 	: '{{ edit_layout_url }}',
+		content 		: {{ layout.content|json_encode() }},
+		element_fields 	: {{ element_fields|json_encode() }},
+		element_mask 	: {{ element_mask|json_encode() }},
+		animate_groups 	: {{ animate_groups|json_encode() }},
+		animates 		: {{ animates|json_encode() }},
+		site_url 		: '{{ site_url }}',
+		image_url 		: '{{ image_url }}',
+		languages 		: {{ i18n }},
+		language_code 	: '{{ iso_code }}',
+		languages_list 	: {{ languages|json_encode() }},
+		user_token 		: '{{ user_token }}',
+		elements 		: {{ elements|json_encode() }},
+		devices 		: { 'laptop' : 'fa fa-laptop', 'tablet' : 'fa fa-tablet', 'mobile' : 'fa fa-mobile' },
+		width_roles 	: {{ width_roles|json_encode() }},
+		no_image 		: '{{ no_image }}',
+		theme_default_image_url: '{{ theme_default_image_url }}',
+		entry_enter_customrow_error: '{{ entry_enter_customrow_error }}',
+		entry_none_copied_text : '{{ entry_none_copied_text }}'
+	}
+</script>
+<script type="text/html" id="pa-languages-panel">
+	<ul class="nav nav-tabs" id="language">
+		{% set i = 0 %}
+		{% for language in languages %}
+			<li{{ i == 0 ? ' class="active"' : '' }}>
+				<a href="#language{{ language.language_id }}" data-toggle="tab" aria-expanded="true"><img src="language/{{ language.code }}/{{ language.code }}.png" /> {{ language.name }}</a>
+			</li>
+		{% set i = i + 1 %}
+		{% endfor %}
+	</ul>
+	<div class="tab-content">
+		{% set i = 0 %}
+		{% for language in languages %}
+			<div class="tab-pane{{ i == 0 ? ' active' : '' }}" id="language{{ language.language_id }}"></div>
+		{% set i = i + 1 %}
+		{% endfor %}
+	</div>
+	<script type="text/javascript">
+		$('#language').tab();
+		$('#language a:first').tab('show');
+	</script>
+</script>
+<script type="text/html" id="pa-group-languages-panel">
+	<div class="form-group">
+		<div class="col-sm-12">
+			<ul class="nav nav-tabs" id="language-<%= data.index %>">
+				{% set i = 0 %}
+				{% for language in languages %}
+					<li{{ i == 0 ? ' class="active"' : '' }}>
+						<a href="#language-<%= data.index %>{{ language.language_id }}" data-toggle="tab" aria-expanded="true"><img src="language/{{ language.code }}/{{ language.code }}.png" /> {{ language.name }}</a>
+					</li>
+				{% set i = i + 1 %}
+				{% endfor %}
+			</ul>
+			<div class="tab-content">
+				{% set i = 0 %}
+				{% for language in languages %}
+					<div class="tab-pane{{ i == 0 ? ' active' : '' }}" id="language-<%= data.index %>{{ language.language_id }}"></div>
+				{% set i = i + 1 %}
+				{% endfor %}
+			</div>
+			<script type="text/javascript">
+				$('#language<%= data.index %>').tab();
+				$('#language<%= data.index %> a:first').tab('show');
+			</script>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-modal-panel-heading">
+	<% if ( data.tabs.length ) { %>
+		<% if ( data.tabs.length > 1 ) { %>
+			<ul class="nav nav-tabs">
+				<% for ( var i = 0; i < data.tabs.length; i++ ) { %>
+					<li<%= i == 0 ? ' class="active"' : '' %>><a href="#nav-<%= data.tabs[i].tab %>" data-toggle="tab" aria-expanded="true"><%= data.tabs[i].label %></a></li>
+				<% } %>
+			</ul>
+		<% } %>
+	<% } %>
+</script>
+<script type="text/html" id="pa-modal-panel">
+	<% if ( data.tabs.length ) { %>
+		<div class="tab-content">
+			<% for ( var i = 0; i < data.tabs.length; i++ ) { %>
+				<div id="nav-<%= data.tabs[i].tab %>" class="tab-pane<%= i == 0 ? ' active' : '' %>"></div>
+			<% } %>
+		</div>
+	<% } %>
+</script>
+<script type="text/html" id="pa-group-wrapper-form-field">
+	<div class="form-group<%= (data.field.hidden !== undefined && data.field.hidden) || data.field.type == 'hidden' || (data.field.relation !== undefined && data.settings[data.field.relation] != data.field.relation_value) ? ' hide' : '' %>"<%= data.field.relation !== undefined ? ' data-relation="'+data.field.relation+'"' : '' %><%= data.field.relation_value !== undefined ? ' data-relation-value="'+data.field.relation_value+'"' : '' %>>
+		<% if (data.field.hidden == undefined || !data.field.hidden) { %>
+			<label class="col-sm-3 control-label"><%= data.field.label %></label>
+		<% } %>
+		<%= data.innerHTML %>
+	</div>
+</script>
+<script type="text/html" id="pa-rangeslider-form-field">
+	<div class="col-sm-9">
+		<input type="text" name="<%= data.field.name %>" data-grid="<%= data.field.grid %>" data-prefix="<%= data.field.prefix %>" data-double="<%= data.field.double %>" data-min="<%= typeof data.field.min !== 'undefined' ? data.field.min : 0 %>" data-max="<%= typeof data.field.max !== 'undefined' ? data.field.max : 1000 %>" id="<%= data.field.name %>" value="<%= data.field.value %>" class="form-control pa-rangeslider-input" />
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-group-form-field">
+	<div class="form-group" id="<%= data.field.id !== undefined ? data.field.id : data.field.name %>">
+		<div class="col-sm-12 group-content"></div>
+	</div>
+</script>
+<script type="text/html" id="pa-group-item-form-field">
+	<div class="<%= data.field.id %>-<%= data.field.index %> panel-default" data-cid="<%= data.field.cid %>" style="margin-bottom: 15px">
+	    <div class="group-header panel-heading" role="tab" id="<%= data.field.id %>-<%= data.field.index %>">
+	      	<h5 class="panel-title">
+		        <a data-toggle="collapse" href="#<%= data.field.id %>-<%= data.field.index %>" aria-expanded="true" aria-controls="<%= data.field.id %>-<%= data.field.index %>">
+		          	<%= data.field.label %> <%= parseInt( data.field.index ) + 1 %>
+		        </a>
+		        <button type="button" class="close" data-dismiss="alert" data-confirm="{{ entry_confirm_delete }}">×</button>
+	      	</h5>
+	    </div>
+
+	    <div id="<%= data.field.id %>-<%= data.field.index %>" class="collapse show" role="tabpanel" aria-labelledby="<%= data.field.id %>-<%= data.field.index %>" data-parent="#<%= data.field.id %>">
+	      	<div class="group-body"></div>
+	    </div>
+  	</div>
+	<% if ( data.field.desc ) { %>
+		<p class="desc"><%= data.field.desc %></p>
+	<% } %>
+</script>
+<script type="text/html" id="pa-group-item-add-new">
+	<div class="alert alert-success alert-dismissible text-center group-item-add-new">
+		<a href="#" class="add-new-group-item">{{ entry_add_new_text }}</a>
+	</div>
+</script>
+<script type="text/html" id="pa-animate-form-field">
+	<div class="form-group text-center">
+		<div id="animate-preview" class="animated">
+			<h1>{{ heading_title }}</h1>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-select-form-field">
+	<div class="col-sm-9">
+		<select name="<%= data.field.name %><%= data.field.multiple !== undefined && data.field.multiple ? '[]' : '' %>" data-name="<%= data.field.name %>" id="<%= data.field.id ? data.field.id : data.field.name %>" class="form-control"<%= data.field.multiple !== undefined && data.field.multiple ? ' multiple="multiple"' : '' %>>
+			<% if ( data.field.none === undefined || data.field.none ) { %>
+				<option value="">{{ entry_text_none }}</option>
+			<% } %>
+			<% if ( data.field.groups ) { %>
+				<% _.each( data.field.options, function( options, name ) { %>
+					<optgroup label="<%= name %>">
+						<% _.each( options, function( label, val ){ %>
+							<option value="<%= val %>"<%= ( val == data.field.value ) || ( typeof data.field.value === 'object' && data.field.value.indexOf( val ) !== -1 ) ? ' selected' : '' %>><%= label %></option>
+						<% }) %>
+					</optgroup>
+				<% }); %>
+			<% } else { %>
+				<% _.each( data.field.options, function( f ) { %>
+					<option value="<%= f.value %>"<%= ( f.value == data.field.value ) || ( typeof data.field.value === 'object' && data.field.value.indexOf( f.value ) !== -1 ) ? ' selected' : '' %>><%= f.label %></option>
+				<% }); %>
+			<% } %>
+		</select>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-select-animate-form-field">
+	<div class="col-sm-5">
+		<select name="<%= data.field.name %><%= data.field.multiple !== undefined && data.field.multiple ? '[]' : '' %>" id="<%= data.field.id ? data.field.id : data.field.name %>" class="form-control"<%= data.field.multiple !== undefined && data.field.multiple ? ' multiple="multiple"' : '' %>>
+			<% if ( data.field.none === undefined || data.field.none ) { %>
+				<option value="">{{ entry_text_none }}</option>
+			<% } %>
+			<% if ( data.field.groups ) { %>
+				<% _.each( data.field.options, function( options, name ) { %>
+					<optgroup label="<%= name %>">
+						<% _.each( options, function( label, val ){ %>
+							<option value="<%= val %>"<%= ( val == data.field.value ) || ( typeof data.field.value === 'object' && data.field.value.indexOf( val ) !== -1 ) ? ' selected' : '' %>><%= label %></option>
+						<% }) %>
+					</optgroup>
+				<% }); %>
+			<% } else { %>
+				<% _.each( data.field.options, function( f ) { %>
+					<option value="<%= f.value %>"<%= ( f.value == data.field.value ) || ( typeof data.field.value === 'object' && data.field.value.indexOf( f.value ) !== -1 ) ? ' selected' : '' %>><%= f.label %></option>
+				<% }); %>
+			<% } %>
+		</select>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+	<div class="col-sm-4">
+		<div id="animate-preview">
+			<h4>{{ heading_title }}</h4>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-hidden-form-field">
+	<div class="col-sm-9">
+		<input type="hidden" name="<%= data.field.name %>" id="<%= data.field.name %>" value="<%= data.field.value %>" class="form-control" placeholder="<%= data.field.placeholder %>" />
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-text-form-field">
+	<div class="col-sm-9">
+		<% if ( data.field.prefix !== undefined || data.field.suffix !== undefined ) { %>
+			<div class="input-group">
+		<% } %>
+			<% if ( data.field.prefix !== undefined ) { %>
+				<span class="input-group-addon"><%= data.field.prefix %></span>
+			<% } %>
+			<input type="text" name="<%= data.field.name %>" id="<%= data.field.name %>" value="<%= data.field.value %>" class="form-control" placeholder="<%= data.field.placeholder %>" />
+			<% if ( data.field.desc ) { %>
+				<p class="desc"><%= data.field.desc %></p>
+			<% } %>
+			<% if ( data.field.suffix !== undefined ) { %>
+				<span class="input-group-addon"><%= data.field.suffix %></span>
+			<% } %>
+		<% if ( data.field.prefix !== undefined || data.field.suffix !== undefined ) { %>
+			</div>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-number-form-field">
+	<div class="col-sm-9">
+		<% if ( data.field.prefix !== undefined || data.field.suffix !== undefined ) { %>
+			<div class="input-group">
+		<% } %>
+			<% if ( data.field.prefix !== undefined ) { %>
+				<span class="input-group-addon"><%= data.field.prefix %></span>
+			<% } %>
+				<input type="number" step="<%= data.field.step %>" min="<%= data.field.min %>" max="<%= data.field.max %>" name="<%= data.field.name %>" id="<%= data.field.name %>" value="<%= data.field.value %>" class="form-control" />
+				<% if ( data.field.desc ) { %>
+					<p class="desc"><%= data.field.desc %></p>
+				<% } %>
+			<% if ( data.field.suffix !== undefined ) { %>
+				<span class="input-group-addon"><%= data.field.suffix %></span>
+			<% } %>
+		<% if ( data.field.prefix !== undefined || data.field.suffix !== undefined ) { %>
+			</div>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-checkbox-form-field">
+	<div class="col-sm-9">
+		<label class="checkbox-inline">
+			<input type="hidden" name="<%= data.field.name %>" value="0" class="form-control" />
+			<input type="checkbox" name="<%= data.field.name %>" id="<%= data.field.name %>" value="1" <%= data.field.value == 1 ? ' checked' : '' %>/>
+		</label>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-radio-form-field">
+	<div class="col-sm-9">
+		<% _.each( data.field.options, function( value ) { %>
+			<label class="radio-inline">
+				<input type="radio" name="<%= data.field.name %>" value="<%= value.value %>" <%= data.field.value == value.value ? ' checked' : '' %>/> <%= value.label %>
+		    </label>
+		<% } ); %>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-colorpicker-form-field">
+	<div class="col-sm-9">
+		<div class="input-group pa-colorpicker-input" title="Using data-color attribute in the input">
+			<input type="text" name="<%= data.field.name %>" class="form-control" value="<%= data.field.value ? data.field.value : '' %>" data-color="<%= data.field.value ? data.field.value : '' %>"/>
+			<span class="input-group-addon"><i></i></span>
+		</div>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-datepicker-form-field">
+	<div class="col-sm-9">
+		<div class="input-group">
+			<input type="text" name="<%= data.field.name %>" value="<%= data.field.value %>" data-format="<%= data.field.format ? data.field.format : 'mm/dd/yyyy' %>" class="form-control pa-datepicker-input"/>
+			<span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+		</div>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-datetimepicker-form-field">
+	<div class="col-sm-9">
+		<div class="input-group datetimepicker">
+            <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+            <input name="<%= data.field.name %>" value="<%= data.field.value %>" type="text" class="form-control input-small pa-datetimepicker-input">
+        </div>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-iconpicker-form-field">
+	<div class="col-sm-9">
+		<div class="input-group">
+	     	<input data-placement="bottomRight" name="<%= data.field.name %>" class="form-control icp icp-auto pa-iconpicker-input" value="<%= data.field.value ? data.field.value : '' %>" type="text" />
+            <span class="input-group-addon"><i class="fa <%= data.field.value ? data.field.value : 'fa-anchor' %>"></i></span>
+	    </div>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-image-form-field">
+	<% var uniqid = new Date().getTime() %>
+	<%
+		var image = PA_PARAMS.no_image;
+		if ( data.field.value !== undefined && data.field.value ) {
+			var lastIndex = new File( [''], data.field.value ).name.lastIndexOf('.');
+			var name = data.field.value.slice( 0, lastIndex );
+			var ext = data.field.value.slice( lastIndex );
+			image = name && ext ? PA_PARAMS.image_url + '/' + name + ext : '';
+		}
+	%>
+	<div class="col-sm-9">
+		<a href="#" id="thumb-<%= uniqid %>" data-toggle="image" class="img-thumbnail" data-original-title="" title="">
+			<img src="<%= image %>" data-placeholder="<%= PA_PARAMS.no_image %>" width="100" height="100" />
+		</a>
+        <input type="hidden" name="<%= data.field.name %>" value="<%= data.field.value %>" id="input-<%= uniqid %>">
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-map-preview-form-field">
+	<div class="form-group">
+		<div class="col-sm-12">
+			<div class="pa-google-map-wrapper">
+				<input name="place_name" value="<% data.settings.place_name %>" placeholder="{{ entry_enter_place_text }}" class="form-control" />
+				<div class="pa-google-map"></div>
+				<input type="hidden" name="lat" value="<%= data.settings.lat %>" />
+				<input type="hidden" name="lng" value="<%= data.settings.lng %>" />
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-textarea-form-field">
+	<div class="col-sm-9">
+		<textarea name="<%= data.field.name %>" id="input-<%= data.field.uniqid %>" class="form-control" cols="<%= data.field.cols ? data.field.cols : 5 %>"><%= data.field.value ? data.field.value : ( data.field.default ? data.field.default : '' ) %></textarea>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-layout-onion-form-field">
+	<div class="form-group">
+		<label class="col-sm-3 control-label"><%= PA_PARAMS.languages.entry_box_text %></label>
+		<div class="col-sm-9">
+			<div class="pa-layout-onion">
+				<div class="margin">
+					<input type="number" class="top" step="any" name="<%= data.field.name %>[margin_top]" value="<%= data.field.value && data.field.value.margin_top != undefined ? data.field.value.margin_top : '' %>" />
+					<input type="number" class="right" step="any" name="<%= data.field.name %>[margin_right]" value="<%= data.field.value && data.field.value.margin_right != undefined ? data.field.value.margin_right : '' %>" />
+					<input type="number" class="bottom" step="any" name="<%= data.field.name %>[margin_bottom]" value="<%= data.field.value && data.field.value.margin_bottom != undefined ? data.field.value.margin_bottom : '' %>" />
+					<input type="number" class="left" step="any" name="<%= data.field.name %>[margin_left]" value="<%= data.field.value && data.field.value.margin_left != undefined ? data.field.value.margin_left : '' %>" />
+					<div class="border">
+						<input type="number" class="top" step="any" name="<%= data.field.name %>[border_top]" value="<%= data.field.value && data.field.value.border_top != undefined ? data.field.value.border_top : '' %>" />
+						<input type="number" class="right" step="any" name="<%= data.field.name %>[border_right]" value="<%= data.field.value && data.field.value.border_right != undefined ? data.field.value.border_right : '' %>" />
+						<input type="number" class="bottom" step="any" name="<%= data.field.name %>[border_bottom]" value="<%= data.field.value && data.field.value.border_bottom != undefined ? data.field.value.border_bottom : '' %>" />
+						<input type="number" class="left" step="any" name="<%= data.field.name %>[border_left]" value="<%= data.field.value && data.field.value.border_left != undefined ? data.field.value.border_left : '' %>" />
+						<div class="padding">
+							<input type="number" class="top" step="any" name="<%= data.field.name %>[padding_top]" value="<%= data.field.value && data.field.value.padding_top != undefined ? data.field.value.padding_top : '' %>" />
+							<input type="number" class="right" step="any" name="<%= data.field.name %>[padding_right]" value="<%= data.field.value && data.field.value.padding_right != undefined ? data.field.value.padding_right : '' %>" />
+							<input type="number" class="bottom" step="any" name="<%= data.field.name %>[padding_bottom]" value="<%= data.field.value && data.field.value.padding_bottom != undefined ? data.field.value.padding_bottom : '' %>" />
+							<input type="number" class="left" step="any" name="<%= data.field.name %>[padding_left]" value="<%= data.field.value && data.field.value.padding_left != undefined ? data.field.value.padding_left : '' %>" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<% if ( data.field.desc ) { %>
+				<p class="desc"><%= data.field.desc %></p>
+			<% } %>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label"><%= PA_PARAMS.languages.entry_border_color_text %></label>
+		<div class="col-sm-9">
+			<div class="input-group pa-colorpicker-input" title="Using data-color attribute in the input">
+				<input type="text" name="<%= data.field.name %>[border_color]" class="form-control" value="<%= data.field.value.border_color ? data.field.value.border_color : '' %>" data-color="<%= data.field.value.border_color ? data.field.value.border_color : '' %>"/>
+				<span class="input-group-addon"><i></i></span>
+			</div>
+			<% if ( data.field.desc ) { %>
+				<p class="desc"><%= data.field.desc %></p>
+			<% } %>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label"><%= PA_PARAMS.languages.entry_border_style_text %></label>
+		<div class="col-sm-9">
+			<select name="<%= data.field.name %>[border_style]" class="form-control">
+				<option value="none"<%= data.field.value.border_style == 'none' ? ' selected' : '' %>>None</option>
+				<option value="hidden"<%= data.field.value.border_style == 'hidden' ? ' selected' : '' %>>Hidden</option>
+				<option value="dotted"<%= data.field.value.border_style == 'dotted' ? ' selected' : '' %>>Dotted</option>
+				<option value="dashed"<%= data.field.value.border_style == 'dashed' ? ' selected' : '' %>>Dashed</option>
+				<option value="solid"<%= data.field.value.border_style == 'solid' ? ' selected' : '' %>>Solid</option>
+				<option value="double"<%= data.field.value.border_style == 'double' ? ' selected' : '' %>>Double</option>
+				<option value="groove"<%= data.field.value.border_style == 'groove' ? ' selected' : '' %>>Groove</option>
+				<option value="ridge"<%= data.field.value.border_style == 'ridge' ? ' selected' : '' %>>Ridge</option>
+				<option value="inset"<%= data.field.value.border_style == 'inset' ? ' selected' : '' %>>Inset</option>
+				<option value="outset"<%= data.field.value.border_style == 'outset' ? ' selected' : '' %>>Outset</option>
+				<option value="initial"<%= data.field.value.border_style == 'initial' ? ' selected' : '' %>>Initial</option>
+				<option value="inherit"<%= data.field.value.border_style == 'inherit' ? ' selected' : '' %>>Inherit</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label"><%= PA_PARAMS.languages.entry_color_text %></label>
+		<div class="col-sm-9">
+			<div class="input-group pa-colorpicker-input" title="Using data-color attribute in the input">
+				<input type="text" name="<%= data.field.name %>[color]" class="form-control" value="<%= data.field.value.color ? data.field.value.color : '' %>" data-color="<%= data.field.value.color ? data.field.value.color : '' %>"/>
+				<span class="input-group-addon"><i></i></span>
+			</div>
+			<% if ( data.field.desc ) { %>
+				<p class="desc"><%= data.field.desc %></p>
+			<% } %>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-editor-form-field">
+	<% var uniqid = new Date().getTime() + '-' + data.field.name; %>
+	<div class="col-sm-9">
+		<textarea id="<%= uniqid %>" name="<%= data.field.name %>" class="form-control pa-editor" data-toggle="summernote"><% print( _.unescape( data.field.value ) ) %></textarea>
+		<% if ( data.field.desc ) { %>
+			<p class="desc"><%= data.field.desc %></p>
+		<% } %>
+	</div>
+</script>
+<script type="text/html" id="pa-responsive-form-field">
+	<% var settings = data.field.value ? data.field.value : {}; %>
+	<table class="pa-table table table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">{{ entry_device_text }}</th>
+				<th>{{ entry_width_text }}</th>
+				<th class="text-center">{{ entry_hide_text }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% _.each( PA_PARAMS.devices, function( name, value ){ %>
+				<tr>
+					<td class="text-center"><span class="<%= name %>"></span></td>
+					<td>
+						<select name="<%= data.field.name %>[<%= value %>][cols]" class="form-control">
+							<% _.each( PA_PARAMS.width_roles, function( text, cols ) { %>
+								<option value="<%= cols %>"<%= settings[value] !== undefined && cols == settings[value].cols ? ' selected' : '' %>><%= text %></option>
+							<% } ); %>
+						</select>
+					</td>
+					<td class="text-center">
+						<div class="checkbox">
+							<input type="hidden" name="<%= data.field.name %>[<%= value %>][hide]" value="0" />
+							<input type="checkbox" name="<%= data.field.name %>[<%= value %>][hide]" value="1"<%= settings[value] !== undefined && settings[value].hide == 1 ? ' checked' : '' %>/>
+						</div>
+					</td>
+				</tr>
+			<% } ) %>
+		</tbody>
+	</table>
+</script>
+<script type="text/html" id="pa-imageselect-form-field">
+	<ul class="list-inline image-select text-center">
+		<% _.each( data.field.options, function( option, key ) { %>
+			<li>
+				<label for="<%= data.field.name %>-<%= key %>" class="<%= data.field.value == option.value ? 'active' : '' %>">
+					<img src="<%= PA_PARAMS.theme_default_image_url %><%= option.src %>" width="100" height="100" class="image-responsive" />
+					<input type="radio" class="hidden" name="<%= data.field.name %>" id="<%= data.field.name %>-<%= key %>" value="<%= option.value %>" <%= data.field.value == option.value ? 'checked="checked"' : '' %> />
+				</label>
+			</li>
+		<% }); %>
+	</ul>
+</script>
+<script type="text/html" id="pa-edit-form-template">
+	<div class="pa-inspector pa-modal-window" id="pa-edit-form">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title text-info"><i class="fa fa-pencil"></i> {{ entry_edit_text }} <%= data.widget !== undefined && data.widget ? data.widget.replace('pa_', '') : '' %></h4>
+				</div>
+				<div class="modal-body">
+			  		<form method="POST" class="form-horizontal" id="pa-edit-form-settings">
+			  			<div class="loading text-center">
+			  				<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+			  			</div>
+			  		</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pa-close" aria-hidden="true">{{ entry_cancel_text }}</button>
+					<button type="button" class="btn btn-info pa-update" aria-hidden="true" form="pa-edit-form-settings">{{ entry_update_text }}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-elements-panel">
+	<div id="pa-elements-list" class="pa-elements-list elements-panel modal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<input type="text" name="s" class="form-control" id="search-text" placeholder="{{ entry_enter_name_text }}" />
+					<h4 class="modal-title text-info"><i class="fa fa-exclamation-triangle"></i> {{ entry_add_element_text }}</h4>
+				</div>
+				<div class="modal-body">
+					{% if ( groups ) %}
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#nav-elements-all" data-toggle="tab" aria-expanded="true">{{ entry_all_text }}</a></li>
+					  		{% for key, tab in groups %}
+					  			<li><a href="#nav-{{ key }}" data-toggle="tab" aria-expanded="true">{{ tab.name }}</a></li>
+					  		{% endfor %}
+			  			</ul>
+				  		<div class="tab-content">
+				  			<div id="nav-elements-all" class="tab-pane active"></div>
+				  			{% for key, tab in groups %}
+				  				<div id="nav-{{ key }}" class="tab-pane">
+				  					{% if ( key == 'opencart' ) %}
+				  						<ul class="nav nav-tabs">
+				  							{% set i = 0 %}
+					  						{% for tab in tab.groups %}
+								  				<li{{ i == 0 ? ' class="active"' : '' }}><a href="#nav-{{ tab.slug }}" data-toggle="tab" aria-expanded="true">{{ tab.name }}</a></li>
+							  				{% set i = i + 1 %}
+								  			{% endfor %}
+							  			</ul>
+							  			<div class="tab-content">
+							  				{% set i = 0 %}
+								  			{% for tab in tab.groups %}
+								  				<div id="nav-{{ tab.slug }}" class="tab-pane{{ i == 0 ? ' active' : '' }}">
+								  					{% for element in elements %}
+									  					{% if ( element.group_slug == tab.slug and element.widget != 'pa_column' ) %}
+									  						<div class="pa-col-sm-3">
+										  						{% if ( element.type == 'widget' and element.widget ) %}
+																	<a href="#"  class="element element-item element-item-{{ element.code ? element.code : element.widget }}" data-widget="{{ element.widget }}">
+																		<i class="{{ element.icon }}"></i>
+																		<span>{{ element.name }}</span>
+																	</a>
+																{% else %}
+																	<a href="#" class="element element-item element-item-{{ element.code ? element.code : '' }}" data-element_type="module" data-group="{{ tab.slug }}" data-module-id="{{ element.module_id }}" data-module-code="{{ element.code }}" data-mask="{{ element | json_encode() | escape }}">
+											  							<i class="{{ element.icon }}"></i>
+											  							<span>{{ element.name }}</span>
+											  							<code>{{ element.code }}.{{ element.module_id }}</code>
+											  						</a>
+																{% endif %}
+									  						</div>
+									  					{% endif %}
+									  				{% endfor %}
+								  				</div>
+							  				{% set i = i + 1 %}
+								  			{% endfor %}
+							  			</div>
+				  					{% else %}
+						  				{% for tab in tab.groups %}
+							  				<div id="nav-{{ tab.slug }}" class="tab-pane">
+								  				{% for element in elements %}
+								  					{% if ( element.group_slug == tab.slug and element.widget != 'pa_column' ) %}
+								  						<div class="pa-col-sm-3">
+									  						{% if ( element.type == 'widget' and element.widget ) %}
+																<a href="#"  class="element element-item element-item-{{ element.code ? element.code : element.widget }}" data-widget="{{ element.widget }}">
+																	<i class="{{ element.icon }}"></i>
+																	<span>{{ element.name }}</span>
+																</a>
+															{% else %}
+																<a href="#" class="element element-item element-item-{{ element.code ? element.code : '' }}" data-element_type="module" data-group="{{ tab.slug }}" data-module-id="{{ element.module_id }}" data-module-code="{{ element.code }}" data-mask="{{ element | json_encode() | escape }}">
+										  							<i class="{{ element.icon }}"></i>
+										  							<span>{{ element.name }}</span>
+										  							<code>{{ element.code }}.{{ element.module_id }}</code>
+										  						</a>
+															{% endif %}
+								  						</div>
+								  					{% endif %}
+								  				{% endfor %}
+							  				</div>
+							  			{% endfor %}
+							  		{% endif %}
+				  				</div>
+				  			{% endfor %}
+				  		</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-row-template">
+	<div class="pa-row-container row-fade-in" data-element="<%= data.settings.element %>" data-cid="<%= data.cid %>" data-uniqid_id="<%= data.settings.uniqid_id %>">
+		<div class="pa-controls row-controls">
+			<div class="left-controls pull-left">
+				<a href="#" class="pa-edit pa-edit-row" title="{{ entry_edit_row_text }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+				<a href="#" class="pa-clone pa-clone-row" title="{{ entry_clone_row_text }}"><i class="fa fa-clone" aria-hidden="true"></i></a>
+				<a href="#" class="pa-copy-row" title="{{ entry_copy_row_text }}"><i class="fa fa-copy" aria-hidden="true"></i></a>
+				<a href="#" class="pa-row-code"><i class="fa fa-code" aria-hidden="true"></i></a>
+				<a href="#" class="pa-delete pa-delete-row" title="{{ entry_delete_row_text }}" data-confirm="{{ confirm_delete_row }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+			</div>
+			<div class="right-controls pull-right">
+				<span href="#" class="pa-set-column<%= data.screen !== 'lg' ? ' hide' : '' %>">
+					<a href="#" class="pa-edit-column-num" title="{{ entry_1_columns_text }}" data-columns="1">1</a>
+					<a href="#" class="pa-edit-column-num" title="{{ entry_2_columns_text }}" data-columns="2">2</a>
+					<a href="#" class="pa-edit-column-num" title="{{ entry_3_columns_text }}" data-columns="3">3</a>
+					<a href="#" class="pa-edit-column-num" title="{{ entry_4_columns_text }}" data-columns="4">4</a>
+					<a href="#" class="pa-edit-column-num" title="{{ entry_2_8_2_columns_text }}" data-columns="2-8-2">2-8-2</a>
+					<a href="#" class="pa-edit-column-num" title="{{ entry_4_8_columns_text }}" data-columns="4-8">4-8</a>
+					<a href="#" class="pa-edit-column-num" title="{{ entry_8_4_columns_text }}" data-columns="8-4">8-4</a>
+				</span>
+				<a href="#" class="pa-add pa-add-column<%= data.screen !== 'lg' ? ' hide' : '' %>" title="{{ entry_add_column_text }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+				<a href="#" class="pa-reorder pa-reorder-row" title="{{ entry_reorder_text }}"><i class="fa fa-arrows" aria-hidden="true"></i></a>
+			</div>
+		</div>
+		<div class="pa-element-wrapper">
+			<div class="pa-row pav-row-container"></div>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-column-template">
+	<div class="pa-column pa-col-xs-<%= data.responsive[data.screen].cols %>" style="<%= data.responsive[data.screen].styles !== undefined && data.responsive[data.screen].styles.width !== undefined ? 'width:' + data.responsive[data.screen].styles.width + '%' : '' %>" data-element="<%= data.settings.element %>" data-cid="<%= data.cid %>" data-resizabled="<%= data.resizabled %>" data-uniqid_id="<%= data.settings.uniqid_id %>">
+		<div class="pa-controls column-controls top">
+			<a href="#" class="pa-add pa-add-element" title="{{ entry_add_element_text }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+			<a href="#" class="pa-edit pa-edit-column" title="{{ entry_edit_column_text }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+			<a href="#" class="pa-delete pa-delete-column" title="{{ entry_delete_column_text }}" data-confirm="{{ confirm_delete_column }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+		</div>
+		<div class="pa-element-wrapper">
+			<div class="pa-column-container"></div>
+		</div>
+		<div class="pa-controls column-controls bottom">
+			<a href="#" class="pa-add pa-add-element" title="{{ entry_add_element_text }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-element-template">
+	<div class="pa-element-content<%= data.element ? ' ' + data.element : '' %>" data-cid="<%= data.cid %>" data-confirm="{{ confirm_element_column }}">
+		<div class="pa-controls element-controls">
+			<a href="#" class="pa-reorder" title="{{ entry_reorder_text }}"><i class="fa fa-arrows" aria-hidden="true"></i></a>
+			<a href="#" class="pa-edit" title="{{ entry_edit_element_text }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+			<a href="#" class="pa-clone" title="{{ entry_clone_element_text }}"><i class="fa fa-clone" aria-hidden="true"></i></a>
+			<a href="#" class="pa-delete" title="{{ entry_delete_element_text }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+		</div>
+		<div class="pa-element-wrapper">
+			<% if ( data.widget !== undefined ) { %>
+				<a href="#" class="element element-item">
+					<i class="<%= data.icon %>"></i>
+					<span><%= data.label %></span>
+					<% if ( data.mask_desc !== undefined ) { %>
+							<code><%= data.mask_desc %></code>
+					<% } %>
+				</a>
+			<% } else { %>
+				<a href="#" class="element element-item element-item-<%= data.mask.code != undefined ? data.mask.code : '' %>">
+					<i class="<%= data.mask.icon %>"></i>
+					<span><%= data.mask.name %></span>
+					<% if ( data.mask.type == 'widget' || data.mask.widget ) { %>
+						<code><%= data.mask.widget %></code>
+					<% } else if ( data.mask.code !== undefined ) { %>
+						<code><%= data.mask.code %>.<%= data.mask.module_id %></code>
+					<% } %>
+				</a>
+			<% } %>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-tabs-element-template">
+	<div class="pa-element-tabs-section">
+		<div class="pa-section-wrap">
+			<div class="pa-tabs-labels-group"></div>
+			<div class="pa-tabs-contents-group"></div>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-tab-element-title">
+	<div class="section-label<%= data.active === true ? ' active' : '' %>" data-cid="<%= data.cid %>">
+		<% if ( data.use_icon && data.icon ) { %>
+			<i class="fa <%= data.icon %>"></i>
+		<% } %>
+		<span class="tab-label">
+			<% if ( data.settings !== undefined && data.settings[PA_PARAMS.language_code] !== undefined && data.settings[PA_PARAMS.language_code].title !== undefined ) { %>
+				<%= data.settings[PA_PARAMS.language_code].title %>
+			<% } else {  %>
+				{{ entry_new_tab_text }}
+			<% } %>
+		</span>
+		<span class="sort-handler"><i class="fa fa-arrows"></i></span>
+	</div>
+</script>
+<script type="text/html" id="pa-tab-element-content">
+	<div class="pa-tab-element-wrap<%= data.active === true ? ' fade in active' : ' fade' %>" data-cid="<%= data.cid %>" data-confirm="{{ entry_confirm_delete }}">
+		<div class="pa-controls element-controls">
+			<a href="#" class="pa-edit" title="{{ entry_edit_text }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+			<a href="#" class="pa-delete" title="{{ entry_delete_text }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+		</div>
+		<div class="pa-tab-elements"></div>
+	</div>
+</script>
+<script type="text/html" id="pa-loading-template">
+	<div id="pa-loading">
+		<div id="loading-inner">
+			<div id="loader" class="loading"></div>
+			<span>{{ waiting_text }}</span>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-custom-row-modal-template">
+	<div class="pa-panel-drag-modal pa-modal pa-modal-window" data-cid="<%= data.cid %>">
+		<div class="pa-modal-window-inner panel">
+			<div class="pa-header-container">
+				<div class="panel-heading">
+					<h3 class="title">{{ entry_row_layout_text }}</h3>
+					<div class="panel-control pull-right">
+						<button type="button" class="close close-modal"><i class="fa fa-times"></i></button>
+					</div>
+				</div>
+			</div>
+			<div class="pa-body-container panel-body">
+				<form action="" id="pa-custom-row-form" class="form-horizontal">
+					<div class="input-group">
+						<input name="value" class="row-custom form-control" placeholder="{{ entry_custom_row_placeholder }}" />
+					   	<span class="input-group-btn">
+					        <button class="btn btn-primary" type="submit">{{ entry_update_text }}</button>
+					   	</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="pa-helper-options">
+	<div id="pa-helper-overlay" data-cid="<%= data.cid %>">
+		<ul id="pa-helper-ui">
+			<li class="label"><%= data.label ? data.label : data.widget %></li>
+			<ul class="submenu">
+				<li class="edit"><i class="fa fa-pencil"></i> {{ entry_edit_text }}</li>
+				<% if ( typeof Storage !== 'undefined' ) { %>
+					<li class="copy"><i class="fa fa-clone"></i> {{ entry_copy_text }}</li>
+				<% } %>
+				<% if ( data.copied !== undefined && data.copied ) { %>
+					<li class="paste"><i class="fa fa-paste"></i> {{ entry_paste_text }}</li>
+				<% } %>
+				<li class="delete" data-confirm="{{ confirm_delete }}"><i class="fa fa-trash"></i>{{ entry_delete_text }}</li>
+			</ul>
+		</ul>
+	</div>
+</script>
+<script type="text/html" id="pa-resizing-column">
+	<div class="pa-resizing-width">
+		<span class="width"><%= data.width %>%</span>
+	</div>
+</script>

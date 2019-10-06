@@ -1,0 +1,20 @@
+{% if get_comment %}
+<div class="box pavblogs-comments-{{ name }}">
+    {% if title %}
+    <h3 class="box-heading">{{ title }}</h3>
+    {% endif %}
+    <div class="box-content" >
+        <div class="pavblog-comments clearfix">
+            {% for get_comments in get_comment %}
+            <div class="pav-comment clearfix">
+                <a href="{{ get_comments.link }}" title="{{ get_comments.comment_name }}">
+                    <img src="http://www.gravatar.com/avatar/" alt="{{ get_comments.comment_name }}"/>
+                </a>
+                <div class="comment">{{ (get_comments.comment_text|striptags)|slice(0,20) }}...</div>
+                <span class="comment-author">{{ text_postedby }} {{ get_comments.comment_name }}...</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}

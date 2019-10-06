@@ -1,0 +1,60 @@
+{% set id = random(1..9) + random() %}
+<div class = "panel panel-default {{settings.layout}} {{ settings.extra_class }}">
+    {% if settings.title == 'enabled' %}
+        <div class="panel-heading">
+        {% if settings.title_blogs %}
+            <h3 class="panel-title">{{ settings.title_blogs }}</h3>
+        {% endif %}
+        {% if settings.description and settings.description != '<p><br></p>' %}
+            <span>{{ settings.description }}</span>
+        {% endif %}
+        </div>
+    {% endif %}
+    <div class="panel-body">
+        {% set rows = settings.rows is defined and settings.rows > 1 ? settings.rows : 1 %}
+        {% set columns = settings.view is defined ? settings.view : 4 %}
+        {% set postsCount = settings.posts|length %}
+
+        <div class="owl-carousel owl-theme" data-owlcarousel-options="{{ settings.carousel|json_encode()|escape }}">
+            {% set i = 0 %}
+            {# calculator #}
+            {% for post in settings.posts %}
+                {% set i = i + 1 %}
+                {% if (i % rows == 1 or rows == 1) and postsCount > columns %}
+                    <div class="item">
+                {% endif %}
+
+                    {# include template file #}
+                    <div class="blogs-thumb transition">
+                        <div class="image text-center">
+                            <a href="{{ post.link }}" class="pa-element blog-image">
+                                <img src="{{ post.thumb }}" class="img-responsive" alt="{{ post.name }}"/>
+                            </a>
+                        </div>
+                        <div class="blog-username ">
+                            <span>{{ post.username }}</span>
+                        </div>
+                        -
+                        <div class="blog-date">{{ post.date_added }}</div>
+                        <div class="blog-body">
+                            <div class="blog-title">
+                                <a href="{{ post.link }}" class="pa-element title">
+                                {{ (post.name|striptags)|slice(0,58) }}
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                {{ (post.content|striptags)|slice(0,58) }}...
+                                <a href="{{ post.link }}" class="blog-content1">{{ entry_read_more_text }}</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    {# end include template file #}
+
+                {% if (rows == 1 or i % rows == 0 or i == postsCount) and postsCount > columns %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

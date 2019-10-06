@@ -1,0 +1,110 @@
+<script type="text/javascript" src="view/javascript/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="view/javascript/jquery/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ js_plugins }}"></script>
+<script type="text/javascript" src="{{ js_revolution }}"></script>
+<link rel="stylesheet" href="{{ typoFile }}" type="text/css"/>
+<style>
+	.rev_slider{ position: relative; overflow: hidden; }
+	.bannercontainer { position: relative;margin: 18px auto }
+</style>
+
+<div class="modal-dialog modal-lg previewLayer" style="width:1170px;">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title"><?php echo $heading_title; ?></h4>
+		</div>
+		<div class="modal-body">
+			<!-- START THE BODY LAYER SLIDER -->
+			<div class="bannercontainer" style="width:{{ sliderParams.width }}px;height:{{ sliderParams.height }}px; ">
+				<div class="banner rev_slider" style="width:{{ sliderParams.width }}px;height:{{ sliderParams.height }}px; ">
+					<ul>
+					<!-- THE FIRST SLIDE -->
+						<li data-transition="random" data-slotamount="7">
+							{% for layer in slider_layers %}
+								{% set type = layer.layer_type %}
+								{% set endeffect = '' %}
+								{% if layer.layer_endanimation == 'auto' %} {% set layer_layer_endanimation = '' %} {% endif %}
+								{% if layer.layer_endtime %} 
+									{% set endeffect = ' data-end="{{ layer.layer_endtime }}"' %}
+									{% set endeffect = ' data-endspeed="{{ layer.layer_endspeed }}"' %}
+									{% if layer.layer_endeasing != 'nothing' %}
+										{% set endeffect = ' data-endeasing="{{ layer.layer_endeasing }}"' %}
+									{% endif %}
+								{% else %}
+									{% set layer_layer_endanimation = ''  %}
+								{% endif %}
+
+								<!-- THE MAIN IMAGE IN THE SLIDE -->
+								<img src="{{ layer.main_image }}" >
+								<div class="caption {{ layer.layer_class }} {{ layer.layer_animation }} {{ layer.layer_easing }} {{ layer_layer_endanimation }}" data-x="{{ layer.layer_left }}" data-y="{{ layer.layer_top }}" data-speed="300" data-start="{{ layer.time_start }}" data-easing="easeOutExpo" {{ endeffect }}>
+									{% if type == 'image' %}
+										<img src="{{ layer.layer_content }}">
+									{% elseif type == 'video' %}
+										{% if layer.layer_video_type == 'vimeo' %}
+											<iframe src="http://player.vimeo.com/video/{{ layer.layer_video_id }}?title=0&amp;byline=0&amp;portrait=0;api=1" width="{{ layer.layer_video_width }}" height="{{ layer.layer_video_height }}"  style="width:{{ layer.layer_video_width }}px;height:{{ layer.layer_video_height }}px"></iframe>
+										{% else %}
+											<iframe src="http://www.youtube.com/embed/{{ layer.layer_video_id }}?title=0&amp;byline=0&amp;portrait=0;api=1" width="{{ layer.layer_video_width }}" height="{{ layer.layer_video_height }}"  style="width:{{ layer.layer_video_width }}px;height:{{ layer.layer_video_height }}px"></iframe>
+										{% endif %}
+									{% else %}
+										{{ layer.layer_caption }}
+									{% endif %}
+								</div>
+
+							{% endfor %}
+								
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+ 
+
+<!--
+##############################
+ - ACTIVATE THE BANNER HERE -
+##############################
+-->
+<script type="text/javascript">
+
+	var tpj=jQuery;
+	tpj.noConflict();
+
+	tpj(document).ready(function() {
+
+	if (tpj.fn.cssOriginal!=undefined)
+		tpj.fn.css = tpj.fn.cssOriginal;
+
+		tpj('.banner').revolution(
+			{
+				delay:9000,
+				startheight:{{ sliderParams.height }},
+				startwidth:{{ sliderParams.width }},
+
+				hideThumbs:200,
+
+				thumbWidth:100,							// Thumb With and Height and Amount (only if navigation Tyope set to thumb !)
+				thumbHeight:50,
+				thumbAmount:5,
+
+				navigationType:"none",				// bullet, thumb, none
+				navigationArrows:"verticalcentered",				// nexttobullets, solo (old name verticalcentered), none
+
+				navigationStyle:"round",				// round,square,navbar,round-old,square-old,navbar-old, or any from the list in the docu (choose between 50+ different item), custom
+
+				touchenabled:"on",						// Enable Swipe Function : on/off
+				onHoverStop:"on",						// Stop Banner Timet at Hover on Slide on/off
+
+				stopAtSlide:-1,							// Stop Timer if Slide "x" has been Reached. If stopAfterLoops set to 0, then it stops already in the first Loop at slide X which defined. -1 means do not stop at any slide. stopAfterLoops has no sinn in this case.
+				stopAfterLoops:-1,						// Stop Timer if All slides has been played "x" times. IT will stop at THe slide which is defined via stopAtSlide:x, if set to -1 slide never stop automatic
+
+				hideCaptionAtLimit:0,					// It Defines if a caption should be shown under a Screen Resolution ( Basod on The Width of Browser)
+				hideAllCaptionAtLilmit:0,				// Hide all The Captions if Width of Browser is less then this value
+				hideSliderAtLimit:0,					// Hide the whole slider, and stop also functions if Width of Browser is less than this value
+
+				shadow:1					 
+			});
+	});
+</script>

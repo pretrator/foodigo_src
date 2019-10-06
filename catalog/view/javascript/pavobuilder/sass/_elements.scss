@@ -1,0 +1,122 @@
+@import 'elements/google_map';
+@import 'elements/team';
+@import 'elements/search';
+/**
+ * Heading
+ */
+.pavo-widget-heading{
+	&.style-center{
+		text-align: center;
+	}
+	&.style-left{
+		text-align: left;
+	}
+	&.style-right{
+		text-align: right;
+	}
+}
+
+/*
+ * Icon Featured Box
+ */
+.pavo-widget-featuredbox{
+	position:relative;
+	.content-icon{
+		margin: 0 auto;
+		height: 45px;
+		width:45px;
+		font-size: 45px;
+		line-height: 45px;
+		text-align: center;
+		color: $brand-primary;
+	}
+	.icon-radius{
+		background: $brand-primary;
+		color:#FFF;
+		font-size: 25px;
+		border-radius: 50%;
+	}
+	.icon-rectangle{
+		background: $brand-primary;
+		color: #FFF;
+		font-size: 25px;
+	}
+	.content-subtitle{
+		color: #888;
+	}
+
+	&.layout-1{
+		text-align: center;
+	}
+	&.layout-2{
+ 
+		.content-icon{
+			float: left;
+		}
+		.content-box-right{
+			padding-left:70px;
+		}
+	}
+	&.layout-3{
+	 
+		.content-icon{
+			float: right
+		}
+		.content-box-left{
+			padding-right:70px;
+		}
+	}
+}
+
+/**
+ * Countdown
+ */
+.pavo-widget-countdown{
+	.inner{
+		padding:20px 10px;
+		text-align: center;
+	}
+ 
+	.time-group{
+		display: inline-block;
+		font-size: 50px;
+		text-align: center;
+		font-weight: bold;
+		padding:10px 20px;
+		background: $brand-primary;
+		color:white;
+		margin: 0 10px;
+	    .unit{
+			font-size: 11px;
+			display: block;
+			clear: both;
+			padding-top:10px;
+			padding-bottom: 10px;
+		}
+		
+	}
+ 
+	&.layout-1{
+		.time-group{
+			background: $brand-info;
+			.unit {
+				background: #FFF;
+				color: $brand-info;
+				margin-left: -20px;
+				margin-right:-20px;
+				margin-bottom: -10px;
+
+			}
+		}
+	}
+	&.layout-2{
+		.time-group{
+			background: inherit;
+			color: #000;
+			.unit {
+				color: #999; 
+				display: inline-block;
+			}
+		}
+	}
+} 

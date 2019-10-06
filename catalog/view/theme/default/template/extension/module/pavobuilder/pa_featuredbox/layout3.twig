@@ -1,0 +1,17 @@
+<div class="pavo-widget-featuredbox {{settings.layout}} {{settings.extra_class}} {{ settings.style }}">
+	<div class="inner">
+		{% if settings.image is defined %}
+			<div class="content-icon {{ settings.iconstyle }}">
+				<img class="img-responsive" src="{{ settings.image }}" alt="Image icon" />
+			</div>
+		{% else %}
+			<div class="content-icon {{ settings.iconstyle }}"><i class="{{ settings.iconpicker }} {{ settings.iconsize }}"></i></div>
+		{% endif %}
+		<div class="content-box-left">
+			<h3 class="content-title">{{ settings.title }}</h3>
+			<div class="content-subtitle">{{ settings.subtitle }}</div>
+			<div class="content-description">{{ settings.content }}</div>
+		</div>	
+		
+	</div>
+</div>

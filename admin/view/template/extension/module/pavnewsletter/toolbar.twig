@@ -1,0 +1,11 @@
+<div class="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		{% if menus is defined %}
+			{% for key,menu in menus %}
+				{% set class_active = '' %}
+				{% if menu_active is defined and menu_active == key %} {% set class_active = 'active' %} {% endif %}
+				<li class="{{ class_active }}"><a href="{{ menu.link }}">{{ menu.title }}</a></li>
+			{% endfor %}
+		{% endif %}
+	</ul>
+</div>

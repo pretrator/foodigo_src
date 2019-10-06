@@ -1,0 +1,22 @@
+<div class="pavo-widget-facebook-page {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<div class="fb-page" data-href="{{settings.facebook_url}}" data-tabs="{{settings.show_post}}" data-width="{{settings.page_width}}" data-height="{{settings.page_height}}" data-small-header="{{settings.header_size}}" data-adapt-container-width="true" data-hide-cover="{{settings.header_photo}}" data-show-facepile="{{settings.friend_face}}">
+		<blockquote cite="{{settings.facebook_url}}" class="fb-xfbml-parse-ignore"><a href="{{settings.facebook_url}}"></a>
+		</blockquote>
+	</div>
+</div>
+<div id="fb-root"></div>
+<script type="text/javascript">
+(function($){
+	$( document ).ready(function() {
+		if (typeof fbAsyncInit !== 'function') {  
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = 'https://connect.facebook.net/{{settings.language_fb}}/sdk.js#xfbml=1&version=v2.11';
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		}
+	});
+})(jQuery);
+</script>

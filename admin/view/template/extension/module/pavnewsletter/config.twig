@@ -1,0 +1,144 @@
+{{ header }}
+{{ column_left }}
+
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+		        {% for breadcrumb in breadcrumbs %}
+		        	<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		        {% endfor %}
+	      	</ul>
+		</div>
+	</div><!-- end div .page-header -->
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success and success != '' %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ heading_title }}</h3>
+			</div>
+			<div class="panel-body" >
+
+				<div class="col-sm-3">
+					
+					<div class="logo"><h3>{{ heading_title }}</h3></div>
+					<div class="slidebar">{% include '/extension/module/pavnewsletter/toolbar.twig' %}</div>
+					<div class="clear clr"></div>
+					
+				</div>
+
+				<div class="col-sm-9">
+					<div class="heading"><h3>{{ entry_mail_settings }}</h1></div>
+					<div class="toolbar">{% include '/extension/module/pavnewsletter/action_bar.twig' %}</div>
+					
+					<div class="content">
+						<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+							<table class="table"> 
+								<tr>
+									<td class="col-sm-4">{{ entry_use_custom_email_config }}</td>
+									<td class="col-sm-8">
+										{% if general.custom_email_config is defined and general.custom_email_config == 1 %} {% set checked = 'checked="checked"' %} {% endif %}
+										<select class="form-control" style="width:35%" name="pavnewsletter_config[custom_email_config]">
+											{% if general.custom_email_config %}
+											<option value="1" selected="selected">{{ text_yes }}</option>
+											<option value="0">{{ text_no }}</option>
+											{% else %}
+											<option value="1">{{ text_yes }}</option>
+											<option value="0" selected="selected">{{ text_no }}</option>
+											{% endif %}
+										</select>
+									</td>
+								</tr>
+				
+								<tr>
+									<td class="col-sm-4">{{ entry_mail_protocal }}</td>
+									<td class="col-sm-8">
+										<select class="form-control" style="width:35%" name="pavnewsletter_config[protocal]">
+											{% if mail_protocals is defined %}
+												{% for key,val in mail_protocals %}
+													{% if general.protocal is defined and key = general.protocal %}
+														<option value="{{ key }}" selected="selected">{{ val }}</option>
+													{% else %}
+														<option value="{{ key }}">{{ val }}</option>
+													{% endif %}
+												{% endfor %}
+											{% endif %}
+										</select><br/>
+										<p>{{ help_mail_protocal }}</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-4">{{ entry_mail_address }}</td>
+									<td class="col-sm-8">
+										{% if general.email %} {% set config_email = general.email %} {% else %} {% set config_email = '' %} {% endif %}
+										<input class="form-control" style="width:55%" type="text" name="pavnewsletter_config[email]" value="{{ config_email }}"/>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-4">{{ entry_smtp_host }}</td>
+									<td class="col-sm-8">
+										{% if general.smtp_host %} {% set smtp_host = general.smtp_host %} {% else %} {% set smtp_host = '' %} {% endif %}
+										<input class="form-control" style="width:55%" type="text" name="pavnewsletter_config[smtp_host]" value="{{ smtp_host }}"/>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-4">{{ entry_smtp_username }}</td>
+									<td class="col-sm-8">
+										{% if general.smtp_username %} {% set smtp_username = general.smtp_username %} {% else %} {% set smtp_username = '' %} {% endif %}
+										<input class="form-control" style="width:55%" type="text" name="pavnewsletter_config[smtp_username]" value="{{ smtp_username }}"/>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-4">{{ entry_smtp_password }}</td>
+									<td class="col-sm-8">
+										{% if general.smtp_password %} {% set smtp_password = general.smtp_password %} {% else %} {% set smtp_password = '' %} {% endif %}
+										<input class="form-control" style="width:55%" type="text" name="pavnewsletter_config[smtp_password]" value="{{ smtp_password }}"/>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-4">{{ entry_smtp_port }}</td>
+									<td class="col-sm-8">
+										{% if general.smtp_port %} {% set smtp_port = general.smtp_port %} {% else %} {% set smtp_port = '' %} {% endif %}
+										<input class="form-control" style="width:55%" type="text" name="pavnewsletter_config[smtp_port]" value="{{ smtp_port }}"/>
+									</td>
+								</tr>
+								<tr>
+									<td class="col-sm-4">{{ entry_smtp_timeout }}</td>
+									<td class="col-sm-8">
+										{% if general.smtp_timeout %} {% set smtp_timeout = general.smtp_timeout %} {% else %} {% set smtp_timeout = '' %} {% endif %}
+										<input class="form-control" style="width:55%" type="text" name="pavnewsletter_config[smtp_timeout]" value="{{ smtp_timeout }}"/>
+									</td>
+								</tr>
+					
+								<tr>
+									<td class="col-sm-4">{{ entry_retries_count }}</td>
+									<td class="col-sm-8">
+										{% if general.retries_count %} {% set retries_count = general.retries_count %} {% else %} {% set retries_count = 3 %} {% endif %}
+										<input class="form-control" style="width:15%" type="text" name="pavnewsletter_config[retries_count]" value="{{ retries_count }}"/>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+
+
+				</div>
+
+			</div><!-- end div .panel-body -->
+		</div><!-- end div .panel -->
+	</div><!-- end div #page-content -->
+
+</div><!-- end div #content -->
+{{ footer }}

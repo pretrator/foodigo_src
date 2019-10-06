@@ -1,0 +1,169 @@
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+
+$width : 300px !default;
+@media screen and (max-width: $screen-md-min) {
+    .row-offcanvas-right {
+        right: 0;
+    }
+    .row-offcanvas-left {
+        left: 0;
+    }
+    .row-offcanvas-right
+    .sidebar-offcanvas {
+        right: -$width;
+    }
+    .row-offcanvas-left
+    .sidebar-offcanvas {
+        left: -$width;
+    }
+    .row-offcanvas-right.active {
+        right: $width;
+    }
+    .row-offcanvas-left.active {
+        left: $width;
+    }
+
+    .row-offcanvas.active {
+        &:before {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background: rgba(black, 0.75);
+            content: "";
+            z-index: 200;
+        }
+    }
+}
+@media (max-width: $screen-sm-max) {
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+        width: $width;
+        background:$offcanvas-menu-bg;
+        height: 100%;
+        z-index: 999;
+    }
+    .row-offcanvas {
+        position: relative;
+        @include transition(all 0.25s ease-out);
+    }
+
+   .sidebar-offcanvas  .navbar-nav > li {
+        display: block !important;
+        position: relative!important;
+        float: none;
+        clear: both;
+        overflow: hidden;
+    }
+
+    .btn-show-offcanvas {
+      font-size: 20px;
+      color: $theme-color-default;
+      &:hover {
+        color: $theme-color;
+      }
+    }
+    .sidebar-offcanvas{
+        .navbar {
+            background: transparent;
+            border: 0;
+        }
+        .offcanvas-heading{
+            background: darken( $offcanvas-menu-bg, 10%);
+            padding:10px 20px;
+            > button {
+                position:absolute;
+                top: 15px;
+                right: 10px;
+            }
+            .quick-search-form {
+                margin-right: 40px;
+                button {    
+                    top: 10px;
+                    right: 10px;}
+            }
+            position:relative;
+        }
+        .offcanvas-top {
+            background: darken( $offcanvas-menu-bg, 20%);
+            padding:20px;
+        }
+        .navbar-nav {
+            width: 100%;
+            text-align: left;
+            margin: 0;
+            border-bottom: 1px solid $border-color;
+        }
+        .navbar-collapse {
+            display: block;
+            padding: 0;
+            border: 0;
+        }
+        .navbar-nav > li {
+            border-top: solid 1px $border-color;
+            width: 100%;
+            &.dropdown {
+                > .dropdown-menu {
+                    width: 100%!important;
+                    border-top: solid 1px $border-color;
+                }
+            }
+        }
+        .nav > li > a {
+            display: inline-block;
+            position: relative;
+        }
+        .dropdown  > .dropdown-menu {
+            position: relative!important;
+            display: none!important;
+            top: auto;
+            left: auto;
+             @include opacity(1);
+            visibility: visible;
+            min-width: 100%;
+            width: 100%;
+            padding: 30px;
+            box-shadow: none;
+            border: 0;
+        }
+        .nav > li > a,  .dropdown > i {
+            padding-top: 20px!important;
+            padding-bottom: 20px!important;
+            line-height: 20px
+        }
+        .dropdown > i {
+            display: block;
+            width: 50px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 99;
+            text-align: center;
+            line-height: 20px;
+            background:$theme-color;
+            color: #FFF;
+            margin-right: 0;
+        }
+        .active > .dropdown-menu  {
+            display: block!important;
+        }
+        .mainmenu .navbar .navbar-nav > li .dropdown-submenu .dropdown-menu {
+            position: relative;
+            left: 0;
+            padding: 10px 20px;
+            display: none;
+            @include box-shadow (none);
+        }
+        .mainmenu .navbar .navbar-nav > li .dropdown-submenu.open .dropdown-menu {
+            display: block;
+        }
+        .click-canavs-menu {
+            display: none;
+        }
+    }
+}

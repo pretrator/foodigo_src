@@ -1,0 +1,15 @@
+<div class="pavo-widget-banner-carousel{{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<div class="owl-carousel owl-theme" data-owlcarousel-options="{{ settings.carousel|json_encode()|escape }}">
+    	{% for banner in settings.get_banners %}
+  			<div class="item text-center">
+  				{% if banner.link %}
+  					<a href="{{ banner.link }}">
+  						<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />
+  					</a>
+				{% else %}
+					<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />
+  				{% endif %}
+  			</div>
+  		{% endfor %}
+  	</div>
+</div>

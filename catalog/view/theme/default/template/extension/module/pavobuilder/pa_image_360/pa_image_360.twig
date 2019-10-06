@@ -1,0 +1,43 @@
+<div class="widget-360-degree-banner {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<div class="threesixty threesixty-banner">
+	    <div class="spinner">
+	        <span>0%</span>
+	    </div>
+	    <ol class="threesixty_images">
+	    </ol>
+	</div>
+</div>
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		var wd = screen.width;
+		var screen;
+		if (wd < 992) {
+			screen = true
+		} else {
+			screen = false
+		}
+		banner = $('.threesixty-banner').ThreeSixty({
+			totalFrames: {{settings.banners|length}}, 
+			endFrame: {{settings.banners|length}}, 
+			currentFrame: 1, 
+			imgList: '.threesixty_images', 
+			progress: '.spinner', 
+			imgArray: [{% for banner in settings.banners %}'{{banner.image}}',{% endfor %}], 
+			ext: '{{settings.gallery_type}}', 
+			height: {{settings.height}},
+			width: {{settings.width}},
+			navigation: false,
+			responsive: screen,
+			{% if settings.auto_spin == "true" %}
+			onReady: function(){
+				banner.play();
+			}
+			{% endif %}
+		});
+		$(".threesixty-banner").hover(function () {
+			banner.stop();
+		});
+	});
+})(jQuery);
+</script>

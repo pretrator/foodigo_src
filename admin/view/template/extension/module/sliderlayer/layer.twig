@@ -1,0 +1,604 @@
+{{ header }} {{ column_left }} {% set module_row = 0 %}
+<div id="content">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="pull-right">
+				<a class="btn btn-primary" onclick="$('#slider-form').submit();" class="button"><i class="fa fa-save"></i> {{ button_save }}</a> |
+      			<a class="btn btn-danger" href="{{ cancel }}" class="button">{{ button_cancel }}</a> |
+      			<a class="btn btn-success" id="btn-preview-ingroup" href="{{ preview_slider }}" class="button green" id="preview"><i class="fa fa-play"></i>  Preview Sliders In Group</a> |
+
+      			<a class="btn btn-default" id="btn-preview-ingroup" href="{{ back_to_edit }}" class="button green" id="preview"><i class="fa fa-mail-reply"></i> Back to Edit Group</a>
+
+			</div>
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+		        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		    	{% endfor %}
+			</ul>
+		</div>
+	</div><!-- End div#page-header -->
+
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ heading_title }}</h3>
+			</div>
+			<div class="panel-body">
+				<ul id="languagetabs" class="nav nav-tabs" role="tablist">
+					{% set i = 0 %}
+					{% for language in show_languages %}
+						{% if language.language_id == lang %} {% set class = 'class="active"' %} {% else %} {% set class = '' %} {% endif %}
+						<li {{ class }} data-value="{{ language.language_id }}" >
+							<a href="{{ language.url }}"><img src="{{ language.image }}" title"{{ language.name }}"> {{ language.name }}</a>
+						</li>
+					{% set i = i + 0 %}
+					{% endfor %}
+				</ul>
+
+				<div class="pull-right">
+					<a href="" title="" class="btn btn-danger" data-toggle="clone"><i class="fa fa-file-text-o"></i> Clone Data</a>
+				</div>
+				<br>
+
+				
+
+	    		<!-- Form Edit Info Slider Layer -->
+	    		{% if slider_id %}
+	    		<h3>{{ text_edit_slider }} <span>{{ slider_title }}</span></h3>
+	    		{% else %}
+	    			<h3>{{ text_create_new_slider }}</h3>
+	    		{% endif %}
+
+				<form action="" method="post" id="slider-editor-form">
+					<div id="slider-warning" class=""></div>
+					<input type="hidden" id="slider_group_id" name="slider_group_id" value="{{ group_id }}"/>
+					<div class="slider-params-wrap">
+						<div class="slider-params">
+							<table class="table">
+								<tr>
+									<td> Title </td>
+									<td><input class="form-control" type="text" name="slider_title" size="100" value="{{ slider_title }}"></td>
+								</tr>
+								<tr>
+									<td>Status </td>
+									<td><input name="slider_language_id" type="hidden" value="{{ lang }}"/>
+										<select class="form-control" name="slider_status">
+											{% for key,value in yesno %}
+											<option value="{{ key }}" {% if key == params.slider_status %} selected="selected" {% endif %} >{{ value }}</option>
+											{% endfor %}
+										</select>	
+									</td>
+								</tr>
+								<tr>
+									<td>Transition</td>
+									<td>
+										<select class="form-control" name="slider_transition">
+											{% for key,value in transtions %}
+											<option value="{{ key }}" {% if key == params.slider_transition %} selected="selected" {% endif %} >{{ value }}</option>
+											{% endfor %}
+										</select>	
+									</td>
+								</tr>
+								<tr>
+									<td>Slot Amount</td>
+									<td><input class="form-control" type="text" name="slider_slot" value="{{ params.slider_slot }}"></td>
+								</tr>
+								<tr>
+									<td>Transition Rotation</td>
+									<td><input class="form-control" type="text" name="slider_rotation" value="{{ params.slider_rotation }}"></td>
+								</tr>
+								<tr>
+									<td> Transition Duration </td>
+									<td><input class="form-control" type="text" name="slider_duration" value="{{ params.slider_duration }}" ></td>
+								</tr>
+								<tr>
+									<td>Delay</td>
+									<td><input class="form-control" type="text" name="slider_delay" value="{{ params.slider_delay }}"></td>
+								</tr>
+								<tr>
+									<td>Enable Link</td>
+									<td> 
+										<select class="form-control" name="slider_enable_link">
+											{% for key,value in yesno %}
+											<option value="{{ key }}" {% if key == params.slider_enable_link %} selected="selected" {% endif %} >{{ value }}</option>
+											{% endfor %}
+										</select>	
+									</td>
+								</tr>
+								<tr>
+									<td>Link</td>
+									<td><input class="form-control" type="text" name="slider_link" value="{{ params.slider_link }}"></td>
+								</tr>
+								<tr>
+									<td> Thumbnail </td>
+									<td class="left">
+										<div class="image">
+											<a href="" id="thumb-img" data-toggle="image" class="img-thumbnail">
+												<img src="{{ slider_thumbnail ? slider_thumbnail : placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" />
+											</a>
+											<input type="hidden" name="slider_thumbnail" id="slider_thumbnail" value="{{ params.slider_thumbnail }}"/>				
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>Full Width Video</td>
+									<td>
+										<div>
+											<select class="form-control" name="slider_usevideo">
+												{% for key,value in usevideo %}
+												<option value="{{ key }}" {% if key == params.slider_usevideo %} selected="selected" {% endif %} >{{ value }}</option>
+												{% endfor %}
+											</select>
+										</div><br/>
+										<div>
+											<b>Video ID</b>
+											<input class="form-control" type="text" name="slider_videoid" value="{{ params.slider_videoid }}">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>Auto Play</td>
+									<td>
+										<select class="form-control" name="slider_videoplay">
+											{% for key,value in yesno %}
+											<option value="{{ key }}" {% if key == params.slider_videoplay %} selected="selected" {% endif %} >{{ value }}</option>
+											{% endfor %}
+										</select>	
+									</td>
+								</tr>
+							</table>	
+						</div>
+					</div>
+					<input name="slider_id" type="hidden" id="slider_id" value="{{ slider_id }}" />	
+					<input name="slider_image" id="slider-image" type="hidden" value="{{ slider_image }}">
+				</form>
+
+
+				<div class="clearfix"></div>
+				<h3>List Of Sliders In Group: <a href="{{ slide_url }}"><span>{{ sliderGroup.title }}</span></a></h3>
+	    	 	<div id="slider-group">
+					<p class="explain">drap and drop to sort slider in list, and click to each item to edit detail information </p>
+	    	 	</div>
+	    		<div class="group-sliders clearfix">
+	    			<div class="new-slider-item">
+		    			<a href="{{ create_new }}">
+		    			</a>
+		    			<div>{{ text_create_new }}</div>
+	    			</div>
+	    			
+	    			{% for slider in sliders %}
+	    				<div class="slider-item {% if slider.id == slider_id %} active {% else %} '' {% endif %}" id="slider_{{ slider.id }}">
+	    					<a class="image" href="{{ slider.url_detail }}">
+	    						<img class="img-responsive" src="{{ slider.image }}" height="86"/>
+	    					</a>
+	    					<a  title="{{ text_clone_this }}" class="slider-clone" href="{{ slider.copythis }}"><span>Clone</span></a>
+	    					<a  title="{{ text_delete_this }}" class="slider-delete" href="{{ slider.deleteslider }}" onclick="return confirm('{{ text_confirm_delete }}')"><span>Delete</span></a>
+
+	    					<a class="slider-status{% if slider.status == 0 %} slider-status-off {% endif %}" href="{{ slider.url_detail }}"><span>Status</span></a>
+	    					<div>{{ slider.title }}</div>
+	    				</div>	
+	    			{% endfor %}
+	    		</div>
+	    		<hr>
+				<div class="clearfix"></div>
+
+			 	
+
+				<!-- Layers Editor -->
+				<h3>Layers Editor</h3> 
+
+				<!-- Button Upload BackGround Slider -->
+				<div class="buttons clearfix">
+					<a class="btn btn-warning" id="btn-update-slider">Update Main Image Slider</a>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="layers-wrapper" id="slider-toolbar">
+					<form action="{{ action }}" method="post" enctype="multipart/form-data"  id="slider-form">
+
+						<div class="slider-toolbar clearfix">
+							<ul>
+								<li><div class="btn btn-create" href="#" data-action="add-image"><div class="icon-image icon"></div>Add Layer Image</div></li>
+								<li><div class="btn btn-create" href="#" data-action="add-video"><div class="icon-video icon"></div>Add Layer Video</div></li>
+								<li><div class="btn btn-create" href="#" data-action="add-text"><div class="icon-text icon"></div>Add Layer Text</div></li>
+								<li class="red"><div class="btn btn-delete" data-action="delete-layer"><div class="icon-delete icon"></div>Delete This Layer</div></li>
+							</ul>	
+							
+							<div class="buttons pull-right">
+								<a class="btn btn-primary" onclick="$('#slider-form').submit();" class="button">{{ button_save }}</a> <a class="btn btn-success" id="btn-preview-slider">{{ text_preview_this_slider }}</a>
+							</div>
+						</div><!-- End div.slider-toolbar -->
+
+						<div class="slider-layers clearfix" >
+						    <div class="slider-editor-wrap" style="width:{{ sliderWidth }}px;height:{{ sliderHeight }}px">	
+						    	<div class="simage" id="simage">
+						    		<img id="slider_image_src" src="{{ slider_image_src }}">
+						    	</div>
+							    <div class="slider-editor" id="slider-editor" style="width:{{ sliderWidth }}px;height:{{ sliderHeight }}px"></div>
+							</div><!-- End div.slider-editor-wrap -->
+
+							<div class="layer-video-inpts" id="dialog-video">
+								<table class="table">
+									<tr>
+										<td>{{ video_type }}</td>
+										<td>
+											<select class="form-control" name="layer_video_type" id="layer_video_type">
+												<option value="youtube">Youtube</option>
+												<option value="vimeo">Vimeo</option>
+											</select>	
+										</td>
+									</tr>
+									<tr>
+										<td>Video ID</td>
+										<td><input class="form-control" name="layer_video_id" type="text" id="dialog_video_id">
+											<p>for example youtube: <b>VA770wpLX-Q</b> and vimeo: <b>17631561</b> </p>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<label>Height</label>
+											<input class="form-control" name="layer_video_height" type="text" value="200">
+											<label>Width</label>
+											<input class="form-control" name="layer_video_width" type="text" value="300">
+											
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<input type="hidden" name="layer_video_thumb" id="layer_video_thumb">
+											<div class="buttons">
+												<a class="btn btn-primary layer-find-video">Find Video</a>
+												<a class="btn btn-success layer-apply-video" id="apply_this_video" style="display:none;">Use This Video</a>
+												<a class="btn btn-danger" onclick="$('#dialog-video').hide();">Close</a>
+											</div>
+										</td>
+									</tr>	
+								</table>
+								<div id="video-preview"></div>
+							</div><!-- End div.layer-video-inpts -->
+
+							<div class="slider-foot row">
+
+								<div class="layer-collection-wrapper col-md-6"><div class="inner">
+								
+									<div class="panel panel-primary">
+										<h4 class="panel-heading">Layer Collection</h4>	
+										<div class="panel-body">
+										<div class="layer-collection" id="layer-collection"></div>	
+									</div></div>
+								</div></div>
+
+								<div class="layer-form col-md-6" id="layer-form"><div class="inner">
+									<div class="panel panel-primary"><h4 class="panel-heading">Edit Layer Data</h4><div class="panel-body">	
+
+
+
+
+									
+									<input type="hidden" id="layer_id" name="layer_id"/>
+									<input type="hidden" id="layer_content" name="layer_content"/>
+									<input type="hidden" id="layer_type" name="layer_type"/>
+
+									<table class="form">
+										<tr>
+											<td>Class Style</td>
+											<td style="padding-bottom: 12px;">
+												<div class="col-sm-6">
+													<input class="form-control" type="text" name="layer_class" id="input-layer-class"/>
+												</div>
+												<div class="col-sm-6">
+													<span class="buttons">
+														<a class="btn btn-warning btn-sm" onclick="$('#input-layer-class').val('');">Clear</a> |
+														<a class="btn btn-success btn-sm" id="btn-insert-typo">Insert Typo</a>
+													</span>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Text</td>
+											<td>
+												<textarea class="form-control" style="width:90%; height:60px" name="layer_caption" id="input-slider-caption" data-for="caption-layer" ></textarea>
+												<br/>
+												Allow insert html code
+											</td>
+										</tr>
+										<tr>
+											<td>Effect</td>
+											<td>
+												<label>Animation</label>
+												<select class="form-control" name="layer_animation">
+													<option selected="selected" value="fade">Fade</option>
+													<option value="sft">Short from Top</option>
+													<option value="sfb">Short from Bottom</option>
+													<option value="sfr">Short from Right</option>
+													<option value="sfl">Short from Left</option>
+													<option value="lft">Long from Top</option>
+													<option value="lfb">Long from Bottom</option>
+													<option value="lfr">Long from Right</option>
+													<option value="lfl">Long from Left</option>
+													<option value="randomrotate">Random Rotate</option>
+												</select>	
+												<p>	
+													<label>Easing</label>
+													<select class="form-control" name="layer_easing">
+														<option value="easeOutBack">easeOutBack</option>
+														<option value="easeInQuad">easeInQuad</option>
+														<option value="easeOutQuad">easeOutQuad</option>
+														<option value="easeInOutQuad">easeInOutQuad</option>
+														<option value="easeInCubic">easeInCubic</option>
+														<option value="easeOutCubic">easeOutCubic</option>
+														<option value="easeInOutCubic">easeInOutCubic</option>
+														<option value="easeInQuart">easeInQuart</option>
+														<option value="easeOutQuart">easeOutQuart</option>
+														<option value="easeInOutQuart">easeInOutQuart</option>
+														<option value="easeInQuint">easeInQuint</option>
+														<option value="easeOutQuint">easeOutQuint</option>
+														<option value="easeInOutQuint">easeInOutQuint</option>
+														<option value="easeInSine">easeInSine</option>
+														<option value="easeOutSine">easeOutSine</option>
+														<option value="easeInOutSine">easeInOutSine</option>
+														<option value="easeInExpo">easeInExpo</option>
+														<option selected="selected" value="easeOutExpo">easeOutExpo</option>
+														<option value="easeInOutExpo">easeInOutExpo</option>
+														<option value="easeInCirc">easeInCirc</option>
+														<option value="easeOutCirc">easeOutCirc</option>
+														<option value="easeInOutCirc">easeInOutCirc</option>
+														<option value="easeInElastic">easeInElastic</option>
+														<option value="easeOutElastic">easeOutElastic</option>
+														<option value="easeInOutElastic">easeInOutElastic</option>
+														<option value="easeInBack">easeInBack</option>
+														<option value="easeOutBack">easeOutBack</option>
+														<option value="easeInOutBack">easeInOutBack</option>
+														<option value="easeInBounce">easeInBounce</option>
+														<option value="easeOutBounce">easeOutBounce</option>
+														<option value="easeInOutBounce">easeInOutBounce</option>
+													</select>	
+												</p>	
+											</td>
+										</tr>	
+										<tr>
+											<td>Speed</td>
+											<td><input class="form-control" name="layer_speed" type="text"></td>
+										</tr>
+										<tr>
+											<td>Position</td>
+											<td>
+												<label>Top:</label><input class="form-control" size="3" type="text" name="layer_top">
+												<label>Left:</label><input class="form-control" size="3" type="text" name="layer_left">
+											</td>
+										</tr>
+									</table>
+
+									<div class="other-effect">
+										<h5>Other Animation</h5>
+										<table class="table">
+											<tr>
+												<td>End Time</td>
+												<td><input class="form-control" type="text" name="layer_endtime"> </td>
+											</tr>
+											<tr>
+												<td>End Speed</td>
+												<td><input class="form-control" type="text" name="layer_endspeed"> </td>
+											</tr>
+											<tr>
+												<td>End Animation</td>
+												<td>
+													<select class="form-control" type="text" name="layer_endanimation"> 
+														<option selected="selected" value="auto">Choose Automatic</option>
+														<option value="fadeout">Fade Out</option>
+														<option value="stt">Short to Top</option>
+														<option value="stb">Short to Bottom</option>
+														<option value="stl">Short to Left</option>
+														<option value="str">Short to Right</option>
+														<option value="ltt">Long to Top</option>
+														<option value="ltb">Long to Bottom</option>
+														<option value="ltl">Long to Left</option>
+														<option value="ltr">Long to Right</option>
+														<option value="randomrotateout">Random Rotate Out</option>
+													</select>
+												</td>
+											</tr>	
+											<tr>
+												<td>End Easing</td>
+												<td>
+													<select class="form-control" name="layer_endeasing"> 
+														<option selected="selected" value="nothing">No Change</option>
+														<option value="easeOutBack">easeOutBack</option>
+														<option value="easeInQuad">easeInQuad</option>
+														<option value="easeOutQuad">easeOutQuad</option>
+														<option value="easeInOutQuad">easeInOutQuad</option>
+														<option value="easeInCubic">easeInCubic</option>
+														<option value="easeOutCubic">easeOutCubic</option>
+														<option value="easeInOutCubic">easeInOutCubic</option>
+														<option value="easeInQuart">easeInQuart</option>
+														<option value="easeOutQuart">easeOutQuart</option>
+														<option value="easeInOutQuart">easeInOutQuart</option>
+														<option value="easeInQuint">easeInQuint</option>
+														<option value="easeOutQuint">easeOutQuint</option>
+														<option value="easeInOutQuint">easeInOutQuint</option>
+														<option value="easeInSine">easeInSine</option>
+														<option value="easeOutSine">easeOutSine</option>
+														<option value="easeInOutSine">easeInOutSine</option>
+														<option value="easeInExpo">easeInExpo</option>
+														<option value="easeOutExpo">easeOutExpo</option>
+														<option value="easeInOutExpo">easeInOutExpo</option>
+														<option value="easeInCirc">easeInCirc</option>
+														<option value="easeOutCirc">easeOutCirc</option>
+														<option value="easeInOutCirc">easeInOutCirc</option>
+														<option value="easeInElastic">easeInElastic</option>
+														<option value="easeOutElastic">easeOutElastic</option>
+														<option value="easeInOutElastic">easeInOutElastic</option>
+														<option value="easeInBack">easeInBack</option>
+														<option value="easeOutBack">easeOutBack</option>
+														<option value="easeInOutBack">easeInOutBack</option>
+														<option value="easeInBounce">easeInBounce</option>
+														<option value="easeOutBounce">easeOutBounce</option>
+														<option value="easeInOutBounce">easeInOutBounce</option>
+													</select>
+												</td>
+											</tr>		
+										</table>
+									</div><!-- End div.other-effect -->
+								</div></div>
+								</div></div><!-- End div.layer-form -->
+							</div><!-- End div.slider-foot -->
+
+		   				</div><!-- End div.slider-layers -->
+					</form><!-- End form#slider-form -->
+
+				</div><!-- End div.layers-wrapper -->
+			</div><!-- End div.panel-body -->
+		</div><!-- End div.panel-content -->
+
+	</div><!-- End div#page-content -->
+
+</div><!-- End div.content -->
+
+
+ <!-- Modal Form-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">{{ text_preview_sliders_in_group }}</h4>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">{{ text_close }}</button>
+			</div>
+		</div> 
+	</div> 
+</div>	
+
+<script type="text/javascript"><!--
+// clone data
+$(document).delegate('a[data-toggle=\'clone\']', 'click', function(e) {
+	e.preventDefault();
+
+
+	var content = '';
+
+	content += '<table class="table">';
+	content += '	<tr>';
+	content += '		<td><label class="control-label">Group:</label></td>';
+	content += '		<td>';
+	content += '			<select class="form-control" name="clone_group" id="clone_group">';
+	content += '				<option value="0">Select group</option>';
+								{% for group in sliderGroups %}
+	content += '				<option value="{{ group.id }}">{{ group.title }}</option>';
+								{% endfor %}
+	content += '			</select>';
+	content += '		</td>';
+	content += '	</tr>';
+	content += '	<tr>';
+	content += '		<td></td>';
+	content += '		<td><button type="button" id="button-save" class="btn btn-primary"><i class="fa fa-save"></i></button> <button type="button" id="button-close" class="btn btn-danger"><i class="fa fa-close"></i></button></td>';
+	content += '	</tr>';
+	content += '</table>';
+
+	var element = this;
+	$(element).popover({
+		title: 'Clone Data to GroupSliders',
+		html: true,
+		placement: 'left',
+		trigger: 'manual',
+		content: function() {
+			return content;
+		}
+	});
+
+	var group_id = {{ group_id }};
+	var lang = {{ lang }};
+	
+	$(element).popover('toggle');
+	// Save
+	$('#button-save').on('click', function() { 
+		var clone_group = $("#clone_group option:selected").val();
+		$.ajax({
+			url: 'index.php?route=extension/module/pavsliderlayer/cloneGroupSliders&group_id=' + group_id + '&lang=' + lang + '&clonegroup=' + clone_group + '&user_token=' + getURLVar('user_token'),
+			type: 'GET',
+		}).done(function(data) { 
+			location.reload(); 
+		});
+	});
+	// Close
+	$('#button-close').on('click', function() {
+		$(element).popover('hide');
+	});
+});
+
+// Sortable Slider
+$(".group-sliders").sortable({ accept:".slider-item",
+	update:function() {   
+		var ids = $( ".slider-item" );
+		var params = '';
+		var j=1;
+		$.each( ids, function(i,e){
+			params += 'id['+$(e).attr('id').replace("slider_","")+']='+(j++)+"&";
+		});
+		$.ajax({
+			url:'{{ actionUpdatePostURL }}',
+			data: params,
+			type:'POST'
+		});
+	} 
+});
+
+// Ajax Upload BackGround Image Slider
+$("#btn-update-slider").click( function(){ 
+	$('#modal-image').remove();
+	$.ajax({
+		url: 'index.php?route=extension/module/pavsliderlayer/filemanager&user_token=' + getURLVar('user_token') + '&target=' + $("#slider-image").attr('id') + '&thumb=slider_image_src',
+		dataType: 'html',
+		success: function(html) {
+			$('body').append('<div id="modal-image" class="modal">' + html + '</div>');
+			$('#modal-image').modal('show');
+		}	
+	});
+});
+//--></script> 
+
+<script type="text/javascript"><!--
+	$( document ).ready( function(){
+		var JSONLIST = '{{ layers }}';
+		var $pavoEditor = $(document).pavoSliderEditor(); 
+		var SURLIMAGE = 'index.php?user_token={{ user_token }}';
+		var SURL = '{{ url_catalog }}';
+		$pavoEditor.process( SURL, SURLIMAGE, {{ sliderDelay }}, '{{ IMAGE_URL }}' ); 
+		$pavoEditor.createList( JSONLIST  );
+	});
+
+	// Modal Create widget
+	$("#btn-preview-ingroup").bind('click', function(){ 
+
+		$('#myModal .modal-dialog').css('width',1170);
+		var a = $( '<span class="glyphicon glyphicon-refresh"></span><iframe frameborder="0" scrolling="no" src="'+$(this).attr('href')+'" style="width:100%;height:500px; display:none"/>'  );
+		$('#myModal .modal-body').html( a );
+			
+		$('#myModal').modal('show');
+		$('#myModal').attr('rel', $(this).attr('rel') );
+		$(a).load( function(){  
+			$('#myModal .modal-body .glyphicon-refresh').hide();
+	 		$('#myModal .modal-body iframe').show();
+		});
+
+		return false;
+	});
+//--></script>
+{{ footer }}

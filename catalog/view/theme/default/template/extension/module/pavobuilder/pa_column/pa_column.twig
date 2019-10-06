@@ -1,0 +1,5 @@
+<div class="pa-column-container{{ settings.bootstrap_class ? [ ' ', settings.bootstrap_class ] | join() : '' }} {{ settings.extra_class_outer ? [ ' ', settings.extra_class_outer ] | join() : '' }}" data-uniqid="{{ settings.uniqid_id }}" data-animate="{{ data.animate ? data.animate : 'none' }}">
+	<div class="pa-column-inner{{ settings.class ? [ ' ', settings.class ] | join() : '' }}">
+		{{ content }}
+	</div>
+</div>

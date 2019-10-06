@@ -1,0 +1,86 @@
+{% set id = random(1..9) + random() %}
+<div class="box-category-carousel" id="module-category-carousel">
+  <div class="box-heading">
+    {% if (settings.title == "true") %}
+    <h3>{{ settings.title_category }}</h3>{% endif %}
+  </div>  
+  <div class="box-content">
+    <div class="row">
+      {% if settings.banner %}
+      <div class="banner-category col-md-3 col-sm-4">
+        <a href="{{ settings.cat_link }}"><img src="{{ settings.banner }}" alt="{{ settings.cat_name }}" title="{{ settings.cat_name }}" class="img-responsive" /></a>
+      </div>
+      {% endif %}
+      <div class="swiper-container {% if settings.get_product|length <= settings.item*settings.rows %}swiper-no-swiping{% endif %}" id="category{{id}}">
+      <div class="swiper-wrapper">
+        {% for product in settings.get_product %}
+        <div class="swiper-slide">
+          <div class="product-thumb">
+            <div class="image">
+              <a class="product-image" href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>
+              <div class="group-action">                     
+                <button class="btn btn-wishlist" type="button" data-toggle="tooltip" data-placement="left" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="icons8-heart"></i></button>
+                <button class="btn btn-compare" type="button" data-toggle="tooltip" data-placement="left" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="icons8-refresh"></i></button>
+              </div>
+            </div>
+            <div class="product-meta">
+              <div class="caption">
+                <h4 class="name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                {% if product.price %}
+                  <div class="price">
+                    {% if not product.special %}
+                    {{ product.price }}
+                    {% else %}
+                    <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                    {% endif %}
+                  </div>
+                  {% endif %}                
+                <div class="description">{{ product.description }}</div>
+                {% if product.rating %}
+                <div class="rating"> {% for i in 1..5 %}
+                  {% if product.rating < i %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>{% endif %}
+                  {% endfor %} </div>
+                {% endif %}                 
+              </div>
+              <button class="btn btn-cart" type="button" onclick="cart.add('{{ product.product_id }}');">{{ button_cart }}</button>
+            </div> 
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pager">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+    </div>                     
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#category{{id}}').swiper({
+  pause: 'hover',
+  speed: 800,
+  nextButton: '.swiper-button-next',
+  prevButton: '.swiper-button-prev',
+  slidesPerView: {{ settings.item ? settings.item : 2}},
+  loop:{{ settings.loop ? settings.loop : 'false'}},
+  {% if settings.auto_play == 'true' %}autoplay: {{ settings.auto_play_time ? settings.auto_play_time : 0 }},
+  {% endif %}noSwipingClass: 'swiper-no-swiping',
+  slidesPerColumn:{{ settings.rows ? settings.rows : 1 }},
+  spaceBetween: 10,
+  breakpoints: {
+    767: {
+      slidesPerView: 1,
+      {% if settings.get_product|length > 1*settings.rows %}
+      noSwiping: false
+      {% endif %}
+    },
+    991: {
+      slidesPerView: 2,
+      {% if settings.get_product|length > 2*settings.rows %}
+      noSwiping: false
+      {% endif %}
+    }, 
+  }
+});
+--></script>

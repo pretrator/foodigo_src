@@ -1,0 +1,20 @@
+<div class="pavo-widget-icon-text {{ settings.layout ? settings.layout : 'layout1'}} {{ settings.extra_class }}">
+	<div class="inner">
+		{% if settings.icon and settings.icon != '<p><br></p>' %}
+		<div class="content-icon pull-right">
+			{{settings.icon}}
+		</div>
+		{% endif %}
+		<div class="content-text content-text-right">
+			{% if settings.title %}
+				<h3 class="content-title">{{ settings.title }}</h3>
+			{% endif %}
+			{% if settings.subtitle %}
+				<div class="content-subtitle">{{ settings.subtitle }}</div>
+			{% endif %}
+			{% if settings.content %}
+				<div class="content-description">{{ settings.content }}</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

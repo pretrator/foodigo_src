@@ -1,0 +1,14 @@
+<div class="pavo-widget-countdown {{ settings.layout }} {{ settings.size }} {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	<div class="inner" {% if settings.src is not empty %} style="background-image: url('{{ settings.src  }}');" {% endif %}>
+		<div class="countdown-timer" data-countdown="1" data-start="{{ setting.date_start }}" data-end="{{ settings.end_date }}">
+			<div class="date-format hidden">
+				<div class="format-date format-date-days">
+					<span class="time-group"><span class="timer">%D</span>  <span class="unit">{{ text_days }}</span></span> 
+					<span class="time-group"><span class="timer">%H</span>  <span class="unit">{{ text_hours }} </span></span>
+					<span class="time-group"><span class="timer">%M</span>  <span class="unit">{{ text_min }}</span></span>
+					<span class="time-group"><span class="timer">%S</span>  <span class="unit">{{ text_sec }}</span></span>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>

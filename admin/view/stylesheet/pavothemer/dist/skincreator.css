@@ -1,0 +1,20 @@
+.pavo-custom-skins li{
+	display: inline-block;
+	background: #FFF;
+	text-align: center;
+	padding: 2px 3px;
+}
+.pavo-custom-skins li:hover{
+	background: #1872a2;
+}
+.pavo-custom-skins li  a > span{
+	display: inline-block;
+	width: 20px;
+	height: 30px;
+}
+
+.pavo-custom-skins  li em{
+	display: block;
+	background: #f7f7f7;
+	font-size: 11px;
+}

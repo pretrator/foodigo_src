@@ -1,0 +1,21 @@
+<div class="pavo-widget-flash-new {{ settings.extra_class ? [ ' ', settings.extra_class ] | join() : '' }}">
+	{% set id = random(1..9) + random() %}
+    <div class="inner">
+        <div class="swiper-container pavo-swiper-carousel" id="flash-new{{id}}">
+            <div class="swiper-wrapper">
+                {% for item in settings.get_language %}
+                	<div class="swiper-slide">
+                    {% if item.link %}
+                		  <a href="{{ item.link }}">{{ item.language['text_link'] }}</a>
+                    {% else %}
+                      {{ item.language['text_link'] }}
+                    {% endif %}
+                	</div>
+                {% endfor %}
+            </div>
+        	<div class="swiper-button-prev pavo-button-prev"></div>
+        	<div class="swiper-button-next pavo-button-next"></div>
+        </div>
+    </div>
+</div>
+ 

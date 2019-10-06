@@ -1,0 +1,133 @@
+{{ header }}
+{{ column_left }}
+
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div><!-- end div .page-header -->
+	<div id="page-content" class="container-fluid">
+		{% if error_warning %}
+	    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+	      <button type="button" class="close" data-dismiss="alert">&times;</button>
+	    </div>
+	    {% endif %}
+
+		{% if success and success is not empty %}
+		<div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ heading_title }}</h3>
+			</div>
+			<div class="panel-body" >
+
+				<div class="col-sm-2">
+					<div class="logo"><h3>{{ heading_title }}</h3></div>
+					<div class="slidebar">{% include '/extension/module/pavnewsletter/toolbar.twig' %}</div>
+					<div class="clear clr"></div>
+				</div>
+
+				<div class="col-sm-10">
+					<div class="heading">
+						<h3>{{ text_templates }}</h1>
+					</div>
+					<div class="toolbar">
+						<div class="pull-left pavbtn">
+							<a onclick="$('#form').submit();" class="btn btn-success">{{ button_save }}</a>
+							<a href="{{ cancel }}" class="btn btn-danger">{{ button_cancel }}</a>
+						</div>		
+					</div> 
+
+			 		<div class="content">
+						<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+							<input type="hidden" name="template[template_id]" value="{{ template_id }}" />
+							<input type="hidden" name="action" id="action" value=""/>
+							<table class="table">
+									<tr>
+										<td colspan="2"><strong>{{ entry_general_template }}</strong></td>
+									</tr>
+									<tr>
+										<td>{{ entry_name }}</td>
+										<td>
+											{% if template.name is defined %} {% set tem_name = template.name %} {% else %} {% set tem_name = '' %} {% endif %}
+											<input class="form-control" type="text" name="template[name]" value="{{ tem_name }}" size="50" />
+										</td>
+									</tr>
+									<tr>
+										<td>{{ entry_sort_order }}</td>
+										<td>
+											{% if template.ordering is defined %} {% set ordering = template.ordering %} {% else %} {% set ordering = '' %} {% endif %}
+											<input class="form-control" type="text" name="template[ordering]" value="{{ ordering }}" size="3" /></td>
+									</tr>
+							</table>
+							<p><strong>{{ entry_template }}</strong></p> 
+							<div class="tab-panel">
+								<ul class="nav nav-tabs" id="language">
+									{% for language in languages %}
+									<li><a href="#tab-language{{ language.language_id }}" data-toggle="tab"><img src="view/image/flags/{{ language.image }}" title="{{ language.name }}" /> {{ language.name }}</a></li>
+									{% endfor %}
+								</ul>
+								<div class="tab-content">
+									{% for language in languages %}
+									<div class="tab-pane" id="tab-language{{ language.language_id }}">
+										<table class="table">
+											<tr>
+												<td>{{ entry_subject }}</td>
+												<td><input class="form-control" name="template_description[subject][{{ language.language_id }}]" id="module_subject-1-{{ language.language_id }}" value="{{ template_description[language.language_id].subject ? template_description[language.language_id].subject }}"/>
+
+													{% if error.subject is defined %}
+													<span class="error">{{ error.subject }}</span>
+													{% endif %}
+												</td>
+											</tr>
+								
+											<tr>
+												<td>{{ entry_message }}</td>
+												<td>
+													{% if error.message is defined %}
+													<span class="error">{{ error.message }}</span>
+													{% endif %}
+									
+													<textarea name="template_description[template_message][{{ language.language_id }}]" id="template_message-1-{{ language.language_id }}">{{ template_description[language.language_id].template_message ? template_description[language.language_id].template_message }}</textarea><br/>
+													{{ text_template_help }}
+												</td>
+											</tr>
+									</table>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+
+
+						</form>
+					</div>
+
+				</div>
+			</div><!-- end div .panel-body -->
+		</div><!-- end div .panel -->
+	</div><!-- end div #page-content -->
+
+</div><!-- end div #content -->
+
+
+<script type="text/javascript">
+
+	$('#language li:first-child a').tab('show');
+
+	{% for language in languages %}
+	$('#template_message-1-{{ language.language_id }}').summernote({ height: 300 });
+	{% endfor %}
+
+</script>
+
+{{ footer }}

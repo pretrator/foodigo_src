@@ -1,0 +1,93 @@
+{{ header }}
+
+  	{# start admin panel left sidebar #}
+  	{{ column_left }}
+  	{# end admin panel left sidebar #}
+
+  	{# start pavo builder control #}
+  	<div id="content">
+
+	    <div class="page-header">
+	      	<div class="container-fluid">
+		        <h1><b>{{ heading_title }}</b></h1>
+		        <ul class="breadcrumb">
+		          	{% for breadcrumb in breadcrumbs %}
+		            	<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		          	{% endfor %}
+		        </ul>
+		        <div class="pull-right">
+		        	<a href="{{ create_new_module_url }}" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="{{ entry_add_new_text }}"><i class="fa fa-plus"></i></a>
+        			<button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm( '{{ entry_confirm_delete }}' ) ? $('#pavohomebuilder-layout').submit() : false;" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
+		        </div>
+	      	</div>
+	    </div>
+
+	    <div class="container-fluid">
+	    	<div class="alert alert-info">
+	    		<a href="{{ homepage_layout_url }}">{{ entry_description }}</a>
+	    	</div> 	
+	      	<div class="panel panel-default">
+		        <div class="panel-heading form-horizontal">
+		        	<div class="panel-title">
+		        		<h3><i class="fa fa-exchange"></i> {{ layout_list_text }}</h3>
+		        		<div class="pull-right" style="min-width: 250px">
+			        		<input type="text" name="group_filter" value="{{ group_filter }}" placeholder="{{ entry_group_search_text }}" class="form-control" id="pavobuilder-group-search" />
+			        	</div>
+		        	</div>
+		        </div>
+		        <div class="panel-body">
+		          	<form action="{{ delete_url }}" method="POST" id="pavohomebuilder-layout" class="form-horizontal" enctype="multipart/form-data">
+		            	<div class="table-responsive">
+		            		<table class="table table-bordered table-hover">
+		            			<thead>
+		            				<tr>
+		            					<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"></td>
+		            					<td class="text-left">{{ entry_id_text }}</td>
+		            					<td class="text-left">{{ layout_list_text }}</td>
+		            					<td class="text-left">{{ entry_group_text }}</td>
+		            					<td class="text-right">{{ entry_action_text }}</td>
+		            				</tr>
+		            			</thead>
+		            			<tbody>
+		            				{% if ( layouts ) %}
+			            				{% for layout in layouts %}
+			            					{% if ( layout.module_id ) %}
+				            					<tr data-group="{{ layout.group }}">
+				            						<td style="width: 1px;" class="text-center">
+				            							<input type="checkbox" name="selected[]" value="{{ layout.module_id }}" />
+				            						</td>
+				            						<td class="text-left">
+				            							#{{ layout.module_id }}
+				            						</td>
+				            						<td class="text-left">
+				            							{{ layout.name }}
+				            						</td>
+				            						<td class="text-left">{{ layout.group }}</td>
+				            						<td class="text-right">
+				            							<a href="{{ layout.edit_link }}" data-tooltip="tooltip" class="btn btn-primary" data-origin-text="{{ entry_edit_text }}"><i class="fa fa-pencil"></i></a>
+				            						</td>
+				            					</tr>
+			            					{% endif %}
+			            				{% endfor %}
+			            			{% else %}
+			            				<tr>
+			            					<td class="text-center" colspan="5">{{ entry_no_layout_text }}</td>
+			            				</tr>
+			            			{% endif %}
+		            			</tbody>
+		            		</table>
+		            	</div>
+		          	</form>
+		        </div>
+	      	</div>
+
+	    </div>
+  	</div>
+  	{# end pavo builder control #}
+  	<script type="text/javascript">
+  		var PAVOBUILDER_PARAMS = window.PAVOBUILDER_PARAMS = {
+  			source: {{ groups | json_encode() }}
+  		};
+  	</script>
+
+{{ footer }}

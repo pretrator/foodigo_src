@@ -1,0 +1,11 @@
+{% if ( post.comment_count != false ) %}
+	<div class="comment-count">
+	  	<i class="fa fa-comment-o" aria-hidden="true"></i>
+	  	{{ post.comment_count }}
+	  	{% if ( post.comment_count > 1 ) %}
+	  		{{ text_comments }}
+	  	{% else %}
+	  		{{ text_comment }}
+	  	{% endif %}
+	</div>
+{% endif %}
